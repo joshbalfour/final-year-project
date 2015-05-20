@@ -1,7 +1,7 @@
 # Level Crossing Predictor
 
 ## State of the code
-THIS IS POC CODE
+This is ~~COMPLETELY SHIT~~ PoC code
 
 I basically took some old code I had when I reversed the National Rail API
 
