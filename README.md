@@ -41,7 +41,7 @@ check you can run node by going `node --version`
 
 
 ###  Install Dependancies
-`cd final-year-project`
+`cd ~/final-year-project`
 
 run `npm install` 
 
