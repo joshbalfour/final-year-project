@@ -3,7 +3,7 @@ var app = require('./app.js');
 
 // gotta be a number
 var howSoonIsSoonInMinutes = 30;
-// CRS code (read: http://www.nationalrail.co.uk/stations_destinations/48541.aspx)
+// CRS code (read: http://www.nationalrail.co.uk/stations_destinations/48541.aspx and http://nrodwiki.rockshore.net/index.php/Identifying_Locations)
 var atStation = 'CBW';
 
 /*
