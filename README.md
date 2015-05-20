@@ -37,7 +37,7 @@ check you can run node by going `node --version`
 ### Clone Repo
 `cd ~`
 
-`git pull https://github.com/beakybal4/final-year-project.git`
+`git clone https://github.com/beakybal4/final-year-project.git`
 
 
 ###  Install Dependancies
