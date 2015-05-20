@@ -2,8 +2,9 @@
 var app = require('./app.js');
 
 var howSoonIsSoonInMinutes = 30;
+var atStation = 'CBW';
 
-app.getTrainsArrivingOrLeavingSoon(howSoonIsSoonInMinutes,function(error, trains){
+app.getTrainsArrivingOrLeavingSoon(atStation,howSoonIsSoonInMinutes,function(error, trains){
 	if (error){
 		console.log('Errored:',error);
 	} else {
