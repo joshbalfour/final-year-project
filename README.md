@@ -1,7 +1,7 @@
 # Level Crossing Predictor
 
 ## State of the code
-This is ~~COMPLETELY SHIT~~ PoC code
+This is (currently) ~~COMPLETELY SHIT~~ PoC code
 
 I basically took some old code I had when I reversed the National Rail API
 
@@ -27,6 +27,22 @@ App routes them accordingly, adding an "Avoid This Road" flag if the user is lik
 App informs user, if appropriate, if they're likely to hit a closure
 
 
+### Implementation Ideas
+
+
+
+#### Make Field Testing Easier
+Make a simple app where you hit a button if the thing is closed
+
+Backend records time, create DB and correllate with train times
+
+#### Make Unit Testing Easier
+Use [Mocha.js](http://mochajs.org/) to make our lives easier 
+
+
+#### Make Design and Documentation Easier
+Host our own [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki) Wiki, use that to write documentation
+
 ### Tutor
 Peter Rodgers
 
@@ -34,9 +50,9 @@ Peter Rodgers
 ## Usage
 
 ### Prerequisites
-install [node.js](https://nodejs.org/) if you haven't already
+Install [node.js](https://nodejs.org/) if you haven't already
 
-check you can run node by going `node --version`
+Check you can run node by going `node --version`
 
 
 ### Clone Repo
@@ -48,7 +64,7 @@ check you can run node by going `node --version`
 ###  Install Dependancies
 `cd ~/final-year-project`
 
-run `npm install` 
+Run `npm install` 
 
 ### Run Example
  `node examples`
