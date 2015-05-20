@@ -37,7 +37,7 @@ Make a simple app where you hit a button if the thing is closed
 Backend records time, create DB and correllate with train times
 
 #### Make Unit Testing Easier
-Use [Mocha.js](http://mochajs.org/) to make our lives easier 
+Use [Mocha.js](http://mochajs.org/) to make our lives easier, and [Instanbul.js](https://github.com/gotwarlost/istanbul) to ensure our tests are comprehensive.
 
 
 #### Make Design and Documentation Easier
