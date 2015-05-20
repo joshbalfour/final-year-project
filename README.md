@@ -27,4 +27,23 @@ Peter Rodgers
 
 
 ## Usage
-run `npm install` then `node examples`
+
+### Prerequisites
+install [node.js](https://nodejs.org/) if you haven't already
+
+check you can run node by going `node --version`
+
+
+### Clone Repo
+`cd ~`
+
+`git pull https://github.com/beakybal4/final-year-project.git`
+
+
+###  Install Dependancies
+`cd final-year-project`
+
+run `npm install` 
+
+### Run Example
+ `node examples`
