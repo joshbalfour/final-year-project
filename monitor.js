@@ -94,7 +94,7 @@ function doScrape(){
 	});
 }
 
-var mins = 3;
+var mins = 0.1;
 
 doScrape();
 
