@@ -42,7 +42,7 @@ function mysqlSyntaxError(err,query){
 }
 
 function log(msg){
-	console.log("[ "+(new Date()).toDateString()+" ] " + msg);
+	console.log("[ "+(new Date()).toUTCString()+" ] " + msg);
 }
 
 
