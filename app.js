@@ -132,7 +132,7 @@ function scanForOutgoing(howSoonIsSoonInMinutes){
 	};
 }
 
-// gets trains to/from CBW within the next [howSoonIsSoonInMinutes] mins, [atStation] is a CRS code
+// gets trains to/from [atStation] within the next [howSoonIsSoonInMinutes] mins, [atStation] is a CRS code
 // callback is called with 2 arguments: error and data
 // data is an array of objects
 function getTrainsArrivingOrLeavingSoon(atStation,howSoonIsSoonInMinutes, callback){
@@ -150,6 +150,21 @@ function getTrainsArrivingOrLeavingSoon(atStation,howSoonIsSoonInMinutes, callba
 	});
 }
 
+function getTrains(atStation,callback){
+	var error = null;
+	var res = null;
+	getArrivalsNowFrom(atStation,'',function(data){
+		if (data){
+			res = data[0].service
+						.map(transformData);
+
+			callback(error,res);
+		}
+
+	});
+}
+
 module.exports = {
-	getTrainsArrivingOrLeavingSoon : getTrainsArrivingOrLeavingSoon
+	getTrainsArrivingOrLeavingSoon : getTrainsArrivingOrLeavingSoon,
+	getTrains : getTrains
 }
