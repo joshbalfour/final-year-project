@@ -27,7 +27,7 @@ function doQuery(query,args,callback){
 					mysqlSyntaxError(err,query);
 				}
 				callback(err,rows);
-				connection.end();
+				connection.release();
 			});
 		}
 	});
