@@ -93,6 +93,8 @@ function getArrivalsNowFrom(fromStation,toStation,callback){
 	getArrivalsFrom(fromStation,toStation,getDateTimestampNow(),callback);
 }
 
+var tzOffset = (( new Date() ).getTimezoneOffset() * -1)/60;
+
 // transform the data received from the API to be more usable
 function transformData(from){
 	var to = {};
@@ -103,7 +105,7 @@ function transformData(from){
 		}
 		if (i.length==3 && i.indexOf('t')==1 ){
 			try {
-				to[i] = new Date(to[i]+"+01:00");
+				to[i] = new Date(to[i]+"+0"+tzOffset+":00");
 			} catch (e){
 
 			}
@@ -138,7 +140,6 @@ function getTrainsArrivingOrLeavingSoon(atStation,howSoonIsSoonInMinutes, callba
 	var res = null;
 	getArrivalsNowFrom(atStation,'',function(data){
 		if (data){
-
 			res = data[0].service
 						.map(transformData)
 						.filter( scanForOutgoing(howSoonIsSoonInMinutes) );
