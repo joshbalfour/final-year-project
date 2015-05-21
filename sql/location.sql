@@ -1,7 +1,10 @@
 drop table if exists location;
+
 create table location (
-	locationName VARCHAR(255),
-	crs VARCHAR(255), 
-	tiploc  VARCHAR(255),
-	via  VARCHAR(255)
+	locationName varchar(255),
+	crs varchar(255), 
+	tiploc  varchar(255),
+	via  varchar(255)
 );
+
+create unique index pk on location (crs);
