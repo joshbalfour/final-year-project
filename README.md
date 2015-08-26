@@ -46,6 +46,8 @@ Host our own [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki) Wiki, use tha
 #### Make Development Easier
 Use [LoopBack](http://loopback.io/) to do the bulk of the work
 
+#### Make Issue and Task Tracking Easier
+Use [GitHub](https://github.com/) to do task and issue tracking
 
 ### Tutor
 [Peter Rodgers](http://www.cs.kent.ac.uk/people/staff/pjr/)
