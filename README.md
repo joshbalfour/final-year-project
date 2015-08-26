@@ -43,8 +43,12 @@ Use [Mocha.js](http://mochajs.org/) to make our lives easier, and [Instanbul.js]
 #### Make Design and Documentation Easier
 Host our own [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki) Wiki, use that to write documentation
 
+#### Make Development Easier
+Use [LoopBack](http://loopback.io/) to do the bulk of the work
+
+
 ### Tutor
-Peter Rodgers
+[Peter Rodgers](http://www.cs.kent.ac.uk/people/staff/pjr/)
 
 
 ## Usage
