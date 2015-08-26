@@ -81,7 +81,13 @@ var rtOptions = {
 function getArrivalsFrom(fromStation,toStation,at,callback){
 	getAFXML(fromStation,toStation,at,function(xml){
 		postXML(rtOptions,xml,function(data){
-			callback(data['soap:Envelope']['soap:Body'][0]['GetArrivalBoardByCRSResponse'][0]['GetBoardResult'][0]['trainServices']);
+			var d;
+			try {
+				d = data['soap:Envelope']['soap:Body'][0]['GetArrivalBoardByCRSResponse'][0]['GetBoardResult'][0]['trainServices'];
+			} catch (e) {
+
+			}
+			callback(d);
 		},function(err){
 			console.log(err);
 		});
@@ -145,6 +151,8 @@ function getTrainsArrivingOrLeavingSoon(atStation,howSoonIsSoonInMinutes, callba
 						.filter( scanForOutgoing(howSoonIsSoonInMinutes) );
 
 			callback(error,res);
+		} else {
+			callback(true,null);
 		}
 
 	});
@@ -159,6 +167,8 @@ function getTrains(atStation,callback){
 						.map(transformData);
 
 			callback(error,res);
+		} else {
+			callback(true,null);
 		}
 
 	});
