@@ -17,7 +17,7 @@ This is the database
 The API reads the data from the database views.
 
 ### WebApp
-The web app contains the agular web application which will display the train crossing.
+The web app contains the angular web application which will display the level crossings.
 
 ### Docs
 This folder containers documention which includes comes the other main 4 folders.
