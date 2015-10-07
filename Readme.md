@@ -6,7 +6,7 @@ Final year project.
 * System:
 	* [Overview](Docs/System overview.md)
 * Development plan:
-	* [Environment](Docs/enviroment.md)
+	* [Environment](Docs/environment.md)
 	* [Workflow](Docs/Development workflow.md)
 * Web App
 	* [UI Designs](Docs/Web App/UI Designs.md)
