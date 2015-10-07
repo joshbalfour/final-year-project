@@ -1,8 +1,8 @@
-# Enviroment
-This document says about the repo structure and enviroment.
+# Environment
+This document says about the repo structure and environment.
 
 ## Config
-We used docker.  
+We use docker.  
 Start by: `docker run`
 
 
@@ -11,7 +11,7 @@ Start by: `docker run`
 This uses node
 
 ### Database
-This is the data base
+This is the database
 
 ### API
 The API reads the data from the database views.

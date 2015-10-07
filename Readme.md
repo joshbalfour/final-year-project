@@ -1,12 +1,12 @@
-# Level Crossing Prodictor
+# Level Crossing Predictor
 Final year project.
 
 
-## Docs Table of Contents
+## Table of Contents
 * System:
 	* [Overview](Docs/System overview.md)
 * Development plan:
-	* [Envrioment](Docs/enviroment.md)
+	* [Environment](Docs/enviroment.md)
 	* [Workflow](Docs/Development workflow.md)
 * Web App
 	* [UI Designs](Docs/Web App/UI Designs.md)
