@@ -9,25 +9,15 @@ Start by: `docker run`
 ## File Structure
 ### Data Sync
 This uses node
-##### Componets
-*
 
 ### Database
 This is the data base
 
 ### API
-##### Componets
-* PHP
-* PHPUNIT
+The API reads the data from the database views.
 
 ### WebApp
 The web app contains the agular web application which will display the train crossing.
-
-##### Componets
-* Angular
-* SCSS
-* Grunt
-
 
 ### Docs
 This folder containers documention which includes comes the other main 4 folders.
