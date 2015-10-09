@@ -16,5 +16,6 @@ We will track the trains. We will map the crossing. We will prodict the future!
 * [Deployment](Docs/Deployment/index.md)
 * [API](Docs/API/index.md)
 * Web App
+	* [Discovery](Docs/Web App/Discovery.md)
 	* [UI Designs](Docs/Web App/UI Designs.md)
 	* [Technical overview](Docs/Web App/Technical overview.md)
