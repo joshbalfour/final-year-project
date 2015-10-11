@@ -229,7 +229,7 @@ Each has a man hour time estimate against it in the format # MH, this is then su
 
 		* Project Risk: We may not get permission to use this data, therefore we might have to use option 2 which we estimate to take longer
 
-* Project Risk: the process may not work
+		* Project Risk: the process may not work
 
 	* Option 2: Download the OpenStreetMap application along with the OpenStreetMap Railway data from [http://wiki.openstreetmap.org/wiki/OpenRailwayMap](http://wiki.openstreetmap.org/wiki/OpenRailwayMap), convert it to database format and extract the data from there - 16 MH
 
