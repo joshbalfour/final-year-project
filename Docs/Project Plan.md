@@ -17,7 +17,7 @@ The purpose of this document is to outline the project plan for the Level Crossi
 
 ## Brief Project Overview
 
-It will tell you whether any level crossing in Kent is up or down.
+The aim of the project is to provide a prediction to the user as to whether a Level Crossing is currently down or up.
 
 ## Requirements Definition
 
