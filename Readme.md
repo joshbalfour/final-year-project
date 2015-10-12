@@ -11,7 +11,8 @@ We will track the trains. We will map the crossing. We will prodict the future!
 * Development:
 	* [Environment](Docs/environment.md)
 	* [Workflow](Docs/Development workflow.md)
-* [Data Collection](Docs/Data Collection/index.md)
+* Data Collection
+	* [Data Sources](Docs/Data Collection/Data Sources.md)
 * [Database](Docs/Database/index.md)
 * [Deployment](Docs/Deployment/index.md)
 * [API](Docs/API/index.md)
