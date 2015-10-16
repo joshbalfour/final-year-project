@@ -1,13 +1,13 @@
 **V 1.0.0**
 # Technical Overview
 
-### Implementation
+## Implementation
 Each importer will be written as a PHP script, this will get the data from the target and import it into the database. Each importer will probably need a set of libraries to access the specific data type.
 
 ### Task timing
 Each task will need be ran as a cron job. Some tasks will need to be ran every minute others, every mnth depending on how frequent the data changes. This is something that will need to be looked into further.
 
-### Flow Chart
+## Flow Chart
 Bellow is the overal flow chart for the connection to the Network Rail data but will be the same for each one changing the data source and the import phase.
 ##### Start
 The script will start and load up several libraries

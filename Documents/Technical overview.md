@@ -23,4 +23,4 @@ The API server will server data from the data base to the users and 3rd party se
 The database provides 2 main purposes. Firslty it will be storeing all the data for the crossing, as well as current and historical train times. Its second purpose is to do all the the anaylitsts on the data to calculate when which crossings will be up or down. Leaving this logic the in database will provide a massive performance gains in calculation times of repeat and new data requests.
 
 ### 6. Data Collection
-The data collection service will be in charge off peridically collecting data from National Rail and Network Rail, checking that the data is correct and storing it into the database.
+The data collection service will be in charge off peridically collecting data from National Rail, Network Rail and OpenStreetMap, checking that the data is correct and storing it into the database.

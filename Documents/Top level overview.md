@@ -1,4 +1,4 @@
-**V 1.0.0**
+**V 1.1.0**
 # Top Level Overview
 
 ![image](images/System designs/Overview.jpg)
@@ -8,6 +8,7 @@ The project will use 2 data sources.
 
 - National Rail: will provide the live train location data. This will be stored to predict where the train will be in the future.
 - Network Rail: which will provide the level crossing data.
+- OpenStreetMap: which will provide the rail location data.
 
 
 ## System
