@@ -1,4 +1,4 @@
-**V 1.0.5**
+**V 1.0.6**
 # Data Sources
 
 There are three pieces of data we have worked out we will need to make these predictions. The locations of the crossing, the train lines, and the locations of the trains. 
@@ -12,5 +12,6 @@ The second key peice of information is the location of trains. This allows us to
 ### Train Lines
 The final peice of information we need that we didnt release until we started to think abotu the model was the actaul train lines them selves. Because track can often run close to each other their may be a crossing which effects one peice of track but not another. So knowing which lines there are, and where they are is key. There are two optional sources for this. Firstly the trainmaponline.com has a comprensive data set, secondly if that is not available then when can use the data from Open Street Maps although this contains alot more raw data then required.  
 
-## Crossing Information
+## Crossing Timings
 [Level Crossings: A guide for managers, designers and operators](http://orr.gov.uk/__data/assets/pdf_file/0016/2158/level_crossings_guidance.pdf)
+[SteveDD1's YouTube channel](https://www.youtube.com/channel/UCdj_ttCg5UZZtz5vgMeAOKQ)
