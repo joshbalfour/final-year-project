@@ -1,8 +1,9 @@
+**V 1.0.0**
 # Technical Overview
 This document providers a more techincal indepth view of the system and how each component works and interacts with its neighbouring components.
 
 
-![image](images/omnigraffle-designs/Technical.jpg)
+![image](images/System designs/Technical.jpg)
 
 
 ### 1. Browser Interface

@@ -1,3 +1,4 @@
+**V 1.0.0**
 # Technical Overview
 
 ### How it works

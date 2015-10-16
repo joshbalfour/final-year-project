@@ -2,4 +2,4 @@
 
 ### Flow Chart
 
-![image](../images/omnigraffle-designs/Flow Diagram - Section 6.jpg)
+![image](../images/System designs/Flow Diagram - Section 6.jpg)

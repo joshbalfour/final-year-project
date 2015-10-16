@@ -1,3 +1,4 @@
+**V 1.0.0**
 # Development Workflow
 
 Bellow defines the work flow for development. It uses **feature branchs**, incorropates **conitunes intergration** and because of these features **auto delopment** to provide a safe and seemless enviroment.

@@ -1,3 +1,4 @@
+**V 1.0.0**
 # Web App Discovery
 The web app will we be used to display data from the API to a human user. It will be a javascript based application that will run on mobiles, tablets and desktops. 
 
