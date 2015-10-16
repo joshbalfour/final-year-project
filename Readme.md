@@ -5,6 +5,8 @@ We will track the trains. We will map the crossing. We will prodict the future!
 \#JoshMakeThisNicerPlease
 
 ## Table of Contents
+* Planning:
+	* [Project Plan](Docs/Project Plan.md)
 * System:
 	* [Top level overview](Docs/Top level overview.md)
 	* [Technical overview](Docs/Technical overview.md)
