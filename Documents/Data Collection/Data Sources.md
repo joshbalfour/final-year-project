@@ -13,4 +13,4 @@ The second key peice of information is the location of trains. This allows us to
 The final peice of information we need that we didnt release until we started to think abotu the model was the actaul train lines them selves. Because track can often run close to each other their may be a crossing which effects one peice of track but not another. So knowing which lines there are, and where they are is key. There are two optional sources for this. Firstly the trainmaponline.com has a comprensive data set, secondly if that is not available then when can use the data from Open Street Maps although this contains alot more raw data then required.  
 
 ## Crossing Information
-(Level Crossings: A guide for managers, designers and operators)[http://orr.gov.uk/__data/assets/pdf_file/0016/2158/level_crossings_guidance.pdf]
+[Level Crossings: A guide for managers, designers and operators](http://orr.gov.uk/__data/assets/pdf_file/0016/2158/level_crossings_guidance.pdf)
