@@ -11,10 +11,10 @@ We will track the trains. We will map the crossing. We will prodict the future!
 * System:
 	* [Top level overview](Documents/Top level overview.md)
 	* [Technical overview](Documents/Technical overview.md)
+* Development:
+	* [Environment](Documents/environment.md)
+	* [Workflow](Documents/Development workflow.md)
 * Application:
-	* Development:
-		* [Environment](Documents/environment.md)
-		* [Workflow](Documents/Development workflow.md)
 	* Data Collection
 		* [Data Sources](Documents/Data Collection/Data Sources.md)
 		* [Technical overview](Documents/Data Collection/Technical overview.md)

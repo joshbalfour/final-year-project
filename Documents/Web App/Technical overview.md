@@ -1,7 +1,7 @@
-**V 1.0.0**
+**V 1.0.1**
 # Technical Overview
 
-### How it works
+### Implementation
 #### General
 The site will use AngularJS to run the webpage. SCSS to build the style sheets. And grunt which will automatically build the style sheets and do any maniplucation on the resources.
 
