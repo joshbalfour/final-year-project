@@ -1,5 +1,5 @@
 **V 1.1.0**
-# Level Crossing Predictor
+# Level Crossing Predictor [![Build Status](https://magnum.travis-ci.com/beakybal4/final-year-project.svg?token=3SrbFjsXZ6b1nrKwyzse&branch=master)](https://magnum.travis-ci.com/beakybal4/final-year-project)
 
 ### Scope Statement
 We will track the trains. We will map the crossing. We will prodict the future!
