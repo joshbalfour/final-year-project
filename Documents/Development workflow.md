@@ -1,7 +1,7 @@
-**V 1.0.0**
+**V 1.0.1**
 # Development Workflow
 
-Bellow defines the work flow for development. It uses **feature branchs**, incorropates **conitunes intergration** and because of these features **auto delopment** to provide a safe and seemless enviroment.
+Bellow defines the work flow for development. It uses **feature branchs**, incorporates **continuous intergration** and because of these features **auto deployment** to provide a safe and seemless enviroment.
 
 ### 1. Branch from Master
 All new features are created in a new branch created from master following the format of `feature/{feature name}`. All coding and testing will done in here.
