@@ -1,4 +1,4 @@
-**V 1.1.0**
+**V 1.2.0**
 # Technical Overview
 
 ### Purpose
@@ -6,13 +6,13 @@ The API is the part that will read the data from the calculated data from the da
 
 ### Implementation
 #### General
-The system will be written in PHP using the #RyanLibraryNameHere as a base framework. This will then be served by the nginx docker container. PHP will recieve a HTTP and which will load up the frame, this will then route the request to the correct peice of code base of the router deffintion. After that the code will connect to the database and the code will decide what view it needs to read the data frame. Finally it will return the data back to the user in a defined format.
+The system will be written in PHP using Lumen as a base framework. This will then be served by the nginx docker container. PHP will recieve a HTTP request which will load up the framework, this will then route the request to the correct peice of code based on the router defintion. After that a database connection will be made and the code will decide what view it needs to read the data from. Finally it will return the data back to the user in a defined format.
 
 #### Errors
 The API also defines what should happen if there is a error. If it is a catchable error then it should return an error code along with a message. If its an uncathble error it should return the unknown error code and the PHP error. This is defined further in the API document.
 
 #### Testing
- #RyanPutThingsHerePlease
+The API code will unit tested using PHPUnit, with a strict 100% code coverage policy. Any automated UA tests and Integrations tests will then be run on commit to the feature branch, Travis CI will be used to run these tests, as well as running PHPunit with code coverage reporting enabled to ensure full coverage. Manual testing will be done and extra unit tests will be written by the reviewer at the stage of code reveiew.
 
 ### Flow Chart
 ##### HTTP Request
@@ -22,7 +22,7 @@ The system will start when when a HTTP request is made to the server. The server
 The next phase is the framework will verify the URL and find the correct piece of code to run it.
 
 ##### Has cached version?
-Next it checks to see if theres already a cached version of the request. Different requests will have different caching lengths. Stale caches will be automatically removed by the library.
+Next it checks to see if theres already a cached version of the request. Different requests will have different caching lengths. Stale caches will be automatically removed by the library. (Caching implementation will be deferred until speed becomes an issue, but this is likely to be the end outcome)
 
 ##### Read Cache
 Assuming is to does have a cached version it needs to read this and pass this on to the returning data phase.
@@ -34,6 +34,6 @@ If the server does not already have the data cached it needs to connect to the d
 Once the request has been returned from the database it should be cached for quicker access in the future.
 
 ##### Return data
-Finally the data shoudl be wrapped correct in the API wrapper and returned to the browser in JSON format.
+Finally the data should be wrapped correct in the API wrapper and returned to the browser in JSON format.
 
 ![image](../images/System designs/Flow Diagram - Section 4.jpg)
