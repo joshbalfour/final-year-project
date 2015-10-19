@@ -6,7 +6,7 @@ php:
   - nightly
 
 install: cd Application && composer install --dev
-before-script:
+before_script:
   - mv .env.testing .env
 script:
   - vendor/phpunit/phpunit/phpunit -c phpunit.xml --coverage-clover build/logs/clover.xml
