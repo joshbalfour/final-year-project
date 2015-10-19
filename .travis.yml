@@ -5,8 +5,10 @@ php:
   - hhvm
   - nightly
 
-install: cd Application && composer install --dev
 env:
-  - APP_KEY=32CharStringabcdefghijklmnopqrst
+  global:
+    - APP_KEY=32CharStringabcdefghijklmnopqrst
+
+install: cd Application && composer install --dev
 script:
   - vendor/phpunit/phpunit/phpunit -c phpunit.xml --coverage-clover build/logs/clover.xml
