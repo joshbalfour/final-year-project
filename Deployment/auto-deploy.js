@@ -16,7 +16,7 @@ var server = app.listen(7000, function () {
 
 	console.log('[',(new Date()).toUTCString(),']','Auto Deploy webhook listening at http://'+host+':'+port);
 
-	console.log('[',(new Date()).toUTCString(),']','git info: ',exec("cd ~ && cd final-year-project && git info"));
+	console.log('[',(new Date()).toUTCString(),']','git status: ',exec("cd ~ && cd final-year-project && git status"));
 });
 
 function redeploy(){
