@@ -41,6 +41,8 @@ RUN cd app \
 	&& ls -a ~/.ssh \
 	&& echo 'Host github.com \nHostname github.com \nIdentityFile ~/.ssh/deployment \nIdentitiesOnly yes' >> ~/.ssh/config && cat ~/.ssh/config
 
+RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+
 RUN cd ~ \
 	&& git clone git@github.com:beakybal4/final-year-project.git
 
