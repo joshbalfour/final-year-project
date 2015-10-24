@@ -1,4 +1,4 @@
-**V 1.1.0**
+**V 1.1.1**
 # Level Crossing Predictor [![Build Status](https://magnum.travis-ci.com/beakybal4/final-year-project.svg?token=3SrbFjsXZ6b1nrKwyzse&branch=master)](https://magnum.travis-ci.com/beakybal4/final-year-project) 
 
 ### Scope Statement
@@ -13,6 +13,7 @@ We will track the trains. We will map the crossing. We will prodict the future!
 	* [Technical overview](Documents/Technical overview.md)
 * Development:
 	* [Environment](Documents/environment.md)
+	* [Docker](Documents/Deployment/Docker.md)
 	* [Workflow](Documents/Development workflow.md)
 * Application:
 	* Data Collection
