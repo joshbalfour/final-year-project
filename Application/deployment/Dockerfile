@@ -3,6 +3,8 @@ FROM postgres
 # osm2pgsql setup
 RUN apt-get -y update
 RUN apt-get -y install osm2pgsql
+
+# postgres configuration
 RUN echo "createdb gis --username postgres && psql -d gis -c 'CREATE EXTENSION postgis; CREATE EXTENSION hstore;' --username postgres \n" >> /docker-entrypoint-initdb.d/run.sh
 
 RUN apt-get -y install wget curl
@@ -46,5 +48,11 @@ EXPOSE 3306
 
 VOLUME [ "/data" ]
 
+ENV MYSQL_ROOT_PASSWORD "level_crossing_predictor"
+ENV MYSQL_DATABASE "level_crossing_predictor"
+ENV MYSQL_USER "level_crossing_predictor"
+
 ADD boot.sh boot.sh
+ADD mysql_init.sh mysql_init.sh
+
 RUN cat boot.sh >> /docker-entrypoint-initdb.d/run.sh

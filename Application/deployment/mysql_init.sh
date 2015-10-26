@@ -1,5 +1,6 @@
-if [ ! -d "$MYSQL_DIR/mysql" ]; then
+#!/bin/bash
 
+if [ ! -d "$MYSQL_DIR/mysql" ]; then
 	if [ -z "$MYSQL_ROOT_PASSWORD" -a -z "$MYSQL_ALLOW_EMPTY_PASSWORD" ]; then
 		echo >&2 'error: database is uninitialized and MYSQL_ROOT_PASSWORD not set'
 		echo >&2 '  Did you forget to add -e MYSQL_ROOT_PASSWORD=... ?'
@@ -13,13 +14,28 @@ if [ ! -d "$MYSQL_DIR/mysql" ]; then
 	mysqld --initialize-insecure=on --datadir="$MYSQL_DIR"
 	echo 'Database initialized'
 
-	sed -i "s/bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
-
-	sed -i "s|datadir.*|datadir = $MYSQL_DIR|" /etc/mysql/my.cnf
-	
-	service mysql start
+	"mysql" --skip-networking &
+	pid="$!"
 
 	mysql=( mysql --protocol=socket -uroot )
+
+	for i in {30..0}; do
+		if echo 'SELECT 1' | "${mysql[@]}" &> /dev/null; then
+			break
+		fi
+		echo 'MySQL init process in progress...'
+		sleep 1
+	done
+	if [ "$i" = 0 ]; then
+		echo >&2 'MySQL init process failed.'
+		exit 1
+	fi
+
+	if [ -z "$MYSQL_INITDB_SKIP_TZINFO" ]; then
+		# sed is for https://bugs.mysql.com/bug.php?id=20545
+		mysql_tzinfo_to_sql /usr/share/zoneinfo | sed 's/Local time zone must be set--see zic manual page/FCTY/' | "${mysql[@]}" mysql
+	fi
+
 	"${mysql[@]}" <<-EOSQL
 		-- What's done in this file shouldn't be replicated
 		--  or products like mysql-fabric won't work
@@ -52,17 +68,17 @@ if [ ! -d "$MYSQL_DIR/mysql" ]; then
 	fi
 
 	echo
+
+	if ! kill -s TERM "$pid" || ! wait "$pid"; then
+		echo >&2 'MySQL init process failed.'
+		exit 1
+	fi
+
+	echo
 	echo 'MySQL init process done. Ready for start up.'
 	echo
-
 fi
 
+chown -R mysql:mysql "$MYSQL_DIR"
+
 service mysql start
-
-cat /etc/mysql/my.cnf
-
-# cd /data && mkdir osm
-# cd osm
-# curl $OSM_URL.html | grep -o '"england/.*\latest.osm\.pbf"' | sed 's/"//g' | xargs -P 4 -I % wget -N $OSM_URL/../%
-# ls -1 | head -n 1 | xargs -I % osm2pgsql --create --database gis --username postgres "%"
-# ls | xargs -I % osm2pgsql --append --database gis --username postgres "%"
