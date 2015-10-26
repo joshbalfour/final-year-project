@@ -1,4 +1,4 @@
-**V 1.0.0**
+**V 1.1.0**
 # Documentation Procedure
 
 The following document is to outline the procedure for updating and introducing new documentation to the project. This is necessary to ensure all documentation is done to a consistent standard and the same high quality we expect from our code. Many parallels have been taken from the workflow we use for making changes to the software to try and keep the process familiar and simple.
@@ -10,10 +10,7 @@ All documentation should be committed to a branch off of master. The naming of t
 When the author is happy the document is finished, a pull request will be made to merge the document branch with master. When the pull request is open the author's reviewer (same reviewer assigned for code review) will read the document and make comments about any changes that need to be made. Version numbering needs to be taken into account when making comments and adjustments. A full outline of version numbering will be outlined at the end of this document.
 
 ### 3. Reviewer validates merge
-When all issues have been rectified, and the version numbers are correct, the reviewer will commit one final change to the document, adding a single line, in italics, to the bottom "This document has been reviewed and approved by {reviewer name} on {current date}". This will in effect digitally sign the document, ensuring all documentation is thoroughly read through and scrutinised.
-
-### 4. Merge into master
-Once all of the above has been satisfied the document branch can be merged with master. Adjustments to existing documentation must go through the same process.
+When all issues have been rectified, and the version numbers are correct, the reviewer will merge the pull request into master. A report will be generated from the closed pull requests giving us an accurtate version history of each document. 
 
 # Document Version Numbering
 
