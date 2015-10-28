@@ -1,0 +1,25 @@
+
+body {
+	padding-top: 70px;
+}
+
+
+.navbar-brand img {
+	float: left;
+	margin-right: 6px;
+	margin-top: -1px;
+}
+
+#crossings-map {
+	position: absolute;
+	top: 51px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+
+.angular-google-map,
+.angular-google-map-container {
+	height: 100%;
+	width: 100%;
+}

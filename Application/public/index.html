@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="LCP">
+	<head>
+		<title>Level Crossing Predictor</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+		<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="app/style/style.css" rel="stylesheet" type="text/css">
+
+		<!-- Angular -->
+		<script src="bower_components/angular/angular.js"></script>
+
+		<script src='https://maps.googleapis.com/maps/api/js?sensor=false'></script>
+
+		<!-- Libraries -->
+		<script src="bower_components/lodash/lodash.min.js"></script>
+		<script src='bower_components/angular-simple-logger/dist/angular-simple-logger.min.js'></script>
+		<script src='bower_components/angular-google-maps/dist/angular-google-maps.min.js'></script>
+
+		<!-- Application -->
+		<script src="app/app.js"></script>
+		<script src="app/modules/map/controller.js"></script>
+
+	</head>
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<a class="navbar-brand" href="#">
+					<img alt="Brand" height="23px" src="app/images/logo.png">
+					Level Crossing Predictor
+				</a>
+			</div>
+		</nav>
+
+		<div id="crossings-map" ng-controller="MapController as mapCtrl" >
+			<ui-gmap-google-map center='mapCtrl.center' zoom='mapCtrl.zoom'>
+				<ui-gmap-markers models="mapCtrl.gateMarkers" coords="'self'" icon="'icon'">
+			</ui-gmap-google-map>
+		</div>
+	</body>
+</html>
