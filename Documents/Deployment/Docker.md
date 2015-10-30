@@ -5,14 +5,16 @@
 The docker enviroment will expect to have the `src` folder pointed to the repo on the host machine and the `data` folder.
 
 #### How to run
-Compile container: `docker build . -t level_crossing`  
-Run container: `docker run 
-	-P 80:7000 -P 3306:7001 -v=/data:/home/kieran/level_crossing_code/data -v=/src:/home/kieran/final-year-project level_crossing`   
-What this means?   
+cd into the /Application/deployment folder
+Compile container: `docker build -t level_crossing .`  
+In the same directory run container: `docker run 
+	-v "`pwd`/data":/data -v "`pwd`/../":/src  -p 7002:5432 -p 7001:3306 -p 7000:80 level_crossing`   
+What this means?
 
 * Container name: level_crossing
 * HTTP port: 7000
 * MySQL port: 7001
+* Postgres port: 7002
 * /data: Location to store database data
 * /src: Final year project code repo
 
