@@ -12,10 +12,6 @@ if [ ! -d "$MYSQL_DIR/mysql" ]; then
 	echo 'Initializing database'
 	mysqld --initialize-insecure=on --datadir="$MYSQL_DIR"
 	echo 'Database initialized'
-
-	sed -i "s/bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
-
-	sed -i "s|datadir.*|datadir = $MYSQL_DIR|" /etc/mysql/my.cnf
 	
 	service mysql start
 
@@ -50,12 +46,17 @@ if [ ! -d "$MYSQL_DIR/mysql" ]; then
 
 		echo 'FLUSH PRIVILEGES ;' | "${mysql[@]}"
 	fi
+	
+	service mysql stop
 
 	echo
 	echo 'MySQL init process done. Ready for start up.'
 	echo
 
 fi
+
+sed -i "s/bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
+sed -i "s|datadir.*|datadir = $MYSQL_DIR|" /etc/mysql/my.cnf
 
 rm /etc/apache2/sites-enabled/000-default.conf
 ln -s /src/deployment/apache.conf /etc/apache2/sites-enabled/levelcrossingpredictor.conf
