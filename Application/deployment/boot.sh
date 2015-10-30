@@ -57,8 +57,9 @@ if [ ! -d "$MYSQL_DIR/mysql" ]; then
 
 fi
 
-ln -s /src/public /var/www/html
-
+rm /etc/apache2/sites-enabled/000-default.conf
+ln -s /src/deployment/apache.conf /etc/apache2/sites-enabled/levelcrossingpredictor.conf
+ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite.load
 service mysql start
 service apache2 start
 

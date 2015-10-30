@@ -70,4 +70,6 @@ RUN mkdir /src && rm -rf /var/www/html
 VOLUME ["/src"]
 VOLUME ["/var/log/apache2"]
 
+RUN service apache2 start && service apache2 stop
+
 RUN cat boot.sh >> /docker-entrypoint-initdb.d/run.sh
