@@ -13,14 +13,16 @@ We will track the trains. We will map the crossing. We will prodict the future!
 	* [Technical overview](Documents/Technical overview.md)
 * Development:
 	* [Environment](Documents/environment.md)
-	* [Docker](Documents/Deployment/Docker.md)
 	* [Workflow](Documents/Development workflow.md)
 * Application:
 	* Data Collection
 		* [Data Sources](Documents/Data Collection/Data Sources.md)
 		* [Technical overview](Documents/Data Collection/Technical overview.md)
-	* [Database](Documents/Database/index.md)
-	* [Deployment](Documents/Deployment/index.md)
+	* Database
+		* [Software](Documents/Database/Database software.md)
+		* [Management](Documents/Database/Database management.md)
+	* Deployment
+		* [Docker](Documents/Deployment/Docker.md)
 	* API
 		* [Technical overview](Documents/API/Technical overview.md)
 		* [Endpoints](Documents/API/Endpoints.md)
