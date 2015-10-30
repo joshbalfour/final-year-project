@@ -13,6 +13,8 @@ ENV OSM_MIRROR "http://joshbalfour.co.uk/osm/"
 
 RUN mkdir /data
 
+ADD boot.sh boot.sh
+
 EXPOSE 5432
 
 # mysql
@@ -48,11 +50,24 @@ EXPOSE 3306
 
 VOLUME [ "/data" ]
 
+ADD mysql_init.sh mysql_init.sh
+
 ENV MYSQL_ROOT_PASSWORD "level_crossing_predictor"
 ENV MYSQL_DATABASE "level_crossing_predictor"
 ENV MYSQL_USER "level_crossing_predictor"
 
-ADD boot.sh boot.sh
-ADD mysql_init.sh mysql_init.sh
+# apache
+
+RUN apt-get update && apt-get -y install apache2 php5 php5-mcrypt php5-pgsql php5-mysql
+EXPOSE 80
+
+# laravel
+
+RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer && composer -V
+
+RUN mkdir /src && rm -rf /var/www/html
+
+VOLUME ["/src"]
+VOLUME ["/var/log/apache2"]
 
 RUN cat boot.sh >> /docker-entrypoint-initdb.d/run.sh

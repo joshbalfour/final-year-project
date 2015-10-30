@@ -57,9 +57,12 @@ if [ ! -d "$MYSQL_DIR/mysql" ]; then
 
 fi
 
-service mysql start
+ln -s /src/public /var/www/html
 
-cat /etc/mysql/my.cnf
+service mysql start
+service apache2 start
+
+cd /src && composer install
 
 # cd /data && mkdir osm
 # cd osm
