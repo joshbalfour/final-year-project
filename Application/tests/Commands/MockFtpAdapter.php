@@ -16,7 +16,7 @@ class MockFtpAdapter extends AbstractFtpAdapter
 
     private $isConnected = false;
 
-    private $contents;
+    private $contents = [];
 
     /**
      * MockFtpAdapter constructor.
@@ -201,7 +201,7 @@ class MockFtpAdapter extends AbstractFtpAdapter
      */
     public function read($path)
     {
-        return [ 'contents' => $this->contents ];
+        return [ 'contents' => $this->contents[$path] ];
     }
 
     /**

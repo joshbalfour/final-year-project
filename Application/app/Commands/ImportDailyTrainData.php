@@ -29,6 +29,27 @@ class ImportDailyTrainData extends Command implements SelfHandling
      */
     public function handle()
     {
-        return null;
+        $files = $this->ftpAdapter->listContents();
+
+        foreach ( $files as $filename ){
+            echo $filename."\n\r";
+            if ( strpos( $filename, date( 'Ymd' ) ) !== false && strpos( $filename, '_v8.xml.gz' ) !== false ){
+                $dataFile = $filename;
+                break;
+            }
+        }
+
+        if (empty( $dataFile )) {
+            return null;
+        }
+
+        $this->ftpAdapter->connect();
+        $data = $this->ftpAdapter->read( $dataFile );
+
+        if ( empty( $data['contents'] ) ){
+            return false;
+        }
+
+        return true;
     }
 }

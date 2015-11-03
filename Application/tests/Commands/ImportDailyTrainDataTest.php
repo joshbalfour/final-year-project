@@ -47,4 +47,14 @@ class ImportDailyTrainDataTest extends \TestCase
         $this->mockFtpAdapter->setContents( ['blahblah-filename.xml.gz' => 'not relevant'] );
         $this->assertNull( $this->command->handle() );
     }
+
+    /**
+     * @test
+     */
+    public function givenEmptyContentsCorrectFilename_WhenSavedFileIsReadAsEmptyDbInsertFails_ThenReturnsFalse()
+    {
+        $filename = date('YmdHis') . '_v8.xml.gz';
+        $this->mockFtpAdapter->setContents( [ $filename => '' ] );
+        $this->assertFalse( $this->command->handle() );
+    }
 }
