@@ -16,6 +16,7 @@ class ImportDailyTrainDataTest extends \TestCase
      */
     public function canConstruct()
     {
-        $command = new ImportDailyTrainData();
+        $mockFtpAdapter = new MockFtpAdapter();
+        $command = new ImportDailyTrainData( $mockFtpAdapter );
     }
 }
