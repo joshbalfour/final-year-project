@@ -25,6 +25,15 @@ class MockFtpAdapter extends AbstractFtpAdapter
     {
     }
 
+    public function listContents($directory = '', $recursive = false)
+    {
+        $filenames = [];
+        foreach ($this->contents as $filename => $_unusedcontents) {
+            $filenames[] = $filename;
+        }
+        return $filenames;
+    }
+
     /**
      * Establish a connection.
      */
@@ -241,5 +250,12 @@ class MockFtpAdapter extends AbstractFtpAdapter
     public function getTimestamp($path)
     {
         return false; // Not needed
+    }
+
+    public function setContents( $files )
+    {
+        foreach ( $files as $filename => $contents ){
+            $this->contents[$filename] = $contents;
+        }
     }
 }

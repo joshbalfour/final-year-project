@@ -9,14 +9,42 @@
 namespace App\Commands;
 
 
+use App\Exceptions\FileNotFoundException;
+
 class ImportDailyTrainDataTest extends \TestCase
 {
     /**
+     * @var ImportDailyTrainData
+     */
+    private $command;
+
+    /**
+     * @var MockFtpAdapter
+     */
+    private $mockFtpAdapter;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->mockFtpAdapter = new MockFtpAdapter();
+        $this->command = new ImportDailyTrainData( $this->mockFtpAdapter );
+    }
+
+    /**
      * @test
      */
-    public function canConstruct()
+    public function givenNullContents_WhenImporterReadsFromFtp_ThenReturnsNull()
     {
-        $mockFtpAdapter = new MockFtpAdapter();
-        $command = new ImportDailyTrainData( $mockFtpAdapter );
+        $this->assertNull( $this->command->handle() );
+    }
+
+    /**
+     * @test
+     */
+    public function givenSimpleContentsWrongFileName_WhenImporterReadsFromFtp_ThenReturnsNull()
+    {
+        $this->mockFtpAdapter->setContents( ['blahblah-filename.xml.gz' => 'not relevant'] );
+        $this->assertNull( $this->command->handle() );
     }
 }
