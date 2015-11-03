@@ -38,7 +38,4 @@ app.controller('MapController', function ($http) {
 	this.init = function () {
 		this.loadCrossings();
 	};
-
-
-	this.init();
 });

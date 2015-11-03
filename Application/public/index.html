@@ -32,7 +32,7 @@
 			</div>
 		</nav>
 
-		<div id="crossings-map" ng-controller="MapController as mapCtrl" >
+		<div id="crossings-map" ng-controller="MapController as mapCtrl" ng-init="mapCtrl.init()" >
 			<ui-gmap-google-map center='mapCtrl.center' zoom='mapCtrl.zoom'>
 				<ui-gmap-markers models="mapCtrl.gateMarkers" coords="'self'" icon="'icon'">
 			</ui-gmap-google-map>
