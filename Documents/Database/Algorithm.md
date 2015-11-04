@@ -35,10 +35,10 @@ The end result will be a table of the track that goes from station to stations.
 ### Train Times
 The data we get from national rail is times about when a train goes past each station. This data will be loaded into the database into the following schema.
 
-| From | FromTime  | To  | ToTime    | Service |
-| ---- | --------- | --- | --------- | ------- |
-| ABC  | Sat 12:05 | DH1 | Sat 12:35 | 22334   |
-| DH1  | Sat 23:54 | ABC | Sun 01:12 | 11223   |
+| From tpl  | FromTime  | To tpl   | ToTime    | rid          |
+| --------- | --------- | -------- | --------- | ------------ |
+| ABC       | Sat 12:05 | DH1      | Sat 12:35 | 2015021222   |
+| DH1       | Sat 23:54 | ABC      | Sun 01:12 | 2015021444   |
 
 ### Stats
 ##### Now
