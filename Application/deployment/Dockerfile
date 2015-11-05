@@ -1,27 +1,13 @@
-FROM postgres
-
-# osm2pgsql setup
-RUN apt-get -y update
-RUN apt-get -y install osm2pgsql
-
-# postgres configuration
-RUN echo "createdb gis --username postgres && psql -d gis -c 'CREATE EXTENSION postgis; CREATE EXTENSION hstore;' --username postgres \n" >> /docker-entrypoint-initdb.d/run.sh
-
-RUN apt-get -y install wget curl
-ENV OSM_URL "http://download.geofabrik.de/europe/great-britain/england"
-ENV OSM_MIRROR "http://joshbalfour.co.uk/osm/"
+FROM debian
 
 RUN mkdir /data
 
 ADD boot.sh boot.sh
 
-EXPOSE 5432
-
 # mysql
-
 ENV MYSQL_MAJOR 5.7
 ENV MYSQL_VERSION 5.7.9-1debian8
-RUN apt-get update && apt-get install -y perl --no-install-recommends
+RUN apt-get update && apt-get install -y perl wget curl ca-certificates --no-install-recommends
 RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys A4A9406876FCBD3C456770C88C718D3B5072E1F5
 RUN echo "deb http://repo.mysql.com/apt/debian/ jessie mysql-${MYSQL_MAJOR}" > /etc/apt/sources.list.d/mysql.list
 
@@ -72,4 +58,4 @@ VOLUME ["/var/log/apache2"]
 
 RUN service apache2 start && service apache2 stop
 
-RUN cat boot.sh >> /docker-entrypoint-initdb.d/run.sh
+ENTRYPOINT ["/bin/bash","-C","boot.sh"]
