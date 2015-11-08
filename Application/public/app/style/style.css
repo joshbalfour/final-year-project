@@ -1,8 +1,12 @@
 
 body {
 	padding-top: 70px;
+	overflow: hidden;
 }
 
+img {
+	max-width: 100%;
+}
 
 .navbar-brand img {
 	float: left;
@@ -21,5 +25,33 @@ body {
 .angular-google-map,
 .angular-google-map-container {
 	height: 100%;
+	width: 100%;
+}
+
+#showCrossingDetails {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	right: 10px;
+	bottom: 5px;
+	display: flex;
+}
+
+@media screen and (min-width: 600px) {
+	#showCrossingDetails {
+		left: 50%;
+	}
+}
+
+#showCrossingDetails .panel-body {
+	display: flex;
+	overflow: scroll;
+	padding: 0px;
+	width: 100%;
+}
+
+.showCrossingDetails-body-scroller {
+	padding: 30px;
+	overflow: auto;
 	width: 100%;
 }

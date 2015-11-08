@@ -17,6 +17,7 @@ module.exports = function(config) {
 	 files: [
 		'app/fixtures/**/*',
 
+		'bower_components/tween.js/src/Tween.js',
 		'bower_components/angular/angular.js',
 		'bower_components/angular-mocks/angular-mocks.js',
 		'bower_components/lodash/lodash.min.js',
@@ -24,6 +25,7 @@ module.exports = function(config) {
 		'bower_components/angular-google-maps/dist/angular-google-maps.min.js',
 		'app/app.js',
 		'app/modules/**/*.js',
+		'app/filters/*.js',
 		'app/tests/**/*.js'
 	 ],
 

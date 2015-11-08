@@ -19,6 +19,7 @@
     "bootstrap": "~3.3.5",
     "angular": "~1.4.7",
     "angular-google-maps": "~2.2.1",
-    "angular-mocks": "~1.4.7"
+    "angular-mocks": "~1.4.7",
+    "tween.js": "tweenjs#v16.3.0"
   }
 }
