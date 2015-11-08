@@ -14,9 +14,9 @@ All of crossings and stations will be attached to their nearest node on the line
 We will start at each train station and begin walking alone the nodes. If a node connects to two other nodes then we branch of the walker down each set of nodes. Once we receach a node that has a station attached we stop the walker and add the path the station along with the from and to destinations into the database. 
 
 ##### End
-The end result will be a table of the track that goes from station to stations.
+The end result will be a table of the track that goes from station to stations. All location based collumns will be stored in **Well Known Text**. The standard for storing locatins.
 
-| From | To  | LineString      |
+| From | To  | Route           |
 | ---- | --- | --------------- |
 | ABC  | DH1 | 1.0 13, 1.1 13  |
 | DH1  | ABC | 1.1 13, 1.0 13  |
@@ -35,14 +35,16 @@ The end result will be a table of the track that goes from station to stations.
 ### Train Times
 The data we get from national rail is times about when a train goes past each station. This data will be loaded into the database into the following schema.
 
-| From tpl  | FromTime  | To tpl   | ToTime    | rid          |
+| From tpl  | FromTime  | To tpl   | ToTime    | RID          |
 | --------- | --------- | -------- | --------- | ------------ |
 | ABC       | Sat 12:05 | DH1      | Sat 12:35 | 2015021222   |
 | DH1       | Sat 23:54 | ABC      | Sun 01:12 | 2015021444   |
 
 ### Stats
 ##### Now
-To compute the stats now we begin by selecting all the train times that have a start and end date that cover the current time. Grouping these values by service we then find the average running time for each service. Once we have the average running time for each service we model that service running over the track and see if the time it runs over a crossing is the current time minus the saftey bounds that determine how early the barrier goes down.   
-Finally is the method of computing stats. it
+To compute the stats now we begin by selecting all the train times that have a start and end date that cover the current time. Then simulate the train running over that track at that time and calculate whether is its location at the current time is with the tollernce of the crossing going down.
+ 
 
+##### Future
+To compute the future stats we select all train times that will be between now and the prediction future. Then simulate the train running over that track at that those and calculate the times that the train will come within contact with a level crossing.
 
