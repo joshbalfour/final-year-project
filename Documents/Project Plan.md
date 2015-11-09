@@ -1,4 +1,4 @@
-**V 1.0.0**
+**V 1.0.1**
 # Project Plan
 
 ## Document Overview
@@ -138,8 +138,8 @@ Each has a man hour time estimate against it in the format # MH, this is then su
 
 	* location
 
-###R1.F2 - Download and Store Train Times - 14 MH
-* R1.F2.T1 Find and download the data - 8 MH
+###R1.F2 - Download and Store Train Times - 20 MH
+* R1.F2.T1 Find and download the data - 14 MH
 
 	* National Rail - Darwin Data Feed
 
