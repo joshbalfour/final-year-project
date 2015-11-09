@@ -1,20 +1,20 @@
-**V 1.0.0**
+**V 1.0.2**
 # Algorithm
 ### Station tracks
 The first step will be to preprocess all of the train tracks and the stations so that we can produce a simple map which contains a table with a line.
 
 #### Method
 ##### Flatten
-All of the rails will be falterned and join together to produce a counious graph of connected nodes. This will group lines that run next to each other together and lines that join on juction that arent present in the shape file.
+All of the rails will be flattened and join together to produce a continuous graph of connected nodes. This will group lines that run next to each other together and lines that join on junctions that aren't present in the shape file.
 
 ##### Attach stations and crossings
 All of crossings and stations will be attached to their nearest node on the line. This will be based on distance but can be based on the shape and size of the station is using general area proves ineffective.
 
 ##### Mapping the result
-We will start at each train station and begin walking along the nodes. If a node connects to two other nodes then we branch off the walker down each set of nodes. Once we receach a node that has a station attached we stop the walker and add the path and the station along with the from and to destinations into the database. 
+We will start at each train station and begin walking along the nodes. If a node connects to two other nodes then we branch off the walker down each set of nodes. Once we reach a node that has a station attached we stop the walker and add the path and the station along with the from and to destinations into the database. 
 
 ##### End
-The end result will be a table of the track that goes from station to stations. All location based collumns will be stored in **Well Known Text**. The standard for storing locations.
+The end result will be a table of the track that goes from station to stations. All location based columns will be stored in **Well Known Text**. The standard for storing locations.
 
 | From | To  | Route           |
 | ---- | --- | --------------- |
