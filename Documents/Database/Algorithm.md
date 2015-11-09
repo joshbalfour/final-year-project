@@ -4,17 +4,17 @@
 The first step will be to preprocess all of the train tracks and the stations so that we can produce a simple map which contains a table with a line.
 
 #### Method
-##### Flattern
-All of the rails will be falterned and join together to produce a continue join of nodes. This will group lines that run next to each other together and lines that join on juction that arent present in the shape file.
+##### Flatten
+All of the rails will be falterned and join together to produce a counious graph of connected nodes. This will group lines that run next to each other together and lines that join on juction that arent present in the shape file.
 
 ##### Attach stations and crossings
 All of crossings and stations will be attached to their nearest node on the line. This will be based on distance but can be based on the shape and size of the station is using general area proves ineffective.
 
 ##### Mapping the result
-We will start at each train station and begin walking alone the nodes. If a node connects to two other nodes then we branch of the walker down each set of nodes. Once we receach a node that has a station attached we stop the walker and add the path the station along with the from and to destinations into the database. 
+We will start at each train station and begin walking along the nodes. If a node connects to two other nodes then we branch off the walker down each set of nodes. Once we receach a node that has a station attached we stop the walker and add the path and the station along with the from and to destinations into the database. 
 
 ##### End
-The end result will be a table of the track that goes from station to stations. All location based collumns will be stored in **Well Known Text**. The standard for storing locatins.
+The end result will be a table of the track that goes from station to stations. All location based collumns will be stored in **Well Known Text**. The standard for storing locations.
 
 | From | To  | Route           |
 | ---- | --- | --------------- |
@@ -42,7 +42,7 @@ The data we get from national rail is times about when a train goes past each st
 
 ### Stats
 ##### Now
-To compute the stats now we begin by selecting all the train times that have a start and end date that cover the current time. Then simulate the train running over that track at that time and calculate whether is its location at the current time is with the tollernce of the crossing going down.
+To compute the stats now we begin by selecting all the train times that have a start and end date that cover the current time. Then simulate the train running over that track at that time and calculate whether it's location at the current time is within the tolerance of the crossing going down.
  
 
 ##### Future
