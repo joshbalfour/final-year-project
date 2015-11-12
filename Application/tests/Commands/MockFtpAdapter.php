@@ -29,7 +29,7 @@ class MockFtpAdapter extends AbstractFtpAdapter
     {
         $filenames = [];
         foreach ($this->contents as $filename => $_unusedcontents) {
-            $filenames[] = $filename;
+            $filenames[] = [ "path" => $filename];
         }
         return $filenames;
     }
@@ -252,7 +252,10 @@ class MockFtpAdapter extends AbstractFtpAdapter
         return false; // Not needed
     }
 
-    public function setContents( $files )
+    /**
+     * @param $files
+     */
+    public function setContents($files )
     {
         foreach ( $files as $filename => $contents ){
             $this->contents[$filename] = $contents;

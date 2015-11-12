@@ -32,9 +32,8 @@ class ImportDailyTrainData extends Command implements SelfHandling
         $files = $this->ftpAdapter->listContents();
 
         foreach ( $files as $filename ){
-            echo $filename."\n\r";
-            if ( strpos( $filename, date( 'Ymd' ) ) !== false && strpos( $filename, '_v8.xml.gz' ) !== false ){
-                $dataFile = $filename;
+            if ( strpos( $filename['path'], date( 'Ymd' ) ) !== false && strpos( $filename['path'], '_v8.xml.gz' ) !== false ){
+                $dataFile = $filename['path'];
                 break;
             }
         }
@@ -50,6 +49,6 @@ class ImportDailyTrainData extends Command implements SelfHandling
             return false;
         }
 
-        return true;
+        return gzdecode( $data['contents'] );
     }
 }
