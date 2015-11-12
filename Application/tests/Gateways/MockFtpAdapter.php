@@ -6,7 +6,7 @@
  * Time: 14:43
  */
 
-namespace App\Commands;
+namespace App\Gateways;
 
 use League\Flysystem\Adapter\AbstractFtpAdapter;
 use League\Flysystem\Config;
