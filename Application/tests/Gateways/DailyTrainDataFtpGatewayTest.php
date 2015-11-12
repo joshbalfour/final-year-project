@@ -79,8 +79,8 @@ class DailyTrainDataFtpGatewayTest extends \TestCase
      */
     public function givenRealFormatDataFile_WhenDownloaded_ThenFileIsDecompressedAndReturned()
     {
-        $compressedData = file_get_contents( 'tests/Gateways/compressed_test.xml.gz' );
-        $uncompressed_data = file_get_contents( 'tests/Gateways/decompressed_test.xml' );
+        $compressedData = file_get_contents( 'tests/Data/TrainTimeData/compressed_test.xml.gz' );
+        $uncompressed_data = file_get_contents( 'tests/Data/TrainTimeData/decompressed_test.xml' );
         $this->mockFtpAdapter->setContents( [ $this->correctFilename => $compressedData ] );
         $this->assertEquals( $uncompressed_data, $this->command->getDailyTrainData() );
     }
