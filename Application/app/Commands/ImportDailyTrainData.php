@@ -3,6 +3,7 @@
 namespace App\Commands;
 
 use App\Gateways\DailyTrainDataGateway;
+use App\Storage\TrainDataStorage;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Nathanmac\Utilities\Parser\Parser;
 
@@ -17,16 +18,22 @@ class ImportDailyTrainData extends Command implements SelfHandling
      * @var Parser
      */
     private $xmlParser;
+    /**
+     * @var TrainDataStorage
+     */
+    private $trainDataStorage;
 
     /**
      * Create a new command instance.
      * @param DailyTrainDataGateway $gateway
      * @param Parser $xmlParser
+     * @param TrainDataStorage $trainDataStorage
      */
-    public function __construct( DailyTrainDataGateway $gateway, Parser $xmlParser )
+    public function __construct( DailyTrainDataGateway $gateway, Parser $xmlParser, TrainDataStorage $trainDataStorage )
     {
         $this->gateway = $gateway;
         $this->xmlParser = $xmlParser;
+        $this->trainDataStorage = $trainDataStorage;
     }
 
     /**
@@ -35,8 +42,28 @@ class ImportDailyTrainData extends Command implements SelfHandling
     public function handle()
     {
         $xmlData = $this->gateway->getDailyTrainData();
-        $data = $this->xmlParser->xml( $xmlData );
-        var_dump( $data );
-        return $data;
+        $journeys = $this->xmlParser->xml( $xmlData );
+
+        foreach ( $journeys as $journey ){
+            var_dump( $journey );echo "\r\n";
+            $rid = $journey['@attributes']['rid'];
+            foreach( $journey as $type => $stop ){
+                var_dump( $type );echo " => "; var_dump( $stop );echo"\r\n";
+
+                if( $type == '@attributes' ) {
+                    continue;
+                } else if( $type == "OR" ){
+                    $from = $stop['@attributes']['tpl'];
+                    $fromTime = new \DateTime( date('Y-m-d').' '.$stop['@attributes']['wtd'].':00' );
+                } else if( $type == "DT" ){
+                    $to = $stop['@attributes']['tpl'];
+                    $toTime = new \DateTime( date('Y-m-d').' '.$stop['@attributes']['wta'].':00' );
+                }
+
+                if( isset( $from, $fromTime, $to, $toTime ) ) {
+                    $this->trainDataStorage->insert($rid, $from, $fromTime, $to, $toTime);
+                }
+            }
+        }
     }
 }

@@ -9,6 +9,7 @@
 namespace App\Commands;
 
 
+use Exception;
 use Nathanmac\Utilities\Parser\Parser;
 
 class ImportDailyTrainDataTest extends \TestCase
@@ -23,19 +24,70 @@ class ImportDailyTrainDataTest extends \TestCase
      */
     private $command;
 
+    /**
+     * @var MockTrainDataStorage
+     */
+    private $mockStorage;
+
     public function setUp()
     {
         parent::setUp();
 
         $this->mockGateway = new MockDailyTrainDataGateway();
-        $this->command = new ImportDailyTrainData( $this->mockGateway, new Parser() );
+        $this->mockStorage = new MockTrainDataStorage();
+        $this->command = new ImportDailyTrainData( $this->mockGateway, new Parser(), $this->mockStorage );
     }
 
     /**
      * @test
      */
-    public function givenNullData_WhenParsed_ThenReturnsEmptyArray()
+    public function givenNullData_WhenParsed_ThenNoRowsInserted()
     {
-        $this->assertEquals( [], $this->command->handle() );
+        $this->command->handle();
+        $this->assertTrue( $this->mockStorage->isEmpty() );
+    }
+
+    /**
+     * @test
+     * @expectedException Exception
+     */
+    public function givenNonXMLData_WhenParsed_ThenThrowsParserException()
+    {
+        $this->mockGateway->setData( 'John Cena' );
+        $this->command->handle();
+    }
+
+    /**
+     * @test
+     */
+    public function givenSingleJourneyNoStopsInValidXMl_WhenParsed_ThenOneRowInsertedToDb()
+    {
+        $data =
+           '<PportTimetable>
+                <Journey rid="1" >
+                    <OR tpl="START" wtd="16:04" />
+                    <DT tpl="END" wta="16:20" />
+                </Journey>
+            </PportTimetable>';
+        $this->mockGateway->setData( $data );
+        $this->command->handle();
+        $expected = [
+            [
+                'rid' => 1,
+                'from' => 'START',
+                'from_time' => date('Y-m-d').' 16:04:00',
+                'to' => 'END',
+                'to_time' => date('Y-m-d').' 16:20:00'
+            ]
+        ];
+        $this->assertEquals( $expected, $this->mockStorage->getData());
+    }
+
+    /**
+     * @test
+     */
+    public function givenSingleJourneyWithPassThroughStop_WhenParsed_ThenTwoRowsInsertedIntoDb()
+    {
+
     }
 }

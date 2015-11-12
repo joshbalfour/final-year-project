@@ -13,6 +13,10 @@ use App\Gateways\DailyTrainDataGateway;
 
 class MockDailyTrainDataGateway implements DailyTrainDataGateway
 {
+    /**
+     * @var string
+     */
+    private $data;
 
     /**
      * MockDailyTrainDataGateway constructor.
@@ -26,6 +30,14 @@ class MockDailyTrainDataGateway implements DailyTrainDataGateway
      */
     public function getDailyTrainData()
     {
-        return null;
+        return $this->data;
+    }
+
+    /**
+     * @param string $data
+     */
+    public function setData($data)
+    {
+        $this->data = $data;
     }
 }
