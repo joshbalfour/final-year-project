@@ -4,6 +4,7 @@ namespace App\Commands;
 
 use App\Gateways\DailyTrainDataGateway;
 use Illuminate\Contracts\Bus\SelfHandling;
+use Nathanmac\Utilities\Parser\Parser;
 
 class ImportDailyTrainData extends Command implements SelfHandling
 {
@@ -13,12 +14,19 @@ class ImportDailyTrainData extends Command implements SelfHandling
     private $gateway;
 
     /**
+     * @var Parser
+     */
+    private $xmlParser;
+
+    /**
      * Create a new command instance.
      * @param DailyTrainDataGateway $gateway
+     * @param Parser $xmlParser
      */
-    public function __construct( DailyTrainDataGateway $gateway )
+    public function __construct( DailyTrainDataGateway $gateway, Parser $xmlParser )
     {
         $this->gateway = $gateway;
+        $this->xmlParser = $xmlParser;
     }
 
     /**
@@ -26,6 +34,9 @@ class ImportDailyTrainData extends Command implements SelfHandling
      */
     public function handle()
     {
-        $data = $this->gateway->getDailyTrainData();
+        $xmlData = $this->gateway->getDailyTrainData();
+        $data = $this->xmlParser->xml( $xmlData );
+        var_dump( $data );
+        return $data;
     }
 }
