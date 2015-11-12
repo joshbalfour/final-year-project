@@ -1,23 +1,28 @@
-**V 1.0.1**
+**V 1.1.0**
 # Docker
 
 ## Container requirements
 The docker enviroment will expect to have the `src` folder pointed to the repo on the host machine and the `data` folder.
 
 #### How to run
-cd into the /Application/deployment folder
-Compile container: `docker build -t level_crossing .`  
-In the same directory run container: 
+Clone the repo:  
+`git clone git@github.com:joshbalfour/final-year-project.git ~/final-year-project/Application/deployment`
+
+Go to your Application deployment folder:  
+`cd ~/final-year-project/Application/deployment`
+
+Compile container:  
+`docker build -t level_crossing .`
+
+Start the container:   
 ```
-docker run  -v "`pwd`/data":/data -v "`pwd`/../":/src  -p 7002:5432 -p 7001:3306 -p 7000:80 level_crossing
+docker run  -v "./data":/data -v "../":/src -p 7000:80 -p 7001:3306 level_crossing
 ```
 
 #####What this means?
-
 * Container name: level_crossing
 * HTTP port: 7000
 * MySQL port: 7001
-* Postgres port: 7002
 * /data: Location to store database data
 * /src: Final year project code repo
 
