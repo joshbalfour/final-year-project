@@ -46,7 +46,7 @@ class ImportDailyTrainData extends Command implements SelfHandling
 
         foreach ( $journeys as $journey ){
             var_dump( $journey );echo "\r\n";
-            $rid = $journey['@attributes']['rid'];
+            $rid = (int)$journey['@attributes']['rid'];
             foreach( $journey as $type => $stop ){
                 var_dump( $type );echo " => "; var_dump( $stop );echo"\r\n";
 
@@ -54,14 +54,19 @@ class ImportDailyTrainData extends Command implements SelfHandling
                     continue;
                 } else if( $type == "OR" ){
                     $from = $stop['@attributes']['tpl'];
-                    $fromTime = new \DateTime( date('Y-m-d').' '.$stop['@attributes']['wtd'].':00' );
+                    $fromTime = new \DateTime( date('Y-m-d').' '.$stop['@attributes']['wtd'] );
+                } else if( $type == "PP" ) {
+                    $to = $stop['@attributes']['tpl'];
+                    $toTime = new \DateTime( date('Y-m-d').' '.$stop['@attributes']['wtp'] );
                 } else if( $type == "DT" ){
                     $to = $stop['@attributes']['tpl'];
-                    $toTime = new \DateTime( date('Y-m-d').' '.$stop['@attributes']['wta'].':00' );
+                    $toTime = new \DateTime( date('Y-m-d').' '.$stop['@attributes']['wta'] );
                 }
 
                 if( isset( $from, $fromTime, $to, $toTime ) ) {
                     $this->trainDataStorage->insert($rid, $from, $fromTime, $to, $toTime);
+                    $from = $to;
+                    $fromTime = $toTime;
                 }
             }
         }

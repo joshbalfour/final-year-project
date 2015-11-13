@@ -88,6 +88,32 @@ class ImportDailyTrainDataTest extends \TestCase
      */
     public function givenSingleJourneyWithPassThroughStop_WhenParsed_ThenTwoRowsInsertedIntoDb()
     {
-
+        $data =
+            '<PportTimetable>
+                <Journey rid="1" >
+                    <OR tpl="START" wtd="16:04" />
+                    <PP tpl="MIDDLE" wtp="16:10"/>
+                    <DT tpl="END" wta="16:20" />
+                </Journey>
+            </PportTimetable>';
+        $this->mockGateway->setData( $data );
+        $this->command->handle();
+        $expected = [
+            [
+                'rid' => 1,
+                'from' => 'START',
+                'from_time' => date('Y-m-d').' 16:04:00',
+                'to' => 'MIDDLE',
+                'to_time' => date('Y-m-d').' 16:10:00'
+            ],
+            [
+                'rid' => 1,
+                'from' => 'MIDDLE',
+                'from_time' => date('Y-m-d').' 16:10:00',
+                'to' => 'END',
+                'to_time' => date('Y-m-d').' 16:20:00'
+            ]
+        ];
+        $this->assertEquals( $expected, $this->mockStorage->getData());
     }
 }
