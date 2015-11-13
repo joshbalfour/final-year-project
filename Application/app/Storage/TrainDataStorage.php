@@ -18,7 +18,6 @@ interface TrainDataStorage
      * @param \DateTimeInterface $fromTime
      * @param $to
      * @param \DateTimeInterface $toTime
-     * @return mixed
      */
     public function insert( $rid, $from, \DateTimeInterface $fromTime, $to, \DateTimeInterface $toTime );
 
