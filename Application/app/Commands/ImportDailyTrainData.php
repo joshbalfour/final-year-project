@@ -5,7 +5,6 @@ namespace App\Commands;
 use App\Gateways\DailyTrainDataGateway;
 use App\Storage\TrainDataStorage;
 use Illuminate\Contracts\Bus\SelfHandling;
-use Nathanmac\Utilities\Parser\Parser;
 
 class ImportDailyTrainData extends Command implements SelfHandling
 {
@@ -15,10 +14,6 @@ class ImportDailyTrainData extends Command implements SelfHandling
     private $gateway;
 
     /**
-     * @var Parser
-     */
-    private $xmlParser;
-    /**
      * @var TrainDataStorage
      */
     private $trainDataStorage;
@@ -26,13 +21,11 @@ class ImportDailyTrainData extends Command implements SelfHandling
     /**
      * Create a new command instance.
      * @param DailyTrainDataGateway $gateway
-     * @param Parser $xmlParser
      * @param TrainDataStorage $trainDataStorage
      */
-    public function __construct( DailyTrainDataGateway $gateway, Parser $xmlParser, TrainDataStorage $trainDataStorage )
+    public function __construct( DailyTrainDataGateway $gateway, TrainDataStorage $trainDataStorage )
     {
         $this->gateway = $gateway;
-        $this->xmlParser = $xmlParser;
         $this->trainDataStorage = $trainDataStorage;
     }
 
@@ -45,9 +38,6 @@ class ImportDailyTrainData extends Command implements SelfHandling
         $xmlData = new \SimpleXMLElement( $xmlString );
         foreach( $xmlData->Journey as $journey ){
             $rid = (int)$journey['rid'];
-            /**
-             * @var $stop \SimpleXMLElement
-             */
             foreach( $journey->children() as $type => $stop ){
                 $stationDepartureTime = false;
                 if( $type == "OR" ){

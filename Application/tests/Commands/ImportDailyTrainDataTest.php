@@ -10,7 +10,6 @@ namespace App\Commands;
 
 
 use Exception;
-use Nathanmac\Utilities\Parser\Parser;
 
 class ImportDailyTrainDataTest extends \TestCase
 {
@@ -35,7 +34,7 @@ class ImportDailyTrainDataTest extends \TestCase
 
         $this->mockGateway = new MockDailyTrainDataGateway();
         $this->mockStorage = new MockTrainDataStorage();
-        $this->command = new ImportDailyTrainData( $this->mockGateway, new Parser(), $this->mockStorage );
+        $this->command = new ImportDailyTrainData( $this->mockGateway, $this->mockStorage );
     }
 
     /**
@@ -202,6 +201,107 @@ class ImportDailyTrainDataTest extends \TestCase
             ],
             [
                 'rid' => 1,
+                'from' => 'MIDDLE2',
+                'from_time' => date('Y-m-d').' 16:22:30',
+                'to' => 'END',
+                'to_time' => date('Y-m-d').' 16:30:00'
+            ]
+        ];
+        $this->assertEquals( $expected, $this->mockStorage->getData());
+    }
+
+    /**
+     * @test
+     */
+    public function givenMultipleJourneys_WhenParsed_ThenAllJourneysAddedWithCorrectRidsForStops()
+    {
+        $data =
+            '<PportTimetable>
+                <Journey rid="1" >
+                    <OR tpl="START" wtd="16:04" />
+                    <PP tpl="NONSTOP" wtp="16:07" />
+                    <IP tpl="MIDDLE" wta="16:10" wtd="16:12" />
+                    <PP tpl="NONSTOP2" wtp="16:17" />
+                    <IP tpl="MIDDLE2" wta="16:20" wtd="16:22:30" />
+                    <DT tpl="END" wta="16:30" />
+                </Journey>
+                <Journey rid="2" >
+                    <OR tpl="START" wtd="16:04" />
+                    <PP tpl="NONSTOP" wtp="16:07" />
+                    <IP tpl="MIDDLE" wta="16:10" wtd="16:12" />
+                    <PP tpl="NONSTOP2" wtp="16:17" />
+                    <IP tpl="MIDDLE2" wta="16:20" wtd="16:22:30" />
+                    <DT tpl="END" wta="16:30" />
+                </Journey>
+            </PportTimetable>';
+        $this->mockGateway->setData( $data );
+        $this->command->handle();
+        $expected = [
+            [
+                'rid' => 1,
+                'from' => 'START',
+                'from_time' => date('Y-m-d').' 16:04:00',
+                'to' => 'NONSTOP',
+                'to_time' => date('Y-m-d').' 16:07:00'
+            ],
+            [
+                'rid' => 1,
+                'from' => 'NONSTOP',
+                'from_time' => date('Y-m-d').' 16:07:00',
+                'to' => 'MIDDLE',
+                'to_time' => date('Y-m-d').' 16:10:00'
+            ],
+            [
+                'rid' => 1,
+                'from' => 'MIDDLE',
+                'from_time' => date('Y-m-d').' 16:12:00',
+                'to' => 'NONSTOP2',
+                'to_time' => date('Y-m-d').' 16:17:00'
+            ],
+            [
+                'rid' => 1,
+                'from' => 'NONSTOP2',
+                'from_time' => date('Y-m-d').' 16:17:00',
+                'to' => 'MIDDLE2',
+                'to_time' => date('Y-m-d').' 16:20:00'
+            ],
+            [
+                'rid' => 1,
+                'from' => 'MIDDLE2',
+                'from_time' => date('Y-m-d').' 16:22:30',
+                'to' => 'END',
+                'to_time' => date('Y-m-d').' 16:30:00'
+            ],
+            [
+                'rid' => 2,
+                'from' => 'START',
+                'from_time' => date('Y-m-d').' 16:04:00',
+                'to' => 'NONSTOP',
+                'to_time' => date('Y-m-d').' 16:07:00'
+            ],
+            [
+                'rid' => 2,
+                'from' => 'NONSTOP',
+                'from_time' => date('Y-m-d').' 16:07:00',
+                'to' => 'MIDDLE',
+                'to_time' => date('Y-m-d').' 16:10:00'
+            ],
+            [
+                'rid' => 2,
+                'from' => 'MIDDLE',
+                'from_time' => date('Y-m-d').' 16:12:00',
+                'to' => 'NONSTOP2',
+                'to_time' => date('Y-m-d').' 16:17:00'
+            ],
+            [
+                'rid' => 2,
+                'from' => 'NONSTOP2',
+                'from_time' => date('Y-m-d').' 16:17:00',
+                'to' => 'MIDDLE2',
+                'to_time' => date('Y-m-d').' 16:20:00'
+            ],
+            [
+                'rid' => 2,
                 'from' => 'MIDDLE2',
                 'from_time' => date('Y-m-d').' 16:22:30',
                 'to' => 'END',
