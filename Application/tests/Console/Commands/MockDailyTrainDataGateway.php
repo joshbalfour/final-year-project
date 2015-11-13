@@ -6,7 +6,7 @@
  * Time: 12:46
  */
 
-namespace App\Commands;
+namespace App\Console\Commands;
 
 
 use App\Gateways\DailyTrainDataGateway;

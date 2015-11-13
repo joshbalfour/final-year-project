@@ -6,7 +6,7 @@
  * Time: 12:13
  */
 
-namespace App\Commands;
+namespace App\Console\Commands;
 
 
 use Exception;

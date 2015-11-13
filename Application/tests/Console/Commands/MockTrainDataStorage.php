@@ -6,7 +6,7 @@
  * Time: 15:08
  */
 
-namespace App\Commands;
+namespace App\Console\Commands;
 
 
 use App\Storage\TrainDataStorage;
