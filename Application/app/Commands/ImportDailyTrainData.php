@@ -41,41 +41,41 @@ class ImportDailyTrainData extends Command implements SelfHandling
      */
     public function handle()
     {
-        $xmlData = $this->gateway->getDailyTrainData();
-        $journeys = $this->xmlParser->xml( $xmlData );
-
-        foreach ( $journeys as $journey ){
-            $rid = (int)$journey['@attributes']['rid'];
-            $stationDepartureTime = false;
-            foreach( $journey as $type => $stop ){
-                if( $type == '@attributes' ) {
-                    //not a station stop so skip
-                    continue;
-                } else if( $type == "OR" ){
+        $xmlString = $this->gateway->getDailyTrainData();
+        $xmlData = new \SimpleXMLElement( $xmlString );
+        foreach( $xmlData->Journey as $journey ){
+            $rid = (int)$journey['rid'];
+            /**
+             * @var $stop \SimpleXMLElement
+             */
+            foreach( $journey->children() as $type => $stop ){
+                $stationDepartureTime = false;
+                if( $type == "OR" ){
                     $from = $this->getStationName( $stop );
-                    $fromTime = $this->getDateTime( $stop['@attributes']['wtd'] );
+                    $fromTime = $this->getDateTime( $stop['wtd'] );
                 } else if( $type == "PP" ) {
                     $to = $this->getStationName( $stop );
-                    $toTime = $this->getDateTime( $stop['@attributes']['wtp'] );
+                    $toTime = $this->getDateTime( $stop['wtp'] );
                 } else if( $type == "IP" ) {
                     $to = $this->getStationName( $stop );
-                    $toTime = $this->getDateTime( $stop['@attributes']['wta'] );
-                    $stationDepartureTime = $this->getDateTime( $stop['@attributes']['wtd'] );
+                    $toTime = $this->getDateTime( $stop['wta'] );
+                    $stationDepartureTime = $this->getDateTime( $stop['wtd'] );
                 } else if( $type == "DT" ){
                     $to = $this->getStationName( $stop );
-                    $toTime = $this->getDateTime( $stop['@attributes']['wta'] );
+                    $toTime = $this->getDateTime( $stop['wta'] );
                 }
 
                 if( isset( $from, $fromTime, $to, $toTime ) ) {
                     $this->insertDataAndUpdateFromValues( $rid, $from, $fromTime, $to, $toTime, $stationDepartureTime );
                 }
             }
+            unset( $from, $fromTime, $to, $toTime );
         }
     }
 
     private function getStationName($stop)
     {
-        return $stop['@attributes']['tpl'];
+        return (string)$stop['tpl'];
     }
 
     private function insertDataAndUpdateFromValues( $rid, &$from, &$fromTime, $to, $toTime, $stationDepartureTime )
