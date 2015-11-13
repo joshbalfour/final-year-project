@@ -8,7 +8,6 @@
 
 namespace App\Gateways;
 
-
 use League\Flysystem\Adapter\AbstractFtpAdapter;
 
 class DailyTrainDataFtpGateway implements DailyTrainDataGateway
