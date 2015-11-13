@@ -116,4 +116,38 @@ class ImportDailyTrainDataTest extends \TestCase
         ];
         $this->assertEquals( $expected, $this->mockStorage->getData());
     }
+
+    /**
+     * @test
+     */
+    public function givenSingleJourneyWithStationStop_WhenPArsed_ThenTwoRowsWithCorrectTimesInserted()
+    {
+        $data =
+            '<PportTimetable>
+                <Journey rid="1" >
+                    <OR tpl="START" wtd="16:04" />
+                    <IP tpl="MIDDLE" wta="16:10" wtd="16:12" />
+                    <DT tpl="END" wta="16:20" />
+                </Journey>
+            </PportTimetable>';
+        $this->mockGateway->setData( $data );
+        $this->command->handle();
+        $expected = [
+            [
+                'rid' => 1,
+                'from' => 'START',
+                'from_time' => date('Y-m-d').' 16:04:00',
+                'to' => 'MIDDLE',
+                'to_time' => date('Y-m-d').' 16:10:00'
+            ],
+            [
+                'rid' => 1,
+                'from' => 'MIDDLE',
+                'from_time' => date('Y-m-d').' 16:12:00',
+                'to' => 'END',
+                'to_time' => date('Y-m-d').' 16:20:00'
+            ]
+        ];
+        $this->assertEquals( $expected, $this->mockStorage->getData());
+    }
 }
