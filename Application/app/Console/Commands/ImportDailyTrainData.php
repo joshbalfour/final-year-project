@@ -13,14 +13,14 @@ class ImportDailyTrainData extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'import:daily-train-data';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Downloads and imports the daily train time data from the national rail ftp server';
 
     /**
      * @var DailyTrainDataGateway
