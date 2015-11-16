@@ -16,7 +16,7 @@ Compile container:
 
 Start the container:   
 ```
-docker run  -v "./data":/data -v "../":/src -p 7000:80 -p 7001:3306 level_crossing
+docker run  -v "`pwd`/../../data":/data -v "`pwd`/":/src -p 7000:80 -p 7001:3306 level_crossing
 ```
 
 #####What this means?
