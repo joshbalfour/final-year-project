@@ -64,7 +64,13 @@ ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite
 service mysql start
 service apache2 start
 
-cd /src && composer install
+echo 'Composer install..'
+
+cd /src && composer -v install
+
+echo 'Composer install completed'
+
+tail -f /var/log/apache2/error.log
 
 # cd /data && mkdir osm
 # cd osm

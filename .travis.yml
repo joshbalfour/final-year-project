@@ -12,12 +12,13 @@ services:
 # 	- nightly
 
 before_install:
-  - cd Application/deployent
-  - docker build -t level_crossing_predictor .
-  - docker run -v "`pwd`/data":/data -v "`pwd`/../":/src -p 7002:5432 -p 7001:3306 -p 7000:80 level_crossing
-  - docker ps -a
+  - cd Application
 
-install: cd Application && composer install --dev
+install: 
+  - cd deployment
+  - docker build -t level_crossing_predictor .
+  - docker run -v "`pwd`/data":/data -v "`pwd`/../":/src -p 7002:5432 -p 7001:3306 -p 7000:80 level_crossing_predictor
+  - docker ps -a
 before_script:
 script:
 	- vendor/phpunit/phpunit/phpunit -c phpunit.xml --coverage-clover build/logs/clover.xml
