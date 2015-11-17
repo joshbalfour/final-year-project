@@ -21,6 +21,7 @@ We will track the trains. We will map the crossing. We will prodict the future!
 	* Database
 		* [Software](Documents/Database/Database software.md)
 		* [Management](Documents/Database/Database management.md)
+		* [Algorithm](Documents/Database/Algorithm.md)
 	* Deployment
 		* [Docker](Documents/Deployment/Docker.md)
 	* API
