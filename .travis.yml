@@ -1,7 +1,7 @@
 sudo: required
 
 services:
-	- docker
+  - docker
 
 # language: php
 
@@ -21,4 +21,4 @@ install:
   - docker ps -a
 before_script:
 script:
-	- vendor/phpunit/phpunit/phpunit -c phpunit.xml --coverage-clover build/logs/clover.xml
+  - vendor/phpunit/phpunit/phpunit -c phpunit.xml --coverage-clover build/logs/clover.xml
