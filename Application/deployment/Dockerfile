@@ -2,8 +2,6 @@ FROM debian
 
 RUN mkdir /data
 
-ADD boot.sh boot.sh
-
 # mysql
 ENV MYSQL_MAJOR 5.7
 ENV MYSQL_VERSION 5.7.9-1debian8
@@ -36,8 +34,6 @@ EXPOSE 3306
 
 VOLUME [ "/data" ]
 
-ADD mysql_init.sh mysql_init.sh
-
 ENV MYSQL_ROOT_PASSWORD "level_crossing_predictor"
 ENV MYSQL_DATABASE "level_crossing_predictor"
 ENV MYSQL_USER "level_crossing_predictor"
@@ -58,4 +54,4 @@ VOLUME ["/var/log/apache2"]
 
 RUN service apache2 start && service apache2 stop
 
-ENTRYPOINT ["/bin/bash","-C","boot.sh"]
+CMD ["/bin/bash","-C","/src/deployment/boot.sh"]
