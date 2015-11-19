@@ -91,7 +91,7 @@ service apache2 start
 
 echo 'Composer install..'
 
-cd /src && composer -v install
+cd /src && composer -v install --prefer-source
 
 echo 'Composer install completed'
 
