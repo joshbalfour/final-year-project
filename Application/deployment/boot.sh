@@ -95,12 +95,12 @@ cd /src && composer -v install --prefer-source
 
 echo 'Composer install completed'
 
-echo '🚂💨 🚂💨 🚂💨 🚂💨 🚂💨 🚂💨 🚂💨 🚂💨 	🚂💨 🚂💨 '
-echo '🚂💨 🚂💨                                  	🚂💨 🚂💨'
-echo '🚂💨 🚂💨  Level Crossing Predictor Ready  	🚂💨 🚂💨'
-echo '🚂💨 🚂💨              Choo Choo           	🚂💨 🚂💨'
-echo '🚂💨 🚂💨                                  	🚂💨 🚂💨'
-echo '🚂💨 🚂💨 🚂💨 🚂💨 🚂💨 🚂💨 🚂💨 🚂💨 	🚂💨 🚂💨 '
+echo '🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 	🚂 💨 🚂 💨'
+echo '🚂 💨 🚂 💨                                  	🚂 💨 🚂💨'
+echo '🚂 💨 🚂 💨  Level Crossing Predictor Ready  	🚂 💨 🚂💨'
+echo '🚂 💨 🚂 💨              Choo Choo           	🚂 💨 🚂💨'
+echo '🚂 💨 🚂 💨                                  	🚂 💨 🚂💨'
+echo '🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 	🚂 💨 🚂 💨'
 
 tail -f /var/log/apache2/error.log
 
