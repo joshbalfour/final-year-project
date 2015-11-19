@@ -1,10 +1,13 @@
-**V 1.1.0**
+**V 1.1.1**
 # Docker
 
 ## Container requirements
 The docker enviroment will expect to have the `src` folder pointed to the repo on the host machine and the `data` folder.
 
 #### How to run
+
+cd into the /Application/deployment folder
+
 Clone the repo:  
 `git clone git@github.com:joshbalfour/final-year-project.git ~/final-year-project/Application/deployment`
 
@@ -12,12 +15,15 @@ Go to your Application deployment folder:
 `cd ~/final-year-project/Application/deployment`
 
 Compile container:  
-`docker build -t level_crossing .`
+`docker build -t level_crossing_predictor .`  
 
-Start the container:   
-```
-docker run  -v "`pwd`/../../data":/data -v "`pwd`/":/src -p 7000:80 -p 7001:3306 level_crossing
-```
+In the same directory run container:
+ 
+````
+docker run -v "`pwd`/data":/data -v "`pwd`/../":/src -p 7002:5432 -p 7001:3306 -p 7000:80 level_crossing_predictor
+````
+
+And then verify it's up by running `docker ps -a` 
 
 #####What this means?
 * Container name: level_crossing
