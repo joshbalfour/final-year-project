@@ -14,15 +14,10 @@ class TrainDataMysqlStorage implements TrainDataStorage
 {
 
     /**
-     * @param $rid
-     * @param $from
-     * @param \DateTimeInterface $fromTime
-     * @param $to
-     * @param \DateTimeInterface $toTime
+     * @param array $trainTimes array of train times data
      */
-    public function insert($rid, $from, \DateTimeInterface $fromTime, $to, \DateTimeInterface $toTime)
+    public function insert($trainTimes)
     {
-        DB::insert( 'insert into train_times ( from_tpl, from_time, to_tpl, to_time, rid ) values ( ?, ?, ?, ?, ? )',
-            [ $from, $fromTime->format('Y-m-d H:i:s'), $to, $toTime->format('Y-m-d H:i:s'), $rid] );
+        DB::table('train_times')->insert( $trainTimes );
     }
 }

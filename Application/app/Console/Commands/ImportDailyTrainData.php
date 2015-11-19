@@ -33,6 +33,11 @@ class ImportDailyTrainData extends Command
     private $trainDataStorage;
 
     /**
+     * @var array data to be inserted
+     */
+    private $data;
+
+    /**
      * Create a new command instance.
      * @param DailyTrainDataGateway $gateway
      * @param TrainDataStorage $trainDataStorage
@@ -71,11 +76,13 @@ class ImportDailyTrainData extends Command
                 }
 
                 if( isset( $from, $fromTime, $to, $toTime ) ) {
-                    $this->insertDataAndUpdateFromValues( $rid, $from, $fromTime, $to, $toTime, $stationDepartureTime );
+                    $this->saveDataToArrayAndUpdateFromValues( $rid, $from, $fromTime, $to, $toTime, $stationDepartureTime );
                 }
             }
             unset( $from, $fromTime, $to, $toTime );
         }
+
+        $this->trainDataStorage->insert( $this->data );
     }
 
     private function getStationName($stop)
@@ -83,9 +90,9 @@ class ImportDailyTrainData extends Command
         return (string)$stop['tpl'];
     }
 
-    private function insertDataAndUpdateFromValues( $rid, &$from, &$fromTime, $to, $toTime, $stationDepartureTime )
+    private function saveDataToArrayAndUpdateFromValues( $rid, &$from, \DateTimeInterface &$fromTime, $to, \DateTimeInterface $toTime, $stationDepartureTime )
     {
-        $this->trainDataStorage->insert($rid, $from, $fromTime, $to, $toTime);
+        $this->saveToArray($rid, $from, $fromTime, $to, $toTime);
         $this->updateStartingLocationAndTimeForNextSectionOfTrack( $from, $fromTime, $to, $toTime, $stationDepartureTime );
     }
 
@@ -102,5 +109,10 @@ class ImportDailyTrainData extends Command
     private function getDateTime( $time )
     {
         return new \DateTime( date('Y-m-d').' '.$time );
+    }
+
+    private function saveToArray($rid, $from, \DateTimeInterface $fromTime, $to, \DateTimeInterface $toTime)
+    {
+        $this->data[] = [ 'rid' => $rid, 'from_tpl' => $from, 'from_time' => $fromTime->format( 'Y-m-d H:i:s' ), 'to_tpl' => $to, 'to_time' => $toTime->format( 'Y-m-d H:i:s' ) ];
     }
 }

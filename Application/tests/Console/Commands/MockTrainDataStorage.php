@@ -25,22 +25,11 @@ class MockTrainDataStorage implements TrainDataStorage
     }
 
     /**
-     * @param $rid
-     * @param \DateTimeInterface $from
-     * @param \DateTimeInterface $fromTime
-     * @param \DateTimeInterface $to
-     * @param \DateTimeInterface $toTime
-     * @return mixed
+     * @param array $trainTimes
      */
-    public function insert( $rid, $from, \DateTimeInterface $fromTime, $to, \DateTimeInterface $toTime )
+    public function insert( $trainTimes )
     {
-        $this->data[] = [
-            'rid' => $rid,
-            'from' => $from,
-            'from_time' => $fromTime->format( 'Y-m-d H:i:s' ),
-            'to' => $to,
-            'to_time' => $toTime->format( 'Y-m-d H:i:s' )
-        ];
+        $this->data = $trainTimes;
     }
 
     public function isEmpty()

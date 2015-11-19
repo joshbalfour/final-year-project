@@ -13,12 +13,8 @@ interface TrainDataStorage
 {
 
     /**
-     * @param $rid
-     * @param $from
-     * @param \DateTimeInterface $fromTime
-     * @param $to
-     * @param \DateTimeInterface $toTime
+     * @param array $trainTimes array of train times data
      */
-    public function insert( $rid, $from, \DateTimeInterface $fromTime, $to, \DateTimeInterface $toTime );
+    public function insert( $trainTimes );
 
 }

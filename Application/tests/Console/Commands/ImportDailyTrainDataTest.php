@@ -75,9 +75,9 @@ class ImportDailyTrainDataTest extends \TestCase
         $expected = [
             [
                 'rid' => 1,
-                'from' => 'START',
+                'from_tpl' => 'START',
                 'from_time' => date('Y-m-d').' 16:04:00',
-                'to' => 'END',
+                'to_tpl' => 'END',
                 'to_time' => date('Y-m-d').' 16:20:00'
             ]
         ];
@@ -102,16 +102,16 @@ class ImportDailyTrainDataTest extends \TestCase
         $expected = [
             [
                 'rid' => 1,
-                'from' => 'START',
+                'from_tpl' => 'START',
                 'from_time' => date('Y-m-d').' 16:04:00',
-                'to' => 'MIDDLE',
+                'to_tpl' => 'MIDDLE',
                 'to_time' => date('Y-m-d').' 16:10:00'
             ],
             [
                 'rid' => 1,
-                'from' => 'MIDDLE',
+                'from_tpl' => 'MIDDLE',
                 'from_time' => date('Y-m-d').' 16:10:00',
-                'to' => 'END',
+                'to_tpl' => 'END',
                 'to_time' => date('Y-m-d').' 16:20:00'
             ]
         ];
@@ -136,16 +136,16 @@ class ImportDailyTrainDataTest extends \TestCase
         $expected = [
             [
                 'rid' => 1,
-                'from' => 'START',
+                'from_tpl' => 'START',
                 'from_time' => date('Y-m-d').' 16:04:00',
-                'to' => 'MIDDLE',
+                'to_tpl' => 'MIDDLE',
                 'to_time' => date('Y-m-d').' 16:10:00'
             ],
             [
                 'rid' => 1,
-                'from' => 'MIDDLE',
+                'from_tpl' => 'MIDDLE',
                 'from_time' => date('Y-m-d').' 16:12:00',
-                'to' => 'END',
+                'to_tpl' => 'END',
                 'to_time' => date('Y-m-d').' 16:20:00'
             ]
         ];
@@ -173,37 +173,37 @@ class ImportDailyTrainDataTest extends \TestCase
         $expected = [
             [
                 'rid' => 1,
-                'from' => 'START',
+                'from_tpl' => 'START',
                 'from_time' => date('Y-m-d').' 16:04:00',
-                'to' => 'NONSTOP',
+                'to_tpl' => 'NONSTOP',
                 'to_time' => date('Y-m-d').' 16:07:00'
             ],
             [
                 'rid' => 1,
-                'from' => 'NONSTOP',
+                'from_tpl' => 'NONSTOP',
                 'from_time' => date('Y-m-d').' 16:07:00',
-                'to' => 'MIDDLE',
+                'to_tpl' => 'MIDDLE',
                 'to_time' => date('Y-m-d').' 16:10:00'
             ],
             [
                 'rid' => 1,
-                'from' => 'MIDDLE',
+                'from_tpl' => 'MIDDLE',
                 'from_time' => date('Y-m-d').' 16:12:00',
-                'to' => 'NONSTOP2',
+                'to_tpl' => 'NONSTOP2',
                 'to_time' => date('Y-m-d').' 16:17:00'
             ],
             [
                 'rid' => 1,
-                'from' => 'NONSTOP2',
+                'from_tpl' => 'NONSTOP2',
                 'from_time' => date('Y-m-d').' 16:17:00',
-                'to' => 'MIDDLE2',
+                'to_tpl' => 'MIDDLE2',
                 'to_time' => date('Y-m-d').' 16:20:00'
             ],
             [
                 'rid' => 1,
-                'from' => 'MIDDLE2',
+                'from_tpl' => 'MIDDLE2',
                 'from_time' => date('Y-m-d').' 16:22:30',
-                'to' => 'END',
+                'to_tpl' => 'END',
                 'to_time' => date('Y-m-d').' 16:30:00'
             ]
         ];
@@ -239,72 +239,72 @@ class ImportDailyTrainDataTest extends \TestCase
         $expected = [
             [
                 'rid' => 1,
-                'from' => 'START',
+                'from_tpl' => 'START',
                 'from_time' => date('Y-m-d').' 16:04:00',
-                'to' => 'NONSTOP',
+                'to_tpl' => 'NONSTOP',
                 'to_time' => date('Y-m-d').' 16:07:00'
             ],
             [
                 'rid' => 1,
-                'from' => 'NONSTOP',
+                'from_tpl' => 'NONSTOP',
                 'from_time' => date('Y-m-d').' 16:07:00',
-                'to' => 'MIDDLE',
+                'to_tpl' => 'MIDDLE',
                 'to_time' => date('Y-m-d').' 16:10:00'
             ],
             [
                 'rid' => 1,
-                'from' => 'MIDDLE',
+                'from_tpl' => 'MIDDLE',
                 'from_time' => date('Y-m-d').' 16:12:00',
-                'to' => 'NONSTOP2',
+                'to_tpl' => 'NONSTOP2',
                 'to_time' => date('Y-m-d').' 16:17:00'
             ],
             [
                 'rid' => 1,
-                'from' => 'NONSTOP2',
+                'from_tpl' => 'NONSTOP2',
                 'from_time' => date('Y-m-d').' 16:17:00',
-                'to' => 'MIDDLE2',
+                'to_tpl' => 'MIDDLE2',
                 'to_time' => date('Y-m-d').' 16:20:00'
             ],
             [
                 'rid' => 1,
-                'from' => 'MIDDLE2',
+                'from_tpl' => 'MIDDLE2',
                 'from_time' => date('Y-m-d').' 16:22:30',
-                'to' => 'END',
+                'to_tpl' => 'END',
                 'to_time' => date('Y-m-d').' 16:30:00'
             ],
             [
                 'rid' => 2,
-                'from' => 'START',
+                'from_tpl' => 'START',
                 'from_time' => date('Y-m-d').' 16:04:00',
-                'to' => 'NONSTOP',
+                'to_tpl' => 'NONSTOP',
                 'to_time' => date('Y-m-d').' 16:07:00'
             ],
             [
                 'rid' => 2,
-                'from' => 'NONSTOP',
+                'from_tpl' => 'NONSTOP',
                 'from_time' => date('Y-m-d').' 16:07:00',
-                'to' => 'MIDDLE',
+                'to_tpl' => 'MIDDLE',
                 'to_time' => date('Y-m-d').' 16:10:00'
             ],
             [
                 'rid' => 2,
-                'from' => 'MIDDLE',
+                'from_tpl' => 'MIDDLE',
                 'from_time' => date('Y-m-d').' 16:12:00',
-                'to' => 'NONSTOP2',
+                'to_tpl' => 'NONSTOP2',
                 'to_time' => date('Y-m-d').' 16:17:00'
             ],
             [
                 'rid' => 2,
-                'from' => 'NONSTOP2',
+                'from_tpl' => 'NONSTOP2',
                 'from_time' => date('Y-m-d').' 16:17:00',
-                'to' => 'MIDDLE2',
+                'to_tpl' => 'MIDDLE2',
                 'to_time' => date('Y-m-d').' 16:20:00'
             ],
             [
                 'rid' => 2,
-                'from' => 'MIDDLE2',
+                'from_tpl' => 'MIDDLE2',
                 'from_time' => date('Y-m-d').' 16:22:30',
-                'to' => 'END',
+                'to_tpl' => 'END',
                 'to_time' => date('Y-m-d').' 16:30:00'
             ]
         ];

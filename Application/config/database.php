@@ -49,6 +49,7 @@ return [
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => 'localhost',
+            'port'      => '7001',
             'database'  => 'level_crossing_predictor',
             'username'  => 'root',
             'password'  => 'level_crossing_predictor',
