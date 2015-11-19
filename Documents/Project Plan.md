@@ -1,4 +1,4 @@
-**V 1.0.0**
+**V 1.0.1**
 # Project Plan
 
 ## Document Overview
@@ -138,8 +138,8 @@ Each has a man hour time estimate against it in the format # MH, this is then su
 
 	* location
 
-###R1.F2 - Download and Store Train Times - 14 MH
-* R1.F2.T1 Find and download the data - 8 MH
+###R1.F2 - Download and Store Train Times - 20 MH
+* R1.F2.T1 Find and download the data - 14 MH
 
 	* National Rail - Darwin Data Feed
 
@@ -219,7 +219,8 @@ Each has a man hour time estimate against it in the format # MH, this is then su
 
 ###R1.F4 - Download and Store Railway Route Locations (R1.F1, R1.F2, and R1.F3) - 10 MH or 32 MH
 * R1.F4.T1 Find and download the data
-
+	* Current option: 3
+	
 	* Option 1: Use the data from [http://railmaponline.com/UKIEMap.php](http://railmaponline.com/UKIEMap.php) with the permission of the owner [[https://twitter.com/battercake](https://twitter.com/battercake)] (preference) - 5 MH
 
 		* Data Downloaded: [https://drive.google.com/a/joshbalfour.co.uk/folderview?id=0Bz0TVyu9wmaic2IzdWNhX0JoUjg&usp=sharing](https://drive.google.com/a/joshbalfour.co.uk/folderview?id=0Bz0TVyu9wmaic2IzdWNhX0JoUjg&usp=sharing)
@@ -239,8 +240,9 @@ Each has a man hour time estimate against it in the format # MH, this is then su
 		* Install [https://github.com/rurseekatze/OpenRailwayMap](https://github.com/rurseekatze/OpenRailwayMap) (downloads a 30GB File, imports it into a postgres DB)
 
 		* Project Risk: We may not have the resources required to achieve this
-
-* Project Risk: The process may not work
+	* Option 3: Use Nation Rail Data
+		* Download data from https://data.gov.uk/dataset/railway-network-inspire
+		* Project risk: None.
 
 * R1.F4.T2 Write view to sanitise/convert/extract the data we need - Option 1: 5 MH, Option 2: 16 MH
 
@@ -269,6 +271,12 @@ Each has a man hour time estimate against it in the format # MH, this is then su
 	* Test interface with multiple devices
 
 	* Evaluate results and refine UI
+
+* R2.F1.T3 Write about page with usage instructions - 2MH
+	
+	* Write about page
+	
+	* Write usage instructions
 
 ###R2.F2 - Way to access level crossing time data - 8.5 MH
 * R2.F2.T1 Fetch data from API server - 1 MH

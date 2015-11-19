@@ -1,15 +1,31 @@
-**V 1.0.0**
+**V 1.1.1**
 # Docker
 
 ## Container requirements
 The docker enviroment will expect to have the `src` folder pointed to the repo on the host machine and the `data` folder.
 
 #### How to run
-Compile container: `docker build . -t level_crossing`  
-Run container: `docker run 
-	-P 80:7000 -P 3306:7001 -v=/data:/home/kieran/level_crossing_code/data -v=/src:/home/kieran/final-year-project level_crossing`   
-What this means?   
 
+cd into the /Application/deployment folder
+
+Clone the repo:  
+`git clone git@github.com:joshbalfour/final-year-project.git ~/final-year-project/Application/deployment`
+
+Go to your Application deployment folder:  
+`cd ~/final-year-project/Application/deployment`
+
+Compile container:  
+`docker build -t level_crossing_predictor .`  
+
+In the same directory run container:
+ 
+````
+docker run -v "`pwd`/data":/data -v "`pwd`/../":/src -p 7002:5432 -p 7001:3306 -p 7000:80 level_crossing_predictor
+````
+
+And then verify it's up by running `docker ps -a` 
+
+#####What this means?
 * Container name: level_crossing
 * HTTP port: 7000
 * MySQL port: 7001

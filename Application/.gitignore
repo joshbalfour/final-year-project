@@ -4,3 +4,4 @@ Homestead.yaml
 Homestead.json
 .env
 bower_components
+error_log
