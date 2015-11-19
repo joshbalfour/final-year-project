@@ -1,3 +1,5 @@
+set -e
+
 if [ ! -d "$MYSQL_DIR/mysql" ]; then
 
 	if [ -z "$MYSQL_ROOT_PASSWORD" -a -z "$MYSQL_ALLOW_EMPTY_PASSWORD" ]; then
@@ -9,13 +11,30 @@ if [ ! -d "$MYSQL_DIR/mysql" ]; then
 	mkdir -p "$MYSQL_DIR"
 	chown -R mysql:mysql "$MYSQL_DIR"
 
-	echo 'Initializing database'
+	echo 'Initializing database FS'
 	mysqld --initialize-insecure=on --datadir="$MYSQL_DIR"
-	echo 'Database initialized'
+	echo 'Database FS initialized'
 	
-	service mysql start
+	mysqld --skip-networking --datadir="$MYSQL_DIR" &
+	pid="$!"
 
 	mysql=( mysql --protocol=socket -uroot )
+
+
+	for i in {30..0}; do
+		if echo 'SELECT 1' | "${mysql[@]}" &> /dev/null; then
+			echo 'MySQL booted in skip networking mode.'
+			break
+		fi
+		echo 'MySQL init process in progress...'
+		sleep 1
+	done
+	if [ "$i" = 0 ]; then
+		echo >&2 'MySQL init process failed.'
+		exit 1
+	fi
+
+
 	"${mysql[@]}" <<-EOSQL
 		-- What's done in this file shouldn't be replicated
 		--  or products like mysql-fabric won't work
@@ -42,12 +61,16 @@ if [ ! -d "$MYSQL_DIR/mysql" ]; then
 
 		if [ "$MYSQL_DATABASE" ]; then
 			echo "GRANT ALL ON \`$MYSQL_DATABASE\`.* TO '$MYSQL_USER'@'%' ;" | "${mysql[@]}"
+			echo "CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD' ; GRANT ALL ON \`$MYSQL_DATABASE\`.* TO '$MYSQL_USER'@'%' ;"
 		fi
-
+		
 		echo 'FLUSH PRIVILEGES ;' | "${mysql[@]}"
 	fi
 	
-	service mysql stop
+	if ! kill -s TERM "$pid" || ! wait "$pid"; then
+		echo >&2 'MySQL init process failed.'
+		exit 1
+	fi
 
 	echo
 	echo 'MySQL init process done. Ready for start up.'

@@ -37,6 +37,7 @@ VOLUME [ "/data" ]
 ENV MYSQL_ROOT_PASSWORD "level_crossing_predictor"
 ENV MYSQL_DATABASE "level_crossing_predictor"
 ENV MYSQL_USER "level_crossing_predictor"
+ENV MYSQL_PASSWORD "level_crossing_predictor"
 
 # apache
 
