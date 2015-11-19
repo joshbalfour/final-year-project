@@ -18,7 +18,7 @@ install:
   - curl icanhazip.com
   - cd deployment
   - docker build -t level_crossing_predictor .
-  - docker run -d -v "`pwd`/data":/data -v "`pwd`/../":/src -p 7002:5432 -p 7001:3306 -p 7000:80 level_crossing_predictor --name level_crossing_predictor_instance
+  - docker run -d -v "`pwd`/data":/data -v "`pwd`/../":/src -p 7002:5432 -p 7001:3306 -p 7000:80 --name level_crossing_predictor_instance level_crossing_predictor
   - docker ps -a
 before_script:
 script:
