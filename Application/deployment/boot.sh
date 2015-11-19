@@ -1,5 +1,7 @@
 set -e
 
+export TERM=xterm
+
 if [ ! -d "$MYSQL_DIR/mysql" ]; then
 
 	if [ -z "$MYSQL_ROOT_PASSWORD" -a -z "$MYSQL_ALLOW_EMPTY_PASSWORD" ]; then
@@ -92,6 +94,13 @@ echo 'Composer install..'
 cd /src && composer -v install
 
 echo 'Composer install completed'
+
+echo '🚂💨 🚂💨 🚂💨 🚂💨 🚂💨 🚂💨 🚂💨 🚂💨 	🚂💨 🚂💨 '
+echo '🚂💨 🚂💨                                  	🚂💨 🚂💨'
+echo '🚂💨 🚂💨  Level Crossing Predictor Ready  	🚂💨 🚂💨'
+echo '🚂💨 🚂💨              Choo Choo           	🚂💨 🚂💨'
+echo '🚂💨 🚂💨                                  	🚂💨 🚂💨'
+echo '🚂💨 🚂💨 🚂💨 🚂💨 🚂💨 🚂💨 🚂💨 🚂💨 	🚂💨 🚂💨 '
 
 tail -f /var/log/apache2/error.log
 
