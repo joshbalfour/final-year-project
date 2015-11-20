@@ -95,6 +95,8 @@ cd /src && composer install --prefer-source
 
 echo 'Composer install completed'
 
+touch /tmp/ready
+
 echo '🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨'
 echo '🚂 💨 🚂 💨                                 🚂 💨 🚂 💨'
 echo '🚂 💨 🚂 💨  Level Crossing Predictor Ready 🚂 💨 🚂 💨'
