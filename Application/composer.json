@@ -31,8 +31,7 @@
         "post-install-cmd": [
             "php artisan clear-compiled",
             "bower install --allow-root",
-            "npm install --verbose --no-bin-links &> /dev/null",
-            "npm install --verbose --no-bin-links"
+            "npm install --no-bin-links"
         ],
         "pre-update-cmd": [
             "php artisan clear-compiled"
@@ -41,10 +40,10 @@
             "php artisan optimize"
         ],
         "test:webapp": [
-            "karma start"
+            "./node_modules/karma/bin/karma start"
         ],
         "test:php": [
-            "phpunit"
+            "/usr/bin/phpunit"
         ]
     },
     "config": {

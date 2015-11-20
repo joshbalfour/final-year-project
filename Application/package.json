@@ -2,7 +2,6 @@
   "private": true,
   "devDependencies": {
     "chai": "^3.4.0",
-    "gulp": "^3.8.8",
     "karma": "^0.13.14",
     "karma-chai": "^0.1.0",
     "karma-fixture": "^0.2.5",
