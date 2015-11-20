@@ -30,7 +30,8 @@
     "scripts": {
         "post-install-cmd": [
             "php artisan clear-compiled",
-            "php artisan optimize"
+            "bower install --allow-root",
+            "npm install --no-bin-links"
         ],
         "pre-update-cmd": [
             "php artisan clear-compiled"
@@ -38,11 +39,11 @@
         "post-update-cmd": [
             "php artisan optimize"
         ],
-        "post-root-package-install": [
-            "php -r \"copy('.env.example', '.env');\""
+        "test:webapp": [
+            "./node_modules/karma/bin/karma start"
         ],
-        "post-create-project-cmd": [
-            "php artisan key:generate"
+        "test:php": [
+            "/usr/bin/phpunit"
         ]
     },
     "config": {

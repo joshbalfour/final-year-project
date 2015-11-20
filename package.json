@@ -1,0 +1,19 @@
+{
+  "name": "level-crossing-predictor",
+  "version": "1.0.0",
+  "description": "**V 1.1.1** # Level Crossing Predictor [![Build Status](https://magnum.travis-ci.com/beakybal4/final-year-project.svg?token=3SrbFjsXZ6b1nrKwyzse&branch=master)](https://magnum.travis-ci.com/beakybal4/final-year-project)",
+  "main": "index.js",
+  "scripts": {
+    "test": "karma run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beakybal4/final-year-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/beakybal4/final-year-project/issues"
+  },
+  "homepage": "https://github.com/beakybal4/final-year-project#readme"
+}

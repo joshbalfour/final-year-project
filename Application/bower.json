@@ -1,0 +1,25 @@
+{
+  "name": "level-crossing-predictor",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Kieran Jones <kjones1876@gmail.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "componentsDirectory": "public/",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "angular": "~1.4.7",
+    "angular-google-maps": "~2.2.1",
+    "angular-mocks": "~1.4.7",
+    "tween.js": "tweenjs#v16.3.0"
+  }
+}

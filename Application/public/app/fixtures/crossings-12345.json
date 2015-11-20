@@ -1,0 +1,23 @@
+{
+	"result": "OK",
+	"data": {
+		"id": 12345,
+		"type": "road",
+		"status": "down",
+		"name": "Caterbury Crossing South",
+		"location": {
+			"city": "Canterbury",
+			"country": "UK",
+			"postcode": "CT1 4DD",
+
+			"lat": 51.282752,
+			"lon": 1.073406
+		},
+		"image": "http://cl.ly/image/2O343q2m3m1z/Image%202015-11-04%20at%2012.35.39%20a.m..jpg",
+		"line": {
+			"trainsPerDay": 10,
+			"northSpeed": 60,
+			"southSpeed": 70
+		}
+	}
+}
