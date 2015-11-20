@@ -1,3 +1,5 @@
+rm /src/.ready
+
 set -e
 
 export TERM=xterm
@@ -95,7 +97,7 @@ cd /src && composer install --prefer-source
 
 echo 'Composer install completed'
 
-touch /tmp/ready
+touch /src/.ready
 
 echo '🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨'
 echo '🚂 💨 🚂 💨                                 🚂 💨 🚂 💨'
