@@ -36,7 +36,7 @@ class ImportRailMapData extends Command
         parent::__construct();
     }
     
-    private $beyondAllHope = [
+    private $😭 = [
         "55.858491196471 -4.2579214593015",
         "55.86246939742 -4.2512323293334",
         "51.546032544248 -0.10437537844082",
@@ -53,34 +53,59 @@ class ImportRailMapData extends Command
         "51.501976428555 0.04608124626708",
         "51.446339292655 -0.20664094881693",
         "50.88899483197 -1.4555491636966",
-        ""
+        "51.651026673924 -0.42897654482917",
+        "51.509731522817 0.026728532247945",
+        "51.646316660556 -0.40708288663889",
+        "51.648368083754 -0.41381899627169",
+        "51.434510411551 -0.19941166373611",
+        "51.516275814066 0.0059468306892281"
     ];
 
-    private $fixes = [
+    private $🚑 = [
         ["loc" => "52.133082410685 -3.5305592623795", "newloc" => "52.133082410685 -3.5305592623795", "newcrs" => "GTH" ],
         ["loc" => "50.911540234104 -1.4340410281041", "newloc" => "50.911540234104 -1.4340410281041", "newcrs" => "MBK"],
-        ["loc" => "54.929821067072 -1.3866108693775", "newloc" => "54.929821067072 -1.3866108693775", "newcrs" => "SEB"]
+        ["loc" => "54.929821067072 -1.3866108693775", "newloc" => "54.929821067072 -1.3866108693775", "newcrs" => "SEB"],
+        ["loc" => "50.732296685048 -3.9968064717481", "newloc" => "50.732296685048 -3.9968064717481", "newcrs" => "OKE"]
     ];
 
-    /*
-    IDK:
-        XXX, POINT(51.516275814066 0.0059468306892281) -> Canning Town DLR station
-        
-    */
+    private function applyFixes(){
 
+        foreach($this->🚑 as $🤕){
+            
+            DB::table('station')
+                ->where('loc', DB::raw('GeomFromText("point('.$🤕["loc"].')")'))
+                ->update([
+                    'loc' => DB::raw('GeomFromText("point('.$🤕["newloc"].')")'), 
+                    'crs' => $🤕["newcrs"] ]);
+        }
+
+        foreach($this->😭 as $😢){
+             DB::table('station')
+                ->where('loc', DB::raw('GeomFromText("point('.$😢.')")'))
+                ->delete();
+        }
+    }
 
     /**
      * Execute the console command.
      *
      * @return mixed
      */
-    public function handle()
-    {
+    public function handle(){
+        $this->import🛤();
+    }
+
+    private function import🚉(){
         $🚉 = $this->get🚉();
+        
         DB::beginTransaction();
-        foreach($🚉 as $🛤){
-            DB::table('station')->insert($🛤);
+        
+        foreach($🚉 as $🚏){
+            DB::table('station')->insert($🚏);
         }
+        
+        $this->applyFixes();
+
         DB::commit();
     }
 
@@ -89,15 +114,44 @@ class ImportRailMapData extends Command
         $📁 = file_get_contents($🔗);
         $🚉 = json_decode($📁, ✅)["features"];
 
-        $🆕🚉 = array_filter(array_map(function($🛤){
-            $🆕🛤 = [];
-            $🆕🛤["loc"] = DB::raw("GeomFromText('point(".$🛤["geometry"]["coordinates"][1]." ".$🛤["geometry"]["coordinates"][0].")')");
-            $🆕🛤["crs"] = $🛤["properties"]["stn_code"];
-            if ($🆕🛤["crs"]){
-                return $🆕🛤;
+        $🆕🚉 = array_filter(array_map(function($🚏){
+            $🆕🚏 = [];
+            $🆕🚏["loc"] = DB::raw("GeomFromText('point(".$🚏["geometry"]["coordinates"][1]." ".$🚏["geometry"]["coordinates"][0].")')");
+            $🆕🚏["crs"] = $🚏["properties"]["stn_code"];
+            if ($🆕🚏["crs"]){
+                return $🆕🚏;
             }
         }, $🚉));
 
         return $🆕🚉;
     }
+
+    private function import🛤(){
+        $🛤 = $this->get🛤();
+    }
+
+    private function get🛤(){
+         $🔗 = "http://inspire.misoportal.com/geoserver/transport_direct_railnetwork/wfs?amp;version=2.0.0&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=transport_direct_railnetwork:railnetwork&SRSNAME=EPSG:4326&outputFormat=json";
+         $📁 = file_get_contents($🔗);
+         $🗺🗺 = json_decode($📁, ✅)["features"];
+         
+         $🛤🛤 = array_map(function($🗺){
+
+            if ($🗺["geometry"]["type"] != 'LineString'){
+                // deal with MultiLineString
+                var_dump($🗺);
+            } else {
+            
+                $📍📍 = array_map(function($📍){
+                    return $📍[1]." ".$📍[0];
+                }, $🗺["geometry"]["coordinates"]);
+
+                return implode( ",", $📍📍);
+            }
+
+         },$🗺🗺);
+
+         //var_dump($🛤🛤);
+    }
+
 }
