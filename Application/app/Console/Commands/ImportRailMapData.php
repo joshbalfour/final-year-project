@@ -112,18 +112,18 @@ class ImportRailMapData extends Command
     private function get🚉(){
         $🔗 = "http://inspire.misoportal.com/geoserver/transport_direct_railnetwork/wfs?amp;version=2.0.0&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=transport_direct_railnetwork:stations&SRSNAME=EPSG:4326&outputFormat=json";
         $📁 = file_get_contents($🔗);
-        $🚉 = json_decode($📁, ✅)["features"];
+        $🚉🚉 = json_decode($📁, ✅)["features"];
 
-        $🆕🚉 = array_filter(array_map(function($🚏){
-            $🆕🚏 = [];
-            $🆕🚏["loc"] = DB::raw("GeomFromText('point(".$🚏["geometry"]["coordinates"][1]." ".$🚏["geometry"]["coordinates"][0].")')");
-            $🆕🚏["crs"] = $🚏["properties"]["stn_code"];
-            if ($🆕🚏["crs"]){
-                return $🆕🚏;
+        $🆕🚉🚉 = array_filter(array_map(function($🚉){
+            $🆕🚉 = [];
+            $🆕🚉["loc"] = DB::raw("GeomFromText('point(".$🚉["geometry"]["coordinates"][1]." ".$🚉["geometry"]["coordinates"][0].")')");
+            $🆕🚉["crs"] = $🚉["properties"]["stn_code"];
+            if ($🆕🚉["crs"]){
+                return $🆕🚉;
             }
-        }, $🚉));
+        }, $🚉🚉));
 
-        return $🆕🚉;
+        return $🆕🚉🚉;
     }
 
     private function import🛤(){
