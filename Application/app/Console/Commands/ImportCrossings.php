@@ -39,7 +39,7 @@ class ImportCrossings extends Command
     public function handle()
     {
         $csvString = file_get_contents('./database/data/Level Crossing Data.csv');
-        
+        echo "Importing Level Crossings  ...\n";
         // getCSV does not do what you think it does!!
 
         $lines = explode(PHP_EOL, $csvString);
@@ -47,6 +47,8 @@ class ImportCrossings extends Command
         foreach ($lines as $line) {
             $csv[] = str_getcsv($line);
         }
+
+        $bar = $this->output->createProgressBar(count($csv));
 
         array_shift($csv);
         $toInsert = [];
@@ -65,6 +67,10 @@ class ImportCrossings extends Command
             ];
             
         }
+
         DB::table('crossings')->insert($toInsert);
+        $bar->finish();
+
+        echo "\nImported Level Crossings.\n";
     }
 }
