@@ -1,5 +1,5 @@
-**V 1.1.1**
-# Level Crossing Predictor [![Build Status](https://magnum.travis-ci.com/joshbalfour/final-year-project.svg?token=3SrbFjsXZ6b1nrKwyzse&branch=master)](https://magnum.travis-ci.com/joshbalfour/final-year-project) 
+**V 1.1.2**
+# 🚂🙅🛤Level Crossing Predictor 🛤🙅🚂[Build Status](https://magnum.travis-ci.com/joshbalfour/final-year-project.svg?token=3SrbFjsXZ6b1nrKwyzse&branch=master)](https://magnum.travis-ci.com/joshbalfour/final-year-project) 
 
 ### Scope Statement
 We will track the trains. We will map the crossing. We will prodict the future!
