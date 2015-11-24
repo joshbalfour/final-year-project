@@ -1,4 +1,4 @@
-**V 1.1.1**
+**V 1.1.2**
 # Docker
 
 ## Container requirements
@@ -20,7 +20,7 @@ Compile container:
 In the same directory run container:
  
 ````
-docker run -v "`pwd`/data":/data -v "`pwd`/../":/src -p 7002:5432 -p 7001:3306 -p 7000:80 level_crossing_predictor
+docker run -v "`pwd`/data":/data -v "`pwd`/../":/src -p 7000:80 -p 7001:3306 level_crossing_predictor
 ````
 
 And then verify it's up by running `docker ps -a` 
