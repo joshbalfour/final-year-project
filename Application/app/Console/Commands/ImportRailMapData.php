@@ -85,6 +85,8 @@ class ImportRailMapData extends Command
                 ->delete();
         }
     }
+    
+    //$mainbar = $this->output->createProgressBar(100);
 
     /**
      * Execute the console command.
@@ -92,24 +94,41 @@ class ImportRailMapData extends Command
      * @return mixed
      */
     public function handle(){
-        $this->import🛤();
+        $bar = $this->output->createProgressBar(100);
+        $this->import🛤🛤();
+        $this->import🚉🚉();
     }
 
-    private function import🚉(){
-        $🚉 = $this->get🚉();
+    private function import🚉🚉(){
+        echo "Importing 🚉  ...\n";
+
+        echo "Downloading 🚉  ...\n";
+        $🚉🚉 = $this->get🚉🚉();
+        echo "Downloaded  🚉   ✅ \n";
         
+        echo "Loading 🚉  to Database...\n";
+        $🚉bar = $this->output->createProgressBar(count($🚉🚉));
+        
+        $🚉bar->start();
+
         DB::beginTransaction();
         
-        foreach($🚉 as $🚏){
-            DB::table('station')->insert($🚏);
+        foreach($🚉🚉 as $🚉){
+            DB::table('station')->insert($🚉);
+            $🚉bar->advance();
         }
-        
+        echo "\nLoaded 🚉  to Database   ✅ \n";
+
+        echo "Fixing 🚉  in Database...\n";
         $this->applyFixes();
+        echo "Fixed 🚉  in Database   ✅\n";
 
         DB::commit();
+        $🚉bar->finish();
+        echo "\nImported 🚉   ✅  ✅\n";
     }
 
-    private function get🚉(){
+    private function get🚉🚉(){
         $🔗 = "http://inspire.misoportal.com/geoserver/transport_direct_railnetwork/wfs?amp;version=2.0.0&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=transport_direct_railnetwork:stations&SRSNAME=EPSG:4326&outputFormat=json";
         $📁 = file_get_contents($🔗);
         $🚉🚉 = json_decode($📁, ✅)["features"];
@@ -126,32 +145,88 @@ class ImportRailMapData extends Command
         return $🆕🚉🚉;
     }
 
-    private function import🛤(){
-        $🛤 = $this->get🛤();
+    private function import🛤🛤(){
+        echo "Importing 🛤  ...\n";
+
+        echo "Downloading 🛤  ...\n";
+        $🛤🛤 = $this->get🛤🛤();
+        echo "Downloaded  🛤   ✅ \n";
+
+        echo "Loading 🛤 to Database...\n";
+        $🛤bar = $this->output->createProgressBar(count($🛤🛤));
+        $🛤bar->start();
+
+        DB::beginTransaction();
+
+        foreach($🛤🛤 as $🛤){
+            DB::table('line')->insert([
+                    "name"   => $🛤["📛"],
+                    "line"   => DB::raw('GeomFromText("linestring('.$🛤["🛤"].')")'),
+                    "status" => $🛤["🚦"],
+                ]);
+            $🛤bar->advance();
+        }
+
+        DB::commit();
+        $🛤bar->finish();
+        echo "\nLoaded 🛤 to Database ✅ \n";
+
+        echo "Imported 🛤  ✅  ✅ \n";
     }
 
-    private function get🛤(){
+    private function 📍📍🔀🛤($📍📍){
+        $🆕📍📍 = array_map(function($📍){
+            return $📍[1]." ".$📍[0];
+        }, $📍📍);
+
+        return implode( ",", $🆕📍📍);
+    }
+
+    private function get🛤🛤(){
+
          $🔗 = "http://inspire.misoportal.com/geoserver/transport_direct_railnetwork/wfs?amp;version=2.0.0&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=transport_direct_railnetwork:railnetwork&SRSNAME=EPSG:4326&outputFormat=json";
          $📁 = file_get_contents($🔗);
          $🗺🗺 = json_decode($📁, ✅)["features"];
-         
-         $🛤🛤 = array_map(function($🗺){
 
-            if ($🗺["geometry"]["type"] != 'LineString'){
-                // deal with MultiLineString
-                var_dump($🗺);
-            } else {
-            
-                $📍📍 = array_map(function($📍){
-                    return $📍[1]." ".$📍[0];
-                }, $🗺["geometry"]["coordinates"]);
+         $🛤🛤 =[];
 
-                return implode( ",", $📍📍);
+         // $🔢 = 0;
+
+         foreach($🗺🗺 as $🗺){
+
+            if ($🗺["geometry"]["type"] == 'LineString'){
+
+                $🛤 = [ 
+                    "📛" => $🗺["properties"]["businessre"], 
+                    "🚦" => $🗺["properties"]["status"], 
+                    "🛤" => $this->📍📍🔀🛤($🗺["geometry"]["coordinates"])
+                ];
+
+                array_push($🛤🛤, $🛤);
+
+            } else if ($🗺["geometry"]["type"] == 'MultiLineString') {
+
+                $🚦 = $🗺["properties"]["status"];
+                $📛 = $🗺["properties"]["businessre"];
+
+                foreach($🗺["geometry"]["coordinates"] as $🗺){
+                    
+                    $🛤 = [ 
+                        "📛" => $📛, 
+                        "🚦" => $🚦,
+                        "🛤" => $this->📍📍🔀🛤($🗺)
+                    ];
+                    
+                    array_push($🛤🛤, $🛤);
+
+                }
+
             }
 
-         },$🗺🗺);
+         }
 
-         //var_dump($🛤🛤);
+
+         return $🛤🛤;
     }
 
 }
