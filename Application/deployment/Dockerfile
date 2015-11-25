@@ -18,7 +18,7 @@ RUN { \
 		echo mysql-community-server mysql-community-server/re-root-pass password ''; \
 		echo mysql-community-server mysql-community-server/remove-test-db select false; \
 	} | debconf-set-selections \
-	&& apt-get update && apt-get install -y perl wget curl ca-certificates apache2 php5 php5-mcrypt php5-curl libavahi-compat-libdnssd-dev php5-mysql mysql-server="${MYSQL_VERSION}" phpunit nodejs htop --no-install-recommends \
+	&& apt-get update && apt-get install -y perl wget curl ca-certificates apache2 php5 php5-mcrypt php5-curl libavahi-compat-libdnssd-dev php5-mysql mysql-server="${MYSQL_VERSION}" phpunit nodejs htop php5-dev libssl-dev libcurl4-openssl-dev pkg-config --no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm -rf /var/lib/mysql
 
@@ -47,7 +47,7 @@ EXPOSE 80
 
 # laravel
 
-RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer && composer -V
+RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer && composer -V && pecl install stomp
 
 RUN mkdir /src && rm -rf /var/www/html
 
