@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         \App\Console\Commands\Inspire::class,
         \App\Console\Commands\ImportCrossings::class,
-        \App\Console\Commands\ImportRailMapData::class
+        \App\Console\Commands\ImportRailMapData::class,
+        \App\Console\Commands\ImportExtendedCrossingData::class
     ];
 
     /**
