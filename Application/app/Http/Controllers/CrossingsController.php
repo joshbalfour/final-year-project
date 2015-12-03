@@ -56,7 +56,7 @@ class CrossingsController extends Controller
         $🙅 = DB::table('crossings')->where('id', $🙅🆔)->first(['id', DB::raw("x(`loc`) as lat"),  DB::raw("y(`loc`) as lon")]);
         if ($🙅 != null){
             $🌐 = [ 
-                "result" => "OK", 
+                "result" => "OK",
                 "data" => [
                     "id" => $🙅->id,
                     "location" => [
@@ -64,7 +64,7 @@ class CrossingsController extends Controller
                         "lon" => $🙅->lon
                     ],
                     "status" => (mt_rand(-1, 0) ? "down" : "up"),
-                    "image" => "http://placekitten.com.s3.amazonaws.com/homepage-samples/408/287.jpg",
+                    "image" => "/crossings/$🙅🆔/image",
                     "line" => [
                         "trainsPerDay" => 100,
                         "northSpeed" => 100,
@@ -86,5 +86,11 @@ class CrossingsController extends Controller
 
     public function getTimes($🙅🆔){
         return json_encode([]);
+    }
+
+    public function serveImage($🙅🆔){
+        $response = \Response::make(\File::get("/data/crossing_images/".$🙅🆔.".jpg"));
+        $response->header('Content-Type', 'image/jpg');
+        return $response;
     }
 }
