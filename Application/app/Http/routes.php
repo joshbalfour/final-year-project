@@ -12,4 +12,7 @@
 */
 
 Route::get('crossings', 'CrossingsController@index');
+Route::get('crossings/{crossing_id}', 'CrossingsController@get');
+Route::get('crossings/{crossing_id}/times', 'CrossingsController@getTimes');
+
 Route::get('debug', 'DebugController@index');
