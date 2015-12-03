@@ -56,6 +56,8 @@ VOLUME ["/var/log/apache2"]
 
 RUN service apache2 start && service apache2 stop
 
+RUN echo 'User mysql \nGroup staff' >> /etc/apache2/apache2.conf
+
 RUN npm install -g bower karma
 
 CMD ["/bin/bash","-C","/src/deployment/boot.sh"]
