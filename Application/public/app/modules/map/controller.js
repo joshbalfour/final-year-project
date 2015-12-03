@@ -33,7 +33,7 @@ app.controller('MapController', function ($http, $interval, Tween) {
 	 * Updates he gateMarkers array.
 	 */
 	this.loadCrossings = function () {
-		$http.get('app/fixtures/crossings.json')
+		$http.get('crossings')
 		.then(function (response) {
 			var result = response.data;
 
@@ -84,8 +84,8 @@ app.controller('MapController', function ($http, $interval, Tween) {
 		// Get the new center location for the map
 		var width = ctrl.mapLongRange();
 		var newLocation = {
-			latitude: model.latitude,
-			longitude: model.longitude + width / 4
+			latitude: parseInt(model.latitude),
+			longitude: parseInt(model.longitude) + width / 4
 		};
 
 		// Slide the map so the crossing icon is in the center
@@ -94,7 +94,7 @@ app.controller('MapController', function ($http, $interval, Tween) {
 		tween.start();
 
 		// Download the crossing meta data
-		$http.get('app/fixtures/crossings-' + model.id + '.json')
+		$http.get('crossings/' + model.id)
 		.then(function (response) {
 
 			var result = response.data;
@@ -109,7 +109,7 @@ app.controller('MapController', function ($http, $interval, Tween) {
 		});
 
 		// Download the future crossing times
-		$http.get('app/fixtures/crossings-' + model.id + '-times.json')
+		$http.get('crossings/' + model.id + '/times')
 		.then(function (response) {
 
 			var result = response.data;
