@@ -4,3 +4,5 @@ Homestead.yaml
 Homestead.json
 .env
 error_log
+trainTimesData.xml
+trainTimesTestData.xml

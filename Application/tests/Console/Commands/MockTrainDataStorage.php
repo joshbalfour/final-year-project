@@ -25,11 +25,16 @@ class MockTrainDataStorage implements TrainDataStorage
     }
 
     /**
-     * @param array $trainTimes
+     * @param $rid
+     * @param $from
+     * @param \DateTimeInterface $fromTime
+     * @param $to
+     * @param \DateTimeInterface $toTime
+     * @internal param array $trainTimes array of train times data
      */
-    public function insert( $trainTimes )
+    public function insert( $rid, $from, \DateTimeInterface $fromTime, $to, \DateTimeInterface $toTime )
     {
-        $this->data = $trainTimes;
+        $this->data[] = [ 'rid' => $rid, 'from_tpl' => $from, 'from_time' => $fromTime->format( 'Y-m-d H:i:s' ), 'to_tpl' => $to, 'to_time' => $toTime->format( 'Y-m-d H:i:s' ) ];
     }
 
     public function isEmpty()
@@ -43,5 +48,15 @@ class MockTrainDataStorage implements TrainDataStorage
     public function getData()
     {
         return $this->data;
+    }
+
+    public function beginTransaction()
+    {
+        // TODO: Implement beginTransaction() method.
+    }
+
+    public function commit()
+    {
+        // TODO: Implement commit() method.
     }
 }

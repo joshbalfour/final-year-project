@@ -34,7 +34,13 @@ class DailyTrainDataFtpGateway implements DailyTrainDataGateway
         if (empty( $file )) {
             return null;
         }
-        return $this->getXMLDataAsStringFromFile($file);
+
+        $filePath = realpath(null) . "/trainTimesData.xml";
+        if ( file_exists( $filePath ) ){
+            unlink( $filePath );
+        }
+        file_put_contents($filePath, $this->getXMLDataAsStringFromFile($file));
+        return $filePath;
     }
 
     /**

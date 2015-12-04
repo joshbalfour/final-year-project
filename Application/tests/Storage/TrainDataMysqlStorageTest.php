@@ -34,7 +34,7 @@ class TrainDataMysqlStorageTest extends \TestCase
      */
     public function givenNoData_WhenInsertCalled_ThenNoDataInTable()
     {
-        $this->storage->insert( [] );
+        $this->storage->insert( null, null,new \DateTime(), null, new \DateTime() );
         $this->assertEmpty( $this->getRowsFromDb() );
     }
 
@@ -44,7 +44,7 @@ class TrainDataMysqlStorageTest extends \TestCase
      */
     public function givenInvalidData_WhenInsertCalled_ThenThrowsException()
     {
-        $this->storage->insert( ['nothing useful', 'at all', [ 'nothing in here either' ], [ 'from_time' => 'not a valid date time' ] ] );
+        $this->storage->insert( 'nothing useful', 'at all',  new \DateTime('0'), 'from_time', new \DateTime('0') );
     }
 
     /**
@@ -59,39 +59,10 @@ class TrainDataMysqlStorageTest extends \TestCase
             'to_time' => '2015-01-01 11:00:00',
             'rid' => '1'
         ];
-        $this->storage->insert( [ $row ] );
+        $this->storage->insert( $row['rid'], $row['from_tpl'], new \DateTime($row['from_time']), $row['to_tpl'], new \DateTime($row['to_time']) );
         $results = $this->getRowsFromDb();
         $this->assertNotEmpty( $results );
         $this->assertExpectedRowInserted($row, $results[0]);
-    }
-
-    /**
-     * @test
-     */
-    public function givenMultpleValidRows_WhenInsertIsCalled_ThenCorrectRowsAreInserted()
-    {
-        $rows = [
-            [
-                'from_tpl' => 'HOME',
-                'from_time' => '2015-01-01 10:00:00',
-                'to_tpl' => 'DESTINATION',
-                'to_time' => '2015-01-01 11:00:00',
-                'rid' => '1'
-            ],
-            [
-                'from_tpl' => 'HOME2',
-                'from_time' => '2015-01-01 12:00:00',
-                'to_tpl' => 'DESTINATION2',
-                'to_time' => '2015-01-01 13:00:00',
-                'rid' => '2'
-            ]
-        ];
-        $this->storage->insert( $rows );
-        $results = $this->getRowsFromDb();
-        $this->assertNotEmpty( $results );
-        foreach( $rows as $index => $row ) {
-            $this->assertExpectedRowInserted($row, $results[ $index ]);
-        }
     }
 
     /**

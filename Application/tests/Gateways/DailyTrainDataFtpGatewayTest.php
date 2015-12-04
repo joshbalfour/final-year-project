@@ -61,7 +61,9 @@ class DailyTrainDataFtpGatewayTest extends \TestCase
     public function givenEmptyContentsCorrectFilename_WhenDownloadedFileIsReadAsEmpty_ThenReturnsFalse()
     {
         $this->mockFtpAdapter->setContents( [ $this->correctFilename => '' ] );
-        $this->assertFalse( $this->command->getDailyTrainData() );
+        $filePath = $this->command->getDailyTrainData();
+        $this->assertEquals( realpath(null)."/trainTimesData.xml", $filePath);
+        $this->assertEmpty( file_get_contents( $filePath ) );
     }
 
     /**
@@ -71,7 +73,9 @@ class DailyTrainDataFtpGatewayTest extends \TestCase
     {
         $data = 'a gzipped file';
         $this->mockFtpAdapter->setContents( [ $this->correctFilename => gzencode($data) ] );
-        $this->assertEquals( $data, $this->command->getDailyTrainData() );
+        $filePath = $this->command->getDailyTrainData();
+        $this->assertEquals( realpath(null)."/trainTimesData.xml", $filePath);
+        $this->assertEquals( $data, file_get_contents( $filePath ) );
     }
 
     /**
@@ -82,7 +86,9 @@ class DailyTrainDataFtpGatewayTest extends \TestCase
         $compressedData = file_get_contents( 'tests/Data/TrainTimeData/compressed_test.xml.gz' );
         $uncompressed_data = file_get_contents( 'tests/Data/TrainTimeData/decompressed_test.xml' );
         $this->mockFtpAdapter->setContents( [ $this->correctFilename => $compressedData ] );
-        $this->assertEquals( $uncompressed_data, $this->command->getDailyTrainData() );
+        $filePath = $this->command->getDailyTrainData();
+        $this->assertEquals( realpath(null)."/trainTimesData.xml", $filePath);
+        $this->assertEquals( $uncompressed_data, file_get_contents( $filePath ) );
     }
 
     /**
@@ -96,7 +102,10 @@ class DailyTrainDataFtpGatewayTest extends \TestCase
             'password' => 'A!t4398htw4ho4jy'
         );
         $command = new DailyTrainDataFtpGateway( new Ftp( $config ) );
-        $xmlData = $command->getDailyTrainData();
+        $filePath = $command->getDailyTrainData();
+        $this->assertEquals( realpath(null)."/trainTimesData.xml", $filePath);
+
+        $xmlData = file_get_contents( $filePath );
         $this->assertStringStartsWith( '<?xml version="1.0" encoding="utf-8"?>', substr( $xmlData, 0, 100 ), 'prefix failed' );
         $this->assertStringEndsWith( '</PportTimetable>', substr( $xmlData, strlen( $xmlData )-100 ), 'suffix failed' );
     }

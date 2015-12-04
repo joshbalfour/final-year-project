@@ -19,18 +19,16 @@ class MockDailyTrainDataGateway implements DailyTrainDataGateway
     private $data;
 
     /**
-     * MockDailyTrainDataGateway constructor.
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * @return string
      */
     public function getDailyTrainData()
     {
-        return $this->data;
+        $filePath = realpath(null) . "/trainTimesTestData.xml";
+        if ( file_exists( $filePath ) ){
+            unlink( $filePath );
+        }
+        file_put_contents( $filePath, $this->data );
+        return $filePath;
     }
 
     /**
