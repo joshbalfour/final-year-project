@@ -97,8 +97,6 @@ cd /src && composer install --prefer-source
 
 echo 'Composer install completed'
 
-php artisan migrate
-
 touch /src/.ready
 
 echo '🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨'
