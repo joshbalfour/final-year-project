@@ -22,7 +22,7 @@ install:
   - until [ -f ../.ready ]; do sleep 1; done
   - docker ps -a
 before_script:
-  - php artisan migrate
 script:
+  - php artisan migrate
   - docker exec level_crossing_predictor_instance /bin/bash -c "cd /src; composer test:webapp"
   - docker exec level_crossing_predictor_instance /bin/bash -c "cd /src; composer test:php"
