@@ -3,6 +3,8 @@
 Homestead.yaml
 Homestead.json
 .env
+bower_components
 error_log
 trainTimesData.xml
 trainTimesTestData.xml
+.ready

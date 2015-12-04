@@ -1,0 +1,21 @@
+{
+    "result": "OK",
+    "data": [
+        {
+            "id": 12345,
+            "location": {
+                "lat": 51.282752,
+                "lon": 1.073406
+            },
+            "status": "up"
+        },
+        {
+            "id": 12346,
+            "location": {
+                "lat": 51.288245,
+                "lon": 1.080495
+            },
+            "status": "down"
+        }
+    ]
+}

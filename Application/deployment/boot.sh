@@ -1,4 +1,8 @@
+rm /src/.ready
+
 set -e
+
+export TERM=xterm
 
 if [ ! -d "$MYSQL_DIR/mysql" ]; then
 
@@ -89,14 +93,17 @@ service apache2 start
 
 echo 'Composer install..'
 
-cd /src && composer -v install
+cd /src && composer install --prefer-source
 
 echo 'Composer install completed'
 
-tail -f /var/log/apache2/error.log
+touch /src/.ready
 
-# cd /data && mkdir osm
-# cd osm
-# curl $OSM_URL.html | grep -o '"england/.*\latest.osm\.pbf"' | sed 's/"//g' | xargs -P 4 -I % wget -N $OSM_URL/../%
-# ls -1 | head -n 1 | xargs -I % osm2pgsql --create --database gis --username postgres "%"
-# ls | xargs -I % osm2pgsql --append --database gis --username postgres "%"
+echo '🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨'
+echo '🚂 💨 🚂 💨                                 🚂 💨 🚂 💨'
+echo '🚂 💨 🚂 💨  Level Crossing Predictor Ready 🚂 💨 🚂 💨'
+echo '🚂 💨 🚂 💨              Choo Choo          🚂 💨 🚂 💨'
+echo '🚂 💨 🚂 💨                                 🚂 💨 🚂 💨'
+echo '🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨'
+
+tail -f /var/log/apache2/error.log
