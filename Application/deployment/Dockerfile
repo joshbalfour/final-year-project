@@ -66,4 +66,6 @@ RUN echo 'hhvm.server.fix_path_info = true' >> /etc/hhvm/server.ini
 
 RUN npm install -g bower karma
 
+ENV TERM "xterm"
+
 CMD ["/bin/bash","-C","/src/deployment/boot.sh"]
