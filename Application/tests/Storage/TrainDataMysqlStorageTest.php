@@ -34,7 +34,11 @@ class TrainDataMysqlStorageTest extends \TestCase
      */
     public function givenNoData_WhenInsertCalled_ThenNoDataInTable()
     {
-        $this->storage->insert( null, null,new \DateTime(), null, new \DateTime() );
+        try {
+            $this->storage->insert( null, null,new \DateTime(), null, new \DateTime() );
+        } catch (\Exception $e){
+            
+        }
         $this->assertEmpty( $this->getRowsFromDb() );
     }
 
