@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use App\Gateways\DailyTrainDataGateway;
 use App\Storage\TrainDataStorage;
 use Illuminate\Console\Command;
-use Illuminate\Console\OutputStyle;
+// use Illuminate\Console\OutputStyle;
 
 class ImportDailyTrainData extends Command
 {
@@ -38,12 +38,12 @@ class ImportDailyTrainData extends Command
      * @param DailyTrainDataGateway $gateway
      * @param TrainDataStorage $trainDataStorage
      */
-    public function __construct( DailyTrainDataGateway $gateway, TrainDataStorage $trainDataStorage, OutputStyle $output)
+    public function __construct( DailyTrainDataGateway $gateway, TrainDataStorage $trainDataStorage/*, OutputStyle $output*/)
     {
         parent::__construct();
         $this->gateway = $gateway;
         $this->trainDataStorage = $trainDataStorage;
-        $this->output = $output;
+        //$this->output = $output;
     }
 
     /**
