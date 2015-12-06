@@ -17,7 +17,8 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\ImportDailyTrainData::class,
         \App\Console\Commands\ImportCrossings::class,
         \App\Console\Commands\ImportRailMapData::class,
-        \App\Console\Commands\ImportExtendedCrossingData::class
+        \App\Console\Commands\ImportExtendedCrossingData::class,
+        \App\Console\Commands\ImportTIPLOCcrsMappings::class
     ];
 
     /**
