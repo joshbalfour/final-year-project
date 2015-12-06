@@ -14,7 +14,6 @@ class CreateTrainTimesTable extends Migration
     public function up()
     {
         Schema::create('train_times', function (Blueprint $table) {
-            $table->increments('id');
             $table->string('from_tpl');
             $table->dateTime('from_time');
             $table->string('to_tpl');
