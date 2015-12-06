@@ -49,11 +49,17 @@ class ImportDailyTrainData extends Command
      */
     public function handle()
     {
+        echo "\nDownloading Train Times.\n";
         $filePath = $this->gateway->getDailyTrainData();
         $reader = new \XMLReader();
         if(!$reader->open($filePath)){
             throw new \Exception( "Failed to open file" );
         }
+        echo "\nDownloaded Train Times.\n";
+        echo "\nImporting Train Times.\n";
+        // guestimate - allows us to show progress and a rough percentage
+        $bar = $this->output->createProgressBar(700000);
+        $bar->setFormat('very_verbose');
         $this->trainDataStorage->beginTransaction();
 
         while( $reader->read() ){
@@ -79,13 +85,15 @@ class ImportDailyTrainData extends Command
 
                     if (isset($from, $fromTime, $to, $toTime)) {
                         $this->insertDataToDatabaseAndUpdateFromValues($rid, $from, $fromTime, $to, $toTime, $stationDepartureTime);
+                        $bar->advance(1);
                     }
                 }
                 unset($from, $fromTime, $to, $toTime);
             }
         }
-
+        echo "\nImported Train Times.\n";
         $this->trainDataStorage->commit();
+        $bar->finish();
     }
 
     private function getStationName($stop)
