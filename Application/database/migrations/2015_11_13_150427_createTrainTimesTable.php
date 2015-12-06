@@ -19,7 +19,7 @@ class CreateTrainTimesTable extends Migration
             $table->dateTime('from_time');
             $table->string('to_tpl');
             $table->dateTime('to_time');
-            $table->integer( 'rid' );
+            $table->bigInteger( 'rid' );
         });
     }
 
