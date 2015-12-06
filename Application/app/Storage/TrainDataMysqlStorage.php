@@ -24,7 +24,7 @@ class TrainDataMysqlStorage implements TrainDataStorage
     public function insert($rid, $from, \DateTimeInterface $fromTime, $to, \DateTimeInterface $toTime)
     {
         $data = [ $rid, $from, $fromTime->format( 'Y-m-d H:i:s' ), $to, $toTime->format( 'Y-m-d H:i:s' ) ];
-        DB::insert( "INSERT INTO train_times ( from_tpl, from_time, to_tpl, to_time, rid ) VALUES ( ?, ? ,? ,? ,? )", $data );
+        DB::insert( "INSERT INTO train_times ( rid, from_tpl, from_time, to_tpl, to_time ) VALUES ( ?, ? ,? ,? ,? )", $data );
     }
 
 
