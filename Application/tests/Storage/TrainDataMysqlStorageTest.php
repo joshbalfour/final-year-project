@@ -25,7 +25,7 @@ class TrainDataMysqlStorageTest extends \TestCase
 
     public function tearDown()
     {
-        DB::statement('delete from train_times where id <> 0');
+        DB::statement('truncate table train_times');
         parent::tearDown();
     }
 

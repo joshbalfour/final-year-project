@@ -59,9 +59,13 @@ class ImportDailyTrainData extends Command
         }
         echo "\nDownloaded Train Times.\n";
         echo "\nImporting Train Times.\n";
-        // guestimate - allows us to show progress and a rough percentage
-        $bar = $this->output->createProgressBar(700000);
-        $bar->setFormat('very_verbose');
+        
+        if (\App::environment() != "testing"){
+            // guestimate - allows us to show progress and a rough percentage
+            $bar = $this->output->createProgressBar(700000);
+            $bar->setFormat('very_verbose');
+        }
+
         $this->trainDataStorage->beginTransaction();
 
         while( $reader->read() ){
@@ -87,7 +91,9 @@ class ImportDailyTrainData extends Command
 
                     if (isset($from, $fromTime, $to, $toTime)) {
                         $this->insertDataToDatabaseAndUpdateFromValues($rid, $from, $fromTime, $to, $toTime, $stationDepartureTime);
-                        $bar->advance(1);
+                        if (\App::environment() != "testing"){
+                            $bar->advance(1);
+                        }
                     }
                 }
                 unset($from, $fromTime, $to, $toTime);
@@ -95,7 +101,12 @@ class ImportDailyTrainData extends Command
         }
         echo "\nImported Train Times.\n";
         $this->trainDataStorage->commit();
-        $bar->finish();
+        
+
+
+        if (\App::environment() != "testing"){
+            $bar->finish();
+        }
     }
 
     private function getStationName($stop)
