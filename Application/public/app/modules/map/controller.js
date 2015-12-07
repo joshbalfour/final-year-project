@@ -84,8 +84,8 @@ app.controller('MapController', function ($http, $interval, Tween) {
 		// Get the new center location for the map
 		var width = ctrl.mapLongRange();
 		var newLocation = {
-			latitude: parseInt(model.latitude),
-			longitude: parseInt(model.longitude) + width / 4
+			latitude: parseFloat(model.latitude),
+			longitude: parseFloat(model.longitude) + width / 4
 		};
 
 		// Slide the map so the crossing icon is in the center
@@ -141,6 +141,6 @@ app.controller('MapController', function ($http, $interval, Tween) {
 		ctrl.loadCrossings();
 		$interval(function () {
 			ctrl.loadCrossings();
-		}, 5000);
+		}, 30000);
 	};
 });
