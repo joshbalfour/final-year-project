@@ -84,7 +84,7 @@ describe('Level Crossing Predictor', function() {
 			
 			console.log('Quality score: '+avgScore);
 
-			var passed = (avgScore < 5.71);
+			var passed = (avgScore < 3.7);
 
 			cestFini(passed);
 		}
