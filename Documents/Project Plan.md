@@ -335,7 +335,7 @@ Each has a man hour time estimate against it in the format # MH, this is then su
 
 	* Repeat R1.F1.T2
 
-	* For images: [http://www.networkrail.co.uk/Custom/Images/LevelCrossings/<id>/<id>.jpg](http://www.networkrail.co.uk/Custom/Images/LevelCrossings/%3Cid%3E/%3Cid%3E.jpg) where id is the unique identifier of the level crossing from the above step
+	* For images: [http://www.networkrail.co.uk/Custom/Images/LevelCrossings/$id/$id.jpg](http://www.networkrail.co.uk/Custom/Images/LevelCrossings/%3Cid%3E/%3Cid%3E.jpg) where $id is the unique identifier of the level crossing from the above step
 
 * R6.F1.T2 Write database view to sanitise/convert/extract the data we need - 1 MH
 
