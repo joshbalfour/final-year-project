@@ -52,7 +52,7 @@
             "/usr/bin/phpunit"
         ],
         "test:quality": [
-            "./node_modules/mocha/bin/mocha test.js"
+            "./node_modules/mocha/bin/mocha test-quality.js"
         ]
     },
     "config": {
