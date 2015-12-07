@@ -10,6 +10,9 @@ RUN echo "deb http://repo.mysql.com/apt/debian/ jessie mysql-${MYSQL_MAJOR}" > /
 RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
 RUN useradd -g staff mysql && usermod -u 1000 mysql
 
+RUN wget -O - http://dl.hhvm.com/conf/hhvm.gpg.key | apt-key add -
+RUN echo deb http://dl.hhvm.com/debian jessie main | tee /etc/apt/sources.list.d/hhvm.list
+
 # the "/var/lib/mysql" stuff here is because the mysql-server postinst doesn't have an explicit way to disable the mysql_install_db codepath besides having a database already "configured" (ie, stuff in /var/lib/mysql/mysql)
 # also, we set debconf keys to make APT a little quieter
 RUN { \
@@ -18,7 +21,7 @@ RUN { \
 		echo mysql-community-server mysql-community-server/re-root-pass password ''; \
 		echo mysql-community-server mysql-community-server/remove-test-db select false; \
 	} | debconf-set-selections \
-	&& apt-get update && apt-get install -y perl wget curl ca-certificates apache2 php5 php5-mcrypt php5-curl libavahi-compat-libdnssd-dev php5-mysql mysql-server="${MYSQL_VERSION}" phpunit nodejs htop php5-dev libssl-dev libcurl4-openssl-dev pkg-config --no-install-recommends \
+	&& apt-get update && apt-get install -y perl wget curl ca-certificates apache2 php5 php5-mcrypt php5-curl libavahi-compat-libdnssd-dev php5-mysql mysql-server="${MYSQL_VERSION}" phpunit nodejs htop nano hhvm php5-dev libssl-dev libcurl4-openssl-dev pkg-config --no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm -rf /var/lib/mysql
 
@@ -56,6 +59,11 @@ VOLUME ["/var/log/apache2"]
 
 RUN service apache2 start && service apache2 stop
 
+RUN /usr/share/hhvm/install_fastcgi.sh
+RUN echo 'hhvm.server.fix_path_info = true' >> /etc/hhvm/server.ini
+
 RUN npm install -g bower karma
+
+ENV TERM "xterm"
 
 CMD ["/bin/bash","-C","/src/deployment/boot.sh"]

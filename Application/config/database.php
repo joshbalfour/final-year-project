@@ -49,8 +49,9 @@ return [
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => 'localhost',
+            'port'      => '3306',
             'database'  => 'level_crossing_predictor',
-            'username'  => 'root',
+            'username'  => 'level_crossing_predictor',
             'password'  => 'level_crossing_predictor',
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
