@@ -23,5 +23,7 @@ install:
   - docker ps -a
 before_script:
 script:
+  - docker exec level_crossing_predictor_instance /bin/bash -c "cd /src; php artisan migrate --force"
   - docker exec level_crossing_predictor_instance /bin/bash -c "cd /src; composer test:webapp"
   - docker exec level_crossing_predictor_instance /bin/bash -c "cd /src; composer test:php"
+  - docker exec level_crossing_predictor_instance /bin/bash -c "cd /src; composer test:quality"

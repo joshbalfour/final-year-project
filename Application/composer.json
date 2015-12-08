@@ -25,7 +25,13 @@
     "autoload-dev": {
         "classmap": [
             "tests/TestCase.php"
-        ]
+        ],
+        "psr-4": {
+            "App\\": [
+                "app/",
+                "tests/"
+            ]
+        }
     },
     "scripts": {
         "post-install-cmd": [
@@ -44,6 +50,9 @@
         ],
         "test:php": [
             "/usr/bin/phpunit"
+        ],
+        "test:quality": [
+            "./node_modules/mocha/bin/mocha test-quality.js"
         ]
     },
     "config": {
