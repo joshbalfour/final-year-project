@@ -40,6 +40,8 @@ class ImportTIPLOCcrsMappings extends Command
         echo "\nImporting into DB...\n";
         $bar = $this->output->createProgressBar(count($🚉🚉));
 
+        $bar->setRedrawFrequency(100);
+
         $bar->start();
 
         foreach($🚉🚉 as $🚉){
