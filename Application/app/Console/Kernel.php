@@ -18,7 +18,6 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\ImportCrossings::class,
         \App\Console\Commands\ImportRailMapData::class,
         \App\Console\Commands\ImportExtendedCrossingData::class,
-        \App\Console\Commands\ProcessRails::class,
         \App\Console\Commands\ImportTIPLOCcrsMappings::class
     ];
 
