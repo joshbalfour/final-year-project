@@ -63,6 +63,7 @@ RUN echo 'User mysql \nGroup staff' >> /etc/apache2/apache2.conf
 
 RUN /usr/share/hhvm/install_fastcgi.sh
 RUN echo 'hhvm.server.fix_path_info = true' >> /etc/hhvm/server.ini
+RUN echo 'Eval.EnableZendCompat = true' >> /etc/hhvm/config.hdf
 
 RUN npm install -g bower karma
 
