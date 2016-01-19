@@ -59,7 +59,7 @@ class ImportDailyTrainData extends Command
         }
         echo "\nDownloaded Train Times.\n";
         echo "\nImporting Train Times.\n";
-        
+        echo \App::environment();
         if (\App::environment() != "testing"){
             // guestimate - allows us to show progress and a rough percentage
             $bar = $this->output->createProgressBar(700000);

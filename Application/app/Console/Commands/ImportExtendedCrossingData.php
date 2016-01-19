@@ -12,7 +12,7 @@ class ImportExtendedCrossingData extends Command
      *
      * @var string
      */
-    protected $signature = 'import:crossings-extended';
+    protected $signature = 'import:crossings-extended {--force}';
 
     /**
      * The console command description.
@@ -46,7 +46,7 @@ class ImportExtendedCrossingData extends Command
             foreach($rows as $row){
                 array_push($ids, $row->id);
             }
-        if ($this->confirm('Do you really want to download '.count($rows).' images of level crossings? I won\'t judge you I promise...')) {
+        if ( $this->option('force') || $this->confirm('Do you really want to download '.count($rows).' images of level crossings? I won\'t judge you I promise...')) {
             $urls = array_map(function($id){
                 return "http://www.networkrail.co.uk/Custom/Images/LevelCrossings/$id/$id.jpg";
             }, $ids);
@@ -54,7 +54,7 @@ class ImportExtendedCrossingData extends Command
             $bar = $this->output->createProgressBar(count($urls));
             $bar->setFormat('very_verbose');
 
-            $chunkSize = 100;
+            $chunkSize = 1000;
             $progress = 0;
             $max = count($urls);
 
