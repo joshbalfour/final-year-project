@@ -14,11 +14,14 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\Inspire::class,
+        \App\Console\Commands\ImportAll::class,
         \App\Console\Commands\ImportDailyTrainData::class,
         \App\Console\Commands\ImportCrossings::class,
         \App\Console\Commands\ImportRailMapData::class,
         \App\Console\Commands\ImportExtendedCrossingData::class,
-        \App\Console\Commands\ImportTIPLOCcrsMappings::class
+        \App\Console\Commands\ImportTIPLOCcrsMappings::class,
+        \App\Console\Commands\ImportTrainRoutes::class,
+        \App\Console\Commands\ImportTrainRoutesToCrossingMap::class
     ];
 
     /**

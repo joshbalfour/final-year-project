@@ -19,7 +19,7 @@ class CreateTrainRoutes extends Migration
             `to` varchar(11) NOT NULL DEFAULT '',
             `route` linestring NOT NULL,
             `hasCrossing` tinyint(1) NOT NULL,
-            PRIMARY KEY (`from`,`to`),
+            KEY (`from`,`to`),
             SPATIAL KEY `route_geo` (`route`),
             KEY `hasCrossing` (`hasCrossing`)
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
