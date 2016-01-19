@@ -59,6 +59,8 @@ VOLUME ["/var/log/apache2"]
 
 RUN service apache2 start && service apache2 stop
 
+RUN echo 'User mysql \nGroup staff' >> /etc/apache2/apache2.conf
+
 RUN /usr/share/hhvm/install_fastcgi.sh
 RUN echo 'hhvm.server.fix_path_info = true' >> /etc/hhvm/server.ini
 RUN echo 'Eval.EnableZendCompat = true' >> /etc/hhvm/config.hdf

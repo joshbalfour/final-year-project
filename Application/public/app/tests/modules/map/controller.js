@@ -10,13 +10,13 @@ describe('MapController', function() {
 		$controller = _$controller_;
 		$httpBackend = $injector.get('$httpBackend');
 
-		$httpBackend.when('GET', 'app/fixtures/crossings.json')
+		$httpBackend.when('GET', 'crossings')
 			.respond( fixture.load('app/fixtures/crossings.json'));
 
-		$httpBackend.when('GET', 'app/fixtures/crossings-12345.json')
+		$httpBackend.when('GET', 'crossings/12345')
 			.respond( fixture.load('app/fixtures/crossings-12345.json'));
 
-		$httpBackend.when('GET', 'app/fixtures/crossings-12345-times.json')
+		$httpBackend.when('GET', 'crossings/12345/times')
 			.respond( fixture.load('app/fixtures/crossings-12345-times.json'));
 	}));
 
