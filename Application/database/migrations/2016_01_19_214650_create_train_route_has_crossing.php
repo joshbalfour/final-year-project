@@ -20,7 +20,7 @@ class CreateTrainRouteHasCrossing extends Migration
                 `node_number` int(11) DEFAULT NULL,
                 KEY `train_route_id` (`train_route_id`),
                 KEY `crossing_id` (`crossing_id`)
-            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            ) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_unicode_ci;
         ");
     }
 

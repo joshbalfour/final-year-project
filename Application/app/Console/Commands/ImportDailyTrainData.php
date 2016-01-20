@@ -62,7 +62,7 @@ class ImportDailyTrainData extends Command
         echo \App::environment();
         if (\App::environment() != "testing"){
             // guestimate - allows us to show progress and a rough percentage
-            $bar = $this->output->createProgressBar(700000);
+            $bar = $this->output->createProgressBar(900000);
             $bar->setRedrawFrequency(1000);
             $bar->setFormat('very_verbose');
         }
