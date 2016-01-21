@@ -28,7 +28,7 @@ class CreateTrainTimesWithCrsView extends Migration
             join
                 tiploc_to_crs as from_crs
                 on
-                    from_crs.tiploc = train_times.from_tpl;
+                    from_crs.tiploc = train_times.from_tpl;;
         ");
     }
 

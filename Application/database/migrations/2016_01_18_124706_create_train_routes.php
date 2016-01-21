@@ -22,7 +22,7 @@ class CreateTrainRoutes extends Migration
             KEY (`from`,`to`),
             SPATIAL KEY `route_geo` (`route`),
             KEY `hasCrossing` (`hasCrossing`)
-            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            ) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_unicode_ci;
         ");
     }
 

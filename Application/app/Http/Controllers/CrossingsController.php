@@ -15,9 +15,13 @@ class CrossingsController extends Controller
      */
     public function index()
     {
-        $🙅🙅 = DB::table('crossings')->get(['id', DB::raw("x(`loc`) as lat"),  DB::raw("y(`loc`) as lon")]);
+        $crossingDownIds = $this->getCrossingsDown();
         
-        $🙅🙅 = array_map(function($🙅){
+        $🙅🙅 = DB::table('crossings')
+            ->where('crossing_type', 'like', 'Public Highway%')
+            ->get(['id', DB::raw("x(`loc`) as lat"),  DB::raw("y(`loc`) as lon")]);
+        
+        $🙅🙅 = array_map(function($🙅) use (&$crossingDownIds) {
 
             return [
                 "id" => (string) $🙅->id,
@@ -25,7 +29,7 @@ class CrossingsController extends Controller
                     "lat" => $🙅->lat,
                     "lon" => $🙅->lon
                 ],
-                "status" => (mt_rand(-1, 0) ? "down" : "up")
+                "status" => in_array($🙅->id, $crossingDownIds) ? 'down':'up'
             ];
 
         }, $🙅🙅);
@@ -43,6 +47,27 @@ class CrossingsController extends Controller
             ];
         }
         return json_encode($🌐);
+    }
+
+    function getCrossingsDown() {
+        $rows = DB::select("
+            select
+                crossing_id
+            from
+                crossing_intersection_time
+            where
+                from_time < NOW()
+            AND
+                to_time > NOW()
+            AND
+                down_time < NOW()
+            AND
+                up_time > NOW();
+        ");
+
+        return array_map(function ($row) {
+            return $row->crossing_id;
+        }, $rows);
     }
 
     /**
@@ -85,7 +110,35 @@ class CrossingsController extends Controller
     }
 
     public function getTimes($🙅🆔){
-        return json_encode([]);
+        $rows =  DB::select("
+            select
+                *
+            from
+                crossing_intersection_time
+            where
+                crossing_id = " . $🙅🆔 . "
+        ");
+
+        usort($rows, function (&$rowA, &$rowB) {
+            return strtotime($rowA->down_time) > strtotime($rowB->down_time) ? 1:-1;
+        });
+
+        $rows = array_map(function (&$row) {
+            return [
+                'trainDepart' => $row->from_time,
+                'trainArrive' => $row->to_time,
+                'downTime' => $row->down_time,
+                'upTime' => $row->up_time,
+                'duration' => strtotime($row->up_time) - strtotime($row->down_time)
+            ];
+        }, $rows);
+
+
+        return [
+            'result' => 'OK',
+            'data' => $rows
+
+        ];
     }
 
     public function serveImage($🙅🆔){

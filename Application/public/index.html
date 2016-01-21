@@ -92,16 +92,16 @@
 							<table class="table table-stripped">
 								<thead>
 									<tr>
-										<th>Date</th>
-										<th>Time</th>
+										<th>Down</th>
 										<th>Duration</th>
+										<th>Up</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr ng-repeat="time in mapCtrl.crossingDetails.times">
-										<td>{{time.upTime | toDate | date:'MMM d'}}</td>
-										<td>{{time.downTime | toDate | date:'shortTime'}}</td>
+										<td>{{time.downTime | toDate | date:'MMM d - HH:mm'}}</td>
 										<td>{{time.duration / 60 | ceil }} minutes</td>
+										<td>{{time.upTime | toDate | date:'MMM d - HH:mm'}}</td>
 									</tr>
 								</tbody>
 							</table>
