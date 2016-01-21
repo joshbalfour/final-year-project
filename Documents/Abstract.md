@@ -5,24 +5,19 @@
 Can level crossing closures be predicted? Rail timetables plus real time train feeds might make journey planning through level crossings more reliable. Redirecting via longer, but quicker routes or delaying journeys would then be possible.
 This project is to develop such a level crossing predictor, integrate with suitable mapping software on the web and/or mobile apps. Field testing for accuracy would be a key part of the final stages of the project.
 The project is implemented in PHP and Node JS on the back end, using Angular JS on the front end and a MySQL Database, all managed in a docker container.
-## Results (150 words)The project was able to, at the time of writing, produce reliable results 95% of the time, to within 30 seconds of accuracy.
-This was achieved by importing a spreadsheet of level crossing locations, the train timetable, a map of the rail line and station locations.
-The key challenges faced and overcome by the team who developed the project were:
-* Data acquisition is easy, data processing and curation is a difficult process
-* We overestimated the quality of relavent data available* Not having much computing power available so spending more time waiting than coding* PHP has no concept of performance
-* The lack of premium tools was a big issue, especially for project management
-* Setting our practices for project management from scratch as we hadn't been previously taught a project management procedures, system or tool
-* PHP is UTF8MB4 compliant, however MySQL is not.
+## Results (150 words)The project is able to produce reliable results 95% of the time, to within 30 seconds of accuracy.Key challenges:
+* Data processing and curation as we overestimated the quality of relavent data available.* Spending more time waiting than coding due to lack computing power.
+* Setting our practices for project management from scratch due to not previously being taught project management procedures, systems or tools.
 
-If we were to run this project again we
+Key success points:
 
-* would write it in Node JS
-* would split out our docker containers as per industry best practices
-* would've used Oracle DB for the data processing aspect of the project
+* Automated continuous integration and code quality testing.
+* The web app part of it just worked and was quick to develop.
+* The prediction aspect of the project was easy.
+* Data acquisition was relatively easy.
 
+If we were to run this project again we would
 
-Continuous integration and quality testing of the code base was a key player in the success of the project.
-
-The web app part of it just worked, and was quick to develop, using purely open source software and free services.
-
-The prediction aspect of the project was the easiest part, once the data was in a workable format.
+* Write it entirely in Javascript.
+* Split out our Docker containers as per industry best practices.
+* Use Oracle DB for the data processing aspect of the project.
