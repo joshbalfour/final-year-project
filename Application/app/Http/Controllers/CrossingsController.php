@@ -125,6 +125,8 @@ class CrossingsController extends Controller
 
         $rows = array_map(function (&$row) {
             return [
+                'trainDepart' => $row->from_time,
+                'trainArrive' => $row->to_time,
                 'downTime' => $row->down_time,
                 'upTime' => $row->up_time,
                 'duration' => strtotime($row->up_time) - strtotime($row->down_time)

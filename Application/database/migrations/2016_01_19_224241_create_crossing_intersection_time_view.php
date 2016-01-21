@@ -17,8 +17,8 @@ class CreateCrossingIntersectionTimeView extends Migration
                 train_route_has_crossing.crossing_id,
                 train_times_with_crs.from_time,
                 train_times_with_crs.to_time,
-                DATE_SUB(ADDTIME(train_times_with_crs.from_time, SEC_TO_TIME((train_route_has_crossing.distance_along_track / ST_Length(train_routes.route)) * (train_times_with_crs.to_time - train_times_with_crs.from_time))), INTERVAL 2 MINUTE) AS down_time,
-                DATE_ADD(ADDTIME(train_times_with_crs.from_time, SEC_TO_TIME((train_route_has_crossing.distance_along_track / ST_Length(train_routes.route)) * (train_times_with_crs.to_time - train_times_with_crs.from_time))), INTERVAL 30 SECOND) AS up_time
+                DATE_SUB(ADDTIME(train_times_with_crs.from_time, SEC_TO_TIME((train_route_has_crossing.distance_along_track / ST_Length(train_routes.route)) * TIME_TO_SEC(TIMEDIFF(train_times_with_crs.to_time, train_times_with_crs.from_time)))), INTERVAL 2 MINUTE) AS down_time,
+                DATE_ADD(ADDTIME(train_times_with_crs.from_time, SEC_TO_TIME((train_route_has_crossing.distance_along_track / ST_Length(train_routes.route)) * TIME_TO_SEC(TIMEDIFF(train_times_with_crs.to_time, train_times_with_crs.from_time)))), INTERVAL 30 SECOND) AS up_time
             from
                 train_routes
             join
