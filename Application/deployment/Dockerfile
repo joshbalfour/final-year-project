@@ -62,4 +62,6 @@ RUN npm install -g bower karma
 
 ENV TERM "xterm"
 
+ENV APP_ENV "development"
+
 CMD ["/bin/bash","-C","/src/deployment/boot.sh"]
