@@ -78,23 +78,38 @@ class CrossingsController extends Controller
      */
     public function get($🙅🆔)
     {
-        $🙅 = DB::table('crossings')->where('id', $🙅🆔)->first(['id', DB::raw("x(`loc`) as lat"),  DB::raw("y(`loc`) as lon")]);
+        $🙅 = DB::table('crossings')->where('id', $🙅🆔)->first([
+            'id', 
+            DB::raw("x(`loc`) as lat"),  
+            DB::raw("y(`loc`) as lon"), 
+            DB::raw("cast(no_of_trains as decimal) as no_of_trains"), 
+            DB::raw("cast(replace(replace(substring_index(line_speed, '\r', 1), ' (up)',''),' mph','') as decimal) line_speed_up"), 
+            DB::raw("cast(replace(if(replace(replace(replace(line_speed, substring_index(line_speed, '\r', 1),''), '\r', ''), ' (down)', '') = '',replace(substring_index(line_speed, '\r', 1), ' (up)',''), replace(replace(replace(line_speed, substring_index(line_speed, '\r', 1),''), '\r', ''), ' (down)', '')),' mph','') as decimal) line_speed_down"),
+            'crossing_type',
+            'postcode',
+            'city',
+            'crossing_name'
+        ]);
         if ($🙅 != null){
             $🌐 = [ 
                 "result" => "OK",
                 "data" => [
-                    "id" => $🙅->id,
+                    "id" => intval($🙅->id),
                     "location" => [
                         "lat" => $🙅->lat,
-                        "lon" => $🙅->lon
+                        "lon" => $🙅->lon,
+                        "postcode" => $🙅->postcode,
+                        "city" => $🙅->city
                     ],
                     "status" => (mt_rand(-1, 0) ? "down" : "up"),
                     "image" => "/crossings/$🙅🆔/image",
                     "line" => [
-                        "trainsPerDay" => 100,
-                        "northSpeed" => 100,
-                        "southSpeed" => 100
-                    ]
+                        "trainsPerDay" => intval($🙅->no_of_trains),
+                        "northSpeed" => intval($🙅->line_speed_up),
+                        "southSpeed" => intval($🙅->line_speed_down)
+                    ],
+                    "type" => $🙅->crossing_type,
+                    "name" => $🙅->crossing_name
                 ]
             ];
         } else {
