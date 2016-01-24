@@ -13,7 +13,7 @@ class CreateCrossingIntersectionTimeView extends Migration
     public function up()
     {
         DB::statement("
-            create view crossing_intersection_time AS select distinct
+            create view crossing_intersection_time AS select
                 train_route_has_crossing.crossing_id,
                 train_times_with_crs.from_time,
                 train_times_with_crs.to_time,

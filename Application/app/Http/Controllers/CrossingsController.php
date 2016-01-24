@@ -52,7 +52,7 @@ class CrossingsController extends Controller
     function getCrossingsDown() {
         $rows = DB::select("
             select
-                crossing_id
+                distinct crossing_id
             from
                 crossing_intersection_time
             where
@@ -127,7 +127,7 @@ class CrossingsController extends Controller
     public function getTimes($🙅🆔){
         $rows =  DB::select("
             select
-                *
+                distinct *
             from
                 crossing_intersection_time
             where
