@@ -1,3 +1,4 @@
+create or replace view flat_train_times_with_crs as 
 select from_crs, to_crs, from_time, to_time, rid 
 from (
 	select 
@@ -37,5 +38,4 @@ from (
 		) to_time,
 		t.rid
 	from train_times_with_crs t
-	where rid = '201601241990918'
-) a where from_crs != '';
+) why_mysql_forces_you_to_make_table_aliases_well_never_know where from_crs != '';
