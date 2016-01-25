@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Gateways\DailyTrainDataGateway;
 use App\Storage\TrainDataStorage;
 use Illuminate\Console\Command;
+use Carbon\Carbon;
 // use Illuminate\Console\OutputStyle;
 
 class ImportDailyTrainData extends Command
@@ -69,37 +70,59 @@ class ImportDailyTrainData extends Command
 
         $this->trainDataStorage->beginTransaction();
 
+        $onekrows = [];
+
         while( $reader->read() ){
             if( $reader->name == "Journey" ) {
                 $journey = new \SimpleXMLElement($reader->readOuterXml());
                 $rid = (int)$journey['rid'];
+                
+                $rollingDate = new Carbon($journey["ssd"]);
+                $prevRollingDate = $rollingDate->copy();
+
                 foreach ($journey->children() as $type => $stop) {
+                    
                     $stationDepartureTime = false;
+
                     if ($type == "OR") {
                         $from = $this->getStationName($stop);
-                        $fromTime = $this->getDateTime($stop['wtd']);
+                        $fromTime = $this->getDateTime($rollingDate, $stop['wtd'], $prevRollingDate);
                     } else if ($type == "PP") {
                         $to = $this->getStationName($stop);
-                        $toTime = $this->getDateTime($stop['wtp']);
+                        $toTime = $this->getDateTime($rollingDate, $stop['wtp'], $prevRollingDate);
                     } else if ($type == "IP") {
                         $to = $this->getStationName($stop);
-                        $toTime = $this->getDateTime($stop['wta']);
-                        $stationDepartureTime = $this->getDateTime($stop['wtd']);
+                        $toTime = $this->getDateTime($rollingDate, $stop['wta'], $prevRollingDate);
+                        $stationDepartureTime = $this->getDateTime($rollingDate, $stop['wtd'], $prevRollingDate);
                     } else if ($type == "DT") {
                         $to = $this->getStationName($stop);
-                        $toTime = $this->getDateTime($stop['wta']);
+                        $toTime = $this->getDateTime($rollingDate, $stop['wta'], $prevRollingDate);
                     }
 
                     if (isset($from, $fromTime, $to, $toTime)) {
-                        $this->insertDataToDatabaseAndUpdateFromValues($rid, $from, $fromTime, $to, $toTime, $stationDepartureTime);
-                        if (\App::environment() != "testing"){
-                            $bar->advance(1);
-                        }
+                        $this->updateStartingLocationAndTimeForNextSectionOfTrack( $from, $fromTime, $to, $toTime, $stationDepartureTime );
+                        $onekrows[] = [$rid, $from, $fromTime, $to, $toTime];
                     }
+
+                    $prevRollingDate = $rollingDate->copy();
                 }
                 unset($from, $fromTime, $to, $toTime);
             }
+
+            if (count($onekrows) > 1000){
+                
+                $this->insertDataToDatabaseAndUpdateFromValues($onekrows);
+                
+                $onekrows = [];
+
+                if (\App::environment() != "testing"){
+                    $bar->advance(1000);
+                }
+            }
         }
+        
+        $this->insertDataToDatabaseAndUpdateFromValues($onekrows);
+
         echo "\nImported Train Times.\n";
         $this->trainDataStorage->commit();
         
@@ -115,24 +138,33 @@ class ImportDailyTrainData extends Command
         return (string)$stop['tpl'];
     }
 
-    private function insertDataToDatabaseAndUpdateFromValues($rid, &$from, \DateTimeInterface &$fromTime, $to, \DateTimeInterface $toTime, $stationDepartureTime )
+    private function insertDataToDatabaseAndUpdateFromValues($rows )
     {
-        $this->trainDataStorage->insert( $rid, $from, $fromTime, $to, $toTime );
-        $this->updateStartingLocationAndTimeForNextSectionOfTrack( $from, $fromTime, $to, $toTime, $stationDepartureTime );
+        $this->trainDataStorage->insert( $rows );
     }
 
     private function updateStartingLocationAndTimeForNextSectionOfTrack( &$from, &$fromTime, $to, $toTime, $stationDepartureTime )
     {
         $from = $to;
         if( $stationDepartureTime ) {
-            $fromTime = $stationDepartureTime;
+            $fromTime = $stationDepartureTime->copy();
         } else {
-            $fromTime = $toTime;
+            $fromTime = $toTime->copy();
         }
     }
 
-    private function getDateTime( $time )
+    private function getDateTime( &$date, $time, &$prevRollingDate )
     {
-        return new \DateTime( date('Y-m-d').' '.$time );
+        list($hour, $minute, $second) = explode(':', $time . ":00");
+        if (empty($second)){
+            $second = 0; // no idea if this'll do anything or not
+        }
+        $date->setTime($hour, $minute, $second);
+        
+        if ($prevRollingDate->gte($date)){
+            $date->addDay(1);
+        }
+
+        return $date->copy();
     }
 }
