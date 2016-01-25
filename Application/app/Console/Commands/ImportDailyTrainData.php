@@ -64,7 +64,7 @@ class ImportDailyTrainData extends Command
         if (\App::environment() != "testing"){
             // guestimate - allows us to show progress and a rough percentage
             $bar = $this->output->createProgressBar(900000);
-            $bar->setRedrawFrequency(1000);
+            $bar->setRedrawFrequency(5000);
             $bar->setFormat('very_verbose');
         }
 
@@ -109,14 +109,14 @@ class ImportDailyTrainData extends Command
                 unset($from, $fromTime, $to, $toTime);
             }
 
-            if (count($onekrows) > 1000){
+            if (count($onekrows) > 5000){
                 
                 $this->insertDataToDatabaseAndUpdateFromValues($onekrows);
                 
                 $onekrows = [];
 
                 if (\App::environment() != "testing"){
-                    $bar->advance(1000);
+                    $bar->advance(5000);
                 }
             }
         }
