@@ -37,7 +37,8 @@
         "post-install-cmd": [
             "php artisan clear-compiled",
             "bower install --allow-root",
-            "npm install --no-bin-links"
+            "npm install --no-bin-links",
+            "cd /src/database/train-route-process && npm install --no-bin-links"
         ],
         "pre-update-cmd": [
             "php artisan clear-compiled"
@@ -50,6 +51,9 @@
         ],
         "test:php": [
             "/usr/bin/phpunit"
+        ],
+        "test:quality": [
+            "./node_modules/mocha/bin/mocha test-quality.js"
         ]
     },
     "config": {

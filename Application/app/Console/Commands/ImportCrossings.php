@@ -61,9 +61,9 @@ class ImportCrossings extends Command
                 'loc' => DB::raw('GeomFromText("point('.$row[3].' '.$row[4].')")'),
                 'postcode' => $row[5],
                 'city' => $row[6],
-                'types_of_trains' => $row[11],
-                'line_speed' => $row[12],
-                'no_of_trains' => $row[13]
+                'types_of_trains' => $row[12],
+                'line_speed' => $row[13],
+                'no_of_trains' => $row[14]
             ];
             
         }

@@ -32,10 +32,10 @@ class DailyTrainDataFtpGateway implements DailyTrainDataGateway
         $files = $this->ftpAdapter->listContents();
         $file = $this->getCorrectFileFromListOfFiles($files);
         if (empty( $file )) {
-            return null;
+            throw new \Exception('Not daily data on ftp');
         }
 
-        $filePath = realpath(null) . "/trainTimesData.xml";
+        $filePath = "/tmp/trainTimesData.xml";
         if ( file_exists( $filePath ) ){
             unlink( $filePath );
         }
@@ -51,7 +51,7 @@ class DailyTrainDataFtpGateway implements DailyTrainDataGateway
     {
         $dataFile = '';
         foreach ($files as $file) {
-            if (strpos($file['path'], date('Ymd')) !== false && strpos($file['path'], '_v8.xml.gz') !== false) {
+            if (strpos($file['path'], '_v8.xml.gz') !== false) {
                 $dataFile = $file['path'];
                 break;
             }

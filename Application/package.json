@@ -13,7 +13,8 @@
     "phantomjs": "^1.9.18",
     "qunitjs": "^1.20.0",
     "karma-sinon": "^1.0.4",
-    "sinon": "^1.17.2"
+    "sinon": "^1.17.2",
+    "emoji-regex" : "6.0.0"
   },
   "dependencies": {
   }

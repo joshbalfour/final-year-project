@@ -50,58 +50,61 @@
 				</div>
 				<div class="panel-body">
 					<div class="showCrossingDetails-body-scroller">
-						<!-- Crossing title -->
-						<h2>{{mapCtrl.crossingDetails.meta.name}}</h2>
 
-						<!-- Crossing details -->
-						<div>
-							<img ng-src="{{mapCtrl.crossingDetails.meta.image}}" />
-							<table class="table table-stripped">
-								<tbody>
-									<tr>
-										<td>Type</td>
-										<td>{{mapCtrl.crossingDetails.meta.type}}</td>
-									</tr>
-									<tr>
-										<td>City</td>
-										<td>{{mapCtrl.crossingDetails.meta.location.city}}</td>
-									</tr>
-									<tr>
-										<td>Postcode</td>
-										<td>{{mapCtrl.crossingDetails.meta.location.postcode}}</td>
-									</tr>
-									<tr>
-										<td>Trains per day</td>
-										<td>{{mapCtrl.crossingDetails.meta.line.trainsPerDay}}</td>
-									</tr>
-									<tr>
-										<td>Line speed (up/down)</td>
-										<td>
-											{{mapCtrl.crossingDetails.meta.line.northSpeed}}mph
-											/
-											{{mapCtrl.crossingDetails.meta.line.southSpeed}}mph
-										</td>
-									</tr>
-								</tbody>
-							</table>
+						<div class="crossing_image" ng-style="{ 'background-image' : 'url('+mapCtrl.crossingDetails.meta.image+')' }"></div>
+						<div class="crossing_content">
+							<!-- Crossing title -->
+							<h2>{{mapCtrl.crossingDetails.meta.name}}</h2>
+
+							<!-- Crossing details -->
+							<div>
+								<table class="table table-stripped">
+									<tbody>
+										<tr>
+											<td>Type</td>
+											<td>{{mapCtrl.crossingDetails.meta.type}}</td>
+										</tr>
+										<tr>
+											<td>City</td>
+											<td>{{mapCtrl.crossingDetails.meta.location.city}}</td>
+										</tr>
+										<tr>
+											<td>Postcode</td>
+											<td>{{mapCtrl.crossingDetails.meta.location.postcode}}</td>
+										</tr>
+										<tr>
+											<td>Trains per day</td>
+											<td>{{mapCtrl.crossingDetails.meta.line.trainsPerDay}}</td>
+										</tr>
+										<tr>
+											<td>Line speed (up/down)</td>
+											<td>
+												{{mapCtrl.crossingDetails.meta.line.northSpeed}}mph
+												/
+												{{mapCtrl.crossingDetails.meta.line.southSpeed}}mph
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 						</div>
 
 						<!-- Crossing times -->
-						<div>
+						<div class="crossing_times">
 							<h3>Times</h3>
 							<table class="table table-stripped">
 								<thead>
 									<tr>
-										<th>Date</th>
-										<th>Time</th>
+										<th>Down</th>
 										<th>Duration</th>
+										<th>Up</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr ng-repeat="time in mapCtrl.crossingDetails.times">
-										<td>{{time.upTime | toDate | date:'MMM d'}}</td>
-										<td>{{time.downTime | toDate | date:'shortTime'}}</td>
+										<td>{{time.downTime | toDate | date:'MMM d - HH:mm'}}</td>
 										<td>{{time.duration / 60 | ceil }} minutes</td>
+										<td>{{time.upTime | toDate | date:'MMM d - HH:mm'}}</td>
 									</tr>
 								</tbody>
 							</table>

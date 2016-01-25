@@ -24,6 +24,6 @@ interface TrainDataStorage
      * @return
      * @internal param array $trainTimes array of train times data
      */
-    public function insert( $rid, $from, \DateTimeInterface $fromTime, $to, \DateTimeInterface $toTime );
+    public function insert( $whyDoesThisExist );
 
 }
