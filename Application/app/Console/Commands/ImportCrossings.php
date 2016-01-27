@@ -52,20 +52,32 @@ class ImportCrossings extends Command
 
         array_shift($csv);
         $toInsert = [];
+
+        $usedSpaces = [];
+
         foreach ($csv as $row) {
-            
+            $lat = $row[3];
+            $lng = $row[4];
+            $key = $lat.' '.$lng;
+
+            while (in_array($key, $usedSpaces)) {
+                $lat += 0.0000000000002;
+                $key = $lat.' '.$lng;
+                echo $row[0] . " fixing colision, moving to: " . $key . "\n";
+            }
+
             $toInsert[] = [
                 'id' => $row[0],
                 'crossing_name' => $row[1],
                 'crossing_type' => $row[2],
-                'loc' => DB::raw('GeomFromText("point('.$row[3].' '.$row[4].')")'),
+                'loc' => DB::raw('GeomFromText("point('.$lat.' '.$lng.')")'),
                 'postcode' => $row[5],
                 'city' => $row[6],
                 'types_of_trains' => $row[12],
                 'line_speed' => $row[13],
                 'no_of_trains' => $row[14]
             ];
-            
+            $usedSpaces[] = $key;
         }
 
         DB::table('crossings')->insert($toInsert);

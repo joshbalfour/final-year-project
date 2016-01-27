@@ -34,6 +34,9 @@ class ImportAll extends Command
         echo "\n\n--- Reseting database\n";
         $this->call('migrate:refresh');
 
+        echo "\n\n--- Importing Rail map\n";
+        $this->call('import:rail-map-data');
+
         echo "\n\n--- Importing crossings\n";
         $this->call('import:crossings');
         
