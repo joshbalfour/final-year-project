@@ -4,7 +4,7 @@ var mysql = require('./mysql');
 function getLines(cb) {
 	mysql.query(
 		'SELECT * from line'
-//		+ " WHERE contains(GeomFromText('Polygon((51.500217 0.214378, 51.493949 1.503170, 50.671713 1.503170, 50.690852 0.002936, 51.500217 0.214378))'), line);"
+		+ " WHERE contains(GeomFromText('Polygon((51.500217 0.214378, 51.493949 1.503170, 50.671713 1.503170, 50.690852 0.002936, 51.500217 0.214378))'), line);"
 		, function(err, rows, fields) {
 	  if (err) throw err;
 
@@ -16,7 +16,7 @@ function getLines(cb) {
 function getStations(cb) {
 	mysql.query(
 		'SELECT * from station'
-//		+ " WHERE contains(GeomFromText('Polygon((51.500217 0.214378, 51.493949 1.503170, 50.671713 1.503170, 50.690852 0.002936, 51.500217 0.214378))'), loc);"
+		+ " WHERE contains(GeomFromText('Polygon((51.500217 0.214378, 51.493949 1.503170, 50.671713 1.503170, 50.690852 0.002936, 51.500217 0.214378))'), loc);"
 		, function(err, rows, fields) {
 	  if (err) throw err;
 
@@ -27,7 +27,7 @@ function getStations(cb) {
 function getCrossings(cb) {
 	mysql.query(
 		'SELECT * from crossings'
-//		+ " WHERE contains(GeomFromText('Polygon((51.500217 0.214378, 51.493949 1.503170, 50.671713 1.503170, 50.690852 0.002936, 51.500217 0.214378))'), loc);"
+		+ " WHERE contains(GeomFromText('Polygon((51.500217 0.214378, 51.493949 1.503170, 50.671713 1.503170, 50.690852 0.002936, 51.500217 0.214378))'), loc);"
 		, function(err, rows, fields) {
 	  if (err) throw err;
 
@@ -230,8 +230,11 @@ function pullRoutes(pointsMap) {
 }
 
 function pullRoutesForStation(pointsMap, station) {
-	var finishedRoutes = [];
+	var finishedRoutes = [
+		[station, station]
+	];
 	var pointsVisited = new Map();
+	pointsVisited.set(station, true);
 	var routes = [
 		[station]
 	];
@@ -257,9 +260,9 @@ function pullRoutesForStation(pointsMap, station) {
 			
 			if (nextPoint.type == 'station') {
 				finishedRoutes.push(newRoute);
-			} else {			
-				routes.push(newRoute);
 			}
+
+			routes.push(newRoute);
 		});
 	}
 

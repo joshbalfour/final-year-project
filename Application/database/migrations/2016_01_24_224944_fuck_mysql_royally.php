@@ -34,13 +34,9 @@ class FuckMysqlRoyally extends Migration
     public function down()
     {
         //
-        Schema::drop('train_times_with_crs');
-        Schema::drop('v_train_times_with_crs');
+        DB::statement("drop table train_times_with_crs");
+        DB::statement("drop view v_train_times_with_crs");
         DB::statement("rename table x_train_times_with_crs to train_times_with_crs");
         DB::statement("alter table train_times drop index idx_train_times_rid");
-
-        DB::statement("alter table train_times_with_crs drop index crs");
-        DB::statement("alter table train_times_with_crs drop index from_time");
-        DB::statement("alter table train_times_with_crs drop index to_time");
     }
 }
