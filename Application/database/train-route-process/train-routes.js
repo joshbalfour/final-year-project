@@ -266,7 +266,7 @@ function pullRoutesForStation(pointsMap, station) {
 
 	while (routes.length) {
 		route = routes.shift();
-		
+
 		if (route.stationCount > 6) {
 			continue;
 		}
@@ -463,7 +463,7 @@ getDatabaseData(function (lines, stations, crossings) {
 		savePointsMap(pointsMap, 'map.json');
 	}
 
-	var tracker = asyncTracker(100, ' committing to db');
+	var tracker = asyncTracker(2, ' committing to db');
 	setTimeout(tracker.track(), 1000);
 
 	var stationToStationRoutes = pullRoutes(pointsMap, function (routes) {

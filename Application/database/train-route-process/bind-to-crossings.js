@@ -3,13 +3,17 @@ var mysql = require('./mysql');
 
 function getRoutes(cb) {
 	mysql.query(
-		'SELECT * from train_routes WHERE `hasCrossing` = 1'
-//		+ " AND contains(GeomFromText('Polygon((51.500217 0.214378, 51.493949 1.503170, 50.671713 1.503170, 50.690852 0.002936, 51.500217 0.214378))'), route);"
-		, function(err, rows, fields) {
-	  if (err) throw err;
+		'select count(*) as le_count from train_routes WHERE `hasCrossing` = 1',
+		function (err, results) {
 
-	  cb(rows);
-	});
+			var streamable = mysql.query(
+				'SELECT * from train_routes WHERE `hasCrossing` = 1'
+		//		+ " AND contains(GeomFromText('Polygon((51.500217 0.214378, 51.493949 1.503170, 50.671713 1.503170, 50.690852 0.002936, 51.500217 0.214378))'), route);"
+			);
+			streamable.total = results[0].le_count;
+			cb(streamable);
+		}
+	);
 }
 
 function getCrossings(cb) {
@@ -61,16 +65,14 @@ function normalizePoint(point, type, meta) {
 
 function getDatabaseData(cb) {
 
-	getRoutes(function (routes) {
 
-		getCrossings(function (crossings) {
-
+	getCrossings(function (crossings) {
+		getRoutes(function (routes) {
 			cb(
 				routes,
 				crossings
 			);
 		});
-
 	});
 }
 
@@ -108,8 +110,9 @@ function routeHasCrossingIn(route) {
 }
 
 function insertConnectionsIntoDB(connections, cb) {
+	cb = cb || function () {};
+
 	connections = [].concat(connections);
-	console.log('Inserting connections into database: ' + connections.length);
 	var tracker = asyncTracker(100);
 
 
@@ -126,7 +129,12 @@ function insertConnectionsIntoDB(connections, cb) {
 		mysql.query(
 			"INSERT INTO train_route_has_crossing (`train_route_id`, `crossing_id`, `distance_along_track`, `node_number`) VALUES " + placeHolders.join(','),
 			params,
-			tracker.track()
+			function (err, result) {
+				if (err) {
+					console.log(err);
+				}
+				tracker.track();
+			}
 		);
 
 		tracker.onComplete(cb);
@@ -145,16 +153,6 @@ function getCrossingMap(crossings) {
 	return crossingsMap;
 }
 
-function getCrossingsInRoutes(routes, crossingMap) {
-	
-	var crossingsInRoutes = [];
-
-	routes.forEach(function (route) {
-		crossingsInRoutes = crossingsInRoutes.concat(getCrossingsInRoute(route, crossingMap));
-	});
-
-	return crossingsInRoutes;
-}
 
 function getCrossingsInRoute(route, crossingsMap) {
 	var connectionPoints = [];
@@ -187,17 +185,34 @@ function getCrossingsInRoute(route, crossingsMap) {
 
 mysql.connect();
 
-getDatabaseData(function (routes, crossings) {
+getDatabaseData(function (routesStream, crossings) {
 
 	console.log('Mapping crossings to map');
 	var crossingMap = getCrossingMap(crossings);
-
+	var i = 0;
 	console.log('Pulling crossings from routes');
-	var crossingsInRoutes = getCrossingsInRoutes(routes, crossingMap);
 
-	insertConnectionsIntoDB(crossingsInRoutes, function () {
-		mysql.end();
-	});
+	routesStream
+		.on('error', function(err) {
+			// Handle error, an 'end' event will be emitted after this as well
+			console.log('Fuck', err);
+		})
+		.on('result', function (row) {
+			if (((++i) % 50) === 0) {
+				console.log('Processing route: ' + (i) + '/' + routesStream.total);
+			}
+
+			var crossingsInRoutes = getCrossingsInRoute(row, crossingMap);
+			insertConnectionsIntoDB(crossingsInRoutes);
+		})
+		.on('end', function() {
+			console.log('Shutting down...');
+			
+			// all rows have been received
+			setTimeout(function () {
+				mysql.end();
+			}, 1000);			
+		});
 
 });
 
