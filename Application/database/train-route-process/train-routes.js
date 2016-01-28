@@ -261,10 +261,15 @@ function pullRoutesForStation(pointsMap, station) {
 	var routes = [
 		[station]
 	];
+	routes[0].stationCount = 1;
 	var route;
 
 	while (routes.length) {
 		route = routes.shift();
+		
+		if (route.stationCount > 6) {
+			continue;
+		}
 
 		var currentPoint = route.last();
 		var connectedTo = pointsMap.get(currentPoint);
@@ -278,10 +283,12 @@ function pullRoutesForStation(pointsMap, station) {
 
 
 			var newRoute = route.concat([]);
+			newRoute.stationCount = route.stationCount;
 			
 			newRoute.push(nextPoint);
 			
 			if (nextPoint.type == 'station') {
+				newRoute.stationCount++;
 				finishedRoutes.push(newRoute);
 			}
 
@@ -412,7 +419,6 @@ function insertRoutesIntoDB(routes, tracker) {
                 );
 
         }
-	mysql.query("delete from train_routes where ST_Length(route) > 2;", [], tracker.track());
 }
 
 function loadCachedMap() {
