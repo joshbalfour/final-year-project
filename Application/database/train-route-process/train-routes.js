@@ -211,7 +211,7 @@ function numberOfStations(pointsMap) {
 	return i;
 }
 
-function pullRoutes(pointsMap, callback, done) {
+function pullRoutes(pointsMap, callback, done, tracker) {
 
 	var stations = numberOfStations(pointsMap);
 	var i = 1;
@@ -219,6 +219,11 @@ function pullRoutes(pointsMap, callback, done) {
 	var points = [];
 
 	function processARoute() {
+		
+		if (tracker.queLength > 100) {
+			return setTimeout(processARoute, 10);
+		}
+
 		var point = points.pop();
 
 		if (!point) {
@@ -319,25 +324,26 @@ function getDatabaseData(cb) {
 
 var asyncTracker = (function (logThreshold, message) {
 	var onComplete = function () {};
-	var counter = 0;
+//	var counter = 0;
 	return {
+		queLength: 0,
 		track: function () {
-			counter++;
+			var _this = this;
+			_this.queLength++;
 			return function () {
-				counter--;
-
-				if ((counter % logThreshold) == 0) {
-					console.log(counter + message);
+				_this.queLength--;
+				if ((_this.queLength % logThreshold) == 0) {
+					console.log(_this.queLength + message);
 				}
 
-				if (counter == 0) {
+				if (_this.queLength == 0) {
 					onComplete();
 				}
 			};
 		},
 		onComplete: function (_onComplete) {
 			onComplete = _onComplete;
-			if (counter == 0) {
+			if (_this.queLengthr == 0) {
 				onComplete();
 			}
 		}
@@ -350,6 +356,7 @@ function routeHasCrossingIn(route) {
 	});
 }
 
+/*
 function insertRoutesIntoDB(routes, tracker) {
 
 	routes.forEach(function (route, key) {
@@ -366,6 +373,46 @@ function insertRoutesIntoDB(routes, tracker) {
 			tracker.track()
 		);
 	});
+}
+
+*/
+
+function insertRoutesIntoDB(routes, tracker) {
+        
+        var routeBlock;
+
+
+        while(true) {
+        	
+		routeBlock = routes.splice(0, 9);
+
+		if (routeBlock.length == 0) {
+			break;
+		}
+
+                var insert = [];
+                var params = [];
+                routeBlock.forEach(function (route, key) {
+
+                        var lingStringInner = route.map(function (point) {
+                                return point.x + ' ' + point.y;
+                        }).join(',');
+
+                        var lineString = 'GeomFromText(\'LINESTRING(' + lingStringInner + ')\')';
+
+                        params = params.concat([route.first().stationCode, route.last().stationCode, routeHasCrossingIn(route)]);
+                        insert.push("(?,?, " + lineString + ", ? )");
+                });
+
+
+                mysql.query(
+                        "INSERT INTO train_routes (`from`, `to`, `route`, `hasCrossing`) VALUES " + insert.join(', '),
+                        params,
+                        tracker.track()
+                );
+
+        }
+	mysql.query("delete from train_routes where ST_Length(route) > 2;", [], tracker.track());
 }
 
 function loadCachedMap() {
@@ -417,7 +464,7 @@ getDatabaseData(function (lines, stations, crossings) {
 		insertRoutesIntoDB(routes, tracker);
 	}, function () {
 		mysql.end();
-	});
+	}, tracker);
 
 
 });
