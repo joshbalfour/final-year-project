@@ -98,10 +98,10 @@ class ImportDailyTrainData extends Command
                         $to = $this->getStationName($stop);
                         $toTime = $this->getDateTime($rollingDate, $stop['wta'], $prevRollingDate);
                     }
-
                     if (isset($from, $fromTime, $to, $toTime)) {
+                        $onekrows[] = [(string)$rid, (string)$from, $fromTime->copy(), (string)$to, $toTime->copy()];
                         $this->updateStartingLocationAndTimeForNextSectionOfTrack( $from, $fromTime, $to, $toTime, $stationDepartureTime );
-                        $onekrows[] = [$rid, $from, $fromTime, $to, $toTime];
+
                     }
 
                     $prevRollingDate = $rollingDate->copy();
@@ -110,7 +110,7 @@ class ImportDailyTrainData extends Command
             }
 
             if (count($onekrows) > 5000){
-                
+
                 $this->insertDataToDatabaseAndUpdateFromValues($onekrows);
                 
                 $onekrows = [];
@@ -125,6 +125,10 @@ class ImportDailyTrainData extends Command
 
         echo "\nImported Train Times.\n";
         $this->trainDataStorage->commit();
+
+
+        \DB::statement("drop table train_times_with_crs");
+        \DB::statement("create table train_times_with_crs as select * from v_train_times_with_crs");
         
 
 

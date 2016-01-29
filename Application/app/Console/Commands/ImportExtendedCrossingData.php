@@ -54,7 +54,7 @@ class ImportExtendedCrossingData extends Command
             $bar = $this->output->createProgressBar(count($urls));
             $bar->setFormat('very_verbose');
 
-            $chunkSize = 1000;
+            $chunkSize = 100;
             $progress = 0;
             $max = count($urls);
 
@@ -104,7 +104,8 @@ class ImportExtendedCrossingData extends Command
           
         // Download the files  
         do {
-          curl_multi_exec($multi_handle,$running);
+            curl_multi_exec($multi_handle,$running);
+            sleep(0.5);
         } while($running > 0);
 
         // Free up objects  

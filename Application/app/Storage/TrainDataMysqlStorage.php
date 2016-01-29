@@ -24,7 +24,7 @@ class TrainDataMysqlStorage implements TrainDataStorage
     public function insert($rows)
     {
         $flattenedRows = [];
-
+        
         $params = array_map(function($row) use (&$flattenedRows) {
             foreach ($row as $value){
                 $flattenedRows[] = $value;
