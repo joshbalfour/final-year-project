@@ -29,7 +29,7 @@ class ImportTrainRoutesToCrossingMap extends Command
     public function handle()
     {
         echo "Linking train routes to crossings\n";
-        echo shell_exec('cd database/train-route-process && node bind-to-crossings.js');
+        echo passthru('cd database/train-route-process && node bind-to-crossings.js');
         echo "Completed\n";
     }
 }

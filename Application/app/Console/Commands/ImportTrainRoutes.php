@@ -29,21 +29,7 @@ class ImportTrainRoutes extends Command
     public function handle()
     {
         echo "Reading data from file\n";
-        $contents = \File::get('database/data/train_routes.sql');
-        echo "Spliting string\n";
-
-        $splitSection = "INSERT INTO `train_routes`";
-        $insertables = explode($splitSection, $contents);
-        $bar = $this->output->createProgressBar(count($insertables));
-
-        echo "Inserting\n";
-        foreach($insertables as $statement) {
-            if (trim($statement) !== '') {
-                \DB::statement($splitSection . $statement);
-            } 
-            \DB::commit();
-            $bar->advance();
-        }
+        echo passthru('cd database/train-route-process && node train-routes.js');
 
         echo "Completed\n";
     }

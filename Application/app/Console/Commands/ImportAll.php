@@ -43,11 +43,11 @@ class ImportAll extends Command
         echo "\n\n--- Importing extended crossings\n";
         $this->call('import:crossings-extended', ['--force' => true]);
 
-        echo "\n\n--- Importing daily train data\n";
-        $this->call('import:daily-train-data');
-
         echo "\n\n--- Importing tiploc map\n";
         $this->call('import:tiploc-crs-mappings');
+
+        echo "\n\n--- Importing daily train data\n";
+        $this->call('import:daily-train-data');
 
         echo "\n\n--- Importing train routes\n";
         $this->call('import:train-routes');
