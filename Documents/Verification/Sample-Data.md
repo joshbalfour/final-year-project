@@ -48,7 +48,7 @@ Misses seem to be due to a an issue in the train time data collection from natio
 
 | Down  | Up    |
 | ----- | ----- |
-| 10:22 | 10:26 |
+| 10:22 | 10:25 |
 | 10:45 | 10:51 |
 | 11:05 | 11:10 |
 | 11:22 | 11:25 |
@@ -62,3 +62,19 @@ Misses seem to be due to a an issue in the train time data collection from natio
 | 14:05 | 14:10 |
 
 ### Predicitons
+
+| Real  | Real  | Predicition  | Predicition  |        |
+| ----- | ----- | ------------ | ------------ | ------ |
+| Down  | Up    | Down         | Up           | Result |
+| 10:22 | 10:25 | 10:22        | 10:25        | Hit    |
+| 10:45 | 10:51 | 10:43        | 10:50        | Almost |
+| 11:04 | 11:10 | 11:04        | 11:07        | Hit    |
+| 11:22 | 11:25 | 11:22        | 11:25        | Hit    |
+| 11:43 | 11:46 | 11:43        | 11:47        | Hit    |
+| 12:05 | 12:07 | 12:04        | 12:07        | Hit    |
+| 12:23 | 12:26 | 12:22        | 12:25        | Hit    |
+| 12:47 | 12:51 | 12:43        | 12:47        | Almost |
+| 13:05 | 13:07 | 13:04        | 13:07        | Hit    |
+| 13:22 | 13:25 | 13:22        | 13:25        | Hit    |
+| 13:43 | 13:47 | 13:43        | 13:47        | Hit    |
+| 14:05 | 14:09 | 13:04        | 13:07        | Almost |
