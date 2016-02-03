@@ -127,8 +127,8 @@ class ImportDailyTrainData extends Command
         $this->trainDataStorage->commit();
 
 
-        \DB::statement("drop table train_times_with_crs");
-        \DB::statement("create table train_times_with_crs as select * from v_train_times_with_crs");
+        \DB::statement("truncate table train_times_with_crs");
+        \DB::statement("insert into train_times_with_crs select * from v_train_times_with_crs");
         
 
 

@@ -1,10 +1,11 @@
 var merge = require('merge');
 var mysql = require('./mysql');
+var fs = require('fs');
 
 function getLines(cb) {
 	mysql.query(
 		'SELECT * from line'
-		// + " WHERE contains(GeomFromText('Polygon((51.500217 0.214378, 51.493949 1.503170, 50.671713 1.503170, 50.690852 0.002936, 51.500217 0.214378))'), line);"
+//		 + " WHERE contains(GeomFromText('Polygon((51.500217 0.214378, 51.493949 1.503170, 50.671713 1.503170, 50.690852 0.002936, 51.500217 0.214378))'), line);"
 		, function(err, rows, fields) {
 	  if (err) throw err;
 
@@ -16,7 +17,7 @@ function getLines(cb) {
 function getStations(cb) {
 	mysql.query(
 		'SELECT * from station'
-		// + " WHERE contains(GeomFromText('Polygon((51.500217 0.214378, 51.493949 1.503170, 50.671713 1.503170, 50.690852 0.002936, 51.500217 0.214378))'), loc);"
+//		 + " WHERE contains(GeomFromText('Polygon((51.500217 0.214378, 51.493949 1.503170, 50.671713 1.503170, 50.690852 0.002936, 51.500217 0.214378))'), loc);"
 		, function(err, rows, fields) {
 	  if (err) throw err;
 
@@ -27,7 +28,7 @@ function getStations(cb) {
 function getCrossings(cb) {
 	mysql.query(
 		'SELECT * from crossings'
-		// + " WHERE contains(GeomFromText('Polygon((51.500217 0.214378, 51.493949 1.503170, 50.671713 1.503170, 50.690852 0.002936, 51.500217 0.214378))'), loc);"
+//		 + " WHERE contains(GeomFromText('Polygon((51.500217 0.214378, 51.493949 1.503170, 50.671713 1.503170, 50.690852 0.002936, 51.500217 0.214378))'), loc);"
 		, function(err, rows, fields) {
 	  if (err) throw err;
 
@@ -72,11 +73,14 @@ function pointKey(point) {
 var normalizedPointMap = {};
 function normalizePoint(point, type, meta) {
 	var key = pointKey(point);
+	meta = meta || {};
 	if (!normalizedPointMap[key]) {
 		normalizedPointMap[key] = merge.recursive({}, point, meta);
 	}
 
-	normalizedPointMap[key].type = type;
+	if (type) {
+		normalizedPointMap[key].type = type;
+	}
 
 	return normalizedPointMap[key];
 }
@@ -207,11 +211,31 @@ function numberOfStations(pointsMap) {
 	return i;
 }
 
-function pullRoutes(pointsMap) {
+function pullRoutes(pointsMap, callback, done, tracker) {
 
-	var finalRoutes = [];
 	var stations = numberOfStations(pointsMap);
 	var i = 1;
+	var i2 = 1;
+	var points = [];
+
+	function processARoute() {
+		
+		if (tracker.queLength > 100) {
+			return setTimeout(processARoute, 10);
+		}
+
+		var point = points.pop();
+
+		if (!point) {
+			done();
+			return;
+		}
+
+		console.log('Routing from station: ' + points.length + ' remaining');
+		callback(pullRoutesForStation(pointsMap, point));
+
+		setTimeout(processARoute, 10);
+	}
 
 	console.log('Routing between stations');
 
@@ -220,13 +244,12 @@ function pullRoutes(pointsMap) {
 			return;
 		}
 
-		console.log('Routing from station: ' + (i++) + '/' + stations);
-
-		var routes = pullRoutesForStation(pointsMap, point);
-		finalRoutes = finalRoutes.concat(routes);
+		points.push(point);
 	});
 
-	return finalRoutes;
+	processARoute();
+
+	return;
 }
 
 function pullRoutesForStation(pointsMap, station) {
@@ -238,10 +261,15 @@ function pullRoutesForStation(pointsMap, station) {
 	var routes = [
 		[station]
 	];
+	routes[0].stationCount = 1;
 	var route;
 
 	while (routes.length) {
 		route = routes.shift();
+
+		if (route.stationCount > 6) {
+			continue;
+		}
 
 		var currentPoint = route.last();
 		var connectedTo = pointsMap.get(currentPoint);
@@ -255,10 +283,12 @@ function pullRoutesForStation(pointsMap, station) {
 
 
 			var newRoute = route.concat([]);
+			newRoute.stationCount = route.stationCount;
 			
 			newRoute.push(nextPoint);
 			
 			if (nextPoint.type == 'station') {
+				newRoute.stationCount++;
 				finishedRoutes.push(newRoute);
 			}
 
@@ -299,27 +329,28 @@ function getDatabaseData(cb) {
 	});
 }
 
-var asyncTracker = (function (logThreshold) {
+var asyncTracker = (function (logThreshold, message) {
 	var onComplete = function () {};
-	var counter = 0;
+//	var counter = 0;
 	return {
+		queLength: 0,
 		track: function () {
-			counter++;
+			var _this = this;
+			_this.queLength++;
 			return function () {
-				counter--;
-
-				if ((counter % logThreshold) == 0) {
-					console.log(counter + ' pending DB commit');
+				_this.queLength--;
+				if ((_this.queLength % logThreshold) == 0) {
+					console.log(_this.queLength + message);
 				}
 
-				if (counter == 0) {
+				if (_this.queLength == 0) {
 					onComplete();
 				}
 			};
 		},
 		onComplete: function (_onComplete) {
 			onComplete = _onComplete;
-			if (counter == 0) {
+			if (_this.queLengthr == 0) {
 				onComplete();
 			}
 		}
@@ -332,9 +363,8 @@ function routeHasCrossingIn(route) {
 	});
 }
 
-function insertRoutesIntoDB(routes, cb) {
-	console.log('Inserting into database');
-	var tracker = asyncTracker(100);
+/*
+function insertRoutesIntoDB(routes, tracker) {
 
 	routes.forEach(function (route, key) {
 
@@ -349,9 +379,61 @@ function insertRoutesIntoDB(routes, cb) {
 			[route.first().stationCode, route.last().stationCode, routeHasCrossingIn(route)],
 			tracker.track()
 		);
-
-		tracker.onComplete(cb);
 	});
+}
+
+*/
+
+function insertRoutesIntoDB(routes, tracker) {
+        
+        var routeBlock;
+
+
+        while(true) {
+        	
+		routeBlock = routes.splice(0, 9);
+
+		if (routeBlock.length == 0) {
+			break;
+		}
+
+                var insert = [];
+                var params = [];
+                routeBlock.forEach(function (route, key) {
+
+                        var lingStringInner = route.map(function (point) {
+                                return point.x + ' ' + point.y;
+                        }).join(',');
+
+                        var lineString = 'GeomFromText(\'LINESTRING(' + lingStringInner + ')\')';
+
+                        params = params.concat([route.first().stationCode, route.last().stationCode, routeHasCrossingIn(route)]);
+                        insert.push("(?,?, " + lineString + ", ? )");
+                });
+
+
+                mysql.query(
+                        "INSERT INTO train_routes (`from`, `to`, `route`, `hasCrossing`) VALUES " + insert.join(', '),
+                        params,
+                        tracker.track()
+                );
+
+        }
+}
+
+function loadCachedMap() {
+	var jsonStr = fs.readFileSync('map.json');
+	var json = JSON.parse(jsonStr);
+
+	var map = new Map();
+
+	json.forEach(function (connection) {
+		map.set(normalizePoint(connection.key), connection.points.map(function (point) {
+			return normalizePoint(point);
+		}));
+	});
+
+	return map;
 }
 
 function savePointsMap(pointsMap, fileName) {
@@ -367,20 +449,29 @@ mysql.connect();
 
 getDatabaseData(function (lines, stations, crossings) {
 
-	var pointsMap = handleLines(lines);
+	var pointsMap;
 
-	addStationsToPointMap(pointsMap, stations);
+	if (fs.existsSync('map.json')) {
+		pointsMap = loadCachedMap();
+	} else {
+		pointsMap = handleLines(lines);
 
-	addCrossingsToPointMap(pointsMap, crossings);
+		addStationsToPointMap(pointsMap, stations);
 
-	var stationToStationRoutes = pullRoutes(pointsMap);
+		addCrossingsToPointMap(pointsMap, crossings);
 
-	insertRoutesIntoDB(stationToStationRoutes, function () {
+		savePointsMap(pointsMap, 'map.json');
+	}
+
+	var tracker = asyncTracker(2, ' committing to db');
+	setTimeout(tracker.track(), 1000);
+
+	var stationToStationRoutes = pullRoutes(pointsMap, function (routes) {
+		insertRoutesIntoDB(routes, tracker);
+	}, function () {
 		mysql.end();
-	});
+	}, tracker);
 
-	savePointsMap(pointsMap, 'map.json');
-	savePointsMap(stationToStationRoutes, 'routes.json');
 
 });
 
