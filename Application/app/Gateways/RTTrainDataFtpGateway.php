@@ -34,6 +34,7 @@ class RTTrainDataFtpGateway implements RTTrainDataGateway
 
         foreach ($ftpFilePaths as $ftpFilePath){
 
+            // debug
             if (count($filePaths) < $limit){
             
                 $filePath = "/tmp/$ftpFilePath";

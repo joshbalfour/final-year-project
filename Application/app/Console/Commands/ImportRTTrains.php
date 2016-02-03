@@ -51,10 +51,58 @@ class ImportRTTrains extends Command
      */
     public function handle()
     {
+        
         echo "\nDownloading Realtime Train Times.\n";
+        
         $filePaths = $this->gateway->getRTTrainData(1);
-        var_dump($filePaths);
+
+        foreach ($filePaths as $filePath){
+            $this->dealWithFile($filePath);
+        }
     }
+
+    private function dealWithFile($filePath){
+        $xmlLines = explode("\n", file_get_contents($filePath));
+        
+        // debug
+        $lineStart = 25;
+        $lineLimit = 1;
+        $counter = 0;
+        $acounter = 0;
+
+        foreach($xmlLines as $xmlLine){
+            
+            if ($counter < $lineLimit && $acounter > $lineStart){
+
+                $this->dealWithPPMessage($xmlLine);
+                
+                $counter++;
+            }
+
+            $acounter++;
+        }
+    }
+
+    private function dealWithPPMessage($ppMessageString){
+        $ppMessageObject = $this->convertPPMessageStringToObject($ppMessageString);
+
+        // todo
+        var_dump($ppMessageObject);
+    }
+
+    private function convertPPMessageStringToObject($ppMessageString){
+        // don't ask
+        $ppMessageString = preg_replace("/<.*(xmlns *= *[\"'].[^\"']*[\"']).[^>]*>/i", "<Pport>", $ppMessageString);
+        $ppMessageString = preg_replace("/<\/([a-z0-9\-]*)?:/i", "</", $ppMessageString);
+        $ppMessageString = preg_replace("/<([a-z0-9\-]*)?:/i", "<", $ppMessageString);
+        
+        $xmlData = simplexml_load_string( $ppMessageString, null, LIBXML_NOCDATA);
+
+        // finally a normal object
+        return  json_decode(json_encode((array) $xmlData), 1);
+    }
+
+    
 }
 
 // TODO
