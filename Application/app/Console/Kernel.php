@@ -21,7 +21,8 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\ImportExtendedCrossingData::class,
         \App\Console\Commands\ImportTIPLOCcrsMappings::class,
         \App\Console\Commands\ImportTrainRoutes::class,
-        \App\Console\Commands\ImportTrainRoutesToCrossingMap::class
+        \App\Console\Commands\ImportTrainRoutesToCrossingMap::class,
+        \App\Console\Commands\ImportRTTrains::class
     ];
 
     /**

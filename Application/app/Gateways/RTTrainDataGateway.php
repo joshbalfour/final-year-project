@@ -8,10 +8,10 @@
 
 namespace App\Gateways;
 
-interface DailyTrainDataGateway
+interface RTTrainDataGateway
 {
     /**
      * @return string
      */
-    public function getDailyTrainData();
+    public function getRTTrainData($limit);
 }
