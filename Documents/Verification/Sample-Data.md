@@ -8,7 +8,7 @@ Hit: The prediction matches or overlaps the timespan of the recorded barrier tim
 Almost: The prediction correctly matches the opening or closing of the barriers, but not both i.e the barrier closes inside the predicted period but opens outside the period.
 Miss: The prediction was wrong, the barrier either didn't open or close at that time, or the barrier did open or close but there was no prediction.
 
-### Take on 20/01/2016
+### Taken on 20/01/2016
  
 | Down  | Up    |
 | ----- | ----- |
@@ -19,7 +19,7 @@ Miss: The prediction was wrong, the barrier either didn't open or close at that 
 | 16:39 | 16:41 |
 
 
-### Predicitons V1
+#### Predicitons V1
 
 | Real  | Real  | Predicition  | Predicition  |        |
 | ----- | ----- | ------------ | ------------ | ------ |
@@ -33,7 +33,7 @@ Miss: The prediction was wrong, the barrier either didn't open or close at that 
 Misses seem to be due to a an issue in the train time data collection from national rail. Data needs to be faltended to match known tiploc locations.
 
 
-### Predicitons V2
+#### Predicitons V2
 
 | Real  | Real  | Predicition  | Predicition  |        |
 | ----- | ----- | ------------ | ------------ | ------ |
@@ -61,7 +61,7 @@ Misses seem to be due to a an issue in the train time data collection from natio
 | 13:40 | 13:41 |
 | 14:05 | 14:10 |
 
-### Predicitons
+#### Predicitons
 
 | Real  | Real  | Predicition  | Predicition  |        |
 | ----- | ----- | ------------ | ------------ | ------ |
