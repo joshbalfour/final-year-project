@@ -1,9 +1,12 @@
-**V 1.0.2**
+**V 1.1.0**
 # Algorithm
 ### Station tracks
 The first step will be to preprocess all of the train tracks and the stations so that we can produce a simple map which contains a table with a line.
 
 #### Method
+##### Techinical
+All of the following process will be passed down to Node.Js because PHP will not provide the performance needed to chrunch the numbers in a timely manour.
+
 ##### Flatten
 All of the rails will be flattened and join together to produce a continuous graph of connected nodes. This will group lines that run next to each other together and lines that join on junctions that aren't present in the shape file.
 
@@ -11,10 +14,16 @@ All of the rails will be flattened and join together to produce a continuous gra
 All of crossings and stations will be attached to their nearest node on the line. This will be based on distance but can be based on the shape and size of the station is using general area proves ineffective.
 
 ##### Mapping the result
-We will start at each train station and begin walking along the nodes. If a node connects to two other nodes then we branch off the walker down each set of nodes. Once we reach a node that has a station attached we stop the walker and add the path and the station along with the from and to destinations into the database. 
+We will start at each train station and begin walking along the nodes. If a node connects to two other nodes then we branch off the walker down each set of nodes. Once we reach a node that has a station attached we add the path and the station along with the from and to destinations into the database. We continue along into will covert 6 stations. This is a compremise between doing all station to all stations and having a 250GB data, and connnecting each station to the nearest neightbour which national rail may not provide.
 
 ##### End
 The end result will be a table of the track that goes from station to stations. All location based columns will be stored in **Well Known Text**. The standard for storing locations.
+
+**Data flow:**
+
+![image](http://cl.ly/2z2u102m473u/Train%20ERD%20-%20Data%20flow.png =400x)
+
+**Tables**
 
 | From | To  | Route           |
 | ---- | --- | --------------- |
