@@ -22,7 +22,6 @@ The the bottom left hand corner of the screen there will be a **?** icon. When a
 	- AngularUI
 	- ngRoute
 - Google Maps (Mapping engine)
-- SCSS (Stylesheet language)
-- Grunt (Task management)
+- CSS (Stylesheet language)
 - Mocha (Testing framework)
 - Karma (Test runner)

@@ -76,8 +76,10 @@ Returns all of the times that a crossing will be down for a crossing id, between
 	result: "OK",
 	data: [
 		{
-			downTime: "2015-06-02 12:00Z+0100",
+			downTime: "2015-06-02 12:05Z+0100",
 			upTime: "2015-06-02 12:08Z+0100",
+			fromTime: "2015-06-02 12:00Z+0100",
+			toTime: "2015-06-02 12:12Z+0100",
 			duration: 480
 		},
 		{...}
