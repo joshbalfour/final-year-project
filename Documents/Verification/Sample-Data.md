@@ -14,7 +14,7 @@ A 90% degree of accuracy within 2 minutes
 ### R5
 A 95% degree of accuracy within 30 seconds
 
-### Taken on 20/01/2016
+### St. Dunstans Taken on 20/01/2016
  
 | Down  | Up    |
 | ----- | ----- |
@@ -55,7 +55,7 @@ Average error: 1.6 minutes, 100% of the time.
 
 
 
-### Taken on 03/02/2016
+### St Stephens - Taken on 03/02/2016
 
 | Down  | Up    |
 | ----- | ----- |
