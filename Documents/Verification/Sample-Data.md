@@ -36,9 +36,9 @@ A 95% degree of accuracy within 30 seconds
 | 16:22 | 16:26 | 16:22        | 16:26        | Hit    | 0 minutes |
 | 16:39 | 16:41 |              |              | Miss   | Missed |
 
-Misses seem to be due to a an issue in the train time data collection from national rail. Data needs to be faltended to match known tiploc locations.
+Misses seem to be due to a an issue in the train time data collection from national rail. Data needs to be flattened to match known tiploc locations.
 
-
+Average error: 0.75 minutes, 60% of the time.
 
 #### Predicitons V2
 
@@ -50,6 +50,10 @@ Misses seem to be due to a an issue in the train time data collection from natio
 | 16:05 | 16:10 | 16:04        | 16:07        | Almost | 4 mintues |
 | 16:22 | 16:26 | 16:22        | 16:25        | Hit    | 1 minute  |
 | 16:39 | 16:41 | 16:39        | 16:41        | Hit    | 0 minutes |
+
+Average error: 1.6 minutes, 100% of the time.
+
+
 
 ### Taken on 03/02/2016
 
@@ -68,7 +72,7 @@ Misses seem to be due to a an issue in the train time data collection from natio
 | 13:40 | 13:41 |
 | 14:05 | 14:10 |
 
-#### Predicitons
+#### Predicitons with V2
 
 | Real  | Real  | Predicition  | Predicition  |        | Error |
 | ----- | ----- | ------------ | ------------ | ------ |------ |
@@ -85,3 +89,5 @@ Misses seem to be due to a an issue in the train time data collection from natio
 | 13:22 | 13:25 | 13:22        | 13:25        | Hit    | 0 Minutes |
 | 13:43 | 13:47 | 13:43        | 13:47        | Hit    | 0 Minutes |
 | 14:05 | 14:09 | 14:04        | 14:07        | Almost | 3 Minutes |
+
+Average error: 1.08 minutes, 100% of the time.
