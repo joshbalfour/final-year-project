@@ -1,7 +1,7 @@
-**V 1.1.0**
+**V 1.1.1**
 # Documentation Procedure
 
-The following document is to outline the procedure for updating and introducing new documentation to the project. This is necessary to ensure all documentation is done to a consistent standard and the same high quality we expect from our code. Many parallels have been taken from the workflow we use for making changes to the software to try and keep the process familiar and simple.
+The purpose of the following document is to outline the procedure for updating and introducing new documentation to the project. This is necessary to ensure all documentation is done to a consistent standard and the same high quality we expect from our code. Many parallels have been taken from the workflow we use for making changes to the software to keep the process as familiar and simple as possible.
 
 ### 1. Branch from Master
 All documentation should be committed to a branch off of master. The naming of the branch should reflect the intent and subject matter of the document but there is no strict style for this. An example would be `subject\{document name}` e.g `QA\test-plan`. Documentation may also be included in a feature branch where appropriate, e.g an instruction document detailing a new feature/tool being added to the repo.
