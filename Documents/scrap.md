@@ -15,10 +15,3 @@
 
 ### Web App - Switch from SASS to CSS
 [Web App Discovery](Web App/Discovery.md) - changed from using SCSS to CSS in practice - could talk about why.
-
-## Stuff to be filled out
-
-[Web App Technical overview.md](Web App/Technical overview.md)
-
-##### Testing
-/#RyanFillThisInPlease (Something about mocha, karma and CI please)
