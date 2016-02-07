@@ -49,7 +49,7 @@ describe('MapController', function() {
 
 	describe('ctrl.loadCrossings()', function() {
 		it('Should make a http request to get crossings', function() {
-			$httpBackend.expectGET('app/fixtures/crossings.json');
+			$httpBackend.expectGET('crossings');
 			controller = createController();
 			controller.loadCrossings();
 			$httpBackend.flush();
@@ -78,7 +78,7 @@ describe('MapController', function() {
 		});
 
 		it('should make a http request to get crossings/12345', function() {
-			$httpBackend.expectGET('app/fixtures/crossings-12345.json');
+			$httpBackend.expectGET('crossings/12345');
 			controller = createController();
 			controller.markerClicked(null, null, { id: 12345 });
 			$httpBackend.flush();
