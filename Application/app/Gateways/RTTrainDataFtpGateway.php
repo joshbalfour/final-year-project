@@ -59,7 +59,7 @@ class RTTrainDataFtpGateway implements RTTrainDataGateway
                     file_put_contents($filePath, $this->getXMLDataAsStringFromFile($ftpFilePath));
                     
                     if (!ends_with($ftpFilePath, 'pPortData.log')) {
-                        Cache::set($ftpFilePath);
+                        Cache::forever($ftpFilePath, true);
                     }
 
                     $filePaths[] = $filePath;
