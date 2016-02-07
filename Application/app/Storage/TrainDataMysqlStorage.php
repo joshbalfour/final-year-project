@@ -36,7 +36,7 @@ class TrainDataMysqlStorage implements TrainDataStorage
     public function update($rows)
     {   
         foreach($rows as $row){
-
+            // todo: batch this using insert code
             $values = [
                 $row["rid"],
                 $row["tpl"],

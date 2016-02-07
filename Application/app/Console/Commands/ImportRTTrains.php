@@ -131,7 +131,8 @@ class ImportRTTrains extends Command
     }
 
     private function dealWithPPMessageObject($ppMessageObject){
-
+        $this->trainDataStorage->beginTransaction();
+        
         $updates = [];
 
         if ( (isset($ppMessageObject["@attributes"]) && isset($ppMessageObject["@attributes"]["ts"])) && (isset($ppMessageObject["uR"]) && isset($ppMessageObject["uR"]["TS"])) ){
@@ -191,7 +192,9 @@ class ImportRTTrains extends Command
 
                     if (count($updates) > 10000){
 
+                        
                         $this->trainDataStorage->update( $updates );
+                        
                         $updates = [];
                     }
                 }
