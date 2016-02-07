@@ -1,35 +1,35 @@
-**V 1.0.0**
+**V 1.0.1**
 # Technical Overview
 
 ## Implementation
-Each importer will be written as a PHP script, this will get the data from the target and import it into the database. Each importer will probably need a set of libraries to access the specific data type.
+Each importer is written as a PHP script, this gets the data from the target and imports it into the database. Each importer needs a set of libraries to access the relative data type.
 
 ### Task timing
-Each task will need be ran as a cron job. Some tasks will need to be ran every minute others, every mnth depending on how frequent the data changes. This is something that will need to be looked into further.
+Each task runs as a cron job. Some tasks need to be ran every minute others, every month depending on how frequent the data changes.
 
 ## Flow Chart
-Bellow is the overal flow chart for the connection to the Network Rail data but will be the same for each one changing the data source and the import phase.
+Below is a generalised, overall flow chart for the connection to Network Rail data. This will generally be the same for each one, only changing the data source and the import phase.
+
 ##### Start
-The script will start and load up several libraries
+The script starts and loads up it's dependencies.
 
 ##### Read Data
-Depending on the script it will need to connect to the relevent data source and download the data. This may involve several steps. For instance the network rail CSV link is on a different page, so first that page will need to be gotten so we can then find the location of the CSV to download.
+The script will then connect to the relevant data source and download the data. This may involve several steps.
 
 ##### Is Data Valid
-The data will need to be ran through so kind of test to make sure its valid and looks sain.
-
+The data is then ran through a series of tests to ensure it's both valid and sane.
 
 ##### Notify Admin
-If the data is not valid the system admin needs to be notified so someone can investergate. There are multiple reasons why it might not be valid.
+If the data is not valid the system administrator is then notified so someone can investigate.
 
 ###### Convert Data
-This step will again varrying depending on the data source but the data will need to be remapping from what ever was collected from the external data source into a format that can be inserted into the data base.
+This step will vary depending on the data source. The data will be remapped from the external datasource into a format that can be inserted into the database.
 
-###### Append Data to Data
+###### Append Data to Database
 Now insert the data processed in the previous step into the database.
 
-###### Stystem Stop
-Finally the PHP script can stop and PHP will clean up any data handled during the process.
+###### System Stop
+Finally the PHP script stops and PHP will clean up any data handled internally during the process.
 
 
-![image](../images/System designs/Flow Diagram - Section 6.jpg)
+![image](../images/System designs/Flow Diagram - Section 6.jpg =450x)
