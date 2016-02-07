@@ -19,6 +19,7 @@
 	* Data Collection
 		* [Data Sources](Documents/Data Collection/Data Sources.md)
 		* [Technical overview](Documents/Data Collection/Technical overview.md)
+	* [Data Quality Verification](Documents/Verification/Sample-Data.md)
 	* Database
 		* [Software](Documents/Database/Database software.md)
 		* [Management](Documents/Database/Database management.md)
@@ -32,3 +33,4 @@
 		* [Discovery](Documents/Web App/Discovery.md)
 		* [UI Designs](Documents/Web App/UI Designs.md)
 		* [Technical overview](Documents/Web App/Technical overview.md)
+	* [Test Plan](Documents/Test Plan.md)

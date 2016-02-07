@@ -1,27 +1,24 @@
-**V 1.0.1**
+**V 1.0.2**
 # Technical Overview
 
 ### Implementation
+
 #### General
-The site will use AngularJS to run the webpage. SCSS to build the style sheets. And grunt which will automatically build the style sheets and do any maniplucation on the resources.
+The site uses AngularJS to run the webpage, CSS to build the stylesheets, And Grunt which will automatically build the stylesheets and do any optimisation and dependancy resolution on the resources.
 
 #### Map
-After loading the page and it resources it will connect to the API and periodically pull down down the latest data for the crossings and pass this data into the angular scope. Angular will use the HTML markup to update the icons on the screen automatically. This will provide a simple, maintinable but powerfull method of working.
+After loading the page and the resources it connects to the API and periodically fetches the latest data for the crossings and passes this data into the angular scope. Angular uses the HTML markup to update the icons on the screen automatically. This provides a simple, maintainable, and powerful method of working.
 
 ##### Crossing Details
-When a user clicks on a crossing icon this will bring up a popup that will pull more complex future data about when crossing will be closed as well as meta data about the crossing its self.
-
-##### About
-The the bottom left hand corner of the screen there will be a **?** icon. When a user clicks with it will open a modal that will have details about the projet and the data that went into it.
+When a user clicks on a crossing icon this brings up a popup that will pull more detailed future data including the crossing's closing times as well as metadata about the crossing itself.
 
 ##### Testing
-\#RyanFillThisInPlease (Something about mocha, karma and CI please)
+/#RyanFillThisInPlease (Something about mocha, karma and CI please)
 
 ### Technologies
 - AngularJS (Javascript framework)
 	- AngularUI
 	- ngRoute
 - Google Maps (Mapping engine)
-- CSS (Stylesheet language)
 - Mocha (Testing framework)
-- Karma (Test runner)
+- Karma (Testing framework)

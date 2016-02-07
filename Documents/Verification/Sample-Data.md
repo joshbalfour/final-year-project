@@ -4,15 +4,23 @@
 
 ### Result Definitions 
 
-Hit: The prediction matches or overlaps the timespan of the recorded barrier times, i.e the barriers open and close within the predicted times.
-Almost: The prediction correctly matches the opening or closing of the barriers, but not both i.e the barrier closes inside the predicted period but opens outside the period.
-Miss: The prediction was wrong, the barrier either didn't open or close at that time, or the barrier did open or close but there was no prediction.
 
-### R3
+| Classification | definition |
+| ------ | ------ |
+| Hit | |The prediction matches or overlaps the timespan of the recorded barrier times, i.e the barriers open and close within the predicted times.|
+| Almost | The prediction correctly matches the opening or closing of the barriers, but not both i.e the barrier closes inside the predicted period but opens outside the period. |
+| Miss | The prediction was wrong, the barrier either didn't open or close at that time, or the barrier did open or close but there was no prediction. |
+
+
+### Feature Release Quality Definitions
+
+### Release R3
 A 90% degree of accuracy within 2 minutes
 
-### R5
+### Release R5
 A 95% degree of accuracy within 30 seconds
+
+## Results
 
 ### St. Dunstans Taken on 20/01/2016
  
@@ -25,7 +33,7 @@ A 95% degree of accuracy within 30 seconds
 | 16:39 | 16:41 |
 
 
-#### Predicitons V1
+#### Respective Predicitons from the application V1
 
 | Real  | Real  | Predicition  | Predicition  |        | Error  |
 | ----- | ----- | ------------ | ------------ | ------ | ------ |
@@ -40,7 +48,7 @@ Misses seem to be due to a an issue in the train time data collection from natio
 
 Average error: 0.75 minutes, 60% of the time.
 
-#### Predicitons V2
+#### Respective Predicitons from the application V2
 
 | Real  | Real  | Predicition  | Predicition  |        |  Error    |
 | ----- | ----- | ------------ | ------------ | ------ | --------- |
@@ -51,6 +59,8 @@ Average error: 0.75 minutes, 60% of the time.
 | 16:22 | 16:26 | 16:22        | 16:25        | Hit    | 1 minute  |
 | 16:39 | 16:41 | 16:39        | 16:41        | Hit    | 0 minutes |
 
+
+#### Prediction Error
 Average error: 1.6 minutes, 100% of the time.
 
 
@@ -72,7 +82,7 @@ Average error: 1.6 minutes, 100% of the time.
 | 13:40 | 13:41 |
 | 14:05 | 14:10 |
 
-#### Predicitons with V2
+#### Respective Predicitons from the application V2
 
 | Real  | Real  | Predicition  | Predicition  |        | Error |
 | ----- | ----- | ------------ | ------------ | ------ |------ |
@@ -90,4 +100,5 @@ Average error: 1.6 minutes, 100% of the time.
 | 13:43 | 13:47 | 13:43        | 13:47        | Hit    | 0 Minutes |
 | 14:05 | 14:09 | 14:04        | 14:07        | Almost | 3 Minutes |
 
+#### Prediction Error
 Average error: 1.08 minutes, 100% of the time.

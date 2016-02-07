@@ -24,12 +24,12 @@ Returns a list of all crossings and thier current status.
 ```
 
 ### GET: /crossings/{crossing_id}
-Returns all the meta data related to a crossing.
+Returns all the metadata related to a crossing.
 
 ##### Params
 | Required | Name        | Type       | Location |
-| :------: | ----------- | ---------- | -------- |
-| X        | crossing_id | Integer    | URL      |
+| -------- | ----------- | ---------- | -------- |
+| ✅       | crossing_id | Integer    | URL      |
 
 
 ##### Returns
@@ -60,14 +60,14 @@ Returns all the meta data related to a crossing.
 ```
 
 ### GET: /crossings/{crossing_id}/times
-Returns all of the times that a crossing will be down for a crossing id, between the splied date range.
+Returns the times that a crossing will be down for the specified crossing id, between the supplied date range.
 
 ##### Params
 | Required | Name        | Type       | Location |
-| :------: | ----------- | ---------- | -------- |
-| X        | crossing_id | Integer    | URL      |
-| X        | start_date  | ISO String | GET      |
-| X        | end_date    | ISO String | GET      |
+| -------- | ----------- | ---------- | -------- |
+| ✅       | crossing_id | Integer    | URL      |
+| ✅       | start_date  | ISO String | GET      |
+| ✅       | end_date    | ISO String | GET      |
 
 
 ##### Returns
@@ -100,7 +100,7 @@ Requests may return an error. If its a catchable error then it should return the
 }
 ```
 
-#### Uknown
+#### Unknown
 ```
 {
 	result: "ERROR",
