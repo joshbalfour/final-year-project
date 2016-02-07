@@ -3,6 +3,7 @@
 namespace App\Gateways;
 
 use League\Flysystem\Adapter\AbstractFtpAdapter;
+use Cache;
 
 class RTTrainDataFtpGateway implements RTTrainDataGateway
 {
@@ -21,8 +22,9 @@ class RTTrainDataFtpGateway implements RTTrainDataGateway
         $this->ftpAdapter = $ftpAdapter;
     }
 
-    public function getRTTrainData($limit)
+    public function getRTTrainData($limit, $output)
     {
+
         $ftpContents = $this->ftpAdapter->listContents();
         $ftpFilePaths = $this->getCorrectFilesFromListOfFiles($ftpContents);
 
@@ -30,23 +32,47 @@ class RTTrainDataFtpGateway implements RTTrainDataGateway
             throw new \Exception('Not realtime data on ftp');
         }
 
-        $filePaths = [];
-
-        foreach ($ftpFilePaths as $ftpFilePath){
-
-            // debug
-            if (count($filePaths) < $limit){
-            
-                $filePath = "/tmp/$ftpFilePath";
-                if ( file_exists( $filePath ) ){
-                    unlink( $filePath );
-                }
-                file_put_contents($filePath, $this->getXMLDataAsStringFromFile($ftpFilePath));
-                
-                $filePaths[] = $filePath;
-            }
+        if (!$limit){
+            $limit = count($ftpFilePaths);
         }
 
+        if ($output){
+            $bar = $output->createProgressBar($limit);
+        }
+
+        $filePaths = [];
+        
+        $bar->start();
+
+        foreach ($ftpFilePaths as $ftpFilePath){
+           if (Cache::has($ftpFilePath)) {
+                if ($bar){
+                    $bar->advance();
+                }
+           } else {
+               if (count($filePaths) < $limit){
+                
+                    $filePath = "/tmp/$ftpFilePath";
+                    if ( file_exists( $filePath ) ){
+                        unlink( $filePath );
+                    }
+                    file_put_contents($filePath, $this->getXMLDataAsStringFromFile($ftpFilePath));
+                    
+                    if (!ends_with($ftpFilePath, 'pPortData.log')) {
+                        Cache::set($ftpFilePath);
+                    }
+
+                    $filePaths[] = $filePath;
+                    if ($bar){
+                        $bar->advance();
+                    }
+               }
+           }
+        }
+
+        if ($bar){
+            $bar->finish();
+        }
         return $filePaths;
     }
 

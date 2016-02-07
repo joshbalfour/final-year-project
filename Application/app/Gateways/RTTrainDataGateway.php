@@ -13,5 +13,5 @@ interface RTTrainDataGateway
     /**
      * @return string
      */
-    public function getRTTrainData($limit);
+    public function getRTTrainData($limit, $output);
 }

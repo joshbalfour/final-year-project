@@ -13,11 +13,7 @@ use Illuminate\Support\Facades\DB;
 class TrainDataMysqlStorage implements TrainDataStorage
 {
     /**
-     * @param $rid
-     * @param $from
-     * @param \DateTimeInterface $fromTime
-     * @param $to
-     * @param \DateTimeInterface $toTime
+     * @param $rows Array of rows
      * @return
      * @internal param array $trainTimes array of train times data
      */
@@ -31,7 +27,30 @@ class TrainDataMysqlStorage implements TrainDataStorage
             }
             return "( ?, ? ,? ,? ,? )";
         }, $rows);
+
         DB::insert( "INSERT INTO train_times ( rid, from_tpl, from_time, to_tpl, to_time ) VALUES ".implode(",",$params), $flattenedRows );
+    }
+
+    
+
+    public function update($rows)
+    {   
+        foreach($rows as $row){
+
+            $values = [
+                $row["rid"],
+                $row["tpl"],
+                $row["ta"],
+                $row["td"],
+                $row["tp"],
+                $row["wta"],
+                $row["wtd"],
+                $row["wtp"],
+                $row["ts"]
+            ];
+
+            DB::statement('replace into rt_updates(`rid`, `tpl`, `ta`,`td`,`tp`, `wta`,`wtd`,`wtp`,`ts`) values(?,?,?,?,?,?,?,?,?)', $values);
+        }
     }
 
 

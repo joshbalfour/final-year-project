@@ -26,4 +26,5 @@ interface TrainDataStorage
      */
     public function insert( $whyDoesThisExist );
 
+    public function update( $reallyJustWhy );
 }
