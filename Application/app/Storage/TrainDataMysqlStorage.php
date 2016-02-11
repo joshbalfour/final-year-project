@@ -25,31 +25,47 @@ class TrainDataMysqlStorage implements TrainDataStorage
             foreach ($row as $value){
                 $flattenedRows[] = $value;
             }
-            return "( ?, ? ,? ,? ,? )";
+            
+            $flattenedRows[] = $row[2];
+            $flattenedRows[] = $row[4];
+
+            return "( ?, ? ,? ,? ,?, ?, ? )";
         }, $rows);
 
-        DB::insert( "INSERT INTO train_times ( rid, from_tpl, from_time, to_tpl, to_time ) VALUES ".implode(",",$params), $flattenedRows );
+        DB::insert( "INSERT INTO train_times ( rid, from_tpl, from_time, to_tpl, to_time, orig_from_time, orig_to_time) VALUES ".implode(",",$params), $flattenedRows );
     }
 
     
 
     public function update($rows)
     {   
+        
         foreach($rows as $row){
-            // todo: batch this using insert code
-            $values = [
-                $row["rid"],
-                $row["tpl"],
-                $row["ta"],
-                $row["td"],
-                $row["tp"],
-                $row["wta"],
-                $row["wtd"],
-                $row["wtp"],
-                $row["ts"]
-            ];
+           
+            // todo: batch this
+            
+            if ($row["ta"] != null){
+                $query = 'update train_times_with_crs set to_time = ? where rid=? and orig_to_time = ? and to_crs = ( select max(3alpha) from tiploc_to_crs where tiploc=? ) ';
+                $values = [$row["ta"], $row["rid"], $row["wta"], $row["tpl"]];
+                DB::statement($query, $values);
+            }
 
-            DB::statement('replace into rt_updates(`rid`, `tpl`, `ta`,`td`,`tp`, `wta`,`wtd`,`wtp`,`ts`) values(?,?,?,?,?,?,?,?,?)', $values);
+            if ($row["td"] != null){
+                $query = 'update train_times_with_crs set from_time = ? where rid=? and orig_from_time = ? and from_crs = ( select max(3alpha) from tiploc_to_crs where tiploc=? ) ';
+                $values = [$row["td"], $row["rid"], $row["wtd"], $row["tpl"]];
+                DB::statement($query, $values);
+            }
+
+            if ($row["tp"] != null){
+                $query = 'update train_times_with_crs set from_time = ? where rid=? and orig_from_time = ? and from_crs = ( select max(3alpha) from tiploc_to_crs where tiploc=? ) ';
+                $values = [$row["ta"], $row["rid"], $row["wta"], $row["tpl"]];
+                DB::statement($query, $values);
+
+                $query = 'update train_times_with_crs set to_time = ? where rid=? and orig_to_time = ? and to_crs = ( select max(3alpha) from tiploc_to_crs where tiploc=? ) ';
+                $values = [$row["td"], $row["rid"], $row["wtd"], $row["tpl"]];
+                DB::statement($query, $values);
+            }
+
         }
     }
 
