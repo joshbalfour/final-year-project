@@ -165,7 +165,7 @@ class ImportDailyTrainData extends Command
         }
         $date->setTime($hour, $minute, $second);
         
-        if ($prevRollingDate->gte($date)){
+        if ($prevRollingDate->gt($date)){
             $date->addDay(1);
         }
 
