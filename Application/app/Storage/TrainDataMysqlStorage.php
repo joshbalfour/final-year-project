@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\DB;
 class TrainDataMysqlStorage implements TrainDataStorage
 {
     /**
-     * @param $rows Array of rows
-     * @return
-     * @internal param array $trainTimes array of train times data
+     * @param $rows array of rows
      */
     public function insert($rows)
     {

@@ -25,12 +25,27 @@ class MockTrainDataStorage implements TrainDataStorage
     }
 
     /**
-     * @param $rows Array of Rows
+     * @param $rows array of Rows
      * @internal param array $trainTimes array of train times data
      */
     public function insert( $rows )
     {
-            
+        $this->data = $rows;
+    }
+
+    public function update($rows)
+    {
+        //implement updating the rows
+    }
+
+    public function beginTransaction()
+    {
+        //not needed in the mock but like... this shouldn't be here in that case
+    }
+
+    public function commit()
+    {
+        //same
     }
 
     public function isEmpty()
@@ -44,15 +59,5 @@ class MockTrainDataStorage implements TrainDataStorage
     public function getData()
     {
         return $this->data;
-    }
-
-    public function beginTransaction()
-    {
-        // TODO: Implement beginTransaction() method.
-    }
-
-    public function commit()
-    {
-        // TODO: Implement commit() method.
     }
 }
