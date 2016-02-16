@@ -3,6 +3,8 @@
 	<head>
 		<title>Level Crossing Predictor</title>
 
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
 		<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 		<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 		<link href="app/style/style.css" rel="stylesheet" type="text/css">
@@ -22,6 +24,7 @@
 		<!-- Application -->
 		<script src="app/app.js"></script>
 		<script src="app/modules/map/controller.js"></script>
+		<script src="app/modules/debug.controller.js"></script>
 		<script src="app/filters/toDate.js"></script>
 		<script src="app/filters/ceil.js"></script>
 		<script src="app/modules/Tween.js"></script>
@@ -34,12 +37,19 @@
 					<img alt="Brand" height="23px" src="app/images/logo.png">
 					Level Crossing Predictor
 				</a>
+
+				<label class="btn btn-info pull-right" ng-click="debug.enabled = !debug.enabled" ng-switch="debug.enabled">
+					Debug 
+					<span ng-switch-when="false">Enable</span>
+					<span ng-switch-when="true">Disable</span>
+				</label>
 			</div>
 		</nav>
 
 		<div id="crossings-map" ng-controller="MapController as mapCtrl" ng-init="mapCtrl.init()" >
 			<ui-gmap-google-map center='mapCtrl.center' zoom='mapCtrl.zoom' control='mapCtrl.googleMap' options='mapCtrl.mapOptions'>
 				<ui-gmap-markers models="mapCtrl.gateMarkers" click="mapCtrl.markerClicked" coords="'self'" icon="'icon'">
+				<ui-gmap-markers ng-if="debug.enabled" models="debug.trainLocations" coords="'self'" icon="'icon'">
 			</ui-gmap-google-map>
 
 			<div class="panel panel-default" id="showCrossingDetails" ng-show="mapCtrl.showCrossingDetails">
@@ -113,5 +123,6 @@
 				</div>
 			</div>
 		</div>
+		<div ng-controller="DebugController"></div>
 	</body>
 </html>
