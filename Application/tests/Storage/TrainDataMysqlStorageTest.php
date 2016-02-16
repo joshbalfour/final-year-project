@@ -63,7 +63,7 @@ class TrainDataMysqlStorageTest extends \TestCase
             'to_time' => '2015-01-01 11:00:00',
             'rid' => '1'
         ];
-        $this->storage->insert( $row['rid'], $row['from_tpl'], new \DateTime($row['from_time']), $row['to_tpl'], new \DateTime($row['to_time']) );
+        $this->storage->insert( [[$row['rid'], $row['from_tpl'], new \DateTime($row['from_time']), $row['to_tpl'], new \DateTime($row['to_time']) ]]);
         $results = $this->getRowsFromDb();
         $this->assertNotEmpty( $results );
         $this->assertExpectedRowInserted($row, $results[0]);

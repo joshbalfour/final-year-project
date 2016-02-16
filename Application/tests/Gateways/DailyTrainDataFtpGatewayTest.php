@@ -40,19 +40,21 @@ class DailyTrainDataFtpGatewayTest extends \TestCase
 
     /**
      * @test
+     * @expectedException \Exception
      */
-    public function givenNullContents_WhenImporterReadsFromFtp_ThenReturnsNull()
+    public function givenNullContents_WhenImporterReadsFromFtp_ThenThrowsException()
     {
         $this->assertNull( $this->command->getDailyTrainData() );
     }
 
     /**
      * @test
+     * @expectedException \Exception
      */
-    public function givenSimpleContentsWrongFileName_WhenImporterReadsFromFtp_ThenReturnsNull()
+    public function givenSimpleContentsWrongFileName_WhenImporterReadsFromFtp_ThenThrowsException()
     {
         $this->mockFtpAdapter->setContents( ['blahblah-filename.xml.gz' => 'not relevant'] );
-        $this->assertNull( $this->command->getDailyTrainData() );
+        $this->command->getDailyTrainData();
     }
 
     /**
@@ -62,7 +64,7 @@ class DailyTrainDataFtpGatewayTest extends \TestCase
     {
         $this->mockFtpAdapter->setContents( [ $this->correctFilename => '' ] );
         $filePath = $this->command->getDailyTrainData();
-        $this->assertEquals( realpath(null)."/trainTimesData.xml", $filePath);
+        $this->assertEquals( "/tmp/trainTimesData.xml", $filePath);
         $this->assertEmpty( file_get_contents( $filePath ) );
     }
 
@@ -74,12 +76,13 @@ class DailyTrainDataFtpGatewayTest extends \TestCase
         $data = 'a gzipped file';
         $this->mockFtpAdapter->setContents( [ $this->correctFilename => gzencode($data) ] );
         $filePath = $this->command->getDailyTrainData();
-        $this->assertEquals( realpath(null)."/trainTimesData.xml", $filePath);
+        $this->assertEquals( "/tmp/trainTimesData.xml", $filePath);
         $this->assertEquals( $data, file_get_contents( $filePath ) );
     }
 
     /**
-     * @test
+     * no longer asserting anything,
+     * possibly needs a move to an integration test suite
      */
     public function givenRealFormatDataFile_WhenDownloaded_ThenFileIsDecompressedAndReturned()
     {
@@ -87,10 +90,11 @@ class DailyTrainDataFtpGatewayTest extends \TestCase
         $uncompressed_data = file_get_contents( 'tests/Data/TrainTimeData/decompressed_test.xml' );
         $this->mockFtpAdapter->setContents( [ $this->correctFilename => $compressedData ] );
         $filePath = $this->command->getDailyTrainData();
-        
+
         // let's not assert two 55MB strings against each other
+        // How can we know it works if we don't?
         /*
-            $this->assertEquals( realpath(null)."/trainTimesData.xml", $filePath);
+            $this->assertEquals( "/tmp/trainTimesData.xml", $filePath);
             $this->assertEquals( $uncompressed_data, file_get_contents( $filePath ) );
         */
     }
@@ -107,7 +111,7 @@ class DailyTrainDataFtpGatewayTest extends \TestCase
         );
         $command = new DailyTrainDataFtpGateway( new Ftp( $config ) );
         $filePath = $command->getDailyTrainData();
-        $this->assertEquals( realpath(null)."/trainTimesData.xml", $filePath);
+        $this->assertEquals( "/tmp/trainTimesData.xml", $filePath);
 
         $xmlData = file_get_contents( $filePath );
         $this->assertStringStartsWith( '<?xml version="1.0" encoding="utf-8"?>', substr( $xmlData, 0, 100 ), 'prefix failed' );
