@@ -11,7 +11,7 @@ namespace App\Gateways;
 interface RTTrainDataGateway
 {
     /**
-     * @return string
+     * @return array
      */
-    public function getRTTrainData($limit, $output);
+    public function getRTTrainData($limit);
 }

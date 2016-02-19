@@ -35,7 +35,7 @@ class ImportRTTrains extends Command
 
     /**
      * Create a new command instance.
-     * @param DailyTrainDataGateway $gateway
+     * @param RTTrainDataGateway $gateway
      * @param TrainDataStorage $trainDataStorage
      */
     public function __construct( RTTrainDataGateway $gateway, TrainDataStorage $trainDataStorage)
@@ -55,7 +55,7 @@ class ImportRTTrains extends Command
         // \DB::statement("truncate table rt_updates");
         echo "\nDownloading Realtime Train Times.\n";
         
-        $filePaths = $this->gateway->getRTTrainData(1, $this->output);
+        $filePaths = $this->gateway->getRTTrainData(1);
 
         foreach ($filePaths as $filePath){
             $this->dealWithFile($filePath);

@@ -44,7 +44,7 @@ class DailyTrainDataFtpGatewayTest extends \TestCase
      */
     public function givenNullContents_WhenImporterReadsFromFtp_ThenThrowsException()
     {
-        $this->assertNull( $this->command->getDailyTrainData() );
+        $this->command->getDailyTrainData();
     }
 
     /**

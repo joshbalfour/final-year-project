@@ -22,7 +22,7 @@ class RTTrainDataFtpGateway implements RTTrainDataGateway
         $this->ftpAdapter = $ftpAdapter;
     }
 
-    public function getRTTrainData($limit, $output)
+    public function getRTTrainData($limit)
     {
 
         $ftpContents = $this->ftpAdapter->listContents();
@@ -36,20 +36,9 @@ class RTTrainDataFtpGateway implements RTTrainDataGateway
             $limit = count($ftpFilePaths);
         }
 
-        if ($output){
-            $bar = $output->createProgressBar($limit);
-        }
-
         $filePaths = [];
-        
-        $bar->start();
 
         foreach ($ftpFilePaths as $ftpFilePath){
-           if (Cache::has($ftpFilePath)) {
-                if ($bar){
-                    $bar->advance();
-                }
-           } else {
                if (count($filePaths) < $limit){
                 
                     $filePath = "/tmp/$ftpFilePath";
@@ -63,16 +52,9 @@ class RTTrainDataFtpGateway implements RTTrainDataGateway
                     }
 
                     $filePaths[] = $filePath;
-                    if ($bar){
-                        $bar->advance();
-                    }
                }
-           }
         }
 
-        if ($bar){
-            $bar->finish();
-        }
         return $filePaths;
     }
 
