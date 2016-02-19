@@ -83,7 +83,7 @@ class RTTrainDataFtpGateway implements RTTrainDataGateway
         if ( empty( $data['contents'] ) ){
             return false;
         }
-        return $data['contents'];
+        return $this->stripMalformedFileEnding( $data['contents'] );
     }
 
     /**
@@ -96,5 +96,23 @@ class RTTrainDataFtpGateway implements RTTrainDataGateway
         $data = $this->ftpAdapter->read($file);
         $this->ftpAdapter->disconnect();
         return $data;
+    }
+
+    /**
+     * pPortData.log seems to be constantly updating, when downloaded you get malformed xml at the end
+     * this gets rid of that
+     *
+     * @param $contents
+     * @return string
+     */
+    private function stripMalformedFileEnding( $contents )
+    {
+        $endString = "</Pport>";
+        $endStringPos = strrpos($contents, $endString);
+        if( $endStringPos == 0 ) {
+           return $contents;
+        }
+
+        return substr( $contents, 0, $endStringPos +strlen($endString) );
     }
 }
