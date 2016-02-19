@@ -54,9 +54,11 @@ class ImportRTTrains extends Command
     public function handle()
     {
         // \DB::statement("truncate table rt_updates");
-        echo "\nDownloading Realtime Train Times.\n";
+        echo "\nDownloading Realtime Train Times.";
         
         $file = $this->gateway->getRTTrainData();
+
+        echo "\nDownloaded Realtime Train Times.";
 
         if( empty($file) ){
             throw new Exception( "No real time train data in file" );
@@ -68,9 +70,11 @@ class ImportRTTrains extends Command
     private function dealWithFile($fileContents){
         $xmlLines = explode("\n", $fileContents);
 
+        echo "\nUpdating";
         foreach($xmlLines as $xmlLine){
                 $this->dealWithPPMessage($xmlLine);
         }
+        echo "\nDone!";
     }
 
     private function dealWithPPMessage($ppMessageString)
@@ -102,11 +106,9 @@ class ImportRTTrains extends Command
      */
     private function dealWithPPMessageObject($ppMessageObject){
         $this->trainDataStorage->beginTransaction();
-        
         $updates = [];
 
         while($ppMessageObject->read()){
-
             if($ppMessageObject->name == 'Location'){
 
                 $update = [
@@ -139,10 +141,7 @@ class ImportRTTrains extends Command
                     $updates[] = $update;
 
                     if (count($updates) > 10000) {
-
-
                         $this->trainDataStorage->update($updates);
-
                         $updates = [];
                     }
                 }
@@ -150,7 +149,6 @@ class ImportRTTrains extends Command
         }
         
         $this->trainDataStorage->update( $updates );
-
         $this->trainDataStorage->commit();
     }
 

@@ -55,5 +55,7 @@ class ImportAll extends Command
         echo "\n\n--- Importing train routes to crossings map\n";
         $this->call('import:train-routes-to-crossings');
 
+        echo "\n\n--- Importing real time train data\n";
+        $this->call('import:train-rt-times');
     }
 }
