@@ -9,6 +9,7 @@
 namespace App\Storage;
 
 use Illuminate\Support\Facades\DB;
+use Mockery\CountValidator\Exception;
 
 class TrainDataMysqlStorageTest extends \TestCase
 {
@@ -31,15 +32,11 @@ class TrainDataMysqlStorageTest extends \TestCase
 
     /**
      * @test
+     * @expectedException \Exception
      */
-    public function givenNoData_WhenInsertCalled_ThenNoDataInTable()
+    public function givenNoData_WhenInsertCalled_ThenExceptionThrown()
     {
-        try {
-            $this->storage->insert( null, null,new \DateTime(), null, new \DateTime() );
-        } catch (\Exception $e){
-            
-        }
-        $this->assertEmpty( $this->getRowsFromDb() );
+        $this->storage->insert( [[null, null,new \DateTime(), null, new \DateTime()]] );
     }
 
     /**
@@ -48,7 +45,7 @@ class TrainDataMysqlStorageTest extends \TestCase
      */
     public function givenInvalidData_WhenInsertCalled_ThenThrowsException()
     {
-        $this->storage->insert( 'nothing useful', 'at all',  new \DateTime('0'), 'from_time', new \DateTime('0') );
+        $this->storage->insert( [['nothing useful', 'at all',  new \DateTime('0'), 'from_time', new \DateTime('0')]] );
     }
 
     /**
