@@ -26,16 +26,38 @@ class MockTrainDataStorage implements TrainDataStorage
 
     /**
      * @param $rows array of Rows
-     * @internal param array $trainTimes array of train times data
      */
     public function insert( $rows )
     {
-        $this->data = $rows;
+        $this->data[] = $rows;
     }
 
     public function update($rows)
     {
-        //implement updating the rows
+        foreach ( $rows as $row ){
+            foreach ( $this->data as $index => $oldRow ){
+                if( $oldRow[0] == $row['rid'] ) {
+                    if (!empty($row['wta'])) {
+                        if ($oldRow[4]->toDateTimeString() == $row['wta']->toDateTimeString()) {
+                            $this->data[$index][4] = $row['ta'];
+                        }
+                    }
+                    if (!empty($row['wtd'])) {
+                        if ($oldRow[2]->toDateTimeString() == $row['wtd']->toDateTimeString()) {
+                            $this->data[$index][2] = $row['td'];
+                        }
+                    }
+                    if (!empty($row['wtp'])) {
+                        if ($oldRow[2]->toDateTimeString() == $row['wtp']->toDateTimeString()) {
+                            $this->data[$index][2] = $row['tp'];
+                        }
+                        if ($oldRow[4]->toDateTimeString() == $row['wtp']->toDateTimeString() ) {
+                            $this->data[$index][4] = $row['tp'];
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public function beginTransaction()

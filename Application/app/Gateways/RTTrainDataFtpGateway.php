@@ -22,55 +22,29 @@ class RTTrainDataFtpGateway implements RTTrainDataGateway
         $this->ftpAdapter = $ftpAdapter;
     }
 
-    public function getRTTrainData($limit)
+    public function getRTTrainData()
     {
 
         $ftpContents = $this->ftpAdapter->listContents();
-        $ftpFilePaths = $this->getCorrectFilesFromListOfFiles($ftpContents);
+        $ftpFilePath = $this->getCorrectFileFromListOfFiles($ftpContents);
 
-        if (count( $ftpFilePaths ) == 0) {
-            throw new \Exception('Not realtime data on ftp');
-        }
-
-        if (!$limit){
-            $limit = count($ftpFilePaths);
-        }
-
-        $filePaths = [];
-
-        foreach ($ftpFilePaths as $ftpFilePath){
-               if (count($filePaths) < $limit){
-                
-                    $filePath = "/tmp/$ftpFilePath";
-                    if ( file_exists( $filePath ) ){
-                        unlink( $filePath );
-                    }
-                    file_put_contents($filePath, $this->getXMLDataAsStringFromFile($ftpFilePath));
-                    
-                    if (!ends_with($ftpFilePath, 'pPortData.log')) {
-                        Cache::forever($ftpFilePath, true);
-                    }
-
-                    $filePaths[] = $filePath;
-               }
-        }
-
-        return $filePaths;
+        return $this->getXMLDataAsStringFromFile($ftpFilePath);
     }
 
     /**
      * @param $files
      * @return string
+     * @throws \Exception
      */
-    private function getCorrectFilesFromListOfFiles($files)
+    private function getCorrectFileFromListOfFiles($files)
     {
-        $dataFiles = [];
         foreach ($files as $file) {
             if (strpos($file['path'], 'pPortData.log') !== false) {
-                $dataFiles[] = $file['path'];
+                return $file['path'];
             }
         }
-        return $dataFiles;
+
+        throw new \Exception("Real Time data file not found");
     }
 
     /**
