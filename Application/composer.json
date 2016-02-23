@@ -50,7 +50,7 @@
             "./node_modules/karma/bin/karma start"
         ],
         "test:php": [
-            "/usr/bin/phpunit"
+            "php vendor/bin/phpunit -c phpunit.xml"
         ],
         "test:quality": [
             "./node_modules/mocha/bin/mocha test-quality.js"
