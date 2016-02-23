@@ -29,7 +29,9 @@ class MockTrainDataStorage implements TrainDataStorage
      */
     public function insert( $rows )
     {
-        $this->data[] = $rows;
+        foreach($rows as $row){
+            $this->data[] = $row;
+        }
     }
 
     public function update($rows)
@@ -58,6 +60,11 @@ class MockTrainDataStorage implements TrainDataStorage
                 }
             }
         }
+    }
+
+    public function truncateToCrsTable()
+    {
+        // no need to Implement truncateToCrsTable() method.
     }
 
     public function beginTransaction()

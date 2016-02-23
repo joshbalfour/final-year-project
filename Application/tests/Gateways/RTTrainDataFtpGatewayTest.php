@@ -43,7 +43,7 @@ class RTTrainDataFtpGatewayTest extends \PHPUnit_Framework_TestCase
      */
     public function givenNullContents_WhenGatewayReadsFromFtp_ThenThrowsException()
     {
-       $this->gateway->getRTTrainData(1);
+       $this->gateway->getRTTrainData();
     }
 
     /**
@@ -53,7 +53,7 @@ class RTTrainDataFtpGatewayTest extends \PHPUnit_Framework_TestCase
     public function givenSimpleContentsWrongFileName_WhenGatewayReadsFromFtp_ThenThrowsException()
     {
         $this->mockFtpAdapter->setContents( ['blahblah-filename.xml.gz' => 'not relevant'] );
-        $this->gateway->getRTTrainData(1);
+        $this->gateway->getRTTrainData();
     }
 
     /**
@@ -63,9 +63,8 @@ class RTTrainDataFtpGatewayTest extends \PHPUnit_Framework_TestCase
     {
         $realFileName = "1" . $this->correctFileEnding;
         $this->mockFtpAdapter->setContents( [ $realFileName => '' ] );
-        $filePaths = $this->gateway->getRTTrainData(1);
-        $this->assertEquals( ["/tmp/".$realFileName], $filePaths);
-        $this->assertEmpty( file_get_contents( $filePaths[0] ) );
+        $data = $this->gateway->getRTTrainData();
+        $this->assertEmpty( $data );
     }
 
     /**
@@ -73,12 +72,11 @@ class RTTrainDataFtpGatewayTest extends \PHPUnit_Framework_TestCase
      */
     public function givenExistingFileWithContents_WhenDownloaded_ThenFileIsDecompressedAndReturned()
     {
-        $data = 'a gzipped file';
+        $expectedData = 'a gzipped file';
         $realFileName = "1" . $this->correctFileEnding;
-        $this->mockFtpAdapter->setContents( [ $realFileName => $data ] );
-        $filePaths = $this->gateway->getRTTrainData(1);
-        $this->assertEquals( ["/tmp/".$realFileName], $filePaths);
-        $this->assertEquals( $data, file_get_contents( $filePaths[0] ) );
+        $this->mockFtpAdapter->setContents( [ $realFileName => $expectedData ] );
+        $data = $this->gateway->getRTTrainData();
+        $this->assertEquals(  $expectedData, $data );
     }
 
     /**
@@ -92,11 +90,8 @@ class RTTrainDataFtpGatewayTest extends \PHPUnit_Framework_TestCase
             'password' => 'A!t4398htw4ho4jy'
         );
         $gateway = new RTTrainDataFtpGateway( new Ftp( $config ) );
-        $filePaths = $gateway->getRTTrainData( 1 );
-        $this->assertEquals( ["/tmp/pPortData.log"], $filePaths);
-
-        $xmlData = file_get_contents( $filePaths[0] );
-        $this->assertStringStartsWith( '<?xml version="1.0" encoding="UTF-8"?>', substr( $xmlData, 0, 100 ), 'prefix failed' );
-        $this->assertStringEndsWith( '</Pport>', substr( $xmlData, strlen( $xmlData )-100 ), 'suffix failed' );
+        $data = $gateway->getRTTrainData();
+        $this->assertStringStartsWith( '<?xml version="1.0" encoding="UTF-8"?>', substr( $data, 0, 100 ), 'prefix failed' );
+        $this->assertStringEndsWith( '</Pport>', substr( $data, strlen( $data )-100 ), 'suffix failed' );
     }
 }

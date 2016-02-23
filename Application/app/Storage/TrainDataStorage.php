@@ -24,4 +24,6 @@ interface TrainDataStorage
      * @param $rows
      */
     public function update($rows );
+
+    public function truncateToCrsTable();
 }

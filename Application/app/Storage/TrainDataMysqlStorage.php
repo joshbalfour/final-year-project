@@ -74,6 +74,11 @@ class TrainDataMysqlStorage implements TrainDataStorage
         }
     }
 
+    public function truncateToCrsTable()
+    {
+        \DB::statement("truncate table train_times_with_crs");
+        \DB::statement("insert into train_times_with_crs select * from v_train_times_with_crs");
+    }
 
     public function beginTransaction()
     {

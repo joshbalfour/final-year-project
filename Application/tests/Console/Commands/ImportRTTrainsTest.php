@@ -67,7 +67,7 @@ class ImportRTTrainsTest extends \PHPUnit_Framework_TestCase
         $data =
             '<Pport><Location rid="1" ssd="'.date("Y-m-d").'" tpl="DESTINATION" ><arr et="16:10" wta="16:04" /></Location></Pport>';
         $this->mockGateway->setData( $data );
-        $this->mockStorage->insert( [ 1, 'HOME', new Carbon( date('Y-m-d').' 16:00:00' ), 'DESTINATION', new Carbon( date('Y-m-d').' 16:04:00' ) ] );
+        $this->mockStorage->insert( [[ 1, 'HOME', new Carbon( date('Y-m-d').' 16:00:00' ), 'DESTINATION', new Carbon( date('Y-m-d').' 16:04:00' ) ]] );
         $this->command->handle();
         $expected = [
             [
@@ -89,7 +89,7 @@ class ImportRTTrainsTest extends \PHPUnit_Framework_TestCase
         $data =
             '<Pport><Location rid="1" ssd="'.date("Y-m-d").'" tpl="DESTINATION" ><dep et="16:06" wtd="16:00" /></Location></Pport>';
         $this->mockGateway->setData( $data );
-        $this->mockStorage->insert( [ 1, 'HOME', new Carbon( date('Y-m-d').' 16:00:00' ), 'DESTINATION', new Carbon( date('Y-m-d').' 16:20:00' ) ] );
+        $this->mockStorage->insert( [[ 1, 'HOME', new Carbon( date('Y-m-d').' 16:00:00' ), 'DESTINATION', new Carbon( date('Y-m-d').' 16:20:00' ) ]] );
         $this->command->handle();
         $expected = [
             [
@@ -111,8 +111,9 @@ class ImportRTTrainsTest extends \PHPUnit_Framework_TestCase
         $data =
             '<Pport><Location rid="1" ssd="'.date("Y-m-d").'" tpl="DESTINATION" ><pass et="16:06" wtp="16:00" /></Location></Pport>';
         $this->mockGateway->setData( $data );
-        $this->mockStorage->insert( [ 1, 'HOME', new Carbon( date('Y-m-d').' 15:30:00' ), 'DESTINATION', new Carbon( date('Y-m-d').' 16:00:00' ) ] );
-        $this->mockStorage->insert( [ 1, 'DESTINATION', new Carbon( date('Y-m-d').' 16:00:00' ), 'ELSEWHERE', new Carbon( date('Y-m-d').' 16:20:00' ) ] );
+        $this->mockStorage->insert( [[ 1, 'HOME', new Carbon( date('Y-m-d').' 15:30:00' ), 'DESTINATION', new Carbon( date('Y-m-d').' 16:00:00' ) ],
+            [ 1, 'DESTINATION', new Carbon( date('Y-m-d').' 16:00:00' ), 'ELSEWHERE', new Carbon( date('Y-m-d').' 16:20:00' ) ]] );
+        $this->mockStorage->insert( [] );
         $this->command->handle();
         $expected = [
             [
