@@ -255,7 +255,7 @@ class MockFtpAdapter extends AbstractFtpAdapter
     /**
      * @param $files
      */
-    public function setContents($files )
+    public function setContents( $files )
     {
         foreach ( $files as $filename => $contents ){
             $this->contents[$filename] = $contents;

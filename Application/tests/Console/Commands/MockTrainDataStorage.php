@@ -25,12 +25,56 @@ class MockTrainDataStorage implements TrainDataStorage
     }
 
     /**
-     * @param $rows Array of Rows
-     * @internal param array $trainTimes array of train times data
+     * @param $rows array of Rows
      */
     public function insert( $rows )
     {
-            
+        foreach($rows as $row){
+            $this->data[] = $row;
+        }
+    }
+
+    public function update($rows)
+    {
+        foreach ( $rows as $row ){
+            foreach ( $this->data as $index => $oldRow ){
+                if( $oldRow[0] == $row['rid'] ) {
+                    if (!empty($row['wta'])) {
+                        if ($oldRow[4]->toDateTimeString() == $row['wta']->toDateTimeString()) {
+                            $this->data[$index][4] = $row['ta'];
+                        }
+                    }
+                    if (!empty($row['wtd'])) {
+                        if ($oldRow[2]->toDateTimeString() == $row['wtd']->toDateTimeString()) {
+                            $this->data[$index][2] = $row['td'];
+                        }
+                    }
+                    if (!empty($row['wtp'])) {
+                        if ($oldRow[2]->toDateTimeString() == $row['wtp']->toDateTimeString()) {
+                            $this->data[$index][2] = $row['tp'];
+                        }
+                        if ($oldRow[4]->toDateTimeString() == $row['wtp']->toDateTimeString() ) {
+                            $this->data[$index][4] = $row['tp'];
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public function truncateToCrsTable()
+    {
+        // no need to Implement truncateToCrsTable() method.
+    }
+
+    public function beginTransaction()
+    {
+        //not needed in the mock but like... this shouldn't be here in that case
+    }
+
+    public function commit()
+    {
+        //same
     }
 
     public function isEmpty()
@@ -44,15 +88,5 @@ class MockTrainDataStorage implements TrainDataStorage
     public function getData()
     {
         return $this->data;
-    }
-
-    public function beginTransaction()
-    {
-        // TODO: Implement beginTransaction() method.
-    }
-
-    public function commit()
-    {
-        // TODO: Implement commit() method.
     }
 }

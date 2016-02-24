@@ -16,14 +16,14 @@ interface TrainDataStorage
     public function commit();
 
     /**
-     * @param $rid
-     * @param $from
-     * @param \DateTimeInterface $fromTime
-     * @param $to
-     * @param \DateTimeInterface $toTime
-     * @return
-     * @internal param array $trainTimes array of train times data
+     * @param $rows
      */
-    public function insert( $whyDoesThisExist );
+    public function insert( $rows );
 
+    /**
+     * @param $rows
+     */
+    public function update($rows );
+
+    public function truncateToCrsTable();
 }
