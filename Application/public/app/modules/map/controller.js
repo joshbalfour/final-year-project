@@ -141,6 +141,6 @@ app.controller('MapController', function ($http, $interval, Tween) {
 		ctrl.loadCrossings();
 		$interval(function () {
 			ctrl.loadCrossings();
-		}, 30000);
+		}, 5000);
 	};
 });
