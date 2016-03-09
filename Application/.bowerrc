@@ -1,6 +1,3 @@
 {
-  "directory" : "public/bower_components",
-  "ignoredDependencies": [
-  	"angular"
-  ]
+  "directory" : "public/bower_components"
 }
