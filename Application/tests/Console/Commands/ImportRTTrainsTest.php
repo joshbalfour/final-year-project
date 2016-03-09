@@ -65,7 +65,7 @@ class ImportRTTrainsTest extends \PHPUnit_Framework_TestCase
     public function givenUpdateWithOneLateArrival_WhenParsed_ThenRowUpdatedInDb()
     {
         $data =
-            '<Pport><Location rid="1" ssd="'.date("Y-m-d").'" tpl="DESTINATION" ><arr et="16:10" wta="16:04" /></Location></Pport>';
+            '<Pport><ns3:Location rid="1" ssd="'.date("Y-m-d").'" tpl="DESTINATION" ><ns3:arr et="16:10" wta="16:04" /></ns3:Location></Pport>';
         $this->mockGateway->setData( $data );
         $this->mockStorage->insert( [[ 1, 'HOME', new Carbon( date('Y-m-d').' 16:00:00' ), 'DESTINATION', new Carbon( date('Y-m-d').' 16:04:00' ) ]] );
         $this->command->handle();
@@ -87,7 +87,7 @@ class ImportRTTrainsTest extends \PHPUnit_Framework_TestCase
     public function givenUpdateWithOneLateDeparture_WhenParsed_ThenRowUpdatedInDb()
     {
         $data =
-            '<Pport><Location rid="1" ssd="'.date("Y-m-d").'" tpl="DESTINATION" ><dep et="16:06" wtd="16:00" /></Location></Pport>';
+            '<Pport><ns3:Location rid="1" ssd="'.date("Y-m-d").'" tpl="DESTINATION" ><ns3:dep et="16:06" wtd="16:00" /></ns3:Location></Pport>';
         $this->mockGateway->setData( $data );
         $this->mockStorage->insert( [[ 1, 'HOME', new Carbon( date('Y-m-d').' 16:00:00' ), 'DESTINATION', new Carbon( date('Y-m-d').' 16:20:00' ) ]] );
         $this->command->handle();
@@ -109,7 +109,7 @@ class ImportRTTrainsTest extends \PHPUnit_Framework_TestCase
     public function givenUpdateWithOneAlteredPassThrough_WhenParsed_ThenTwoRowsUpdatedInDb()
     {
         $data =
-            '<Pport><Location rid="1" ssd="'.date("Y-m-d").'" tpl="DESTINATION" ><pass et="16:06" wtp="16:00" /></Location></Pport>';
+            '<Pport><ns3:Location rid="1" ssd="'.date("Y-m-d").'" tpl="DESTINATION" ><ns3:pass et="16:06" wtp="16:00" /></ns3:Location></Pport>';
         $this->mockGateway->setData( $data );
         $this->mockStorage->insert( [[ 1, 'HOME', new Carbon( date('Y-m-d').' 15:30:00' ), 'DESTINATION', new Carbon( date('Y-m-d').' 16:00:00' ) ],
             [ 1, 'DESTINATION', new Carbon( date('Y-m-d').' 16:00:00' ), 'ELSEWHERE', new Carbon( date('Y-m-d').' 16:20:00' ) ]] );
@@ -129,6 +129,28 @@ class ImportRTTrainsTest extends \PHPUnit_Framework_TestCase
                 new Carbon( date('Y-m-d').' 16:06:00' ),
                 'ELSEWHERE',
                 new Carbon( date('Y-m-d').' 16:20:00' )
+            ]
+        ];
+        $this->assertEquals( $expected, $this->mockStorage->getData() );
+    }
+
+    /**
+     * @test
+     */
+    public function givenUpdateWithRealLifeLookingXml_WhenParsed_ThenRowUpdatedInDb()
+    {
+        $data = '<Pport xmlns="http://www.thalesgroup.com/rtti/PushPort/v12" xmlns:ns3="http://www.thalesgroup.com/rtti/PushPort/Forecasts/v2" ts="2016-02-19T10:58:00.8711777Z" version="12.0"><uR updateOrigin="Darwin"><TS rid="1" ssd="2016-02-19" uid="C60247"><ns3:Location pta="16:04" tpl="DESTINATION" wta="16:10"><ns3:arr et="16:04" src="Darwin"/><ns3:plat cisPlatsup="true" platsup="true">4</ns3:plat></ns3:Location></TS></uR></Pport>';
+
+        $this->mockGateway->setData( $data );
+        $this->mockStorage->insert( [[ 1, 'HOME', new Carbon( date('Y-m-d').' 16:00:00' ), 'DESTINATION', new Carbon( date('Y-m-d').' 16:04:00' ) ]] );
+        $this->command->handle();
+        $expected = [
+            [
+                1,
+                'HOME',
+                new Carbon( date('Y-m-d').' 16:00:00' ),
+                'DESTINATION',
+                new Carbon( date('Y-m-d').' 16:10:00' )
             ]
         ];
         $this->assertEquals( $expected, $this->mockStorage->getData() );

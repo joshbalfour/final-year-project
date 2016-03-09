@@ -92,6 +92,7 @@ class ImportRTTrains extends Command
     private function convertPPMessageStringToObject($ppMessageString)
     {
         $xmlData = new \XMLReader();
+        $this->getRidOfNameSpaceCrap( $ppMessageString );
         $xmlData->xml($ppMessageString);
         try{
             $xmlData->read();
@@ -168,7 +169,23 @@ class ImportRTTrains extends Command
         return $nowDate->copy();
     }
 
-    
+    private function getRidOfNameSpaceCrap( &$ppMessageString )
+    {
+        /*
+         * the xmlns stuff inside Pport tags are just attributes which I think are all ok
+         *
+         * $left = 'xmlns="http://www.thalesgroup.com/rtti/PushPort/v12"';
+        $right = 'version="12.0"';
+        $le = explode($left, $ppMessageString);
+        $ts = explode($right, $le[1])[0];
+        $ppMessageString = preg_replace("/<.*(xmlns *= *[\"'].[^\"']*[\"']).[^>]*>/i", "<Pport $ts>", $ppMessageString);*/
+        $ppMessageString = preg_replace("/<\/([a-z0-9\-]*)?:/i", "</", $ppMessageString);
+        $ppMessageString = preg_replace("/<([a-z0-9\-]*)?:/i", "<", $ppMessageString);
+
+        return $ppMessageString;
+    }
+
+
 }
 
 // TODO
