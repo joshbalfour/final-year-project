@@ -139,3 +139,42 @@ Average error: 1.08 minutes, 100% of the time.
 
 #### Prediction Error
 Average error: 20 seconds, 100% of the time.
+
+
+
+
+### Chilham - Taken on 24/02/2016
+
+| Down  | Up    |
+| ----- | ----- |
+| 15:29 | 15:31 |
+| 15:42 | 15:44 |
+| 15:49 | 15:51 |
+| 15:59 | 16:05 |
+| 16:12 | 16:15 |
+| 16:29 | 16:31 |
+| 16:42 | 16:45 |
+| 16:45 | 16:47 |
+| 16:59 | 17:01 |
+| 17:12 | 17:15 |
+| 17:29 | 17:31 |
+
+#### Respective Predicitons from the application V3
+
+| Real  | Real  | Predicition  | Predicition  |        | Error |
+| ----- | ----- | ------------ | ------------ | ------ |------ |
+| Down  | Up    | 
+| 15:29 | 15:31 | 15:28 | 15:31 | Almost | 1 minute
+| 15:42 | 15:44 | 15:42 | 15:44 | Hit 
+| 15:49 | 15:51 | 15:49 | 15:51 | Hit
+| 15:59 | 16:05 | 16:02 | 16:05 | Almost | 3 minutes
+| 16:12 | 16:15 | 16:12 | 16:15 | Hit
+| 16:29 | 16:31 | 16:29 | 16:31 | Hit
+| 16:42 | 16:45 | 16:42 | 16:46 | Almost | 1 minute
+| 16:45 | 16:47 | 16:45 | 16:47 | Hit
+| 16:59 | 17:01 | 16:59 | 17:03 | Almost | 2 minutes
+| 17:12 | 17:15 | 17:12 | 17:15 | Hit
+| 17:29 | 17:31 | 17:29 | 17:31 | Hit
+
+#### Prediction Error
+Average error: 38 seconds, 100% of the time.
