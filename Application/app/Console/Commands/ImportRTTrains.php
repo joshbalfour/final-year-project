@@ -109,34 +109,38 @@ class ImportRTTrains extends Command
         $this->trainDataStorage->beginTransaction();
         $updates = [];
 
+        //<TS rid="1" ssd="2016-02-19" uid="C60247">
+
         while($ppMessageObject->read()){
+            if( $ppMessageObject->name == "TS" ){
+                $ssd = new Carbon( $ppMessageObject->getAttribute('ssd') );
+
+                $update["rid"] = $ppMessageObject->getAttribute('rid');
+                continue;
+            }
             if($ppMessageObject->name == 'Location'){
 
-                $update = [
-                    "rid" => $ppMessageObject->getAttribute('rid'),
-                    "tpl" => $ppMessageObject->getAttribute('tpl'),
-                ];
-
-                $ssd = new Carbon( $ppMessageObject->getAttribute('ssd') );
+                $update["tpl"] = $ppMessageObject->getAttribute('tpl');
 
                 $location = new \SimpleXMLElement( $ppMessageObject->readOuterXml() );
                 foreach( $location->children() as $type => $details ) {
+                    /** @var \SimpleXMLElement $details */
                     if ($type == "arr") {
                         $et = $this->getDateTime($ssd, $details->attributes()['et']);
                         $update["ta"] = $et;
-                        $update["wta"] = $this->getDateTime($ssd, $details->attributes()['wta']);
+                        $update["wta"] = $this->getDateTime($ssd, $location->attributes()['wta']);
                     }
 
                     if ($type == "dep") {
                         $et = $this->getDateTime($ssd, $details->attributes()['et']);
                         $update["td"] = $et;
-                        $update["wtd"] = $this->getDateTime($ssd, $details->attributes()['wtd']);
+                        $update["wtd"] = $this->getDateTime($ssd, $location->attributes()['wtd']);
                     }
 
                     if ($type == "pass") {
                         $et = $this->getDateTime($ssd, $details->attributes()['et']);
                         $update["tp"] = $et;
-                        $update["wtp"] = $this->getDateTime($ssd, $details->attributes()['wtp']);
+                        $update["wtp"] = $this->getDateTime($ssd, $location->attributes()['wtp']);
                     }
 
                     $updates[] = $update;
