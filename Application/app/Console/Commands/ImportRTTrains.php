@@ -126,20 +126,32 @@ class ImportRTTrains extends Command
                 foreach( $location->children() as $type => $details ) {
                     /** @var \SimpleXMLElement $details */
                     if ($type == "arr") {
-                        $et = $this->getDateTime($ssd, $details->attributes()['et']);
-                        $update["ta"] = $et;
+                        $et = $this->getEstimatedOrActualTime( $details );
+                        if( !$et ){
+                            echo "No estimated or actual time for arrival";
+                            continue;
+                        }
+                        $update["ta"] = $this->getDateTime( $ssd, $et );
                         $update["wta"] = $this->getDateTime($ssd, $location->attributes()['wta']);
                     }
 
                     if ($type == "dep") {
-                        $et = $this->getDateTime($ssd, $details->attributes()['et']);
-                        $update["td"] = $et;
+                        $et = $this->getEstimatedOrActualTime( $details );
+                        if( !$et ){
+                            echo "No estimated or actual time for departure";
+                            continue;
+                        }
+                        $update["td"] = $this->getDateTime( $ssd, $et );
                         $update["wtd"] = $this->getDateTime($ssd, $location->attributes()['wtd']);
                     }
 
                     if ($type == "pass") {
-                        $et = $this->getDateTime($ssd, $details->attributes()['et']);
-                        $update["tp"] = $et;
+                        $et = $this->getEstimatedOrActualTime( $details );
+                        if( !$et ){
+                            echo "No estimated or actual time for pass through";
+                            continue;
+                        }
+                        $update["tp"] = $this->getDateTime( $ssd, $et );
                         $update["wtp"] = $this->getDateTime($ssd, $location->attributes()['wtp']);
                     }
 
@@ -187,6 +199,18 @@ class ImportRTTrains extends Command
         $ppMessageString = preg_replace("/<([a-z0-9\-]*)?:/i", "<", $ppMessageString);
 
         return $ppMessageString;
+    }
+
+    private function getEstimatedOrActualTime( \SimpleXMLElement $details )
+    {
+        $et = $details->attributes()['et'];
+        if ( empty($et) ){
+            $et = $details->attributes()['at'];
+            if( empty($et) ){
+                return false;
+            }
+        }
+        return $et;
     }
 
 

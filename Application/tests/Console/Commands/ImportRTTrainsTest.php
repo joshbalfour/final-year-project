@@ -9,7 +9,10 @@
 namespace App\Console\Commands;
 
 
+use App\Gateways\RTTrainDataFtpGateway;
+use App\Storage\NullTrainDataStorage;
 use Carbon\Carbon;
+use League\Flysystem\Adapter\Ftp;
 
 class ImportRTTrainsTest extends \PHPUnit_Framework_TestCase
 {
@@ -154,5 +157,46 @@ class ImportRTTrainsTest extends \PHPUnit_Framework_TestCase
             ]
         ];
         $this->assertEquals( $expected, $this->mockStorage->getData() );
+    }
+
+    /**
+     * updates in that past use the "at" or actual time attribute rather than "et" or estimated time
+     *
+     * @test
+     */
+    public function givenUpdateThatIsNotEstimated_WhenParsed_ThenUpdateRow()
+    {
+        $data =
+            '<Pport><TS rid="1" ssd="'.date("Y-m-d").'"><ns3:Location tpl="DESTINATION" wta="16:04" ><ns3:arr at="16:10" /></ns3:Location></TS></Pport>';
+        $this->mockGateway->setData( $data );
+        $this->mockStorage->insert( [[ 1, 'HOME', new Carbon( date('Y-m-d').' 16:00:00' ), 'DESTINATION', new Carbon( date('Y-m-d').' 16:04:00' ) ]] );
+        $this->command->handle();
+        $expected = [
+            [
+                1,
+                'HOME',
+                new Carbon( date('Y-m-d').' 16:00:00' ),
+                'DESTINATION',
+                new Carbon( date('Y-m-d').' 16:10:00' )
+            ]
+        ];
+        $this->assertEquals( $expected, $this->mockStorage->getData() );
+    }
+
+    /**
+     * Integrate with actual real time data from the ftp server for better testing
+     * @test
+     */
+    public function givenRealpPortData_WhenDownloadedAndParsed_ThenNoErrors()
+    {
+        $gateway = new RTTrainDataFtpGateway( new Ftp(array(
+            'host' => 'datafeeds.nationalrail.co.uk',
+            'username' => 'ftpuser',
+            'password' => 'A!t4398htw4ho4jy')) );
+
+        $command = new ImportRTTrains( $gateway, new NullTrainDataStorage() );
+
+        $command->handle();
+        $this->assertTrue(true);
     }
 }
