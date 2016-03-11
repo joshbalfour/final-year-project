@@ -5,9 +5,10 @@ var app = angular.module('LCP', [
 
 // Configure Google maps
 app.config(
-    ['uiGmapGoogleMapApiProvider', function(GoogleMapApiProviders) {
+    ['uiGmapGoogleMapApiProvider, $compileProvider', function(GoogleMapApiProviders, $compileProvider) {
         GoogleMapApiProviders.configure({
-            china: true
+            china: false 
         });
+        $compileProvider.debugInfoEnabled(false);
     }]
 );
