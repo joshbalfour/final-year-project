@@ -59,51 +59,56 @@ class DebugController extends Controller
         ");
 
         $trains = array_map(function ($row) {
+            try {
+                $currentTime = time();
+                $departTime = strtotime($row->from_time);
+                $arrivalTime = strtotime($row->to_time);
 
-            $currentTime = time();
-            $departTime = strtotime($row->from_time);
-            $arrivalTime = strtotime($row->to_time);
+                $percetangeLongTrack = ($currentTime - $departTime) / ($arrivalTime - $departTime);
 
-            $percetangeLongTrack = ($currentTime - $departTime) / ($arrivalTime - $departTime);
+                $distanceLongTrack = $row->route_distance * $percetangeLongTrack;
+                $distanceTracker = 0;
+                $oldDistance = 0;
+                $trackPoints = json_decode($row->route);
+                $trackPoints = $trackPoints->coordinates;
 
-            $distanceLongTrack = $row->route_distance * $percetangeLongTrack;
-            $distanceTracker = 0;
-            $oldDistance = 0;
-            $trackPoints = json_decode($row->route);
-            $trackPoints = $trackPoints->coordinates;
-
-            $trackPointsCount = count($trackPoints);
-            $steps = [];
+                $trackPointsCount = count($trackPoints);
+                $steps = [];
 
 
-            for($i = 1; $i < $trackPointsCount; $i++) {
-                $prevPoint = $trackPoints[$i - 1];
-                $curPoint = $trackPoints[$i];
+                for($i = 1; $i < $trackPointsCount; $i++) {
+                    $prevPoint = $trackPoints[$i - 1];
+                    $curPoint = $trackPoints[$i];
 
-                $steps[] = [
-                    $this->distanceBetweenPoints($prevPoint, $curPoint)
-                    ,$prevPoint,$curPoint, $distanceTracker
-                ];
-                $distanceTracker += $this->distanceBetweenPoints($prevPoint, $curPoint);
+                    $steps[] = [
+                        $this->distanceBetweenPoints($prevPoint, $curPoint)
+                        ,$prevPoint,$curPoint, $distanceTracker
+                    ];
+                    $distanceTracker += $this->distanceBetweenPoints($prevPoint, $curPoint);
 
-                if ($distanceTracker > $distanceLongTrack) {
-                    break;
+                    if ($distanceTracker > $distanceLongTrack) {
+                        break;
+                    }
+                    $oldDistance = $distanceTracker;
+
                 }
-                $oldDistance = $distanceTracker;
+                $distanceBetweenPoints = ($distanceLongTrack - $oldDistance) / ($distanceTracker - $oldDistance);
 
+                return [
+                    'location' => [
+                        'x' => $prevPoint[0] + (($curPoint[0] - $prevPoint[0]) * $distanceBetweenPoints) ,
+                        'y' => $prevPoint[1] + (($curPoint[1] - $prevPoint[1]) * $distanceBetweenPoints) ,
+                    ],
+                    'rid' => $row->rid
+                ];
+            } catch (\Exception $e) {
+                return null;
             }
-            $distanceBetweenPoints = ($distanceLongTrack - $oldDistance) / ($distanceTracker - $oldDistance);
-
-            return [
-                'location' => [
-                    'x' => $prevPoint[0] + (($curPoint[0] - $prevPoint[0]) * $distanceBetweenPoints) ,
-                    'y' => $prevPoint[1] + (($curPoint[1] - $prevPoint[1]) * $distanceBetweenPoints) ,
-                ],
-                'rid' => $row->rid
-            ];
 
         }, $trainPositionLocations);
-//        dd($trains);
+    
+        $trains = array_filter($trains);
+
         return [
             "status" => "OK",
             "data" => $trains //array_slice($trains, 3, 1)
