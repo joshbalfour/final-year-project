@@ -141,10 +141,10 @@ class CrossingsController extends Controller
 
         $rows = array_map(function (&$row) {
             return [
-                'trainDepart' => (new Carbon($row->from_time))->toIso8601String(),
-                'trainArrive' => (new Carbon($row->to_time))->toIso8601String(),
-                'downTime' => (new Carbon($row->down_time))->toIso8601String(),
-                'upTime' => (new Carbon($row->up_time))->toIso8601String(),
+                'trainDepart' => (new Carbon($row->from_time))->toAtomString(),
+                'trainArrive' => (new Carbon($row->to_time))->toAtomString(),
+                'downTime' => (new Carbon($row->down_time))->toAtomString(),
+                'upTime' => (new Carbon($row->up_time))->toAtomString(),
                 'duration' => strtotime($row->up_time) - strtotime($row->down_time)
             ];
         }, $rows);
