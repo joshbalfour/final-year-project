@@ -5,7 +5,7 @@ var app = angular.module('LCP', [
 
 // Configure Google maps
 app.config(
-    ['uiGmapGoogleMapApiProvider, $compileProvider', function(GoogleMapApiProviders, $compileProvider) {
+    ['uiGmapGoogleMapApiProvider', '$compileProvider', function(GoogleMapApiProviders, $compileProvider) {
         GoogleMapApiProviders.configure({
             china: false 
         });
