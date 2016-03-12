@@ -92,6 +92,7 @@ class ImportRTTrains extends Command
     private function convertPPMessageStringToObject($ppMessageString)
     {
         $xmlData = new \XMLReader();
+        $this->getRidOfNameSpaceCrap( $ppMessageString );
         $xmlData->xml($ppMessageString);
         try{
             $xmlData->read();
@@ -108,34 +109,50 @@ class ImportRTTrains extends Command
         $this->trainDataStorage->beginTransaction();
         $updates = [];
 
+        //<TS rid="1" ssd="2016-02-19" uid="C60247">
+
         while($ppMessageObject->read()){
+            if( $ppMessageObject->name == "TS" ){
+                $ssd = new Carbon( $ppMessageObject->getAttribute('ssd') );
+
+                $update["rid"] = $ppMessageObject->getAttribute('rid');
+                continue;
+            }
             if($ppMessageObject->name == 'Location'){
 
-                $update = [
-                    "rid" => $ppMessageObject->getAttribute('rid'),
-                    "tpl" => $ppMessageObject->getAttribute('tpl'),
-                ];
-
-                $ssd = new Carbon( $ppMessageObject->getAttribute('ssd') );
+                $update["tpl"] = $ppMessageObject->getAttribute('tpl');
 
                 $location = new \SimpleXMLElement( $ppMessageObject->readOuterXml() );
                 foreach( $location->children() as $type => $details ) {
+                    /** @var \SimpleXMLElement $details */
                     if ($type == "arr") {
-                        $et = $this->getDateTime($ssd, $details->attributes()['et']);
-                        $update["ta"] = $et;
-                        $update["wta"] = $this->getDateTime($ssd, $details->attributes()['wta']);
+                        $et = $this->getEstimatedOrActualTime( $details );
+                        if( !$et ){
+                            echo "No estimated or actual time for arrival";
+                            continue;
+                        }
+                        $update["ta"] = $this->getDateTime( $ssd, $et );
+                        $update["wta"] = $this->getDateTime($ssd, $location->attributes()['wta']);
                     }
 
                     if ($type == "dep") {
-                        $et = $this->getDateTime($ssd, $details->attributes()['et']);
-                        $update["td"] = $et;
-                        $update["wtd"] = $this->getDateTime($ssd, $details->attributes()['wtd']);
+                        $et = $this->getEstimatedOrActualTime( $details );
+                        if( !$et ){
+                            echo "No estimated or actual time for departure";
+                            continue;
+                        }
+                        $update["td"] = $this->getDateTime( $ssd, $et );
+                        $update["wtd"] = $this->getDateTime($ssd, $location->attributes()['wtd']);
                     }
 
                     if ($type == "pass") {
-                        $et = $this->getDateTime($ssd, $details->attributes()['et']);
-                        $update["tp"] = $et;
-                        $update["wtp"] = $this->getDateTime($ssd, $details->attributes()['wtp']);
+                        $et = $this->getEstimatedOrActualTime( $details );
+                        if( !$et ){
+                            echo "No estimated or actual time for pass through";
+                            continue;
+                        }
+                        $update["tp"] = $this->getDateTime( $ssd, $et );
+                        $update["wtp"] = $this->getDateTime($ssd, $location->attributes()['wtp']);
                     }
 
                     $updates[] = $update;
@@ -168,7 +185,35 @@ class ImportRTTrains extends Command
         return $nowDate->copy();
     }
 
-    
+    private function getRidOfNameSpaceCrap( &$ppMessageString )
+    {
+        /*
+         * the xmlns stuff inside Pport tags are just attributes which I think are all ok
+         *
+         * $left = 'xmlns="http://www.thalesgroup.com/rtti/PushPort/v12"';
+        $right = 'version="12.0"';
+        $le = explode($left, $ppMessageString);
+        $ts = explode($right, $le[1])[0];
+        $ppMessageString = preg_replace("/<.*(xmlns *= *[\"'].[^\"']*[\"']).[^>]*>/i", "<Pport $ts>", $ppMessageString);*/
+        $ppMessageString = preg_replace("/<\/([a-z0-9\-]*)?:/i", "</", $ppMessageString);
+        $ppMessageString = preg_replace("/<([a-z0-9\-]*)?:/i", "<", $ppMessageString);
+
+        return $ppMessageString;
+    }
+
+    private function getEstimatedOrActualTime( \SimpleXMLElement $details )
+    {
+        $et = $details->attributes()['et'];
+        if ( empty($et) ){
+            $et = $details->attributes()['at'];
+            if( empty($et) ){
+                return false;
+            }
+        }
+        return $et;
+    }
+
+
 }
 
 // TODO
