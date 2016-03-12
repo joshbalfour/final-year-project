@@ -70,6 +70,10 @@ The project's requirements were first broken down to into 6 key points and numbe
 
 * R6 - Show more data about the level crossing that could be of potential interest (pictures, names, general information such as: accessibility, train frequency, and more)
 
+Due to the size of the project, it was deemed appropriate to class the project as MVP, with a preceding Discovery phase and an extension "Future" phase.
+
+The requirements were also allocated a 
+
 We then broke each requirement down to a functional level, and listed out the functions that the the system would have to fullfill in order to accomplish each respective requirement, numbered in the format `Requirement#.Function#` for example R1 was broken down to 5 functional requirements:
 
 * R1.F1 - Download and Store Level Crossing Locations
@@ -82,7 +86,7 @@ We then broke each requirement down to a functional level, and listed out the fu
 
 * R1.F5 - Write algorithm to show if level crossing is up or down based on the above data
 
-We then started a Spike, within which each function was discussed in depth and broken down to a task level, making notes from our own knowledge and researching where there were gaps, bullet points of what needed to be done in order to accomplish the task. This then allowed us to put man hour time estimates against each task.
+We then started a Spike, within which each function was discussed in depth and broken down to a task level, making notes from our own knowledge and researching where there were gaps, bullet points of what needed to be done in order to accomplish the task. This then allowed us to put man hour sizings against each task.
 
 For Example R1.F1 was broken down into 3 tasks:
 
@@ -117,8 +121,70 @@ With these Man Hour estimates in hand we were then able to make estimates by agg
 Aside from providing us with time estimates this process was incredibly valuable as it also highlighted the project's risks, which is why some tasks have ranges against them instead of an absolute hour value, and it also gave us time to think through the approach we would take, lowering the number of assumptions we made.
 
 Taking these time estimates we then established how we would share the load of the tasks. 
-We did this by 
-During the discussions surrounding the spike we had already established where the group member's strengths were and who already had a solid idea about how they would accomplish each task.
+To do this we needed to input the tasks into a collaborative project management tool, within which you could assign tasks to an individual, input dependancies, and generate gantt charts and workload reports.
+
+After evaluating a number of different project management tools we ultimately chose Asana in combination with a collection other third party services, as it was both free and able to fulfill our needs.
+
+Using the dynamic gantt chart creator Instagantt, we were able to pull our project data from Asana and render it in gantt chart form, like so:
+
+<img src="Images/instagantt.png" width=650/>
+
+NB: The bars were previously blue before the tasks were marked as completed.
+
+During the discussions surrounding the Spike we had already established where the group member's strengths were and who already had a solid idea about how they would accomplish each task, so assigning responsibilities to group members was reasonably easy.
+
+After allocating a team member to each task, we used the Pending Workload view in Instagantt to set target completion dates, preventing clashes and verifying that the workload was distributed evenly across team members.
+
+<img src="Images/instagantt-workload.png" width=650/> 
+
+NB: I marked tasks as incomplete so that they would show in the Pending Workload view to illustrate our usage of the product, hence they appear as red.
+
+With the project planning process completed, we were able to deliver well thought through, concrete delivery date estimates to our project supervisor for when each requirement in the project would be met.
+
+
+### Step Two - Execute
+
+Within the project plan a Discovery phase was allocated in order to establish the base of the project. 
+
+This consisted of the following:
+
+* A Version Control System.
+* A self-contained runtime environment for development and deployment.
+* A definition of practices surrounding documentation, testing, communication, and development.
+
+The chosen VCS was GIT, as it met our requirements and would also allow us to use industry standard GitHub's free private hosted offering, which we were all very familiar with.
+
+In order to ensure that software which our project would depend on was in sync between our development machines, and ultimately our production machine, we chose to use Docker to build a  low-overhead virtual machine, herein refered to as a container, which would have all our dependancies installed - our database, our application framework, and our web server. This container was defined by a script, known as a Dockerfile, which was under version control in our VCS (GitHub). 
+
+Using Docker solved the issue of this project's environment conflicting with other projects on the developer's machines.
+This also meant that when it came to test and deploy the application, we were able to do it in under a minute with no problems, as the environment was exactly the same as the development environment.
+
+
+Using GitHub as our VCS allowed us to use GitHub's development workflow which they dubbed "GitHub Flow".
+
+<img src="Images/the github flow.png" width=700/>
+
+We implemented GitHub Flow by establishing in our development practice that when developing a feature, bugfix, or otherwise changing the contents of the repository, that the developer must first make a new branch from the master branch, perform their task, then open a Pull Request to the master branch. A notification is then sent to the rest of the team, who review the request, and when there is unanimous approval the code from the feature branch is merged into master, and the feature branch is deleted.
+
+To minimise the opinionated aspect of our code review, the process was established objectively as part of our development practices. 
+One of our criteria for approval was that the code could be automatically merged into the master branch, with no conflicts. This was determined by GitHub and could be satisfied by the developer who made the feature request merging the Master branch into their feature branch, and resolving any conflicts in their feature branch before making the pull request.
+Another of our criteria was that the code passes all tests. In order to minimise the work required to verify this criteria we used a Continuous Integration service called Travis to continually monitor our code repository and run our automated tests. When a pull request was made against the master branch Travis would test both the feature branch, and the automatic merge from the feature branch into master branch.
+
+The resulting box is then shown to reviewers of the pull request:
+<img src="Images/pr-ci-tests.png" width=500/>
+
+This approach minimised developer effort, whilst maximising stability of the product.
+
+#### Weekly Standups
+
+Each week, as the project progressed and tasks were marked completed in Asana, the gantt chart automatically updated, visualising the project's progression. This allowed us to report to our project supervisor in graphical form the progress of the project.
+
+Along with the updated gantt chart, a weekly report was produced using the third party service  WeekDone which pulled the project's progress data from Asana and generated a progress report, an excerpt of an example of which is below:
+
+<img src="Images/productivity report.png" width=550/>
+
+
+### Step Three - Deliver
 
 
 ## Conclusions
