@@ -48,6 +48,69 @@ Depending on the nature of your project, these sections may include: a compariso
 In particular you should give a mixture of general discussion of your work and particular examples. Too much general discussion and the reader cannot easily get a handle on what you are doing; too many specific examples and the document fails to "tell a story".
 ```
 
+### Step One - Plan
+
+The project's requirements were first broken down to into 6 key points and numbered, in order of priority:
+
+* R1 - Be able to show current level crossing times
+
+* R2 - Be able to display level crossing times in a nice way
+
+* R3 - Predict level crossing times to a 90% degree of accuracy within 2 minutes
+
+* R4 - Have an open API to allow other developers to add value
+
+* R5 - Be able to predict level crossing times to 95% degree of accuracy within 30 seconds
+
+* R6 - Show more data about the level crossing that could be of potential interest (pictures, names, general information such as: accessibility, train frequency, and more)
+
+We then broke each requirement down to a functional level, and listed out the functions that the the system would have to fullfill in order to accomplish each respective requirement, numbered in the format `Requirement#.Function#` for example R1 was broken down to 5 functional requirements:
+
+* R1.F1 - Download and Store Level Crossing Locations
+
+* R1.F2 - Download and Store Train Times
+
+* R1.F3 - Download and Store Rail Station Locations (links R1.F1 and R1.F2)
+
+* R1.F4 - Download and Store Railway Route Locations (R1.F1, R1.F2, and R1.F3)
+
+* R1.F5 - Write algorithm to show if level crossing is up or down based on the above data
+
+We then started a Spike, within which each function was discussed in depth and broken down to a task level, making notes from our own knowledge and researching where there were gaps, bullet points of what needed to be done in order to accomplish the task. This then allowed us to put man hour time estimates against each task.
+
+For Example R1.F1 was broken down into 3 tasks:
+
+* R1.F1.T1 Set up a Database - 4 MH
+
+	* DockerFile from mysql  
+
+* R1.F1.T2 Find and download the data - 4 MH
+
+	* Needs to be able to be done regularly, so must write script
+
+		* Scrape [http://www.networkrail.co.uk/transparency/level-crossings/](http://www.networkrail.co.uk/transparency/level-crossings/)
+
+		* Find download link
+
+		* Download contents
+
+		* Parse XLS file
+
+		* Grab second sheet
+
+		* Import each row into database table
+
+* R1.F1.T3 Write view to sanitise/convert/extract the data we need - 1 MH
+
+	* ID
+
+	* location
+	
+With these Man Hour estimates in hand we were then able to make estimates by aggregating the estimates and including 10% contingency, as to how long each requirement was going to take to fulfill.
+
+Aside from providing us with time estimates this process was incredibly valuable as it also highlighted the project's risks, which is why some tasks have ranges against them instead of an absolute hour value, and it also gave us time to think through the approach we would take, lowering the number of assumptions we made.
+
+Taking these time estimates we then established how we would share the load of the tasks. During the discussions surrounding the spike we had already established where the group member's strengths were and 
 
 
 ## Conclusions
