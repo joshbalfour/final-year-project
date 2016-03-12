@@ -16,9 +16,15 @@ The members of the project group, listed in alphabetical order.
 ## Abstract
 
 Level crossing closures are a cause of delay, have a negative impact on the environment due to fumes of stopped transport, and prevent vital emergency services from getting to their destination quickly. The problem is particularly noticeable in Canterbury, which has level crossings on main transport routes.
-Can level crossing closures be predicted? Rail timetables plus real time train feeds might make journey planning through level crossings more reliable. Redirecting via longer, but quicker routes or delaying journeys would then be possible.
-The project was to develop such a level crossing predictor, integrate with suitable mapping software on the web and/or mobile apps. Field testing for accuracy would be a key part of the final stages of the project.
-The project was implemented in PHP and Node JS on the back end, using Angular JS on the front end and a MySQL Database, all managed in a Docker container.
+
+
+Can level crossing closures be predicted? Rail timetables plus real time train feeds might make journey planning through level crossings more reliable. Redirecting via longer, but quicker routes or delaying journeys would then be possible.
+
+
+The project was to develop such a level crossing predictor, integrate with suitable mapping software on the web and/or mobile apps. Field testing for accuracy would be a key part of the final stages of the project.
+
+
+The project was implemented in PHP and Node JS on the back end, using Angular JS on the front end and a MySQL Database, all managed in a Docker container.
 
 ## Introduction
 ```
@@ -110,7 +116,9 @@ With these Man Hour estimates in hand we were then able to make estimates by agg
 
 Aside from providing us with time estimates this process was incredibly valuable as it also highlighted the project's risks, which is why some tasks have ranges against them instead of an absolute hour value, and it also gave us time to think through the approach we would take, lowering the number of assumptions we made.
 
-Taking these time estimates we then established how we would share the load of the tasks. During the discussions surrounding the spike we had already established where the group member's strengths were and 
+Taking these time estimates we then established how we would share the load of the tasks. 
+We did this by 
+During the discussions surrounding the spike we had already established where the group member's strengths were and who already had a solid idea about how they would accomplish each task.
 
 
 ## Conclusions
@@ -127,7 +135,8 @@ A statement of what your project achieved. For example you might want to conside
 
 Key pain points:
 
-* Data processing and curation as we overestimated the quality of relavent data available.* Spending more time waiting than coding due to lack computing power.
+* Data processing and curation as we overestimated the quality of relavent data available.
+* Spending more time waiting than coding due to lack computing power.
 * Setting our practices for project management from scratch due to not previously being taught project management procedures, systems or tools.
 * Horrendous amount of Scope creep
 
