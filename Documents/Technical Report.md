@@ -168,12 +168,19 @@ We implemented GitHub Flow by establishing in our development practice that when
 
 To minimise the opinionated aspect of our code review, the process was established objectively as part of our development practices. 
 One of our criteria for approval was that the code could be automatically merged into the master branch, with no conflicts. This was determined by GitHub and could be satisfied by the developer who made the feature request merging the Master branch into their feature branch, and resolving any conflicts in their feature branch before making the pull request.
-Another of our criteria was that the code passes all tests. In order to minimise the work required to verify this criteria we used a Continuous Integration service called Travis to continually monitor our code repository and run our automated tests. When a pull request was made against the master branch Travis would test both the feature branch, and the automatic merge from the feature branch into master branch.
+Another of our criteria was that the code passes all tests. In order to minimise the work required to verify this criteria we used a continuous integration service called Travis to continually monitor our code repository and run our automated tests. When a pull request was made against the master branch Travis would test both the feature branch, and the automatic merge from the feature branch into master branch.
 
 The resulting box is then shown to reviewers of the pull request:
+
 <img src="Images/pr-ci-tests.png" width=500/>
 
 This approach minimised developer effort, whilst maximising stability of the product.
+
+Discussions on pull requests were done using a team messaging service called Slack, which allowed us to communicate whilst on our laptops and phones. Our continuous integration service Travis, and our VCS GitHub integrated with Slack, which allowed developers to be notified when other team members were committing to the repository. This prompted increased collaboration and encouraged more knowledge sharing and allowed team members working remotely to feel more involved in the project.
+
+```
+*** Write about docs ***
+```
 
 #### Weekly Standups
 
