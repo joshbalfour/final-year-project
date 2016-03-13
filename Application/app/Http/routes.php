@@ -17,3 +17,4 @@ Route::get('crossings/{crossing_id}/times', 'CrossingsController@getTimes');
 Route::get('crossings/{crossing_id}/image', 'CrossingsController@serveImage');
 
 Route::get('debug', 'DebugController@index');
+Route::get('debug/active_trains', 'DebugController@trainLocations');

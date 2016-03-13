@@ -9,6 +9,7 @@
 namespace App\Console\Commands;
 
 
+use Carbon\Carbon;
 use Exception;
 
 class ImportDailyTrainDataTest extends \TestCase
@@ -65,7 +66,7 @@ class ImportDailyTrainDataTest extends \TestCase
     {
         $data =
            '<PportTimetable>
-                <Journey rid="1" >
+                <Journey rid="1" ssd="'.date("Y-m-d").'" >
                     <OR tpl="START" wtd="16:04" />
                     <DT tpl="END" wta="16:20" />
                 </Journey>
@@ -74,11 +75,11 @@ class ImportDailyTrainDataTest extends \TestCase
         $this->command->handle();
         $expected = [
             [
-                'rid' => 1,
-                'from_tpl' => 'START',
-                'from_time' => date('Y-m-d').' 16:04:00',
-                'to_tpl' => 'END',
-                'to_time' => date('Y-m-d').' 16:20:00'
+                '1',
+                'START',
+                new Carbon( date('Y-m-d').' 16:04:00' ),
+                'END',
+                new Carbon( date('Y-m-d').' 16:20:00' )
             ]
         ];
         $this->assertEquals( $expected, $this->mockStorage->getData());
@@ -91,7 +92,7 @@ class ImportDailyTrainDataTest extends \TestCase
     {
         $data =
             '<PportTimetable>
-                <Journey rid="1" >
+                <Journey rid="1" ssd="'.date("Y-m-d").'" >
                     <OR tpl="START" wtd="16:04" />
                     <PP tpl="MIDDLE" wtp="16:10"/>
                     <DT tpl="END" wta="16:20" />
@@ -101,21 +102,21 @@ class ImportDailyTrainDataTest extends \TestCase
         $this->command->handle();
         $expected = [
             [
-                'rid' => 1,
-                'from_tpl' => 'START',
-                'from_time' => date('Y-m-d').' 16:04:00',
-                'to_tpl' => 'MIDDLE',
-                'to_time' => date('Y-m-d').' 16:10:00'
+                '1',
+                'START',
+                new Carbon( date('Y-m-d').' 16:04:00' ),
+                'MIDDLE',
+                new Carbon( date('Y-m-d').' 16:10:00' )
             ],
             [
-                'rid' => 1,
-                'from_tpl' => 'MIDDLE',
-                'from_time' => date('Y-m-d').' 16:10:00',
-                'to_tpl' => 'END',
-                'to_time' => date('Y-m-d').' 16:20:00'
+                '1',
+                'MIDDLE',
+                new Carbon( date('Y-m-d').' 16:10:00' ),
+                'END',
+                new Carbon( date('Y-m-d').' 16:20:00' )
             ]
         ];
-        $this->assertEquals( $expected, $this->mockStorage->getData());
+        $this->assertEquals( $expected, $this->mockStorage->getData() );
     }
 
     /**
@@ -125,7 +126,7 @@ class ImportDailyTrainDataTest extends \TestCase
     {
         $data =
             '<PportTimetable>
-                <Journey rid="1" >
+                <Journey rid="1" ssd="'.date("Y-m-d").'" >
                     <OR tpl="START" wtd="16:04" />
                     <IP tpl="MIDDLE" wta="16:10" wtd="16:12" />
                     <DT tpl="END" wta="16:20" />
@@ -135,18 +136,18 @@ class ImportDailyTrainDataTest extends \TestCase
         $this->command->handle();
         $expected = [
             [
-                'rid' => 1,
-                'from_tpl' => 'START',
-                'from_time' => date('Y-m-d').' 16:04:00',
-                'to_tpl' => 'MIDDLE',
-                'to_time' => date('Y-m-d').' 16:10:00'
+                '1',
+                'START',
+                new Carbon( date('Y-m-d').' 16:04:00' ),
+                'MIDDLE',
+                new Carbon( date('Y-m-d').' 16:10:00' )
             ],
             [
-                'rid' => 1,
-                'from_tpl' => 'MIDDLE',
-                'from_time' => date('Y-m-d').' 16:12:00',
-                'to_tpl' => 'END',
-                'to_time' => date('Y-m-d').' 16:20:00'
+                '1',
+                'MIDDLE',
+                new Carbon( date('Y-m-d').' 16:12:00' ),
+                'END',
+                new Carbon( date('Y-m-d').' 16:20:00' )
             ]
         ];
         $this->assertEquals( $expected, $this->mockStorage->getData());
@@ -159,7 +160,7 @@ class ImportDailyTrainDataTest extends \TestCase
     {
         $data =
             '<PportTimetable>
-                <Journey rid="1" >
+                <Journey rid="1" ssd="'.date("Y-m-d").'" >
                     <OR tpl="START" wtd="16:04" />
                     <PP tpl="NONSTOP" wtp="16:07" />
                     <IP tpl="MIDDLE" wta="16:10" wtd="16:12" />
@@ -172,39 +173,39 @@ class ImportDailyTrainDataTest extends \TestCase
         $this->command->handle();
         $expected = [
             [
-                'rid' => 1,
-                'from_tpl' => 'START',
-                'from_time' => date('Y-m-d').' 16:04:00',
-                'to_tpl' => 'NONSTOP',
-                'to_time' => date('Y-m-d').' 16:07:00'
+                '1',
+                'START',
+                new Carbon( date('Y-m-d').' 16:04:00' ),
+                'NONSTOP',
+                new Carbon( date('Y-m-d').' 16:07:00' )
             ],
             [
-                'rid' => 1,
-                'from_tpl' => 'NONSTOP',
-                'from_time' => date('Y-m-d').' 16:07:00',
-                'to_tpl' => 'MIDDLE',
-                'to_time' => date('Y-m-d').' 16:10:00'
+                '1',
+                'NONSTOP',
+                new Carbon( date('Y-m-d').' 16:07:00' ),
+                'MIDDLE',
+                new Carbon( date('Y-m-d').' 16:10:00' )
             ],
             [
-                'rid' => 1,
-                'from_tpl' => 'MIDDLE',
-                'from_time' => date('Y-m-d').' 16:12:00',
-                'to_tpl' => 'NONSTOP2',
-                'to_time' => date('Y-m-d').' 16:17:00'
+                '1',
+                'MIDDLE',
+                new Carbon( date('Y-m-d').' 16:12:00' ),
+                'NONSTOP2',
+                new Carbon( date('Y-m-d').' 16:17:00' )
             ],
             [
-                'rid' => 1,
-                'from_tpl' => 'NONSTOP2',
-                'from_time' => date('Y-m-d').' 16:17:00',
-                'to_tpl' => 'MIDDLE2',
-                'to_time' => date('Y-m-d').' 16:20:00'
+                '1',
+                'NONSTOP2',
+                new Carbon( date('Y-m-d').' 16:17:00'),
+                'MIDDLE2',
+                new Carbon( date('Y-m-d').' 16:20:00' )
             ],
             [
-                'rid' => 1,
-                'from_tpl' => 'MIDDLE2',
-                'from_time' => date('Y-m-d').' 16:22:30',
-                'to_tpl' => 'END',
-                'to_time' => date('Y-m-d').' 16:30:00'
+                '1',
+                'MIDDLE2',
+                new Carbon( date('Y-m-d').' 16:22:30'),
+                'END',
+                new Carbon( date('Y-m-d').' 16:30:00' )
             ]
         ];
         $this->assertEquals( $expected, $this->mockStorage->getData());
@@ -217,7 +218,7 @@ class ImportDailyTrainDataTest extends \TestCase
     {
         $data =
             '<PportTimetable>
-                <Journey rid="1" >
+                <Journey rid="1" ssd="'.date("Y-m-d").'" >
                     <OR tpl="START" wtd="16:04" />
                     <PP tpl="NONSTOP" wtp="16:07" />
                     <IP tpl="MIDDLE" wta="16:10" wtd="16:12" />
@@ -225,7 +226,7 @@ class ImportDailyTrainDataTest extends \TestCase
                     <IP tpl="MIDDLE2" wta="16:20" wtd="16:22:30" />
                     <DT tpl="END" wta="16:30" />
                 </Journey>
-                <Journey rid="2" >
+                <Journey rid="2" ssd="'.date("Y-m-d").'" >
                     <OR tpl="START" wtd="16:04" />
                     <PP tpl="NONSTOP" wtp="16:07" />
                     <IP tpl="MIDDLE" wta="16:10" wtd="16:12" />
@@ -238,74 +239,74 @@ class ImportDailyTrainDataTest extends \TestCase
         $this->command->handle();
         $expected = [
             [
-                'rid' => 1,
-                'from_tpl' => 'START',
-                'from_time' => date('Y-m-d').' 16:04:00',
-                'to_tpl' => 'NONSTOP',
-                'to_time' => date('Y-m-d').' 16:07:00'
+                '1',
+                'START',
+                new Carbon( date('Y-m-d').' 16:04:00'),
+                'NONSTOP',
+                new Carbon( date('Y-m-d').' 16:07:00')
             ],
             [
-                'rid' => 1,
-                'from_tpl' => 'NONSTOP',
-                'from_time' => date('Y-m-d').' 16:07:00',
-                'to_tpl' => 'MIDDLE',
-                'to_time' => date('Y-m-d').' 16:10:00'
+                '1',
+                'NONSTOP',
+                new Carbon( date('Y-m-d').' 16:07:00'),
+                'MIDDLE',
+                new Carbon( date('Y-m-d').' 16:10:00')
             ],
             [
-                'rid' => 1,
-                'from_tpl' => 'MIDDLE',
-                'from_time' => date('Y-m-d').' 16:12:00',
-                'to_tpl' => 'NONSTOP2',
-                'to_time' => date('Y-m-d').' 16:17:00'
+                '1',
+                'MIDDLE',
+                new Carbon( date('Y-m-d').' 16:12:00'),
+                'NONSTOP2',
+                new Carbon( date('Y-m-d').' 16:17:00')
             ],
             [
-                'rid' => 1,
-                'from_tpl' => 'NONSTOP2',
-                'from_time' => date('Y-m-d').' 16:17:00',
-                'to_tpl' => 'MIDDLE2',
-                'to_time' => date('Y-m-d').' 16:20:00'
+                '1',
+                'NONSTOP2',
+                new Carbon( date('Y-m-d').' 16:17:00'),
+                'MIDDLE2',
+                new Carbon( date('Y-m-d').' 16:20:00' )
             ],
             [
-                'rid' => 1,
-                'from_tpl' => 'MIDDLE2',
-                'from_time' => date('Y-m-d').' 16:22:30',
-                'to_tpl' => 'END',
-                'to_time' => date('Y-m-d').' 16:30:00'
+                '1',
+                'MIDDLE2',
+                new Carbon( date('Y-m-d').' 16:22:30'),
+                'END',
+                new Carbon( date('Y-m-d').' 16:30:00' )
             ],
             [
-                'rid' => 2,
-                'from_tpl' => 'START',
-                'from_time' => date('Y-m-d').' 16:04:00',
-                'to_tpl' => 'NONSTOP',
-                'to_time' => date('Y-m-d').' 16:07:00'
+                '2',
+                'START',
+                new Carbon( date('Y-m-d').' 16:04:00'),
+                'NONSTOP',
+                new Carbon( date('Y-m-d').' 16:07:00' )
             ],
             [
-                'rid' => 2,
-                'from_tpl' => 'NONSTOP',
-                'from_time' => date('Y-m-d').' 16:07:00',
-                'to_tpl' => 'MIDDLE',
-                'to_time' => date('Y-m-d').' 16:10:00'
+                '2',
+                'NONSTOP',
+                new Carbon( date('Y-m-d').' 16:07:00'),
+                'MIDDLE',
+                new Carbon( date('Y-m-d').' 16:10:00' )
             ],
             [
-                'rid' => 2,
-                'from_tpl' => 'MIDDLE',
-                'from_time' => date('Y-m-d').' 16:12:00',
-                'to_tpl' => 'NONSTOP2',
-                'to_time' => date('Y-m-d').' 16:17:00'
+                '2',
+                'MIDDLE',
+                new Carbon( date('Y-m-d').' 16:12:00'),
+                'NONSTOP2',
+                new Carbon( date('Y-m-d').' 16:17:00' )
             ],
             [
-                'rid' => 2,
-                'from_tpl' => 'NONSTOP2',
-                'from_time' => date('Y-m-d').' 16:17:00',
-                'to_tpl' => 'MIDDLE2',
-                'to_time' => date('Y-m-d').' 16:20:00'
+                2,
+                'NONSTOP2',
+                new Carbon( date('Y-m-d').' 16:17:00'),
+                'MIDDLE2',
+                new Carbon( date('Y-m-d').' 16:20:00' )
             ],
             [
-                'rid' => 2,
-                'from_tpl' => 'MIDDLE2',
-                'from_time' => date('Y-m-d').' 16:22:30',
-                'to_tpl' => 'END',
-                'to_time' => date('Y-m-d').' 16:30:00'
+                2,
+                'MIDDLE2',
+                new Carbon( date('Y-m-d').' 16:22:30'),
+                'END',
+                new Carbon( date('Y-m-d').' 16:30:00' )
             ]
         ];
         $this->assertEquals( $expected, $this->mockStorage->getData());

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class CrossingsController extends Controller
@@ -140,10 +141,10 @@ class CrossingsController extends Controller
 
         $rows = array_map(function (&$row) {
             return [
-                'trainDepart' => $row->from_time,
-                'trainArrive' => $row->to_time,
-                'downTime' => $row->down_time,
-                'upTime' => $row->up_time,
+                'trainDepart' => (new Carbon($row->from_time))->toAtomString(),
+                'trainArrive' => (new Carbon($row->to_time))->toAtomString(),
+                'downTime' => (new Carbon($row->down_time))->toAtomString(),
+                'upTime' => (new Carbon($row->up_time))->toAtomString(),
                 'duration' => strtotime($row->up_time) - strtotime($row->down_time)
             ];
         }, $rows);
