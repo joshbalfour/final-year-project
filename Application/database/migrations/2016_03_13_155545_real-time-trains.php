@@ -14,6 +14,7 @@ class RealTimeTrains extends Migration
     {
         //
         DB::statement("alter table `train_times_with_crs` add orig_from_time datetime not null, add orig_to_time datetime not null");
+        DB::statement("create index rid on train_times_with_crs(rid);");
     }
 
     /**
@@ -25,5 +26,6 @@ class RealTimeTrains extends Migration
     {
         //
         DB::statement("alter table `train_times_with_crs` drop orig_from_time, drop orig_to_time");
+        DB::statement("DROP INDEX rid ON train_times_with_crs;");
     }
 }

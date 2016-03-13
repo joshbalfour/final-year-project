@@ -36,39 +36,41 @@ class TrainDataMysqlStorage implements TrainDataStorage
 
     public function update($rows)
     {   
+        if (count($rows) == 0){
+            return;
+        }
+        $queries = "";
+        $values = [];
         
         foreach($rows as $row){
-           
-            // todo: batch this
             
             if ($row["ta"] != null){
-                $query = 'update train_times_with_crs set to_time = ? where rid=? and orig_to_time = ? and to_crs = ( select max(3alpha) from tiploc_to_crs where tiploc=? ) ';
-                $values = [$row["ta"], $row["rid"], $row["wta"], $row["tpl"]];
-                DB::statement($query, $values);
+                $queries .= 'update train_times_with_crs set to_time = ? where rid=? and orig_to_time = ? and to_crs = ( select max(3alpha) from tiploc_to_crs where tiploc=? ); ';
+
+                array_push($values, $row["ta"], $row["rid"], $row["wta"], $row["tpl"]);
             }
 
             if ($row["td"] != null){
-                $query = 'update train_times_with_crs set from_time = ? where rid=? and orig_from_time = ? and from_crs = ( select max(3alpha) from tiploc_to_crs where tiploc=? ) ';
-                $values = [$row["td"], $row["rid"], $row["wtd"], $row["tpl"]];
-                DB::statement($query, $values);
+                $queries .= 'update train_times_with_crs set from_time = ? where rid=? and orig_from_time = ? and from_crs = ( select max(3alpha) from tiploc_to_crs where tiploc=? ); ';
+                array_push($values, $row["td"], $row["rid"], $row["wtd"], $row["tpl"]);
             }
 
             if ($row["tp"] != null){
-                $query = 'update train_times_with_crs set from_time = ? where rid=? and orig_from_time = ? and from_crs = ( select max(3alpha) from tiploc_to_crs where tiploc=? ) ';
-                $values = [$row["tp"], $row["rid"], $row["wtp"], $row["tpl"]];
-                DB::statement($query, $values);
+                $queries .= 'update train_times_with_crs set from_time = ? where rid=? and orig_from_time = ? and from_crs = ( select max(3alpha) from tiploc_to_crs where tiploc=? ); ';
+                array_push($values, $row["tp"], $row["rid"], $row["wtp"], $row["tpl"]);
 
-                $query = 'update train_times_with_crs set to_time = ? where rid=? and orig_to_time = ? and to_crs = ( select max(3alpha) from tiploc_to_crs where tiploc=? ) ';
-                $values = [$row["tp"], $row["rid"], $row["wtp"], $row["tpl"]];
-                DB::statement($query, $values);
+                $queries .= 'update train_times_with_crs set to_time = ? where rid=? and orig_to_time = ? and to_crs = ( select max(3alpha) from tiploc_to_crs where tiploc=? ); ';
+                array_push($values, $row["tp"], $row["rid"], $row["wtp"], $row["tpl"]);
             }
         }
+        DB::statement($queries, $values);
     }
 
 
     public function beginTransaction()
     {
         DB::beginTransaction();
+        DB::connection()->getPdo()->setAttribute(\PDO::ATTR_EMULATE_PREPARES, 1);
     }
 
     public function commit()
