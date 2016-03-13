@@ -144,6 +144,8 @@ With the project planning process completed, we were able to deliver well though
 
 ### Step Two - Execute
 
+#### A Targeted Approach
+
 Within the project plan a Discovery phase was allocated in order to establish the base of the project. 
 
 This consisted of the following:
@@ -189,6 +191,24 @@ Each week, as the project progressed and tasks were marked completed in Asana, t
 Along with the updated gantt chart, a weekly report was produced using the third party service  WeekDone which pulled the project's progress data from Asana and generated a progress report, an excerpt of an example of which is below:
 
 <img src="Images/productivity report.png" width=550/>
+
+#### Pivot Points
+
+Over the course of the project there were several pivot points, which, due to the agile approach we took, we were able to easily accomodate for.
+
+##### Project Pivots
+
+* www.railmaponline.com data -> OSM
+* OSM -> National Rail Data
+* Scope extension to Kent-wide rather than just Canterbury
+
+##### Technology Pivots
+
+* Lumen -> Laravel
+* Postgres -> MySQL
+* PHP -> HHVM
+* PHP -> Node for algorithm
+* Stack not compatible with Raptor, decided to use own server
 
 
 ### Step Three - Deliver
