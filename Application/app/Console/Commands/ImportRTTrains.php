@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 use App\Gateways\RTTrainDataGateway;
 use App\Storage\TrainDataStorage;
 use Carbon\Carbon;
-use Mockery\CountValidator\Exception;
 
 class ImportRTTrains extends Command
 {
@@ -25,7 +24,7 @@ class ImportRTTrains extends Command
     protected $description = 'Imports the real time train data';
 
     /**
-     * @var RTTrainDataGateway
+     * @var DailyTrainDataGateway
      */
     private $gateway;
 
@@ -36,7 +35,7 @@ class ImportRTTrains extends Command
 
     /**
      * Create a new command instance.
-     * @param RTTrainDataGateway $gateway
+     * @param DailyTrainDataGateway $gateway
      * @param TrainDataStorage $trainDataStorage
      */
     public function __construct( RTTrainDataGateway $gateway, TrainDataStorage $trainDataStorage)
@@ -54,94 +53,147 @@ class ImportRTTrains extends Command
     public function handle()
     {
         // \DB::statement("truncate table rt_updates");
-        echo "\nDownloading Realtime Train Times.";
+        echo "\nDownloading Realtime Train Times.\n";
+        $filePaths = $this->gateway->getRTTrainData(false, $this->output);
+
+        foreach ($filePaths as $filePath){
+            $this->dealWithFile($filePath);
+        }
+    }
+
+    private function dealWithFile($filePath){
+        $fc = file_get_contents($filePath);
+        $xmlLines = explode("\n", $fc);
         
-        $file = $this->gateway->getRTTrainData();
+        // debug
+        $lineStart = 47;
+        $lineLimit = 1;
+        $counter = 0;
+        $acounter = 0;
 
-        echo "\nDownloaded Realtime Train Times.";
-
-        if( empty($file) ){
-            throw new Exception( "No real time train data in file" );
-        }
-
-        $this->dealWithFile($file);
-    }
-
-    private function dealWithFile($fileContents){
-        $xmlLines = explode("\n", $fileContents);
-
-        echo "\nUpdating";
         foreach($xmlLines as $xmlLine){
-                $this->dealWithPPMessage($xmlLine);
+            
+          //  if ($counter < $lineLimit && $acounter > $lineStart){
+                $this->dealWithPPMessage($xmlLine, $fc, $filePath);
+                
+             //   $counter++;
+         //   }
+
+           // $acounter++;
         }
-        echo "\nDone!";
     }
 
-    private function dealWithPPMessage($ppMessageString)
-    {
-        $ppMessageObject = $this->convertPPMessageStringToObject($ppMessageString);
-        $this->dealWithPPMessageObject($ppMessageObject);
-    }
-
-
-    /**
-     * @param $ppMessageString
-     * @return \XMLReader
-     * @throws \Exception
-     */
-    private function convertPPMessageStringToObject($ppMessageString)
-    {
-        $xmlData = new \XMLReader();
-        $xmlData->xml($ppMessageString);
-        try{
-            $xmlData->read();
-        } catch (\Exception $e){
-            throw new \Exception("Corrupt or Invalid XML");
+    private function dealWithPPMessage($ppMessageString, $xmlLines, $filePath){
+        $ppMessageObject = $this->convertPPMessageStringToObject($ppMessageString, $xmlLines, $filePath);
+        
+        if ($ppMessageObject != null){
+            $this->dealWithPPMessageObject($ppMessageObject);
         }
-        return $xmlData;
     }
 
-    /**
-     * @param \XMLReader $ppMessageObject
-     */
+    private function convertPPMessageStringToObject($ppMessageString, $xmlLines, $filePath){
+
+        $orig = $ppMessageString;
+
+        $left = 'xmlns="http://www.thalesgroup.com/rtti/PushPort/v12"';
+        $right = 'version="12.0"';
+        
+        $le = explode($left, $ppMessageString);
+        if (count($le) > 1){
+            $ts = explode($right, $le[1])[0];
+
+            // don't ask
+            $ppMessageString = preg_replace("/<.*(xmlns *= *[\"'].[^\"']*[\"']).[^>]*>/i", "<Pport $ts>", $ppMessageString);
+            $ppMessageString = preg_replace("/<\/([a-z0-9\-]*)?:/i", "</", $ppMessageString);
+            $ppMessageString = preg_replace("/<([a-z0-9\-]*)?:/i", "<", $ppMessageString);
+            
+            try {
+                $xmlData = simplexml_load_string( $ppMessageString, null, LIBXML_NOCDATA);
+            } catch (\Exception $e) {
+                 // var_dump($ppMessageString);
+                 // var_dump($orig);
+                 // var_dump($xmlLines);
+                 // var_dump($filePath);
+            }
+
+            if (isset($xmlData)){
+                // finally a normal object
+                return  json_decode(json_encode((array) $xmlData), 1);
+            } else {
+                echo "\nCorrupt/Incomplete push port message recieved";
+                return null;
+            }
+        } else {
+            echo "\nCoudn't get timestamp for push port message";
+            return null;
+        }
+    }
+
     private function dealWithPPMessageObject($ppMessageObject){
         $this->trainDataStorage->beginTransaction();
+        
         $updates = [];
 
-        while($ppMessageObject->read()){
-            if($ppMessageObject->name == 'Location'){
+        if ( (isset($ppMessageObject["@attributes"]) && isset($ppMessageObject["@attributes"]["ts"])) && (isset($ppMessageObject["uR"]) && isset($ppMessageObject["uR"]["TS"])) ){
+            
+            $ppMessageTime = new Carbon($ppMessageObject["@attributes"]["ts"]);
 
-                $update = [
-                    "rid" => $ppMessageObject->getAttribute('rid'),
-                    "tpl" => $ppMessageObject->getAttribute('tpl'),
-                ];
+            $ts = $ppMessageObject["uR"]["TS"];
 
-                $ssd = new Carbon( $ppMessageObject->getAttribute('ssd') );
+            $rid = $ts["@attributes"]["rid"];
+            $ssd = new Carbon($ts["@attributes"]["ssd"]);
+            // $uid = $ts["@attributes"]["uid"];
 
-                $location = new \SimpleXMLElement( $ppMessageObject->readOuterXml() );
-                foreach( $location->children() as $type => $details ) {
-                    if ($type == "arr") {
-                        $et = $this->getDateTime($ssd, $details->attributes()['et']);
-                        $update["ta"] = $et;
-                        $update["wta"] = $this->getDateTime($ssd, $details->attributes()['wta']);
+            foreach ($ts["Location"] as $location){
+
+                if (isset($location["@attributes"]) && isset($location["@attributes"]["tpl"])){
+
+                    $tiploc = $location["@attributes"]["tpl"];
+
+                    $update = [
+                        "ts" => $ppMessageTime,
+                        "rid" => $rid,
+                        "tpl" => $tiploc,
+                        // Illuminate\Support\Facades\DB is dumb and groups queries wrong
+                        "ta" => null,
+                        "td" => null,
+                        "tp" => null,
+                        "wta" => null,
+                        "wtd" => null,
+                        "wtp" => null
+                    ];
+
+                    if (isset($location["arr"])){
+                        if (isset($location["arr"]["@attributes"]["et"]) && isset($location["@attributes"]["wta"])){
+                            $et = $this->getDateTime($ssd, $location["arr"]["@attributes"]["et"]);
+                            $update["ta"] = $et;
+                            $update["wta"] = $this->getDateTime($ssd, $location["@attributes"]["wta"]);
+                        }
                     }
 
-                    if ($type == "dep") {
-                        $et = $this->getDateTime($ssd, $details->attributes()['et']);
-                        $update["td"] = $et;
-                        $update["wtd"] = $this->getDateTime($ssd, $details->attributes()['wtd']);
+                    if (isset($location["dep"])){
+                        if (isset($location["dep"]["@attributes"]["et"]) && isset($location["@attributes"]["wtd"])){
+                            $et = $this->getDateTime($ssd, $location["dep"]["@attributes"]["et"]);
+                            $update["td"] = $et;
+                            $update["wtd"] = $this->getDateTime($ssd, $location["@attributes"]["wtd"]);
+                        }
                     }
 
-                    if ($type == "pass") {
-                        $et = $this->getDateTime($ssd, $details->attributes()['et']);
-                        $update["tp"] = $et;
-                        $update["wtp"] = $this->getDateTime($ssd, $details->attributes()['wtp']);
+                    if (isset($location["pass"])){
+                        if (isset($location["pass"]["@attributes"]["et"]) && isset($location["@attributes"]["wtp"])){
+                            $et = $this->getDateTime($ssd, $location["pass"]["@attributes"]["et"]);
+                            $update["tp"] = $et;
+                            $update["wtp"] = $this->getDateTime($ssd, $location["@attributes"]["wtp"]);
+                        }
                     }
 
                     $updates[] = $update;
 
-                    if (count($updates) > 10000) {
-                        $this->trainDataStorage->update($updates);
+                    if (count($updates) > 10000){
+
+                        
+                        $this->trainDataStorage->update( $updates );
+                        
                         $updates = [];
                     }
                 }
@@ -149,6 +201,7 @@ class ImportRTTrains extends Command
         }
         
         $this->trainDataStorage->update( $updates );
+
         $this->trainDataStorage->commit();
     }
 

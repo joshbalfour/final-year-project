@@ -127,7 +127,8 @@ class ImportDailyTrainData extends Command
         $this->trainDataStorage->commit();
 
 
-        $this->trainDataStorage->truncateToCrsTable();
+        \DB::statement("truncate table train_times_with_crs");
+        \DB::statement("insert into train_times_with_crs select from_crs, to_crs, from_time, to_time, rid, from_time, to_time from v_train_times_with_crs");
         
 
 
@@ -164,7 +165,7 @@ class ImportDailyTrainData extends Command
         }
         $date->setTime($hour, $minute, $second);
         
-        if ($prevRollingDate->gt($date)){
+        if ($prevRollingDate->gte($date)){
             $date->addDay(1);
         }
 
