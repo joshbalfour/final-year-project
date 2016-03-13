@@ -54,8 +54,7 @@ class ImportRTTrains extends Command
     {
         // \DB::statement("truncate table rt_updates");
         echo "\nDownloading Realtime Train Times.\n";
-        
-        $filePaths = $this->gateway->getRTTrainData(1, $this->output);
+        $filePaths = $this->gateway->getRTTrainData(false, $this->output);
 
         foreach ($filePaths as $filePath){
             $this->dealWithFile($filePath);
