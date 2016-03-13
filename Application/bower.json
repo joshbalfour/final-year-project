@@ -22,5 +22,8 @@
     "angular-mocks": "1.4.7",
     "tween.js": "tweenjs#v16.3.0",
     "lodash": "~3.*"
+  },
+  "resolutions": {
+    "angular": "1.4.7"
   }
 }
