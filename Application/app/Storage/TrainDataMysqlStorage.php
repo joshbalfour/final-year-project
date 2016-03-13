@@ -25,14 +25,11 @@ class TrainDataMysqlStorage implements TrainDataStorage
             foreach ($row as $value){
                 $flattenedRows[] = $value;
             }
-            
-            $flattenedRows[] = $row[2];
-            $flattenedRows[] = $row[4];
 
-            return "( ?, ? ,? ,? ,?, ?, ? )";
+            return "( ?, ? ,? ,? ,?)";
         }, $rows);
 
-        DB::insert( "INSERT INTO train_times ( rid, from_tpl, from_time, to_tpl, to_time, orig_from_time, orig_to_time) VALUES ".implode(",",$params), $flattenedRows );
+        DB::insert( "INSERT INTO train_times ( rid, from_tpl, from_time, to_tpl, to_time) VALUES ".implode(",",$params), $flattenedRows );
     }
 
     
@@ -58,14 +55,13 @@ class TrainDataMysqlStorage implements TrainDataStorage
 
             if ($row["tp"] != null){
                 $query = 'update train_times_with_crs set from_time = ? where rid=? and orig_from_time = ? and from_crs = ( select max(3alpha) from tiploc_to_crs where tiploc=? ) ';
-                $values = [$row["ta"], $row["rid"], $row["wta"], $row["tpl"]];
+                $values = [$row["tp"], $row["rid"], $row["wtp"], $row["tpl"]];
                 DB::statement($query, $values);
 
                 $query = 'update train_times_with_crs set to_time = ? where rid=? and orig_to_time = ? and to_crs = ( select max(3alpha) from tiploc_to_crs where tiploc=? ) ';
-                $values = [$row["td"], $row["rid"], $row["wtd"], $row["tpl"]];
+                $values = [$row["tp"], $row["rid"], $row["wtp"], $row["tpl"]];
                 DB::statement($query, $values);
             }
-
         }
     }
 
