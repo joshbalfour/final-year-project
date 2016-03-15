@@ -22,29 +22,73 @@ class RTTrainDataFtpGateway implements RTTrainDataGateway
         $this->ftpAdapter = $ftpAdapter;
     }
 
-    public function getRTTrainData()
+    public function getRTTrainData($limit, $output)
     {
 
         $ftpContents = $this->ftpAdapter->listContents();
-        $ftpFilePath = $this->getCorrectFileFromListOfFiles($ftpContents);
+        $ftpFilePaths = $this->getCorrectFilesFromListOfFiles($ftpContents);
 
-        return $this->getXMLDataAsStringFromFile($ftpFilePath);
+        if (count( $ftpFilePaths ) == 0) {
+            throw new \Exception('Not realtime data on ftp');
+        }
+
+        if (!$limit){
+            $limit = count($ftpFilePaths);
+        }
+
+        if ($output){
+            $bar = $output->createProgressBar($limit);
+        }
+
+        $filePaths = [];
+        
+        $bar->start();
+
+        foreach ($ftpFilePaths as $ftpFilePath){
+           if (Cache::has($ftpFilePath)) {
+                if ($bar){
+                    $bar->advance();
+                }
+           } else {
+               if (count($filePaths) < $limit){
+                
+                    $filePath = "/tmp/$ftpFilePath";
+                    if ( file_exists( $filePath ) ){
+                        unlink( $filePath );
+                    }
+                    file_put_contents($filePath, $this->getXMLDataAsStringFromFile($ftpFilePath));
+                    
+                    if (!ends_with($ftpFilePath, 'pPortData.log')) {
+                        Cache::forever($ftpFilePath, true);
+                    }
+
+                    $filePaths[] = $filePath;
+                    if ($bar){
+                        $bar->advance();
+                    }
+               }
+           }
+        }
+
+        if ($bar){
+            $bar->finish();
+        }
+        return $filePaths;
     }
 
     /**
      * @param $files
      * @return string
-     * @throws \Exception
      */
-    private function getCorrectFileFromListOfFiles($files)
+    private function getCorrectFilesFromListOfFiles($files)
     {
+        $dataFiles = [];
         foreach ($files as $file) {
             if (strpos($file['path'], 'pPortData.log') !== false) {
-                return $file['path'];
+                $dataFiles[] = $file['path'];
             }
         }
-
-        throw new \Exception("Real Time data file not found");
+        return $dataFiles;
     }
 
     /**
@@ -57,7 +101,7 @@ class RTTrainDataFtpGateway implements RTTrainDataGateway
         if ( empty( $data['contents'] ) ){
             return false;
         }
-        return $this->stripMalformedFileEnding( $data['contents'] );
+        return $data['contents'];
     }
 
     /**
@@ -70,23 +114,5 @@ class RTTrainDataFtpGateway implements RTTrainDataGateway
         $data = $this->ftpAdapter->read($file);
         $this->ftpAdapter->disconnect();
         return $data;
-    }
-
-    /**
-     * pPortData.log seems to be constantly updating, when downloaded you get malformed xml at the end
-     * this gets rid of that
-     *
-     * @param $contents
-     * @return string
-     */
-    private function stripMalformedFileEnding( $contents )
-    {
-        $endString = "</Pport>";
-        $endStringPos = strrpos($contents, $endString);
-        if( $endStringPos == 0 ) {
-           return $contents;
-        }
-
-        return substr( $contents, 0, $endStringPos +strlen($endString) );
     }
 }
