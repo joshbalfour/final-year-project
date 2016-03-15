@@ -1,17 +1,28 @@
-## Title
 
-```
-Should be informative and not too long.
-```
 
-Enterprise-Ready Cloud-Based Containerised Algorithmic Big-Geospatial-Data Based Level Crossing Predictor.
 
-## Author(s)
+<br>
 
-```
-The members of the project group, listed in alphabetical order.
-```
-* Josh, Kieran, Ryan
+# Level Crossing Predictor
+
+<br>
+
+===
+
+
+<center> <img src="../Assets/logo-only.png" width=500/> </center>
+
+#### Josh Balfour <<jdb45@kent.ac.uk>>
+#### Kieran Jones <<kj90@kent.ac.uk>>
+#### Ryan Wood <<rsw24@kent.ac.uk>>
+
+<br>
+
+
+ 
+===
+
+
 
 ## Abstract
 
@@ -198,9 +209,13 @@ Over the course of the project there were several pivot points, which, due to th
 
 ##### Project Pivots
 
-* www.railmaponline.com data -> OSM
-* OSM -> National Rail Data
-* Scope extension to Kent-wide rather than just Canterbury
+Data sourcing was one of our key challenges on this project, we pivoted many times before we settled on our final set of data sources.
+
+In our initial research we found a website that mapped out the entire UK rail network on a Google Map, and emailed the author to obtain permission from him to use his data. Unfortunately he declined, so we kept searching.
+
+We next looked into using crowd sourced mapping project Open Street Map's data. This however produced an extra set of challenges - mostly surrounding compute resources. This was because although the compressed map itself was only 4 GB, it was 40 GB uncompressed. The uncompressed file then needed to be imported into a Postgres database which had a geospatial extension called PostGIS installed. After evaluating this option it was deemed unfeasible due to the time it would take to extract the railway tracks from the database and the gamble taken on the quality of the resulting data, as it was purely a crowdsourced dataset.
+
+After some in-depth research into the subject we found a government open spatial data initiative called INSPIRE. Backed by European Directive 2007/2/EC, the initiative established an infrastructure upon which government departments can publish geospatial datasets. Within the datasets published we found a listed, but not documented, API endpoint which was backed by Geoserver, an open source geospatial data server. Despite the lack of documentation, we were still able to make use of the API as one of the team mebers, Kieran, had knowledge of how Geoserver behaved so was able to write a reusable script to extract and transform the data we needed. Using this service we were able to source the railway track routes and the railway station locations.
 
 ##### Technology Pivots
 
@@ -209,6 +224,14 @@ Over the course of the project there were several pivot points, which, due to th
 * PHP -> HHVM
 * PHP -> Node for algorithm
 * Stack not compatible with Raptor, decided to use own server
+
+
+Over the course of the project we made several pivots in the technology stack that we utilised to deliver this project.
+
+
+
+#### Challenges
+
 
 
 ### Step Three - Deliver
