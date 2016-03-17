@@ -25,7 +25,7 @@ class MockRTTrainDataGateway implements RTTrainDataGateway
     /**
      * @return array
      */
-    public function getRTTrainData()
+    public function getRTTrainData($really, $hatePhp)
     {
         return $this->data;
     }

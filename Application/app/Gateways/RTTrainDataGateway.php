@@ -13,5 +13,5 @@ interface RTTrainDataGateway
     /**
      * @return array
      */
-    public function getRTTrainData();
+    public function getRTTrainData($hate, $php);
 }

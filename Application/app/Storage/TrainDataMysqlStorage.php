@@ -13,10 +13,9 @@ use Illuminate\Support\Facades\DB;
 class TrainDataMysqlStorage implements TrainDataStorage
 {
     /**
-     * inserts rows in the train_times table
-     *
-     *
-     * @param $rows array of rows
+     * @param $rows Array of rows
+     * @return
+     * @internal param array $trainTimes array of train times data
      */
     public function insert($rows)
     {
@@ -26,63 +25,52 @@ class TrainDataMysqlStorage implements TrainDataStorage
             foreach ($row as $value){
                 $flattenedRows[] = $value;
             }
-            
-            $flattenedRows[] = $row[2];
-            $flattenedRows[] = $row[4];
 
-            return "( ?, ? ,? ,? ,?, ?, ? )";
+            return "( ?, ? ,? ,? ,?)";
         }, $rows);
 
-        DB::insert( "INSERT INTO train_times ( rid, from_tpl, from_time, to_tpl, to_time, orig_from_time, orig_to_time) VALUES ".implode(",",$params), $flattenedRows );
+        DB::insert( "INSERT INTO train_times ( rid, from_tpl, from_time, to_tpl, to_time) VALUES ".implode(",",$params), $flattenedRows );
     }
 
+    
 
-    /**
-     * updates rows in the train_times_with_crs table
-     *
-     * @param $rows
-     */
     public function update($rows)
     {   
+        if (count($rows) == 0){
+            return;
+        }
+        $queries = "";
+        $values = [];
         
         foreach($rows as $row){
-           
-            // todo: batch this
             
-            if (!empty($row["ta"])){
-                $query = 'update train_times_with_crs set to_time = ? where rid=? and orig_to_time = ? and to_crs = ( select max(3alpha) from tiploc_to_crs where tiploc=? ) ';
-                $values = [$row["ta"], $row["rid"], $row["wta"], $row["tpl"]];
-                DB::statement($query, $values);
+            if ($row["ta"] != null){
+                $queries .= 'update train_times_with_crs set to_time = ? where rid=? and orig_to_time = ? and to_crs = ( select max(3alpha) from tiploc_to_crs where tiploc=? ); ';
+
+                array_push($values, $row["ta"], $row["rid"], $row["wta"], $row["tpl"]);
             }
 
-            if (!empty($row["td"])){
-                $query = 'update train_times_with_crs set from_time = ? where rid=? and orig_from_time = ? and from_crs = ( select max(3alpha) from tiploc_to_crs where tiploc=? ) ';
-                $values = [$row["td"], $row["rid"], $row["wtd"], $row["tpl"]];
-                DB::statement($query, $values);
+            if ($row["td"] != null){
+                $queries .= 'update train_times_with_crs set from_time = ? where rid=? and orig_from_time = ? and from_crs = ( select max(3alpha) from tiploc_to_crs where tiploc=? ); ';
+                array_push($values, $row["td"], $row["rid"], $row["wtd"], $row["tpl"]);
             }
 
-            if (!empty($row["tp"])){
-                $query = 'update train_times_with_crs set from_time = ? where rid=? and orig_from_time = ? and from_crs = ( select max(3alpha) from tiploc_to_crs where tiploc=? ) ';
-                $values = [$row["ta"], $row["rid"], $row["wta"], $row["tpl"]];
-                DB::statement($query, $values);
+            if ($row["tp"] != null){
+                $queries .= 'update train_times_with_crs set from_time = ? where rid=? and orig_from_time = ? and from_crs = ( select max(3alpha) from tiploc_to_crs where tiploc=? ); ';
+                array_push($values, $row["tp"], $row["rid"], $row["wtp"], $row["tpl"]);
 
-                $query = 'update train_times_with_crs set to_time = ? where rid=? and orig_to_time = ? and to_crs = ( select max(3alpha) from tiploc_to_crs where tiploc=? ) ';
-                $values = [$row["td"], $row["rid"], $row["wtd"], $row["tpl"]];
-                DB::statement($query, $values);
+                $queries .= 'update train_times_with_crs set to_time = ? where rid=? and orig_to_time = ? and to_crs = ( select max(3alpha) from tiploc_to_crs where tiploc=? ); ';
+                array_push($values, $row["tp"], $row["rid"], $row["wtp"], $row["tpl"]);
             }
-
         }
+        DB::statement($queries, $values);
     }
 
-    public function truncateToCrsTable()
-    {
-        \DB::statement("truncate table train_times_with_crs");
-        \DB::statement("insert into train_times_with_crs select * from v_train_times_with_crs");
-    }
 
     public function beginTransaction()
     {
         DB::beginTransaction();
+        DB::connection()->getPdo()->setAttribute(\PDO::ATTR_EMULATE_PREPARES, 1);
     }
 
     public function commit()

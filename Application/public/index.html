@@ -3,7 +3,7 @@
 	<head>
 		<title>Level Crossing Predictor</title>
 
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 		<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 		<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -31,98 +31,100 @@
 
 	</head>
 	<body>
-		<nav class="navbar navbar-default navbar-fixed-top">
-			<div class="container">
-				<a class="navbar-brand" href="#">
-					<img alt="Brand" height="23px" src="app/images/logo.png">
-					Level Crossing Predictor
-				</a>
+		<div class="container">
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<a class="navbar-brand" href="#">
+						<img alt="Brand" height="23px" src="app/images/logo.png">
+						Level Crossing Predictor
+					</a>
 
-				<label class="btn btn-info pull-right" ng-click="debug.enabled = !debug.enabled" ng-switch="debug.enabled">
-					Debug 
-					<span ng-switch-when="false">Enable</span>
-					<span ng-switch-when="true">Disable</span>
-				</label>
-			</div>
-		</nav>
-
-		<div id="crossings-map" ng-controller="MapController as mapCtrl" ng-init="mapCtrl.init()" >
-			<ui-gmap-google-map center='mapCtrl.center' zoom='mapCtrl.zoom' control='mapCtrl.googleMap' options='mapCtrl.mapOptions'>
-				<ui-gmap-markers models="mapCtrl.gateMarkers" click="mapCtrl.markerClicked" coords="'self'" icon="'icon'">
-				<ui-gmap-markers ng-if="debug.enabled" models="debug.trainLocations" coords="'self'" icon="'icon'">
-			</ui-gmap-google-map>
-
-			<div class="panel panel-default" id="showCrossingDetails" ng-show="mapCtrl.showCrossingDetails">
-				<div class="panel-heading">
-					<button type="button" class="close" ng-click="mapCtrl.closeCrossingDetals();">
-						<span aria-hidden="true">&times;</span>
-					</button>
+					<label class="btn btn-info pull-right" ng-click="debug.enabled = !debug.enabled" ng-switch="debug.enabled">
+						Debug 
+						<span ng-switch-when="false">Enable</span>
+						<span ng-switch-when="true">Disable</span>
+					</label>
 				</div>
-				<div class="panel-body">
-					<div class="showCrossingDetails-body-scroller">
+			</nav>
 
-						<div class="crossing_image" ng-style="{ 'background-image' : 'url('+mapCtrl.crossingDetails.meta.image+')' }"></div>
-						<div class="crossing_content">
-							<!-- Crossing title -->
-							<h2>{{mapCtrl.crossingDetails.meta.name}}</h2>
+			<div id="crossings-map" ng-controller="MapController as mapCtrl" ng-init="mapCtrl.init()" >
+				<ui-gmap-google-map center='mapCtrl.center' zoom='mapCtrl.zoom' control='mapCtrl.googleMap' options='mapCtrl.mapOptions'>
+					<ui-gmap-markers models="mapCtrl.gateMarkers" click="mapCtrl.markerClicked" coords="'self'" icon="'icon'"/>
+					<ui-gmap-markers ng-if="debug.enabled" models="debug.trainLocations" coords="'self'" icon="'icon'"/>
+				</ui-gmap-google-map>
 
-							<!-- Crossing details -->
-							<div>
+				<div class="panel panel-default" id="showCrossingDetails" ng-show="mapCtrl.showCrossingDetails">
+					<div class="panel-heading">
+						<button type="button" class="close" ng-click="mapCtrl.closeCrossingDetals();">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="panel-body">
+						<div class="showCrossingDetails-body-scroller">
+
+							<div class="crossing_image" ng-style="{ 'background-image' : 'url('+mapCtrl.crossingDetails.meta.image+')' }"></div>
+							<div class="crossing_content">
+								<!-- Crossing title -->
+								<h2>{{mapCtrl.crossingDetails.meta.name}}</h2>
+
+								<!-- Crossing details -->
+								<div>
+									<table class="table table-stripped">
+										<tbody>
+											<tr>
+												<td>Type</td>
+												<td>{{mapCtrl.crossingDetails.meta.type}}</td>
+											</tr>
+											<tr>
+												<td>City</td>
+												<td>{{mapCtrl.crossingDetails.meta.location.city}}</td>
+											</tr>
+											<tr>
+												<td>Postcode</td>
+												<td>{{mapCtrl.crossingDetails.meta.location.postcode}}</td>
+											</tr>
+											<tr>
+												<td>Trains per day</td>
+												<td>{{mapCtrl.crossingDetails.meta.line.trainsPerDay}}</td>
+											</tr>
+											<tr>
+												<td>Line speed (up/down)</td>
+												<td>
+													{{mapCtrl.crossingDetails.meta.line.northSpeed}}mph
+													/
+													{{mapCtrl.crossingDetails.meta.line.southSpeed}}mph
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+							<!-- Crossing times -->
+							<div class="crossing_times">
+								<h3>Times</h3>
 								<table class="table table-stripped">
+									<thead>
+										<tr>
+											<th>Down</th>
+											<th>Duration</th>
+											<th>Up</th>
+										</tr>
+									</thead>
 									<tbody>
-										<tr>
-											<td>Type</td>
-											<td>{{mapCtrl.crossingDetails.meta.type}}</td>
-										</tr>
-										<tr>
-											<td>City</td>
-											<td>{{mapCtrl.crossingDetails.meta.location.city}}</td>
-										</tr>
-										<tr>
-											<td>Postcode</td>
-											<td>{{mapCtrl.crossingDetails.meta.location.postcode}}</td>
-										</tr>
-										<tr>
-											<td>Trains per day</td>
-											<td>{{mapCtrl.crossingDetails.meta.line.trainsPerDay}}</td>
-										</tr>
-										<tr>
-											<td>Line speed (up/down)</td>
-											<td>
-												{{mapCtrl.crossingDetails.meta.line.northSpeed}}mph
-												/
-												{{mapCtrl.crossingDetails.meta.line.southSpeed}}mph
-											</td>
+										<tr ng-repeat="time in mapCtrl.crossingDetails.times">
+											<td>{{time.downTime | toDate | date:'MMM d - HH:mm'}}</td>
+											<td>{{time.duration / 60 | ceil }} minutes</td>
+											<td>{{time.upTime | toDate | date:'MMM d - HH:mm'}}</td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
 						</div>
-
-						<!-- Crossing times -->
-						<div class="crossing_times">
-							<h3>Times</h3>
-							<table class="table table-stripped">
-								<thead>
-									<tr>
-										<th>Down</th>
-										<th>Duration</th>
-										<th>Up</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr ng-repeat="time in mapCtrl.crossingDetails.times">
-										<td>{{time.downTime | toDate | date:'MMM d - HH:mm'}}</td>
-										<td>{{time.duration / 60 | ceil }} minutes</td>
-										<td>{{time.upTime | toDate | date:'MMM d - HH:mm'}}</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
 					</div>
 				</div>
 			</div>
+			<div ng-controller="DebugController"></div>
 		</div>
-		<div ng-controller="DebugController"></div>
 	</body>
 </html>
