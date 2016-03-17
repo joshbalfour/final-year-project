@@ -178,3 +178,134 @@ Average error: 20 seconds, 100% of the time.
 
 #### Prediction Error
 Average error: 38 seconds, 100% of the time.
+
+
+
+
+
+
+### Stone - Taken on Sunday 13/03/2016 
+
+Near Faversham (ME13 0WG)
+
+| Down  | Up    |
+| ----- | ----- |
+| 10:29 | 10:31 |
+| 10:42 | 10:44 |
+| 10:49 | 10:51 |
+| 10:59 | 11:05 |
+| 11:12 | 11:15 |
+| 11:29 | 11:31 |
+| 11:42 | 11:45 |
+| 11:45 | 11:47 |
+| 11:59 | 12:01 |
+| 12:12 | 12:15 |
+| 12:29 | 12:31 |
+
+#### Respective Predicitons from the application V3
+
+
+| Real  | Real  | Predicition  | Predicition  |        | Error |
+| ----- | ----- | ------------ | ------------ | ------ |------ |
+| Down  | Up    | 
+| 10:29 | 10:31 | 10:24 | 10:30 | | 6 minutes
+| 10:42 | 10:44 | 10:43 | 10:45 | | 2 minutes
+| 10:49 | 10:51 | 10:51 | 10:52 | | 3 minutes
+| 10:59 | 11:05 | 10:55 | 10:59 | | 6 minutes
+| 11:12 | 11:15 | 11:10 | 11:17 | | 4 minutes
+| 11:29 | 11:31 | 11:27 | 11:31 | | 2 minutes
+| 11:42 | 11:45 | 11:42 | 11:45 | | 0 minutes
+| 11:45 | 11:47 | 11:46 | 11:49 | | 3 minutes
+| 11:59 | 12:01 | 11:55 | 12:00 | | 5 minutes
+| 12:12 | 12:15 | 12:15 | 12:17 | | 3 minutes
+| 12:29 | 12:31 | 12:32 | 12:35 | | 2 minutes
+
+#### Prediction Error
+Average error: 3 minutes, 100% of the time.
+
+
+#### Respective Predicitons from the application V4
+
+
+| Real  | Real  | Predicition  | Predicition  |        | Error |
+| ----- | ----- | ------------ | ------------ | ------ |------ |
+| Down  | Up    | 
+| 10:29 | 10:31 | 10:29 | 10:32 | | 1 minute
+| 10:42 | 10:44 | 10:42 | 10:44 | | 0 minutes
+| 10:49 | 10:51 | 10:49 | 10:51 | | 0 minutes
+| 10:59 | 11:05 | 10:58 | 11:05 | | 1 minute
+| 11:12 | 11:15 | 11:12 | 11:15 | | 0 minutes
+| 11:29 | 11:31 | 11:29 | 11:32 | | 1 minutes
+| 11:42 | 11:45 | 11:42 | 11:45 | | 0 minutes
+| 11:45 | 11:47 | 11:45 | 11:47 | | 0 minutes
+| 11:59 | 12:01 | 11:59 | 12:01 | | 0 minutes
+| 12:12 | 12:15 | 12:12 | 12:15 | | 0 minutes
+| 12:29 | 12:31 | 12:29 | 12:31 | | 0 minutes
+
+#### Prediction Error
+Average error: 27 seconds, 100% of the time.
+
+
+
+
+
+
+
+### Stone - Taken on Monday 14/03/2016
+
+| Down  | Up    |
+| ----- | ----- |
+| 12:29 | 12:31 |
+| 12:42 | 12:44 |
+| 12:49 | 12:51 |
+| 12:59 | 13:05 |
+| 13:12 | 13:15 |
+| 13:29 | 13:31 |
+| 13:42 | 13:45 |
+| 13:45 | 13:47 |
+| 14:59 | 15:01 |
+| 15:12 | 15:15 |
+| 15:29 | 15:31 |
+
+#### Respective Predicitons from the application V3
+
+
+| Real  | Real  | Predicition  | Predicition  |        | Error |
+| ----- | ----- | ------------ | ------------ | ------ |------ |
+| Down  | Up    | 
+| 10:29 | 10:31 | 10:24 | 10:30 | | 6 minutes
+| 10:42 | 10:44 | 10:43 | 10:45 | | 2 minutes
+| 10:49 | 10:51 | 10:51 | 10:52 | | 3 minutes
+| 10:59 | 11:05 | 10:55 | 10:59 | | 6 minutes
+| 11:12 | 11:15 | 11:10 | 11:17 | | 4 minutes
+| 11:29 | 11:31 | 11:27 | 11:31 | | 2 minutes
+| 11:42 | 11:45 | 11:42 | 11:45 | | 0 minutes
+| 11:45 | 11:47 | 11:46 | 11:49 | | 3 minutes
+| 11:59 | 12:01 | 11:55 | 12:00 | | 5 minutes
+| 12:12 | 12:15 | 12:15 | 12:17 | | 3 minutes
+| 12:29 | 12:31 | 12:32 | 12:35 | | 2 minutes
+
+#### Prediction Error
+Average error: 3 minutes, 100% of the time.
+
+
+#### Respective Predicitons from the application V4
+
+
+| Real  | Real  | Predicition  | Predicition  |        | Error |
+| ----- | ----- | ------------ | ------------ | ------ |------ |
+| Down  | Up    | 
+| 10:29 | 10:31 | 10:29 | 10:32 | | 1 minute
+| 10:42 | 10:44 | 10:42 | 10:44 | | 0 minutes
+| 10:49 | 10:51 | 10:49 | 10:51 | | 0 minutes
+| 10:59 | 11:05 | 10:58 | 11:05 | | 1 minute
+| 11:12 | 11:15 | 11:12 | 11:15 | | 0 minutes
+| 11:29 | 11:31 | 11:29 | 11:32 | | 1 minutes
+| 11:42 | 11:45 | 11:42 | 11:45 | | 0 minutes
+| 11:45 | 11:47 | 11:45 | 11:47 | | 0 minutes
+| 11:59 | 12:01 | 11:59 | 12:01 | | 0 minutes
+| 12:12 | 12:15 | 12:12 | 12:15 | | 0 minutes
+| 12:29 | 12:31 | 12:29 | 12:31 | | 0 minutes
+
+#### Prediction Error
+Average error: 27 seconds, 100% of the time.
