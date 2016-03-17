@@ -16,7 +16,7 @@ app.controller('DebugController', function ($http, $interval, $rootScope) {
 			$rootScope.debug.trainLocations = response.data.data.map(function (obj) {
 				return {
 					icon: "http://cl.ly/3k1o3D461W11/Image%202016-02-15%20at%209.46.12%20pm.png",
-					id: Math.random(),
+					id: obj.rid,
 					latitude: obj.location.x,
 					longitude: obj.location.y,
 				};
