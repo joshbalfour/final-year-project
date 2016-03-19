@@ -18,7 +18,7 @@
   "dependencies": {
     "bootstrap": "~3.3.5",
     "angular": "~1.4.7",
-    "angular-google-maps": "~2.2.1",
+    "angular-google-maps": "https://github.com/angular-ui/angular-google-maps.git#^2.3.2",
     "angular-mocks": "~1.4.7",
     "tween.js": "tweenjs#v16.3.0",
     "lodash": "~3.*"
