@@ -219,17 +219,26 @@ After some in-depth research into the subject we found a government open spatial
 
 ##### Technology Pivots
 
-* Lumen -> Laravel
-* Postgres -> MySQL
-* PHP -> HHVM
-* PHP -> Node for algorithm
-* Stack not compatible with Raptor, decided to use own server
-
-
 Over the course of the project we made several pivots in the technology stack that we utilised to deliver this project.
 
+###### Application Framework
+
+We initially started off using Lumen as the project's overarching framework, as it would allow us to deliver a lightweight solution, but still provided an industry standard project structure for us to use. However, as we started fleshing out our technical implementation plan we realised that a large part of the functionality we were planning to implement was available in Lumen's more feature rich cousin: Laravel. As Lumen and Laravel were made by the same community, we were able to transition over painlessly, within only a half hour. Although this cost us half an hour of development time, it saved us in the long-term many hours. With hindsight it's clear to see that this was the right decision.
+
+###### Relational Database Management System
+
+After starting off with a Postgres Database, which was a requirement of the Open Street Map datasource, we transitioned to MySQL after switching out our datasource, as the team's skillset was more suited to MySQL, and 3rd party library support was more prevalent.
+
+###### PHP JIT Compiler
+
+* PHP -> HHVM
+
+* This was easy because of Docker and Travis and our extensive test suite
 
 
+###### Algorithm Language and Framework
+
+* PHP -> Node JS
 
 #### Challenges
 
