@@ -10,7 +10,7 @@
 ===
 
 
-<center> <img src="../Assets/logo-only.png" width=500/> </center>
+<center> <img src="../Assets/logo-only.png" width=300/> </center>
 
 #### Josh Balfour <<jdb45@kent.ac.uk>>
 #### Kieran Jones <<kj90@kent.ac.uk>>
@@ -195,6 +195,14 @@ Discussions on pull requests were done using a team messaging service called Sla
 *** Write about docs ***
 ```
 
+#### Documentation
+
+Documentation was taken very seriously in this project. It's level of importance was a combination of the group members all working remotely from one another, and integrating between the different components being vital to not putting ourselves in technical debt. For example if the database was in a different format than the algorithm was expecting then this would create rework further down the line.
+
+It was decided that the documentation should be treated as a first-class citizen alongside the source code, as they sat hand-in-hand in our development procedure, as with every piece of code written a comprehensive accompanying documentation item needed to be written.
+With code files sharing commits with documentation files, it was easier to keep track of the progression of features' functionality and documentation levels.
+
+#### Importer Procedure
 As part of our documentation we formalised what we referred to as our "Importer Procedure". The Importer Procedure is a generalised flow of how all of the respective importer scripts will work, formalising the process, which was important as the different importers will be written by different group members.
 
 ![image](images/System designs/Flow Diagram - Section 6.jpg =400x)
@@ -230,7 +238,7 @@ All of crossings and stations will be attached to their nearest node on the line
 
 ###### Mapping the result
 Starting at each train station and walking along the nodes, if a node has connections then we send the walker down each respective set of nodes. When we reach a node that has a station attached we add the path, the station, and the from and to destinations into the database. Then we continue along into will covert 6 stations.
-This is a compromise between doing all station to all stations and having 250GB of data, and connnecting each station to the nearest neighbour which National Rail may have not provided.
+This is a compromise between doing all station to all stations and having a large amount (250GB) of data, and connnecting each station to the nearest neighbour, which National Rail may have not provided.
 
 ###### Ouput
 The output of this algorithm will be a table of the track that goes from station to stations.
