@@ -229,7 +229,8 @@ All of the rails will be flattened and joined together to produce a continuous g
 All of crossings and stations will be attached to their nearest node on the line. This will be based on distance but can be based on the shape and size of the station if using general area proves ineffective.
 
 ###### Mapping the result
-Starting at each train station and walking along the nodes. If a node connects to two other nodes then we branch off the walker down each set of nodes. Once we reach a node that has a station attached we add the path and the station along with the from and to destinations into the database. We continue along into will covert 6 stations. This is a compromise between doing all station to all stations and having 250GB of data, and connnecting each station to the nearest neighbour which National Rail may have not provided.
+Starting at each train station and walking along the nodes, if a node has connections then we send the walker down each respective set of nodes. When we reach a node that has a station attached we add the path, the station, and the from and to destinations into the database. Then we continue along into will covert 6 stations.
+This is a compromise between doing all station to all stations and having 250GB of data, and connnecting each station to the nearest neighbour which National Rail may have not provided.
 
 ###### Ouput
 The output of this algorithm will be a table of the track that goes from station to stations.
