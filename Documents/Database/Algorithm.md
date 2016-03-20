@@ -44,7 +44,7 @@ The crossing table contians a list of all the crossings in the UK and meta meta 
 
 
 ##### train_routes
-This train_routes table is statically produce when the system is first loaded and would need to be reran if nationa rail ever adds more track.
+This train_routes table is statically produce when the system is first loaded and would need to be reran if national rail ever adds more track.
 
 | From | To  | Route           |
 | ---- | --- | --------------- |
