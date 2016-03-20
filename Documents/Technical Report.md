@@ -38,32 +38,35 @@ The project was to develop such a level crossing predictor, integrate with suita
 The project was implemented in PHP and Node JS on the back end, using Angular JS on the front end and a MySQL Database, all managed in a Docker container.
 
 ## Introduction
-```
-This should outline the motivation for the project and sketch the general background. It might also signpost significant features of the rest of the report. Ideally, the introduction will both orient the reader and capture his/her interest.
-```
 
+* Many solutions for tracking trains, none for level crossing's 
+* Big problem in Canterbury
+* Potential commercial viability
+	* Emergency Services
+	* Bus Drivers
+	* Taxi Drivers
+	* Integration with route planning services
+	
+* In this report we shall cover
+	* Project Management
+	* Pivots in both technology and project approach
+	* Development Tactics
+	* Real-world testing
 
 ## Background
 
-```
-No project is undertaken in isolation; rather, it builds upon earlier work and published material. In this section, you should provide a detailed account of this material, linking it in with the bibliography at the end of your report. The purpose is twofold: as a formal acknowledgement of prior work in the field, and as guidance to your reader should he or she be unfamiliar with the field.
-```
-
-* unofficial NROD wiki
+* Unofficial NROD wiki
+* Data Sources
+	* Level Crossing Spreadsheet
+	* INSPIRE geoserver
+		* railway track locations
+		* railway station location
+	* Timetable updating FTP site
+* Docker community
+* Laravel community
+* NPM community
 
 ## Aims
-
-```
-A careful statement of what it is that you are setting out to achieve.
-
-(Several technical content sections)
-
-This is where you go into detail about what you have done. You will need to decide the titles for these sections yourself; they will depend on the content of the project. These sections should summarize the technical and scientific achievements of the project.
-
-Depending on the nature of your project, these sections may include: a comparison of different approaches that you considered, accounts of experimental work, mathematical analyses, specifications, top-level architectural diagrams, results obtained, problems encountered, workarounds, user evaluations, performance measures, testing regimes and results, comparisons between different approaches adopted, comparisons with existing work on similar problems.
-
-In particular you should give a mixture of general discussion of your work and particular examples. Too much general discussion and the reader cannot easily get a handle on what you are doing; too many specific examples and the document fails to "tell a story".
-```
 
 ### Step One - Plan
 
@@ -159,11 +162,7 @@ With the project planning process completed, we were able to deliver well though
 
 Within the project plan a Discovery phase was allocated in order to establish the base of the project. 
 
-This consisted of the following:
-
-* A Version Control System.
-* A self-contained runtime environment for development and deployment.
-* A definition of practices surrounding documentation, testing, communication, and development.
+This consisted of the following: A Version Control System, a self-contained runtime environment for development and deployment, and a definition of practices surrounding documentation, testing, communication, and development.
 
 The chosen VCS was GIT, as it met our requirements and would also allow us to use industry standard GitHub's free private hosted offering, which we were all very familiar with.
 
@@ -191,16 +190,14 @@ This approach minimised developer effort, whilst maximising stability of the pro
 
 Discussions on pull requests were done using a team messaging service called Slack, which allowed us to communicate whilst on our laptops and phones. Our continuous integration service Travis, and our VCS GitHub integrated with Slack, which allowed developers to be notified when other team members were committing to the repository. This prompted increased collaboration and encouraged more knowledge sharing and allowed team members working remotely to feel more involved in the project.
 
-```
-*** Write about docs ***
-```
-
 #### Documentation
 
 Documentation was taken very seriously in this project. It's level of importance was a combination of the group members all working remotely from one another, and integrating between the different components being vital to not putting ourselves in technical debt. For example if the database was in a different format than the algorithm was expecting then this would create rework further down the line.
 
 It was decided that the documentation should be treated as a first-class citizen alongside the source code, as they sat hand-in-hand in our development procedure, as with every piece of code written a comprehensive accompanying documentation item needed to be written.
 With code files sharing commits with documentation files, it was easier to keep track of the progression of features' functionality and documentation levels.
+
+Each document, as well as being under version control, is version numbered at the top of the document, this is to make it even easier for the reader to understand which version of the document they are reading.
 
 #### Importer Procedure
 As part of our documentation we formalised what we referred to as our "Importer Procedure". The Importer Procedure is a generalised flow of how all of the respective importer scripts will work, formalising the process, which was important as the different importers will be written by different group members.
@@ -304,6 +301,8 @@ One of the data sources made publicly available by Network Rail is a real time f
 It was decided as this would potentially give us a higher level of accuracy, that Josh would make use of his active connections with senior management at TFL (Transport for London), who work closely with Network Rail, and explain our situation to them, in the hope of getting the data and their permission to use it. 
 They reached back, confirming that the dataset did exist, but unfortunately were not able to allow us use it.
 
+* Collecting actual data to compare against
+
 
 ### Step Three - Deliver
 
@@ -347,24 +346,24 @@ If we were to run this project again we would
 
 ## Acknowledgements
 
-```
-Where you thank people who helped you or gave guidance (including your supervisor!).
-```
+* Project supervisor
+* Unofficial NROD wiki
+* Data Sources
+	* Level Crossing Spreadsheet
+	* INSPIRE geoserver
+		* railway track locations
+		* railway station location
+	* Timetable updating FTP site
+* Docker community
+* Laravel community
+* NPM community
 
 ## Bibliography
 
-```
-A list of work that you have referred to throughout the document, for example related projects and papers, reference documents, relevant textbooks, et cetera.
 
-Some of the references may be of URLs to free-standing, electronically published reports but the majority are likely to be to textbooks or journal articles. Have a look at an academic paper such as the one below to see the style in which references to published work are presented. There are automated systems such as Endnote and BibTeX which can help you manage references automatically.
-```
 
 ## Appendices
 
-```
-You might include items such as: test data, detailed results, significant portions of programs, statistical analyses, UML diagrams, etc. that, whilst not essential to understanding the main report, provide fine-grained info supporting conclusions reached or explaining methods adopted.
 
-Appendices do not could towards the page limit. But do not use this as an excuse to "bulk up" the project in the mistaken belief that the heavier the project report the higher the mark! Indeed you will be marked down for excessive appendices which contain information which would be better included on the CD-ROM.
-
-You should give careful thought to which items you want to include here, and which are better included on the accompanying CD-ROM. Written documents, detailed diagrams and tables are often better presented on paper. Items which will only be read briefly (like minutes of meetings) and items which contain large amounts of data (e.g. large sets of testing results) are better placed on the CD-ROM.
-```
+* Diagrams
+* Test data
