@@ -4,11 +4,11 @@
 The first step will be to preprocess all of the train tracks and the stations so that we can produce a simple map which contains a table with a line.
 
 #### Method
-##### Techinical
-All of the following process will be passed down to Node.Js because PHP will not provide the performance needed to chrunch the numbers in a timely manour.
+##### Technical
+All of the following process will be passed down to Node.JS because PHP will not provide the performance needed to crunch the numbers in a timely manner.
 
 ##### Flatten
-All of the rails will be flattened and join together to produce a continuous graph of connected nodes. This will group lines that run next to each other together and lines that join on junctions that aren't present in the shape file.
+All of the rails will be flattened and joined together to produce a continuous graph of connected nodes. This will group lines that run next to each other together and lines that join on junctions that aren't present in the shape file.
 
 ##### Attach stations and crossings
 All of crossings and stations will be attached to their nearest node on the line. This will be based on distance but can be based on the shape and size of the station is using general area proves ineffective.
