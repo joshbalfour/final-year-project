@@ -231,17 +231,27 @@ After starting off with a Postgres Database, which was a requirement of the Open
 
 ###### PHP JIT Compiler
 
-* PHP -> HHVM
+Whilst at a Facebook Hackathon part way through the project Josh discussed the technology stack used in the project with a developer at Facebook, who commented that if we switched from using the stock PHP interpreter to run our code to the HHVM (Hip-Hop Virtual Machine) JIT compiler, we would see a significant performance boost. This comment was taken with a significant grain of salt, as HHVM is a technology that was developed internally at Facebook, and their use case was significantly different to ours, hence performance improvements may be subjective.
 
-* This was easy because of Docker and Travis and our extensive test suite
+After performing an impact analysis of evaluating the performance difference between the two approaches it was determined that the development time that this would take would be minimal, although this is a core part of our stack it's installation was as easy as changing a line in the Docker container's configuration from `FROM php` to `FROM hhvm`. This made swapping the technology easy, however performance evaluation still remained. 
+This was handled by our extensive test suite, which was automatically ran against every commit made to the repository by Travis. This both verified that the technology change was non-destructive, and, because the test suite reporter also noted down run-times, allowed us to compare the performance of HHVM against stock PHP. 
+
+The results of the analysis were that HHVM used less memory, and out-stripped stock PHP in terms of raw speed, thus HHVM was judged to be more performant than stock PHP, so we switched to using it. 
 
 
 ###### Algorithm Language and Framework
 
-* PHP -> Node JS
+The underlying algorithm for the project was originaly written in PHP, and when tested against a subset of the data it was performant, however when it was ran against the entire dataset, PHP proved to not scale. This meant that going forward, in order for the algorithm to run it needed to be rewritten using a different toolset. The choice was made to switch to using JavaScript and Node.JS as this was a language and framework the group had the matching skillset for. 
+
+As the approach the algorithm took to the source dataset was already established and proven, the rewrite from PHP to JavaScript was a short process, and the resulting code was quick to run against the entire dataset, and also produced correct results.
+
 
 #### Challenges
 
+One of the data sources made publicly available by Network Rail is a real time feed of raw data from rail signals, which gave us what train passed what signal at what time. However what was missing from it was the location of the signals. We found an FOIA (freedom of information act) request that was filed for this data, however Network Rail actively refused it.
+
+It was decided as this would potentially give us a higher level of accuracy, that Josh would make use of his active connections with senior management at TFL (Transport for London), who work closely with Network Rail, and explain our situation to them, in the hope of getting the data and their permission to use it. 
+They reached back, confirming that the dataset did exist, but unfortunately were not able to allow us use it.
 
 
 ### Step Three - Deliver
