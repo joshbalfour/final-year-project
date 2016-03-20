@@ -206,10 +206,11 @@ As a result of the testing 3 changes were made: The Search bar was removed - Due
 
 As a result of this the UI became, overall, slightly simplier which is due tousing a map based view which the user can also navigate manually.
 
-##### After the interface testing
-![image](images/System designs/Wireframes-mobile.jpg =525x)
+
 ##### Before the interface testing
 ![image](images/System designs/Wireframes-mobile v1.jpg =350x)
+##### After the interface testing
+![image](images/System designs/Wireframes-mobile.jpg =525x)
 
 #### Algorithm 
 
