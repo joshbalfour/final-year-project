@@ -138,7 +138,7 @@ After evaluating a number of different project management tools we ultimately ch
 
 Using the dynamic gantt chart creator Instagantt, we were able to pull our project data from Asana and render it in gantt chart form, like so:
 
-<img src="Images/instagantt.png" width=650/>
+![image](Images/instagantt.png =650x)
 
 NB: The bars were previously blue before the tasks were marked as completed.
 
@@ -146,7 +146,7 @@ During the discussions surrounding the Spike we had already established where th
 
 After allocating a team member to each task, we used the Pending Workload view in Instagantt to set target completion dates, preventing clashes and verifying that the workload was distributed evenly across team members.
 
-<img src="Images/instagantt-workload.png" width=650/> 
+![image](Images/instagantt-workload.png =650x)
 
 NB: I marked tasks as incomplete so that they would show in the Pending Workload view to illustrate our usage of the product, hence they appear as red.
 
@@ -175,7 +175,7 @@ This also meant that when it came to test and deploy the application, we were ab
 
 Using GitHub as our VCS allowed us to use GitHub's development workflow which they dubbed "GitHub Flow".
 
-<img src="Images/the github flow.png" width=700/>
+![image](Images/the github flow.png =700x)
 
 We implemented GitHub Flow by establishing in our development practice that when developing a feature, bugfix, or otherwise changing the contents of the repository, that the developer must first make a new branch from the master branch, perform their task, then open a Pull Request to the master branch. A notification is then sent to the rest of the team, who review the request, and when there is unanimous approval the code from the feature branch is merged into master, and the feature branch is deleted.
 
@@ -185,7 +185,7 @@ Another of our criteria was that the code passes all tests. In order to minimise
 
 The resulting box is then shown to reviewers of the pull request:
 
-<img src="Images/pr-ci-tests.png" width=500/>
+![image](Images/pr-ci-tests.png =500x)
 
 This approach minimised developer effort, whilst maximising stability of the product.
 
@@ -194,6 +194,47 @@ Discussions on pull requests were done using a team messaging service called Sla
 ```
 *** Write about docs ***
 ```
+
+As part of our documentation we formalised what we referred to as our "Importer Procedure". The Importer Procedure is a generalised flow of how all of the respective importer scripts will work, formalising the process, which was important as the different importers will be written by different group members.
+
+![image](images/System designs/Flow Diagram - Section 6.jpg =400x)
+
+#### Interface testing
+
+After building a mock-up of the user interface it was tested on a small group of people for usability, along with private testing with different data sets. 
+As a result of the testing 3 changes were made: The Search bar was removed - Due to the limited area of coverage, no one ever attempted to use this, more information bubble was made a model - This provided more room to display data, as the popup provided little space, this was particularly an issue on smaller devices, and the "Go to my current location" button was removed as Google maps does not allow this with their API.
+
+As a result of this the UI became, overall, slightly simplier which is due tousing a map based view which the user can also navigate manually.
+
+##### After the interface testing
+![image](images/System designs/Wireframes-mobile.jpg =525x)
+##### Before the interface testing
+![image](images/System designs/Wireframes-mobile v1.jpg =350x)
+
+#### Algorithm 
+
+The full algorithm deep-dive is available in the project's documentation, but here I will give a brief overview.
+
+##### Station tracks
+The first step will be to preprocess all of the train tracks and the stations so that we can produce a simple map which contains a table with a line.
+
+###### Technical Decision
+All of the following process will be passed down to Node.JS because PHP will not provide the performance needed to crunch the numbers in a timely manner.
+
+###### Flatten
+All of the rails will be flattened and joined together to produce a continuous graph of connected nodes. This will group lines which run next to each other together and lines that join on junctions that aren't present in the source data file.
+
+###### Attach stations and crossings
+All of crossings and stations will be attached to their nearest node on the line. This will be based on distance but can be based on the shape and size of the station if using general area proves ineffective.
+
+###### Mapping the result
+Starting at each train station and walking along the nodes. If a node connects to two other nodes then we branch off the walker down each set of nodes. Once we reach a node that has a station attached we add the path and the station along with the from and to destinations into the database. We continue along into will covert 6 stations. This is a compromise between doing all station to all stations and having 250GB of data, and connnecting each station to the nearest neighbour which National Rail may have not provided.
+
+###### Ouput
+The output of this algorithm will be a table of the track that goes from station to stations.
+
+
+![image](images/ERD.png =800x)
 
 #### Weekly Standups
 
@@ -214,7 +255,7 @@ Data sourcing was one of our key challenges on this project, we pivoted many tim
 In our initial research we found a website that mapped out the entire UK rail network on a Google Map, and emailed the author to obtain permission from him to use his data. Unfortunately he declined, so we kept searching.
 
 We next looked into using crowd sourced mapping project Open Street Map's data. This however produced an extra set of challenges - mostly surrounding compute resources. This was because although the compressed map itself was only 4 GB, it was 40 GB uncompressed. The uncompressed file then needed to be imported into a Postgres database which had a geospatial extension called PostGIS installed. After evaluating this option it was deemed unfeasible due to the time it would take to extract the railway tracks from the database and the gamble taken on the quality of the resulting data, as it was purely a crowdsourced dataset.
-
+	
 After some in-depth research into the subject we found a government open spatial data initiative called INSPIRE. Backed by European Directive 2007/2/EC, the initiative established an infrastructure upon which government departments can publish geospatial datasets. Within the datasets published we found a listed, but not documented, API endpoint which was backed by Geoserver, an open source geospatial data server. Despite the lack of documentation, we were still able to make use of the API as one of the team mebers, Kieran, had knowledge of how Geoserver behaved so was able to write a reusable script to extract and transform the data we needed. Using this service we were able to source the railway track routes and the railway station locations.
 
 ##### Technology Pivots
@@ -257,6 +298,8 @@ They reached back, confirming that the dataset did exist, but unfortunately were
 ### Step Three - Deliver
 
 
+
+
 ## Conclusions
 
 ```
@@ -292,7 +335,7 @@ If we were to run this project again we would
 
 
 
-##Acknowledgements
+## Acknowledgements
 
 ```
 Where you thank people who helped you or gave guidance (including your supervisor!).
