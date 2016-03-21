@@ -55,18 +55,13 @@ The project was implemented in PHP and Node JS on the back end, using Angular JS
 
 ## Background
 
-* Unofficial NROD wiki
-* Data Sources
-	* Level Crossing Spreadsheet
-	* INSPIRE geoserver
-		* railway track locations
-		* railway station location
-	* Timetable updating FTP site
-* Docker community
-* Laravel community
-* NPM community
+This project built off of many communities existing efforts, mainly from the rail, technology, and cartography communities. As part of our research we found that many communities had an intersection with the technology community. A prime example of this was the National Rail Open Data (NROD) community, who created a collaborative wiki in order to document the various data feeds and systems that National Rail advertise as public but that are poorly documented. This was a major asset to us, and was referred to often over the course of the project. It's best asset was the amount of tips people had written about that saved us many hours of investigation, as we were able to learn from other's mistakes going forward.
+
+The technology community was immensely helpful in this project, all of the products we used to realise this project were community developed and supported products. Particularly the Docker, Laravel, and Node JS communities.
+This was particularly apparent when it came to provisioning a local copy of the database for each group member, as we were able to synchronise our environments and version control configuration changes using Docker, and the plethora of libraries available for Node JS and Laravel meant that we were able to focus on building the project itself, as opposed to the underlying libraries.
 
 ## Aims
+
 
 ### Step One - Plan
 
