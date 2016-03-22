@@ -308,6 +308,7 @@ Our key pain point was the quality of the the data that was provided to us, as i
 
 
 
+
 ## Conclusions
 
 Overall we are very pleased with the work that was completed, our requirements were all met, our smooth development flow with automated continuous integration and code quality testing is an approach we plan to replicate across other projects - personal and commercial. We are also pleased that we were able to better our estimates for the web app component, as it was written only once and produced no re-work.
@@ -325,17 +326,7 @@ To extend this project we would work on integrating the system with third party 
 
 ## Acknowledgements
 
-* Project supervisor
-* Unofficial NROD wiki
-* Data Sources
-	* Level Crossing Spreadsheet
-	* INSPIRE geoserver
-		* railway track locations
-		* railway station location
-	* Timetable updating FTP site
-* Docker community
-* Laravel community
-* NPM community
+We would like to acknowledge Peter Rodgers, our project supervisor, the various authors of the Unofficial National Rail Open Data (NROD) wiki, the maintainers of the various data sources we based the project on: Network Rail's spreadsheet, the INSPIRE geoserver containing the railway track and station locations, and those responsible for maintaining Network Rail's FTP server containing the train timetable and real-time updates. We would also like to thank the Docker, Laravel, and Node JS communities for their plethora of modules and libraries that made building this project infinitely easier than it would have been without them.
 
 ## Bibliography
 
