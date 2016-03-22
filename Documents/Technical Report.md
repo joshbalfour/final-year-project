@@ -296,11 +296,13 @@ One of the data sources made publicly available by Network Rail is a real time f
 It was decided as this would potentially give us a higher level of accuracy, that Josh would make use of his active connections with senior management at TFL (Transport for London), who work closely with Network Rail, and explain our situation to them, in the hope of getting the data and their permission to use it. 
 They reached back, confirming that the dataset did exist, but unfortunately were not able to allow us use it.
 
-* Collecting actual data to compare against
+Our biggest challenge was collecting data for our predictive algorithm to compare against, which was a very time consuming process, and logistically complex as it involved visiting a wide variety level crossings, some of which were far from Canterbury, in order to get a workable reference data set.
 
+Key pain points:
 
-### Step Three - Deliver
-
+* Data processing and curation as we overestimated the quality of relavent data available.
+* Spending more time waiting than coding due to lack computing power.
+* Setting our practices for project management from scratch due to not previously being taught project management procedures, systems or tools.
 
 
 
@@ -316,28 +318,21 @@ A statement of what your project achieved. For example you might want to conside
 * what scope is there for further work on the topic?
 ```
 
-Key pain points:
-
-* Data processing and curation as we overestimated the quality of relavent data available.
-* Spending more time waiting than coding due to lack computing power.
-* Setting our practices for project management from scratch due to not previously being taught project management procedures, systems or tools.
-* Horrendous amount of Scope creep
-
 
 Key success points:
 
-* Automated continuous integration and code quality testing.
-* The web app part of it just worked and was quick to develop.
-* The prediction aspect of the project was easy.
-* Data acquisition was relatively easy once found.
-
-If we were to run this project again we would
-
-* Write it entirely in Javascript.
-* Split out our Docker containers as per industry best practices.
-* Use Oracle DB for the data processing aspect of the project.
+* Smooth development flow with automated continuous integration and code quality testing
+* Web app part worked first time and was quick to develop.
+* The prediction aspect of the project was easy once the data was in place
+* Data acquisition was automatable once it was found.
 
 
+
+If we were to run this project again, in hindsight we would have written it entirely in JavaScript, now that we know the limitations of PHP, which caused us a man day's worth of rework. 
+We would also split our Docker containers, which we didn't do in this round due to lack of experience with the technology - we didn't know how best to use it - and there are now many tools surrounding Docker which were not proven when we built this project. This would have simplied setup and minimised the time the process took to run. 
+We would also have used the free edition of Oracle's commercial database (Oracle XE) to handle our data processing as it's underlying engine is more efficient and contains many more geospatial optimisation features and would allow us to run far more complex procedural data manipulation code on the database itself rather than using a driver to interact with it from Node JS or PHP code. As we use Docker, it would have been easy to provision a container of it, then destroy it when the data import was complete.
+
+To extend this project we would work on integrating the system with third party solutions, such as TomTom and the routing software used by bus companies and emergeancy services. Although we have an API which third parties could already use it would take some development work on their part in order to integrate with us. Given more time we would develop those integrations ourselves in consultation with them, as this would make our work more accessible, and therefore useful, for the end users. We would also gather more reference data from more level crossings, as this was a major logistical challenge for us but our results are solid we would like to prove our work more.
 
 ## Acknowledgements
 
