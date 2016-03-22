@@ -307,8 +307,6 @@ Our key pain point was the quality of the the data that was provided to us, as i
 * Length of time calcs take to run
 
 
-
-
 ## Conclusions
 
 Overall we are very pleased with the work that was completed, our requirements were all met, our smooth development flow with automated continuous integration and code quality testing is an approach we plan to replicate across other projects - personal and commercial. We are also pleased that we were able to better our estimates for the web app component, as it was written only once and produced no re-work.
