@@ -298,35 +298,27 @@ They reached back, confirming that the dataset did exist, but unfortunately were
 
 Our biggest challenge was collecting data for our predictive algorithm to compare against, which was a very time consuming process, and logistically complex as it involved visiting a wide variety level crossings, some of which were far from Canterbury, in order to get a workable reference data set.
 
-Key pain points:
+Our key pain point was the quality of the the data that was provided to us, as it meant that there was a significant amount of data cleansing that was required in order for the data to be workable.
 
-* Data processing and curation as we overestimated the quality of relavent data available.
-* Spending more time waiting than coding due to lack computing power.
-* Setting our practices for project management from scratch due to not previously being taught project management procedures, systems or tools.
+### Step Three - Deliver
 
-
+* Predictive accuracy
+* Web App
+* Database 
+* API
+* Length of time calcs take to run
 
 ## Conclusions
-
-```
-A statement of what your project achieved. For example you might want to consider:
-
-* how well did your end-product work?
-* how does it compare with other, similar projects?
-* how novel are your ideas?
-* what guidance can you offer to others setting out with similar aims?
-* what scope is there for further work on the topic?
-```
 
 
 Key success points:
 
-* Smooth development flow with automated continuous integration and code quality testing
-* Web app part worked first time and was quick to develop.
-* The prediction aspect of the project was easy once the data was in place
 * Data acquisition was automatable once it was found.
+* The prediction aspect of the project was easy once the data was in place
+* The accuracy of the predictions
+* Last year's train tracking project - we bettered them
 
-
+Overall we are very pleased with the work that was completed, our requirements were all met, our smooth development flow with automated continuous integration and code quality testing is an approach we plan to replicate across other projects - personal and commercial. We are also pleased that we were able to better our estimates for the web app component, as it was written only once and produced no re-work.
 
 If we were to run this project again, in hindsight we would have written it entirely in JavaScript, now that we know the limitations of PHP, which caused us a man day's worth of rework. 
 We would also split our Docker containers, which we didn't do in this round due to lack of experience with the technology - we didn't know how best to use it - and there are now many tools surrounding Docker which were not proven when we built this project. This would have simplied setup and minimised the time the process took to run. 
