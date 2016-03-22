@@ -313,12 +313,15 @@ Our key pain point was the quality of the the data that was provided to us, as i
 
 Key success points:
 
-* Data acquisition was automatable once it was found.
 * The prediction aspect of the project was easy once the data was in place
 * The accuracy of the predictions
 * Last year's train tracking project - we bettered them
 
 Overall we are very pleased with the work that was completed, our requirements were all met, our smooth development flow with automated continuous integration and code quality testing is an approach we plan to replicate across other projects - personal and commercial. We are also pleased that we were able to better our estimates for the web app component, as it was written only once and produced no re-work.
+
+Our main success point was the 
+
+the data acquisition was completely automatable, which meant that we are able to script the entire spin-up process from start to finish, which has kept our repository very light as we don't have to put large data files into it.
 
 If we were to run this project again, in hindsight we would have written it entirely in JavaScript, now that we know the limitations of PHP, which caused us a man day's worth of rework. 
 We would also split our Docker containers, which we didn't do in this round due to lack of experience with the technology - we didn't know how best to use it - and there are now many tools surrounding Docker which were not proven when we built this project. This would have simplied setup and minimised the time the process took to run. 
