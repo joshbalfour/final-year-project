@@ -81,8 +81,6 @@ The project's requirements were first broken down to into 6 key points and numbe
 
 Due to the size of the project, it was deemed appropriate to class the project as MVP, with a preceding Discovery phase and an extension "Future" phase.
 
-The requirements were also allocated a 
-
 We then broke each requirement down to a functional level, and listed out the functions that the the system would have to fullfill in order to accomplish each respective requirement, numbered in the format `Requirement#.Function#` for example R1 was broken down to 5 functional requirements:
 
 * R1.F1 - Download and Store Level Crossing Locations
@@ -307,6 +305,8 @@ Our key pain point was the quality of the the data that was provided to us, as i
 * Database 
 * API
 * Length of time calcs take to run
+
+
 
 ## Conclusions
 
