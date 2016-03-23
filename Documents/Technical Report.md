@@ -291,12 +291,10 @@ Our key pain point was the quality of the the data that was provided to us, as i
 
 ### Step Three - Deliver
 
-* Predictive accuracy
-* Web App
-* Database 
-* API
-* Length of time calcs take to run
-
+Our completed project was able to predict when a level crossing is going to be up to within 27 seconds of accuracy. It consisted of an easy to use map-based, mobile, tablet, and desktop friendly user interface.
+The data is also accessible via a well-documented, standard adhering, open JSON RESTful API, allowing developers to build on our efforts.
+Our finished product's technology stack consisted of a MySQL database, with the algorithm written in Node.JS, the API and data acquisition scripts in PHP, and the front end in Angular JS, with a Google Map view, backed by the Bootstrap CSS library and HTML5.
+Every day at 3 AM the system reloads the data published by Network Rail, which takes on average 4 minutes, and throughout the day Network Rail feeds in real time timetable corrections if a train is delayed or cancelled.
 
 ## Conclusions
 
