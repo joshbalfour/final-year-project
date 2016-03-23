@@ -97,6 +97,15 @@ cd /src && composer install --prefer-source
 
 echo 'Composer install completed'
 
+echo 'Adding dailytraindatacron cronjob'
+
+crontab -l > dailytraindatacron
+echo "0 6 * * * cd /src && php artisan import:daily-train-data" >> dailytraindatacron
+crontab dailytraindatacron
+rm dailytraindatacron
+
+echo 'Added dailytraindatacron cronjob'
+
 touch /src/.ready
 
 echo '🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨 🚂 💨'
