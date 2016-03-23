@@ -1,4 +1,4 @@
- 
+
 
 
 <br>
@@ -39,22 +39,10 @@ The project was implemented in PHP and Node JS on the back end, using Angular JS
 
 ## Introduction
 
-* Many solutions for tracking trains, none for level crossing's 
-* Big problem in Canterbury
-* Potential commercial viability
-	* Emergency Services
-	* Bus Drivers
-	* Taxi Drivers
-	* Integration with route planning services
-	
-* In this report we shall cover
-	* Project Management
-	* Pivots in both technology and project approach
-	* Development Tactics
-	* Real-world testing
-
 The problem this project solves is the lack of data surrounding the timings of level crossings. There are many solutions on the market for tracking the trains themselves, however there are none for level crossings. Level crossings are a big problem in Canterbury, bringing the city's roads to an almost standstill whenever they are down.
-Because of this issue, this product has major commercial viability, as the data that it produces ...
+Because of this issue, this product has major commercial viability, as the data that it produces has the potential to save the emergency services, bus drivers, and taxi drivers the large amount of money currently spent on employees sitting in avoidable traffic jams caused by level crossings being down. Aside from offering the data to businesses, there is also the potential to integrate with existing route planning services that could factor the data in to optimise their routeing algorithms further, and make the data available to end users.
+
+In this report we shall cover the methodology behind the project's management in detail, the pivots that were taken in both the technology and project approach, detail behind our development tactics, and the real-world testing aspect.
 
 ## Background
 
