@@ -1,4 +1,4 @@
-
+ 
 
 
 <br>
@@ -52,6 +52,9 @@ The project was implemented in PHP and Node JS on the back end, using Angular JS
 	* Pivots in both technology and project approach
 	* Development Tactics
 	* Real-world testing
+
+The problem this project solves is the lack of data surrounding the timings of level crossings. There are many solutions on the market for tracking the trains themselves, however there are none for level crossings. Level crossings are a big problem in Canterbury, bringing the city's roads to an almost standstill whenever they are down.
+Because of this issue, this product has major commercial viability, as the data that it produces ...
 
 ## Background
 
