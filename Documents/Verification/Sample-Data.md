@@ -26,11 +26,11 @@ A 95% degree of accuracy within 30 seconds
  
 | Down  | Up    |
 | ----- | ----- |
-| 15:22 | 15:25 |
-| 15:46 | 15:50 |
-| 16:05 | 16:10 |
-| 16:22 | 16:26 |
-| 16:39 | 16:41 |
+| 15:22:15 | 15:25:43 |
+| 15:46:43 | 15:50:21 |
+| 16:06:24 | 16:10:59 |
+| 16:22:32 | 16:26 |
+| 16:38:30 | 16:41 |
 
 
 #### Respective Predicitons from the application V1
@@ -38,11 +38,11 @@ A 95% degree of accuracy within 30 seconds
 | Real  | Real  | Predicition  | Predicition  |        | Error  |
 | ----- | ----- | ------------ | ------------ | ------ | ------ |
 | Down  | Up    | Down         | Up           | Result |           |
-| 15:22 | 15:25 | 15:22        | 15:25        | Hit    | 0 minutes |
-| 15:46 | 15:50 |              |              | Miss   | Missed    |
-| 16:05 | 16:10 | 16:04        | 16:07        | Almost | 4 minutes |
-| 16:22 | 16:26 | 16:22        | 16:26        | Hit    | 0 minutes |
-| 16:39 | 16:41 |              |              | Miss   | Missed |
+| 15:22:15 | 15:25:43 | 15:22        | 15:25        | Hit    | 0 minutes |
+| 15:46:43 | 15:50:21 |              |              | Miss   | Missed    |
+| 16:06:24 | 16:10:59 | 16:04        | 16:07        | Almost | 4 minutes |
+| 16:22:32 | 16:26 | 16:22        | 16:26        | Hit    | 0 minutes |
+| 16:38:30 | 16:41 |              |              | Miss   | Missed |
 
 Misses seem to be due to a an issue in the train time data collection from national rail. Data needs to be flattened to match known tiploc locations.
 
@@ -53,11 +53,11 @@ Average error: 0.75 minutes, 60% of the time.
 | Real  | Real  | Predicition  | Predicition  |        |  Error    |
 | ----- | ----- | ------------ | ------------ | ------ | --------- |
 | Down  | Up    | Down         | Up           | Result |           |
-| 15:22 | 15:25 | 15:22        | 15:25        | Hit    | 0 minutes |
-| 15:46 | 15:50 | 15:43        | 15:50        | Almost | 3 minutes |
-| 16:05 | 16:10 | 16:04        | 16:07        | Almost | 4 mintues |
-| 16:22 | 16:26 | 16:22        | 16:25        | Hit    | 1 minute  |
-| 16:39 | 16:41 | 16:39        | 16:41        | Hit    | 0 minutes |
+| 15:22:15 | 15:25:43 | 15:22        | 15:25        | Hit    | 0 minutes |
+| 15:46:43 | 15:50:21 | 15:43        | 15:50        | Almost | 3 minutes |
+| 16:06:24 | 16:10:59 | 16:04        | 16:07        | Almost | 4 mintues |
+| 16:22:32 | 16:26 | 16:22        | 16:25        | Hit    | 1 minute  |
+| 16:38:30 | 16:41 | 16:39        | 16:41        | Hit    | 0 minutes |
 
 
 #### Prediction Error
@@ -68,11 +68,11 @@ Average error: 1.6 minutes, 100% of the time.
 | Real  | Real  | Predicition  | Predicition  |        |  Error    |
 | ----- | ----- | ------------ | ------------ | ------ | --------- |
 | Down  | Up    | Down         | Up           | Result |           |
-| 15:22 | 15:25 | 15:22        | 15:25        | Hit    | 0 minutes |
-| 15:46 | 15:50 | 15:44        | 15:50        | Almost | 2 minutes |
-| 16:05 | 16:10 | 16:05        | 16:09        | Almost | 1 mintue  |
-| 16:22 | 16:26 | 16:22        | 16:26        | Hit    | 0 minute  |
-| 16:39 | 16:41 | 16:39        | 16:41        | Hit    | 0 minutes |
+| 15:22:15 | 15:25:43 | 15:22        | 15:25        | Hit    | 0 minutes |
+| 15:46:43 | 15:50:21 | 15:44        | 15:50        | Almost | 2 minutes |
+| 16:06:24 | 16:10:59 | 16:05        | 16:09        | Almost | 1 mintue  |
+| 16:22:32 | 16:26 | 16:22        | 16:26        | Hit    | 0 minute  |
+| 16:38:30 | 16:41 | 16:39        | 16:41        | Hit    | 0 minutes |
 
 
 #### Prediction Error
