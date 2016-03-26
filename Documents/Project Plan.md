@@ -66,7 +66,7 @@ Each function is based off of the numbered requirement and is also numbered in t
 
 ###R2 - Be able to display level crossing times in a nice way
 
-* R2.F1 - Easy to use interface
+* R2.F1 - Easy to use interfac
 
 * R2.F2 - Way to access level crossing time data
 
@@ -100,9 +100,9 @@ Each function is based off of the numbered requirement and is also numbered in t
 
 
 
-# Impact Analysis
+# Spike
 
-The Impact Analysis is a breakdown of the functional specification into task-level items to aid in the process of high level design and effort estimation.
+The Spike is a breakdown of the functional specification into task-level items to aid in the process of high level design and effort estimation.
 
 Each task is numbered in line with the source function specified above, and the requirement that function stems from in the following format:
 

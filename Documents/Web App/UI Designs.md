@@ -17,7 +17,7 @@ The UI is now overall slightly simplier which is possible as we went for a map b
 ## Interface
 
 ### Design V2
-![image](../images/System designs/Wireframes-mobile.jpg)
+![image](../images/System designs/Wireframes-mobile.jpg =700x)
 
 1) Closed icon is shown whenever a barrier is down. Using both an icon and colour - this improves accessibility.
 
@@ -30,7 +30,7 @@ The UI is now overall slightly simplier which is possible as we went for a map b
 7) Clicking the ? icon opens up an about window showing user information about the app.
 
 ### Design V1
-![image](../images/System designs/Wireframes-mobile v1.jpg)
+![image](../images/System designs/Wireframes-mobile v1.jpg =700x)
 
 
 1) Search bar provides a way to search for any location in the UK and zoom straight to it.

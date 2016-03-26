@@ -17,7 +17,7 @@ RUN { \
 		echo mysql-community-server mysql-community-server/re-root-pass password ''; \
 		echo mysql-community-server mysql-community-server/remove-test-db select false; \
 	} | debconf-set-selections \
-	&& apt-get update && apt-get install -y perl wget curl ca-certificates apache2 php5 php5-mcrypt php5-curl libavahi-compat-libdnssd-dev php5-mysql mysql-server phpunit nodejs htop nano --no-install-recommends \
+	&& apt-get update && apt-get install -y perl wget curl ca-certificates apache2 php5 php5-mcrypt php5-curl libavahi-compat-libdnssd-dev php5-mysql mysql-server phpunit nodejs htop nano cron --no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm -rf /var/lib/mysql
 
