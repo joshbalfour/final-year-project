@@ -49,8 +49,8 @@ All documents are in the /Documents folder.
 All code files are in the /Application folder. 
 The table below describes the main code files, there are many more supporting files, but these are the most important ones.
 
-| Name | | Category 		| Purpose | Path  | Contributors  | QA Approval Date  | 
-|------|--------------	|-------- | -----------|-----------|--------------------|-------------------|
+| Name | Category 		| Purpose | Path  		| Contributors  | QA Approval Date  | 
+|------|--------------	|-------- | -----------|---------------|-------------------|
 | ImportCrossings.php | Data Importer	| Imports the Level Crossing Location Data from Network Rail | [/app/Console/Commands/ImportCrossings.php](Application/app/Console/Commands/ImportCrossings.php)  |   
 |ImportDailyTrainData.php| Data Importer	| Imports the daily train schedule from National Rail | [/app/Console/Commands/ImportDailyTrainData.php](Application/app/Console/Commands/ImportDailyTrainData.php) | 
 |ImportExtendedCrossingData.php| Data Importer | Imports the extended Level Crossing data from Network Rail | [/app/Console/Commands/ImportExtendedCrossingData.php](Application/app/Console/Commands/ImportExtendedCrossingData.php) |
