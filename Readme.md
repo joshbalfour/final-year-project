@@ -22,12 +22,13 @@ CO600 Project Corpus Index
 
 All documents are in the /Documents folder.
 
-| Category 			| Document  | Contributors  | QA Approval Date  | 
-|------------------|-----------|-----------|--------------------|-------------------|
-| Misc 				| [Abstract](Documents/Abstract.md)  |   |   |
-| Misc				| [Project Plan](Documents/Project Plan.md)  |   |   |
-| System  			| [Top level overview](Documents/Top level overview.md) |   |   |
-| System  			| [Technical overview](Documents/Technical overview.md) |   |   |
+| Category 			| Document  | Contributors  |
+|------------------|-----------|-----------|--------------------|
+| Misc 				| [Abstract](Documents/Abstract.md)  |   |   
+| Misc				| [Project Plan](Documents/Project Plan.md)  |   |   
+| Misc				| [Meeting Minutes](Documents/meeting_minutes.md)  |   |   
+| System  			| [Top level overview](Documents/Top level overview.md) |   |   
+| System  			| [Technical overview](Documents/Technical overview.md) |   |   
 | Development 		| [Environment](Documents/environment.md)
 | Development 		| [Workflow](Documents/Development workflow.md)
 | Data Collection 	| [Data Sources](Documents/Data Collection/Data Sources.md)
