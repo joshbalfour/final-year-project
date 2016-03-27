@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	</head>
+	<body>
+
+		<div class="container">
+			<p><strong>V 1.2.0</strong></p>
+<h1 id="environment">Environment</h1>
+<p>This document describes the repository’s structure and environment.</p>
+<h2 id="description">Description</h2>
+<p>This project is built mainly using Laravel 5, bringing in Node.JS to do some heavy lifting when appropriate.</p>
+<h2 id="file-structure">File Structure</h2>
+<h3 id="-assets">/Assets</h3>
+<p>The assets folder has assets related to the project just as logos, designs, any generally files that have no other specific place within the file system.</p>
+<h3 id="-documents">/Documents</h3>
+<p>The docs folder contains all the documents related to this project. This is the management files as well as technical coding files.</p>
+<h3 id="-application">/Application</h3>
+<p>The Application folder folder containers the several folders required for running the application its self.</p>
+<h3 id="-application-development-">/Application/Development/</h3>
+<p>The deployment folder will contain the Application required to actaully start and run the system. This will include a initialisation script that will download all data, and a boot script that just starts the system assuming it already has a primed database.</p>
+<h3 id="-application-public-">/Application/public/</h3>
+<p>The web app contains the angular web application which will display the level crossings.</p>
+<h3 id="-application-database-">/Application/database/</h3>
+<p>The database will contain all files related to the the database including any seed data, schemas for tables and schemas for views. The views will store the algorithm.</p>
+<h3 id="-application-app-http-">/Application/app/Http/</h3>
+<p>The API reads the data from the database views.</p>
+<h3 id="-application-app-console-commands-">/Application/app/Console/Commands/</h3>
+<p>This folder will contain all the Application related to the Data Collection and a crontab file which will ensure all the data runs at the correct timings.</p>
+<h3 id="-application-database-">/Application/database/</h3>
+<p>The database will contain all files related to the the database including any seed data, schemas for tables and schemas for views. The views will store the algorithm.</p>
+
+		</div>
+	</body>
+</html>

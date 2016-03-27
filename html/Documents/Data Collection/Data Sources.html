@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	</head>
+	<body>
+
+		<div class="container">
+			<p><strong>V 1.1.1</strong></p>
+<h1 id="data-sources">Data Sources</h1>
+<p>There are four pieces of data needed to make these predictions:</p>
+<ol>
+<li>The locations of the crossing</li>
+<li>The locations of the railway station</li>
+<li>The locations of the railway lines</li>
+<li>The locations of the trains. </li>
+</ol>
+<h3 id="crossing-locations">Crossing Locations</h3>
+<p>Firstly we will need a list of all the crossings as well as the meta data to go with them. We have found that network rail contains this data. By going to their crossing homepage there is a link to a XLS file which contains the location and details about all UK level crossings. On top of this they also have a an image of every level crossing which can be accessed by using the unqiue id in the spreadsheet.</p>
+<h3 id="train-locations">Train Locations</h3>
+<p>The second key peice of information is the location of trains. This allows us to then work out if the train is going past the level crossing. Although the exact location of the trains can not be gotten their are data feeds from train stations which says when a train has gone past it as well as how long until it gets to the next station.</p>
+<h3 id="train-lines-and-stations">Train Lines and Stations</h3>
+<p>The train line data will be provided by Nation Rail as part of the Governments Open Data Platform. This will need to be normalised, but provides a detailed map of all UK railway lines and the stations.</p>
+<h2 id="crossing-timings">Crossing Timings</h2>
+<ul>
+<li><a href="http://orr.gov.uk/__data/assets/pdf_file/0016/2158/level_crossings_guidance.pdf">Level Crossings: A guide for managers, designers and operators</a></li>
+<li><a href="https://www.youtube.com/channel/UCdj_ttCg5UZZtz5vgMeAOKQ">SteveDD1’s YouTube channel</a></li>
+<li>Manual data collection</li>
+</ul>
+
+		</div>
+	</body>
+</html>

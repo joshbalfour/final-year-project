@@ -1,0 +1,142 @@
+<html>
+	<head>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	</head>
+	<body>
+
+		<div class="container">
+			<p><strong>V 1.2.0</strong></p>
+<h1 id="algorithm">Algorithm</h1>
+<h3 id="station-tracks">Station tracks</h3>
+<p>The first step will be to preprocess all of the train tracks and the stations so that we can produce a simple map which contains a table with a line.</p>
+<h4 id="method">Method</h4>
+<h5 id="technical">Technical</h5>
+<p>All of the following process will be passed down to Node.JS because PHP will not provide the performance needed to crunch the numbers in a timely manner.</p>
+<h5 id="flatten">Flatten</h5>
+<p>All of the rails will be flattened and joined together to produce a continuous graph of connected nodes. This will group lines that run next to each other together and lines that join on junctions that aren’t present in the shape file.</p>
+<h5 id="attach-stations-and-crossings">Attach stations and crossings</h5>
+<p>All of crossings and stations will be attached to their nearest node on the line. This will be based on distance but can be based on the shape and size of the station is using general area proves ineffective.</p>
+<h5 id="mapping-the-result">Mapping the result</h5>
+<p>We will start at each train station and begin walking along the nodes. If a node connects to two other nodes then we branch off the walker down each set of nodes. Once we reach a node that has a station attached we add the path and the station along with the from and to destinations into the database. We continue along into will covert 6 stations. This is a compromise between doing all station to all stations and having a 250GB data, and connnecting each station to the nearest neighbour which national rail may not provide.</p>
+<h5 id="end">End</h5>
+<p>The end result will be a table of the track that goes from station to stations. All location based columns will be stored in <strong>Well Known Text</strong>. The standard for storing locations.</p>
+<h4 id="data-flow">Data flow</h4>
+<p><img src="../images/ERD.png" width="800px"" alt="image"></p>
+<h5 id="line">line</h5>
+<p>The line table contains a list of all of the train lines by national rail. This contains single end to end pieces of track and doesnt store where train joins or splits.</p>
+<h5 id="station">station</h5>
+<p>The station table contains a list of all the train stations in the UK.</p>
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Station</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ABC</td>
+<td>12 11.5</td>
+</tr>
+<tr>
+<td>DH1</td>
+<td>10 12.8</td>
+</tr>
+</tbody>
+</table>
+<h5 id="crossing">crossing</h5>
+<p>The crossing table contians a list of all the crossings in the UK and meta meta about them.</p>
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Crossing</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4435</td>
+<td>12 11.5</td>
+</tr>
+<tr>
+<td>8865</td>
+<td>10 12.8</td>
+</tr>
+</tbody>
+</table>
+<h5 id="train_routes">train_routes</h5>
+<p>This train_routes table is statically produce when the system is first loaded and would need to be reran if national rail ever adds more track.</p>
+<table class="table table-striped">
+<thead>
+<tr>
+<th>From</th>
+<th>To</th>
+<th>Route</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ABC</td>
+<td>DH1</td>
+<td>1.0 13, 1.1 13</td>
+</tr>
+<tr>
+<td>DH1</td>
+<td>ABC</td>
+<td>1.1 13, 1.0 13</td>
+</tr>
+<tr>
+<td>DH1</td>
+<td>GGH</td>
+<td>9.3 1, 9.4 1.1</td>
+</tr>
+</tbody>
+</table>
+<h5 id="train_route_has_crossings">train_route_has_crossings</h5>
+<p>The train_route_has_crossings table stores the distance from each station how far along the train route the level crossing is.</p>
+<h5 id="toploc_to_crs">toploc_to_crs</h5>
+<p>A table that maps the tiploc codes, the referance points provided by nationalrail data feeds with the crs codes, the ids given to each station.</p>
+<h5 id="train_times">train_times</h5>
+<p>The train_times table contains all of the train times prvoided by national rail. A train time says where a train will arrive and depart from each tiploc.</p>
+<h5 id="train_times_with_crs">train_times_with_crs</h5>
+<p>The train_times_with_crs view contains the toploc_to_crs and train_times joined together. The table is complex to compute because not all tiplocs have matching cts codes so the query flatterns train time skipping out unknown tiplocs codes.</p>
+<h5 id="crossing_interaction_time">crossing_interaction_time</h5>
+<p>The final crossing_interaction_time view is a table that contains the predicted collisions between all trains and level crossings. This view is not expected to be read interaly, but to filter the results as needed, and the SQL engine will pull out the subset of results needed.</p>
+<h3 id="train-times">Train Times</h3>
+<p>The data we get from national rail is times about when a train goes past each station. This data will be loaded into the database into the following schema.</p>
+<table class="table table-striped">
+<thead>
+<tr>
+<th>From tpl</th>
+<th>FromTime</th>
+<th>To tpl</th>
+<th>ToTime</th>
+<th>RID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ABC</td>
+<td>Sat 12:05</td>
+<td>DH1</td>
+<td>Sat 12:35</td>
+<td>2015021222</td>
+</tr>
+<tr>
+<td>DH1</td>
+<td>Sat 23:54</td>
+<td>ABC</td>
+<td>Sun 01:12</td>
+<td>2015021444</td>
+</tr>
+</tbody>
+</table>
+<h3 id="stats">Stats</h3>
+<h5 id="now">Now</h5>
+<p>To compute the stats now we begin by selecting all the train times that have a start and end date that cover the current time. Then simulate the train running over that track at that time and calculate whether it’s location at the current time is within the tolerance of the crossing going down.</p>
+<h5 id="future">Future</h5>
+<p>To compute the future stats we select all train times that will be between now and the prediction future. Then simulate the train running over that track at that those and calculate the times that the train will come within contact with a level crossing.</p>
+
+		</div>
+	</body>
+</html>

@@ -39,4 +39,4 @@ Once the request has been returned from the database it should be cached for qui
 ##### Return data
 Finally the data should be wrapped correct in the API wrapper and returned to the browser in JSON format.
 
-![image](../images/System designs/Flow Diagram - Section 4.jpg)
+![image](../images/System designs/Flow Diagram - Section 4.jpg =400x)

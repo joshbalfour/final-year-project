@@ -1,0 +1,40 @@
+<html>
+	<head>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	</head>
+	<body>
+
+		<div class="container">
+			<p><strong>V 1.3.1</strong></p>
+<h1 id="technical-overview">Technical Overview</h1>
+<h3 id="purpose">Purpose</h3>
+<p>The API is the part that will read the data from the calculated data from the database and return it to the user. The type and data range of the data will be defined in the URL of the request.</p>
+<h3 id="implementation">Implementation</h3>
+<h4 id="general">General</h4>
+<p>The system will be written in PHP using Lumen as a base framework. This will then be served by the nginx docker container. PHP will receive a HTTP request which will load up the framework, this will then route the request to the correct piece of code based on the router definition. After that a database connection will be made and the code will decide what view it needs to read the data from. Finally it will return the data back to the user in a defined format.</p>
+<h4 id="installation-and-development">Installation and Development</h4>
+<p>On first setup it is recommended to run <code>php composer.phar install</code> inside the Application directory. When developing new routes, add them to the <code>app/Http/routes.php</code> file and link them to a controller in <code>API/app/Http/Controllers/</code></p>
+<h4 id="errors">Errors</h4>
+<p>The API also defines what should happen if there is a error. If it is a catchable error then it should return an error code along with a message. If its an non catchable error it should return the unknown error code and the PHP error. This is defined further in the API document.</p>
+<h4 id="testing">Testing</h4>
+<p>The API code will unit tested using PHPUnit, with a strict 100% code coverage policy. Any automated UA tests and Integrations tests will then be run on commit to the feature branch, Travis CI will be used to run these tests, as well as running PHPunit with code coverage reporting enabled to ensure full coverage. Manual testing will be done and extra unit tests will be written by the reviewer at the stage of code review.</p>
+<h3 id="flow-chart">Flow Chart</h3>
+<h5 id="http-request">HTTP Request</h5>
+<p>The system will start when when a HTTP request is made to the server. The server will then load up PHP and pass the request data long</p>
+<h5 id="validate-url-request">Validate URL request</h5>
+<p>The next phase is the framework will verify the URL and find the correct piece of code to run it.</p>
+<h5 id="has-cached-version-">Has cached version?</h5>
+<p>Next it checks to see if there’s already a cached version of the request. Different requests will have different caching lengths. Stale caches will be automatically removed by the library. (Caching implementation will be deferred until speed becomes an issue, but this is likely to be the end outcome)</p>
+<h5 id="read-cache">Read Cache</h5>
+<p>Assuming is to does have a cached version it needs to read this and pass this on to the returning data phase.</p>
+<h5 id="read-crossing-data-from-computed-view">Read crossing data from computed view</h5>
+<p>If the server does not already have the data cached it needs to connect to the database and read the data from a table. No further processing of data needs to be done after this because all of the predicting logic will be done in the database.</p>
+<h5 id="write-to-cache">Write to cache</h5>
+<p>Once the request has been returned from the database it should be cached for quicker access in the future.</p>
+<h5 id="return-data">Return data</h5>
+<p>Finally the data should be wrapped correct in the API wrapper and returned to the browser in JSON format.</p>
+<p><img src="../images/System designs/Flow Diagram - Section 4.jpg" width="400px"" alt="image"></p>
+
+		</div>
+	</body>
+</html>

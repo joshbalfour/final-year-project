@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	</head>
+	<body>
+
+		<div class="container">
+			<p><strong>V 1.0.2</strong></p>
+<h1 id="technical-overview">Technical Overview</h1>
+<p>This document providers a more techincal in-depth view of the system and how each component works and interacts with its neighbouring components.</p>
+<p><img src="images/System designs/Technical.jpg" width="700px"" alt="image"></p>
+<h3 id="1-browser-interface">1. Browser Interface</h3>
+<p>The primary access to the site and its data is through a website accessible by a user using any internet enabled device such as a laptop, smart phone or tablet. This works by providing a a web application from the application server which will then request data from the API server. We support the latest versions of the most popular 4 browsers: IE, Chrome, Safari and Firefox.</p>
+<h3 id="2-api-interface">2. API Interface</h3>
+<p>This project also allows users to access the data via the API directly which is documented <a href="API/Endpoints.html">here</a>. Users are neither rate limited or required to posess an API key, and can rely on the same strong system architecture that copes with any level of demand from our own users. 
+API access allows other developers to build on our work and screate more apps with our data, such as a a Navigiation app that factors in crossing locations and times.</p>
+<h3 id="3-web-app">3. Web App</h3>
+<p>The web app is the interface which allows human users to interact with the data. It uses several of the latest technologies which efficiently display to the user - in an intuitive manner - data about each level crossing. It is cross browser and cross device compatible so provides maximum accessibility for our users.<br><a href="Web App/Technical overview.html">More technical details can be found here.</a></p>
+<h3 id="4-api-server">4. API Server</h3>
+<p>The API server serves data from the database to the users and 3rd party services. It is responsible for reading and validating the requests, as well as caching the requests for performance.</p>
+<h3 id="5-storage-processing">5. Storage/Processing</h3>
+<p>The database serves 2 main purposes: Firstly it stores all the data for the level crossings, train tracks, along with the current and historical train times. 
+It’s second purpose is to perform all the the analysis on the data in order to calculate when each crossing will be up or down. We found that leaving this logic the in database provided a massive performance gain in calculation times of both repeat and new data requests.</p>
+<h3 id="6-data-collection">6. Data Collection</h3>
+<p>The purpose of the data collection service is to peridically collect data from both National Rail and Network Rail, check that the data is correct and store it into the database.</p>
+
+		</div>
+	</body>
+</html>

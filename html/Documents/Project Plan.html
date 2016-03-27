@@ -1,0 +1,475 @@
+<html>
+	<head>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	</head>
+	<body>
+
+		<div class="container">
+			<p><strong>V 1.0.1</strong></p>
+<h1 id="project-plan">Project Plan</h1>
+<h2 id="document-overview">Document Overview</h2>
+<p>The purpose of this document is to outline the project plan for the Level Crossing Predictor. It first defines the requirements of the product, then breaks the requirements down into functional requirements, then follows them through down to task-level items, with man hour time estimates, in the impact analysis.</p>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><p>Brief Project overview</p>
+</li>
+<li><p>Requirements Definition</p>
+</li>
+<li><p>Functional Specification</p>
+</li>
+<li><p>Impact Analysis</p>
+</li>
+</ul>
+<h2 id="brief-project-overview">Brief Project Overview</h2>
+<p>The aim of the project is to provide a prediction to the user as to whether a Level Crossing is currently down or up.</p>
+<h2 id="requirements-definition">Requirements Definition</h2>
+<p>Each requirement that is defined falls into one of three categories: “Must”, “Should”, or “Could”.</p>
+<p>A <strong>Must</strong> requirement is defined as being essential to the project’s success, the absolute bare minimum required to take the product to market – our MVP (Minimum Viable Product).</p>
+<p>A <strong>Should</strong> requirement is a requirement that extends the product’s functionality is a major way, allowing us to potentially enter new markets and strengthen our value proposition.</p>
+<p>A <strong>Could</strong> requirement is essentially a nice to have, and is possible to extend our established position in the market.</p>
+<p>Requirements are numbered to be referenced throughout the rest of the project process.</p>
+<h3 id="must">Must</h3>
+<ul>
+<li>R1 - Be able to show current level crossing times</li>
+</ul>
+<h3 id="should">Should</h3>
+<ul>
+<li><p>R2 - Be able to display level crossing times in a nice way</p>
+</li>
+<li><p>R3 - Predict level crossing times to a 90% degree of accuracy within 2 minutes</p>
+</li>
+</ul>
+<h3 id="could">Could</h3>
+<ul>
+<li><p>R4 - Have an open API to allow other developers to add value</p>
+</li>
+<li><p>R5 - Be able to predict level crossing times to 95% degree of accuracy within 30 seconds</p>
+</li>
+<li><p>R6 - Show more data about the level crossing (pictures, names, general information such as: accessibility, train frequency, and more)</p>
+</li>
+</ul>
+<h1 id="functional-specification">Functional Specification</h1>
+<p>Each function is based off of the numbered requirement and is also numbered in the format Requirement# (dot) Function#</p>
+<h3 id="r1-be-able-to-show-current-level-crossing-times">R1 - Be able to show current level crossing times</h3>
+<ul>
+<li><p>R1.F1 - Download and Store Level Crossing Locations</p>
+</li>
+<li><p>R1.F2 - Download and Store Train Times</p>
+</li>
+<li><p>R1.F3 - Download and Store Rail Station Locations (links R1.F1 and R1.F2)</p>
+</li>
+<li><p>R1.F4 - Download and Store Railway Route Locations (R1.F1, R1.F2, and R1.F3)</p>
+</li>
+<li><p>R1.F5 - Write algorithm to show if level crossing is up or down based on the above data</p>
+</li>
+</ul>
+<h3 id="r2-be-able-to-display-level-crossing-times-in-a-nice-way">R2 - Be able to display level crossing times in a nice way</h3>
+<ul>
+<li><p>R2.F1 - Easy to use interfac</p>
+</li>
+<li><p>R2.F2 - Way to access level crossing time data</p>
+</li>
+</ul>
+<h3 id="r3-predict-level-crossing-times-to-a-90-degree-of-accuracy-within-2-minutes">R3 - Predict level crossing times to a 90% degree of accuracy within 2 minutes</h3>
+<ul>
+<li>R3.F1 - Write Algorithm to predict crossing times within 2 minutes</li>
+</ul>
+<h3 id="r4-have-an-open-api-to-allow-other-developers-to-add-value">R4 - Have an open API to allow other developers to add value</h3>
+<ul>
+<li><p>R4.F1 - Create API</p>
+</li>
+<li><p>R4.F2 - Document API</p>
+</li>
+</ul>
+<h3 id="r5-be-able-to-predict-level-crossing-times-to-to-95-degree-of-accuracy-within-30-seconds">R5 - Be able to predict level crossing times to to 95% degree of accuracy within 30 seconds</h3>
+<ul>
+<li>R5.F1 - Refine algorithm from R3.F1</li>
+</ul>
+<h3 id="r6-show-more-data-about-the-level-crossing">R6 - Show more data about the level crossing</h3>
+<ul>
+<li><p>R6.F1 - Download and Store Extended Level Crossing Information</p>
+<ul>
+<li><p>Picture</p>
+</li>
+<li><p>Name</p>
+</li>
+<li><p>Accessibility (public or private)</p>
+</li>
+<li><p>Train Frequency</p>
+</li>
+<li><p>Possibly More</p>
+</li>
+</ul>
+</li>
+<li><p>R6.F2 – Make Extended Level Crossing Information accessible via the API</p>
+</li>
+<li><p>R6.F3 - Make Extended Level Crossing Information accessible from the user interface</p>
+</li>
+</ul>
+<h1 id="spike">Spike</h1>
+<p>The Spike is a breakdown of the functional specification into task-level items to aid in the process of high level design and effort estimation.</p>
+<p>Each task is numbered in line with the source function specified above, and the requirement that function stems from in the following format:</p>
+<p>Requirement # (dot) Function # (dot) Task #</p>
+<p>Each has a man hour time estimate against it in the format # MH, this is then summed into the function.</p>
+<h3 id="r1-f1-download-and-store-level-crossing-locations-9-mh">R1.F1 - Download and Store Level Crossing Locations - 9 MH</h3>
+<ul>
+<li><p>R1.F1.T1 Set up a Database - 4 MH</p>
+<ul>
+<li>DockerFile from mysql  </li>
+</ul>
+</li>
+<li><p>R1.F1.T2 Find and download the data - 4 MH</p>
+<ul>
+<li><p>Needs to be able to be done regularly, so must write script</p>
+<ul>
+<li><p>Scrape <a href="http://www.networkrail.co.uk/transparency/level-crossings/">http://www.networkrail.co.uk/transparency/level-crossings/</a></p>
+</li>
+<li><p>Find download link</p>
+</li>
+<li><p>Download contents</p>
+</li>
+<li><p>Parse XLS file</p>
+</li>
+<li><p>Grab second sheet</p>
+</li>
+<li><p>Import each row into database table</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>R1.F1.T3 Write view to sanitise/convert/extract the data we need - 1 MH</p>
+<ul>
+<li><p>ID</p>
+</li>
+<li><p>location</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="r1-f2-download-and-store-train-times-20-mh">R1.F2 - Download and Store Train Times - 20 MH</h3>
+<ul>
+<li><p>R1.F2.T1 Find and download the data - 14 MH</p>
+<ul>
+<li><p>National Rail - Darwin Data Feed</p>
+<ul>
+<li><p>Username: joshbalfour</p>
+</li>
+<li><p>Email Address: jdb45@kent.ac.uk</p>
+</li>
+<li><p>API Token: c0812a6f-d0c4-45e4-98bf-a8830cd4fc41</p>
+</li>
+<li><p>Docs: <a href="http://www.nationalrail.co.uk/100296.aspx">http://www.nationalrail.co.uk/100296.aspx</a></p>
+</li>
+</ul>
+</li>
+<li><p>National Rail FTP</p>
+<ul>
+<li><p>URL: datafeeds.nationalrail.co.uk</p>
+</li>
+<li><p>FTP Username: ftpuser</p>
+</li>
+<li><p>FTP Password: A!t4398htw4ho4jy</p>
+</li>
+<li><p>docs: <a href="http://wiki.openraildata.com/index.php/Darwin:Push_Port">http://wiki.openraildata.com/index.php/Darwin:Push_Port</a></p>
+</li>
+</ul>
+</li>
+<li><p>National Rail STOMP Feed</p>
+<ul>
+<li><p>Queue Name: D3e7f2670e-45c0-4f17-a022-fe33f54e707f</p>
+</li>
+<li><p>STOMP Username: d3user</p>
+</li>
+<li><p>STOMP Password: d3password</p>
+</li>
+<li><p>docs: <a href="http://wiki.openraildata.com/index.php/Connecting_with_Stomp">http://wiki.openraildata.com/index.php/Connecting_with_Stomp</a></p>
+</li>
+</ul>
+</li>
+<li><p>Network Rail</p>
+<ul>
+<li><p>url: <a href="https://datafeeds.networkrail.co.uk/ntrod/">https://datafeeds.networkrail.co.uk/ntrod/</a></p>
+</li>
+<li><p>username: beakybal4@gmail.com</p>
+</li>
+<li><p>password: /Levelcrossing1</p>
+</li>
+<li><p>Security Token: 1eb9983c-a295-4b57-aa93-e34288b88fd6</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>R1.F2.T2 Write view to sanitise/convert/extract the data we need - 6 MH</p>
+<ul>
+<li><p>Previous Station</p>
+</li>
+<li><p>Next Station</p>
+</li>
+<li><p>Actual Departure Time at Previous Station</p>
+</li>
+<li><p>Estimated Arrival Time at Next Station</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="r1-f3-download-and-store-rail-station-locations-links-r1-f1-and-r1-f2-5-mh">R1.F3 - Download and Store Rail Station Locations (links R1.F1 and R1.F2) - 5 MH</h3>
+<ul>
+<li><p>R1.F3.T1 Find and download the data - 4 MH</p>
+<ul>
+<li><p>Docs: <a href="https://data.gov.uk/dataset/naptan">https://data.gov.uk/dataset/naptan</a></p>
+</li>
+<li><p>Download <a href="http://www.dft.gov.uk/NaPTAN/snapshot/NaPTANcsv.zip">http://www.dft.gov.uk/NaPTAN/snapshot/NaPTANcsv.zip</a></p>
+</li>
+<li><p>Extract ZIP file</p>
+</li>
+<li><p>Parse RailReferences.csv File</p>
+</li>
+<li><p>Import each row into database table</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>R1.F3.T2 Write view to sanitise/convert/extract the data we need - 1 MH</p>
+<ul>
+<li><p>TIPLOC</p>
+</li>
+<li><p>Latitude</p>
+</li>
+<li><p>Longitude</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="r1-f4-download-and-store-railway-route-locations-r1-f1-r1-f2-and-r1-f3-10-mh-or-32-mh">R1.F4 - Download and Store Railway Route Locations (R1.F1, R1.F2, and R1.F3) - 10 MH or 32 MH</h3>
+<ul>
+<li><p>R1.F4.T1 Find and download the data</p>
+<ul>
+<li><p>Current option: 3</p>
+</li>
+<li><p>Option 1: Use the data from <a href="http://railmaponline.com/UKIEMap.php">http://railmaponline.com/UKIEMap.php</a> with the permission of the owner [<a href="https://twitter.com/battercake">https://twitter.com/battercake</a>] (preference) - 5 MH</p>
+<ul>
+<li><p>Data Downloaded: <a href="https://drive.google.com/a/joshbalfour.co.uk/folderview?id=0Bz0TVyu9wmaic2IzdWNhX0JoUjg&amp;usp=sharing">https://drive.google.com/a/joshbalfour.co.uk/folderview?id=0Bz0TVyu9wmaic2IzdWNhX0JoUjg&amp;usp=sharing</a></p>
+</li>
+<li><p>Data Owner emailed requesting permission on 7th October 2015: <a href="https://drive.google.com/open?id=0Bz0TVyu9wmaiMkpCMjB2WXpDemM">https://drive.google.com/open?id=0Bz0TVyu9wmaiMkpCMjB2WXpDemM</a></p>
+</li>
+<li><p>Extract the data into a database</p>
+</li>
+<li><p>Project Risk: We may not get permission to use this data, therefore we might have to use option 2 which we estimate to take longer</p>
+</li>
+<li><p>Project Risk: the process may not work</p>
+</li>
+<li><p>Request denied: <a href="https://drive.google.com/open?id=0Bz0TVyu9wmaiMHoteVhSSmlhYWs">https://drive.google.com/open?id=0Bz0TVyu9wmaiMHoteVhSSmlhYWs</a> </p>
+</li>
+</ul>
+</li>
+<li><p>Option 2: Download the OpenStreetMap application along with the OpenStreetMap Railway data from <a href="http://wiki.openstreetmap.org/wiki/OpenRailwayMap">http://wiki.openstreetmap.org/wiki/OpenRailwayMap</a>, convert it to database format and extract the data from there - 16 MH</p>
+<ul>
+<li><p>Install <a href="https://github.com/rurseekatze/OpenRailwayMap">https://github.com/rurseekatze/OpenRailwayMap</a> (downloads a 30GB File, imports it into a postgres DB)</p>
+</li>
+<li><p>Project Risk: We may not have the resources required to achieve this</p>
+</li>
+</ul>
+</li>
+<li>Option 3: Use Nation Rail Data<ul>
+<li>Download data from <a href="https://data.gov.uk/dataset/railway-network-inspire">https://data.gov.uk/dataset/railway-network-inspire</a></li>
+<li>Project risk: None.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>R1.F4.T2 Write view to sanitise/convert/extract the data we need - Option 1: 5 MH, Option 2: 16 MH</p>
+<ul>
+<li>Rail track routes with Latitude + Longitudes</li>
+</ul>
+</li>
+</ul>
+<h3 id="r1-f5-write-algorithm-to-show-if-level-crossing-is-up-or-down-based-on-the-above-data-50-mh">R1.F5 - Write algorithm to show if level crossing is up or down based on the above data - 50 MH</h3>
+<ul>
+<li><p>R1.F5.T1 Link the location of the level crossing to the railway - 1 MH</p>
+</li>
+<li><p>R1.F5.T2 Get train journeys currently in progress on that line - 1 MH</p>
+</li>
+<li><p>R1.F5.T3 Judge whether the train(s) are close enough to warrant the rail crossing barrier being closed - 48 MH</p>
+</li>
+</ul>
+<h3 id="r2-f1-easy-to-use-interface-9-mh">R2.F1 - Easy to use interface - 9 MH</h3>
+<ul>
+<li><p>R2.F1.T1 Design preliminary UI - 3 MH</p>
+<ul>
+<li><p>Map + controls</p>
+</li>
+<li><p>Indicator for crossing status</p>
+</li>
+<li><p>About/Help page</p>
+</li>
+</ul>
+</li>
+<li><p>R2.F1.T2 Focus group to evaluate UI - 6 MH</p>
+<ul>
+<li><p>Test interface with multiple users</p>
+</li>
+<li><p>Test interface with multiple devices</p>
+</li>
+<li><p>Evaluate results and refine UI</p>
+</li>
+</ul>
+</li>
+<li><p>R2.F1.T3 Write about page with usage instructions - 2MH</p>
+<ul>
+<li><p>Write about page</p>
+</li>
+<li><p>Write usage instructions</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="r2-f2-way-to-access-level-crossing-time-data-8-5-mh">R2.F2 - Way to access level crossing time data - 8.5 MH</h3>
+<ul>
+<li><p>R2.F2.T1 Fetch data from API server - 1 MH</p>
+<ul>
+<li>Fetch data periodically to keep view up to date</li>
+</ul>
+</li>
+<li><p>R2.F2.T2 Pass data into designed interface  - 0.5 MH</p>
+<ul>
+<li><p>Pass data into angular’s two way data binder</p>
+</li>
+<li><p>Two way data binder automagically updates the web page view</p>
+</li>
+</ul>
+</li>
+<li><p>R2.F2.T3 Build designed interface 3 MH</p>
+</li>
+<li><p>R2.F2.T4 On click a crossing display future dates - 4 MH</p>
+<ul>
+<li><p>When clicking the icon of a level crossing open a popup</p>
+</li>
+<li><p>Pull future predicted down times for the crossing</p>
+</li>
+<li><p>Display them on the page using two way data binding</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="r3-f1-write-algorithm-to-predict-crossing-times-to-a-90-degree-of-accuracy-within-2-minutes-60-mh">R3.F1 - Write Algorithm to predict crossing times to a 90% degree of accuracy within 2 minutes - 60 MH</h3>
+<ul>
+<li><p>R3.F1.T1 Download historic time train data - 8 MH</p>
+<ul>
+<li>Use Darwin Data Feed from R1.F2.T1</li>
+</ul>
+</li>
+<li><p>R3.F1.T2 Write view to sanitise/convert/extract the data we need - 4 MH</p>
+</li>
+<li>R3.F1.T3 Write algorithm to analyze future times and work out when the rail crossing barrier will be closed to within 2 minutes - 48 MH</li>
+</ul>
+<h3 id="r4-f1-create-api-4-mh">R4.F1 - Create API - 4 MH</h3>
+<ul>
+<li>R4.F1.T1 Set up connection to database - 1 MH</li>
+<li><p>R4.F1.T2 Query the database and extract the required information - 2 MH</p>
+<ul>
+<li><p>Level Crossing Locations</p>
+</li>
+<li><p>Level Crossing Statuses</p>
+</li>
+</ul>
+</li>
+<li><p>R4.F1.T3 Convert the data into an accessible format - 1 MH</p>
+<ul>
+<li>JSON Objects</li>
+</ul>
+</li>
+</ul>
+<h3 id="r4-f2-document-api-6-mh">R4.F2 - Document API - 6 MH</h3>
+<ul>
+<li>R4.F2.T1 Agree documentation format - 2 MH</li>
+<li>R4.F2.T2 Copy existing internal-use API documentation to agreed format - 4 MH</li>
+</ul>
+<h3 id="r5-f1-refine-algorithm-from-f7-48-mh">R5.F1 - Refine algorithm from F7 - 48 MH</h3>
+<ul>
+<li><p>R5.F1.T1 Scope out steps needed for improvement</p>
+<ul>
+<li>Project risk as currently unknown</li>
+</ul>
+</li>
+<li><p>R5.F1.T2 Execute steps</p>
+</li>
+</ul>
+<h3 id="r6-f1-download-and-store-extended-level-crossing-information-picture-name-accessibility-train-frequency-possibly-more-5-mh">R6.F1 - Download and Store Extended Level Crossing Information (picture, name, accessibility, train frequency, possibly more) - 5 MH</h3>
+<ul>
+<li><p>R6.F1.T1 Find data sources and Download data</p>
+<ul>
+<li><p>Repeat R1.F1.T2</p>
+</li>
+<li><p>For images: <a href="http://www.networkrail.co.uk/Custom/Images/LevelCrossings/%3Cid%3E/%3Cid%3E.jpg">http://www.networkrail.co.uk/Custom/Images/LevelCrossings/$id/$id.jpg</a> where $id is the unique identifier of the level crossing from the above step</p>
+</li>
+</ul>
+</li>
+<li><p>R6.F1.T2 Write database view to sanitise/convert/extract the data we need - 1 MH</p>
+<ul>
+<li><p>Name</p>
+</li>
+<li><p>Accessibility</p>
+</li>
+<li><p>Train frequency</p>
+</li>
+</ul>
+</li>
+<li><p>R6.F1.T3 Write a script which downloads all the images from networkrail - 4 MH</p>
+<ul>
+<li><p>Pull list of IDs</p>
+</li>
+<li><p>Convert into URL</p>
+</li>
+<li><p>Download contents of URL</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="r6-f2-make-extended-level-crossing-information-accessible-via-the-api-4-mh">R6.F2 - Make Extended Level Crossing Information accessible via the API - 4 MH</h3>
+<ul>
+<li><p>R6.F2.T1 Make extra metadata accessible via API - 1 MH</p>
+<ul>
+<li><p>Add extra fields to requests</p>
+</li>
+<li><p>or add a separate detail endpoint</p>
+</li>
+</ul>
+</li>
+<li><p>R6.F2.T2 Make picture accessible via API - 3 MH</p>
+<ul>
+<li><p>Send extra URL as a field in the above alteration</p>
+</li>
+<li><p>Or send image as base64 encoded along with the above alteration</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="r6-f3-make-extended-level-crossing-information-accessible-from-the-user-interface-3-mh">R6.F3 - Make Extended Level Crossing information accessible from the user interface - 3 MH</h3>
+<ul>
+<li><p>R6.F3.T1 Add popup panel for when user clicks a crossing - 2 MH</p>
+<ul>
+<li><p>Image</p>
+</li>
+<li><p>Name</p>
+</li>
+<li><p>Accessibility</p>
+</li>
+<li><p>Train frequency</p>
+</li>
+<li><p>Other</p>
+</li>
+</ul>
+</li>
+<li><p>R6.F3.T2 Fetch extra crossing data from server - 1 MH</p>
+<ul>
+<li>Pull data from database</li>
+</ul>
+</li>
+</ul>
+
+		</div>
+	</body>
+</html>

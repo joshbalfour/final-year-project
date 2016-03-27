@@ -3,7 +3,7 @@
 This document providers a more techincal in-depth view of the system and how each component works and interacts with its neighbouring components.
 
 
-![image](images/System designs/Technical.jpg)
+![image](images/System designs/Technical.jpg =700x)
 
 
 ### 1. Browser Interface

@@ -1,0 +1,341 @@
+<html>
+	<head>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	</head>
+	<body>
+
+		<div class="container">
+			<p><strong>V 1.2</strong></p>
+<h1 id="co600-project-corpus-index">CO600 Project Corpus Index</h1>
+<hr>
+<p><img src="Assets/logo-bg.png" alt="image"></p>
+<h2 id="project-details">Project Details</h2>
+<table class="table table-striped">
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Project title</td>
+<td>Level Crossing Predictor</td>
+</tr>
+<tr>
+<td>Students</td>
+<td>Josh Balfour (jdb45), Kieran Jones (kj90), Ryan Wood (rsw24)</td>
+</tr>
+<tr>
+<td>Supervisor</td>
+<td>Peter Rodgers (P.J.Rodgers@kent.ac.uk)</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>27th March 2016</td>
+</tr>
+</tbody>
+</table>
+<p>A live demonstration of the project is available at <a href="https://levelcrossingpredictor.co.uk">https://levelcrossingpredictor.co.uk</a> , and works best in Google Chrome.</p>
+<h2 id="documentation-index">Documentation Index</h2>
+<p>All documents are in the /Documents folder.</p>
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Category</th>
+<th>Document</th>
+<th>Contributors</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Misc</td>
+<td><a href="html/Documents/Abstract.html">Abstract</a></td>
+<td>Josh</td>
+</tr>
+<tr>
+<td>Misc</td>
+<td><a href="html/Documents/Project Plan.html">Project Plan</a></td>
+<td>Josh</td>
+</tr>
+<tr>
+<td>Misc</td>
+<td><a href="html/Documents/meeting_minutes.html">Meeting Minutes</a></td>
+<td>Kieran</td>
+</tr>
+<tr>
+<td>System</td>
+<td><a href="html/Documents/Top level overview.html">Top level overview</a></td>
+<td>Kieran, Josh</td>
+</tr>
+<tr>
+<td>System</td>
+<td><a href="html/Documents/Technical overview.html">Technical overview</a></td>
+<td>Kieran, Josh</td>
+</tr>
+<tr>
+<td>Development</td>
+<td><a href="html/Documents/environment.html">Environment</a></td>
+<td>Kieran, Josh</td>
+</tr>
+<tr>
+<td>Development</td>
+<td><a href="html/Documents/Development workflow.html">Workflow</a></td>
+<td>Josh, Kieran</td>
+</tr>
+<tr>
+<td>Data Collection</td>
+<td><a href="html/Documents/Data Collection/Data Sources.html">Data Sources</a></td>
+<td>Josh, Kieran</td>
+</tr>
+<tr>
+<td>Data Collection</td>
+<td><a href="html/Documents/Data Collection/Technical overview.html">Technical overview</a></td>
+<td>Kieran, Josh</td>
+</tr>
+<tr>
+<td>Data Collection</td>
+<td><a href="html/Documents/Verification/Sample-Data.html">Data Quality Verification</a></td>
+<td>Josh, Kieran</td>
+</tr>
+<tr>
+<td>Database</td>
+<td><a href="html/Documents/Database/Database software.html">Software</a></td>
+<td>Kieran, Josh</td>
+</tr>
+<tr>
+<td>Database</td>
+<td><a href="html/Documents/Database/Database management.html">Management</a></td>
+<td>Kieran</td>
+</tr>
+<tr>
+<td>Database</td>
+<td><a href="html/Documents/Database/Algorithm.html">Algorithm</a></td>
+<td>Kieran, Josh</td>
+</tr>
+<tr>
+<td>Deployment</td>
+<td><a href="html/Documents/Deployment/Docker.html">Docker</a></td>
+<td>Josh, Kieran</td>
+</tr>
+<tr>
+<td>API</td>
+<td><a href="html/Documents/API/Technical overview.html">Technical overview</a></td>
+<td>Kieran</td>
+</tr>
+<tr>
+<td>API</td>
+<td><a href="html/Documents/API/Endpoints.html">Endpoints</a></td>
+<td>Kieran, Josh</td>
+</tr>
+<tr>
+<td>Web App</td>
+<td><a href="html/Documents/Web App/Discovery.html">Discovery</a></td>
+<td>Kieran, Josh</td>
+</tr>
+<tr>
+<td>Web App</td>
+<td><a href="html/Documents/Web App/UI Designs.html">UI Designs</a></td>
+<td>Kieran, Josh</td>
+</tr>
+<tr>
+<td>Web App</td>
+<td><a href="html/Documents/Web App/Technical overview.html">Technical overview</a></td>
+<td>Kieran, Josh</td>
+</tr>
+<tr>
+<td>Testing</td>
+<td><a href="html/Documents/Test Plan.html">Test Plan</a></td>
+<td>Ryan</td>
+</tr>
+</tbody>
+</table>
+<h2 id="main-code-file-index">Main Code File Index</h2>
+<p>All code files are in the /Application folder. 
+The table below describes the main code files, there are many more supporting files, but these are the most important ones.</p>
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Name</th>
+<th>Category</th>
+<th>Purpose</th>
+<th>Path</th>
+<th>Main Contributor(s) (in order of amount)</th>
+<th>QA Approval Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ImportCrossings.php</td>
+<td>Data Importer</td>
+<td>Imports the Level Crossing Location Data from Network Rail</td>
+<td><a href="Application/app/Console/Commands/ImportCrossings.php">/app/Console/Commands/ImportCrossings.php</a></td>
+<td>Josh, Kieran</td>
+<td>27th January 2016</td>
+</tr>
+<tr>
+<td>ImportDailyTrainData.php</td>
+<td>Data Importer</td>
+<td>Imports the daily train schedule from National Rail</td>
+<td><a href="Application/app/Console/Commands/ImportDailyTrainData.php">/app/Console/Commands/ImportDailyTrainData.php</a></td>
+<td>Josh, Kieran</td>
+<td>13th March 2016</td>
+</tr>
+<tr>
+<td>ImportExtendedCrossingData.php</td>
+<td>Data Importer</td>
+<td>Imports the extended Level Crossing data from Network Rail</td>
+<td><a href="Application/app/Console/Commands/ImportExtendedCrossingData.php">/app/Console/Commands/ImportExtendedCrossingData.php</a></td>
+<td>Kieran, Josh</td>
+<td>27th January 2016</td>
+</tr>
+<tr>
+<td>ImportRailMapData.php</td>
+<td>Data Importer</td>
+<td>Imports the train stations and railway lines from INSPIRE</td>
+<td><a href="Application/app/Console/Commands/ImportRailMapData.php">/app/Console/Commands/ImportRailMapData.php</a></td>
+<td>Josh</td>
+<td>24th November 2015</td>
+</tr>
+<tr>
+<td>ImportRTTrains.php</td>
+<td>Data Importer</td>
+<td>Imports real time schedule updates from National Rail</td>
+<td><a href="Application/app/Console/Commands/ImportRTTrains.php">/app/Console/Commands/ImportRTTrains.php</a></td>
+<td>Josh</td>
+<td>13th March 2016</td>
+</tr>
+<tr>
+<td>ImportTIPLOCcrsMappings.php</td>
+<td>Data Importer</td>
+<td>Imports the TIPLOC to CRS mapping table</td>
+<td><a href="Application/app/Console/Commands/ImportTIPLOCcrsMappings.php">/app/Console/Commands/ImportTIPLOCcrsMappings.php</a></td>
+<td>Kieran, Josh</td>
+<td>18th January 2016</td>
+</tr>
+<tr>
+<td>ImportTrainRoutes.php</td>
+<td>Data Importer</td>
+<td>Passes through to Node.JS to calculate train routes from the railway lines</td>
+<td><a href="Application/app/Console/Commands/ImportTrainRoutes.php">/app/Console/Commands/ImportTrainRoutes.php</a></td>
+<td>Kieran</td>
+<td>28th January 2016</td>
+</tr>
+<tr>
+<td>ImportTrainRoutesToCrossingMap.php</td>
+<td>Data Importer</td>
+<td>Passes through to Node.JS to calculate which level crossings are on what train routes</td>
+<td><a href="Application/app/Console/Commands/ImportTrainRoutesToCrossingMap.php">/app/Console/Commands/ImportTrainRoutesToCrossingMap.php</a></td>
+<td>Kieran</td>
+<td>28th January 2016</td>
+</tr>
+<tr>
+<td>train-routes.js</td>
+<td>Data Importer</td>
+<td>Calculates train routes from the railway lines</td>
+<td><a href="Application/database/train-route-process/train-routes.js">/database/train-route-process/train-routes.js</a></td>
+<td>Kieran</td>
+<td>28th January 2016</td>
+</tr>
+<tr>
+<td>bind-to-crossings.js</td>
+<td>Data Importer</td>
+<td>Calculates which level crossings are on what train routes</td>
+<td><a href="Application/database/train-route-process/bind-to-crossings.js">/database/train-route-process/bind-to-crossings.js</a></td>
+<td>Kieran</td>
+<td>28th January 2016</td>
+</tr>
+<tr>
+<td>CrossingsController.php</td>
+<td>API Controller</td>
+<td>Responds to HTTP requests with a JSON response containing level crossing data, with calculated timing estimates</td>
+<td><a href="Application/app/Http/Controllers/CrossingsController.php">/app/Http/Controllers/CrossingsController.php</a></td>
+<td>Kieran, Josh</td>
+<td>11th March 2016</td>
+</tr>
+<tr>
+<td>DebugController.php</td>
+<td>API Controller</td>
+<td>Responds to HTTP requests with a JSON response containing calculated real time train positions</td>
+<td><a href="Application/app/Http/Controllers/DebugController.php">/app/Http/Controllers/DebugController.php</a></td>
+<td>Kieran, Josh</td>
+<td>11th March 2016</td>
+</tr>
+<tr>
+<td>TrainDataMysqlStorage.php</td>
+<td>Storage Controller</td>
+<td>Handles train data related interaction with the Database</td>
+<td><a href="Application/app/Storage/TrainDataMysqlStorage.php">/app/Storage/TrainDataMysqlStorage.php</a></td>
+<td>Josh</td>
+<td>13th March 2016</td>
+</tr>
+<tr>
+<td>DailyTrainDataFtpGateway.php</td>
+<td>Gateway Controller</td>
+<td>Handles interaction with the daily train schedule FTP data source</td>
+<td><a href="Application/app/Gateways/DailyTrainDataFtpGateway.php">/app/Gateways/DailyTrainDataFtpGateway.php</a></td>
+<td>Kieran</td>
+<td>15th March 2016</td>
+</tr>
+<tr>
+<td>RTTrainDataFtpGateway.php</td>
+<td>Gateway Controller</td>
+<td>Handles interaction with the real time train schedule corrections FTP data source</td>
+<td><a href="Application/app/Gateways/RTTrainDataFtpGateway.php">/app/Gateways/RTTrainDataFtpGateway.php</a></td>
+<td>Josh</td>
+<td>15th March 2016</td>
+</tr>
+<tr>
+<td>Database Schema Migration PHP files</td>
+<td>Database Schema Definitions</td>
+<td>RDBMS engine agnostic satabase Schema definitions</td>
+<td><a href="Application/database/migrations">/app/database/migrations</a></td>
+<td>Josh, Kieran</td>
+<td>13th March 2016</td>
+</tr>
+<tr>
+<td>index.html</td>
+<td>Web App Entrypoint</td>
+<td>Web app index HTML file</td>
+<td><a href="Application/public/index.html">/public/index.html</a></td>
+<td>Kieran</td>
+<td>11th March 2016</td>
+</tr>
+<tr>
+<td>controller.js</td>
+<td>Web App Controller</td>
+<td>Controller logic for the web app</td>
+<td><a href="Application/public/app/modules/map/controller.js">/public/app/modules/map/controller.js</a></td>
+<td>Kieran</td>
+<td>25th February 2016</td>
+</tr>
+<tr>
+<td>debug.controller.js</td>
+<td>Web App Controller</td>
+<td>Controller logic behind the debug button in the web app</td>
+<td><a href="Application/public/app/modules/debug.controller.js">/public/app/modules/debug.controller.js</a></td>
+<td>Kieran</td>
+<td>17th March 2016</td>
+</tr>
+<tr>
+<td>Dockerfile</td>
+<td>Runtime Environment Definition</td>
+<td>Defines a Docker image containing Apache, PHP, HHVM, MySQL for the product to be ran in</td>
+<td><a href="Application/deployment/Dockerfile">/app/deployment/Dockerfile</a></td>
+<td>Josh</td>
+<td>23rd March 2016</td>
+</tr>
+<tr>
+<td>boot.sh</td>
+<td>Container Boot Bash Script</td>
+<td>A Bash script ran when the Docker container starts</td>
+<td><a href="Application/deployment/boot.sh">/app/deployment/boot.sh</a></td>
+<td>Josh</td>
+<td>23rd March 2016</td>
+</tr>
+</tbody>
+</table>
+
+		</div>
+	</body>
+</html>

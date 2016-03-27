@@ -1,0 +1,55 @@
+<html>
+	<head>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	</head>
+	<body>
+
+		<div class="container">
+			<p><strong>V 1.1.3</strong></p>
+<h1 id="runtime-environment">Runtime Environment</h1>
+<h2 id="description">Description</h2>
+<p>The runtime environment is a fully self-contained OS within which the application can be run. It’s purpose is to ensure that the application always has everything it needs in order to function optimally. The advantages of this are:</p>
+<ul>
+<li>The environments for projects the developers are concurrently working on do not “pollute” this project’s environment (e.g. a developer could require an older version of MySQL for another project which would conflict with ours)</li>
+<li>The development environment is consistant across all developers.</li>
+<li>The testing environment is consistant with development and deployment.</li>
+<li>The deployment environment is consistant with development and testing.</li>
+</ul>
+<p>It removes many unknows, and guarentees that code written by a developer will perform the exact same between their local copy, the testing environment and the production environment.</p>
+<p>In order to accomplish this we’re utilising Docker, which allows you to specify your environment in a <code>Dockerfile</code>. Ours is in <a href="../../Application/deployment/Dockerfile">The deployment folder</a>.
+It specifies an environment with:</p>
+<ul>
+<li>MySQL (latest version)</li>
+<li>Apache (latest version)</li>
+<li>Node JS (latest version)</li>
+<li>PHP (latest version)</li>
+<li>Composer</li>
+<li>Laravel 5</li>
+</ul>
+<h2 id="prerequisites">Prerequisites</h2>
+<ol>
+<li>Docker Installed</li>
+<li>At least 2GB RAM and 2 cores available</li>
+</ol>
+<h2 id="container-requirements">Container requirements</h2>
+<p>The docker enviroment will expect to have the <code>src</code> folder pointed to the repo on the host machine and the <code>data</code> folder.</p>
+<h4 id="how-to-run">How to run</h4>
+<p>Clone the repo:<br><code>git clone git@github.com:joshbalfour/final-year-project.git ~/final-year-project/Application/deployment</code></p>
+<p>Go to the deployment folder:
+<code>cd ~/final-year-project/Application/deployment</code></p>
+<p>In the same directory run this command which builds the image for the container:<br><code>docker build -t level_crossing_predictor .</code>  </p>
+<p>In the same directory run this command which starts a container from the image:</p>
+<pre><code>docker run -v &quot;`pwd`/data&quot;:/data -v &quot;`pwd`/../&quot;:/src -p 7000:80 -p 7001:3306 level_crossing_predictor
+</code></pre><p>And then verify it’s running by running <code>docker ps -a</code> </p>
+<h5 id="parameter-description">Parameter Description</h5>
+<ul>
+<li>Container name: level_crossing</li>
+<li>HTTP port mapped to the host: 7000</li>
+<li>MySQL port mapped to the host: 7001</li>
+<li>/data: Location to store database data</li>
+<li>/src: Final year project code repo</li>
+</ul>
+
+		</div>
+	</body>
+</html>
