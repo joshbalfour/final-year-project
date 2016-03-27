@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	</head>
+	<body>
+
+		<div class="container">
+			<p><strong>V 1.2.1</strong></p>
+<h1 id="top-level-overview">Top Level Overview</h1>
+<p><img src="images/System designs/Overview.jpg" alt="image"></p>
+<h2 id="data-sources">Data Sources</h2>
+<p>The project uses 3 data sources:</p>
+<ul>
+<li>National Rail: provides the live train location data. This is then stored persistantly to predict where the train will be in the future.</li>
+<li>National Rail: provides the locations of rail lines and stations.</li>
+<li>Network Rail: provides the locations, photos, and other attributes of the level crossings.</li>
+</ul>
+<h2 id="system">System</h2>
+<p>The clever part of the system has two key systems, with other background processes which help move data around.</p>
+<ul>
+<li>Storage: Data will be pulled in from the remote data sources and stored forever</li>
+<li>Analysis engine: This will use the up to date and historial data in the storage to predict  what the current status of level crossings are now, and times for the future.</li>
+</ul>
+<h2 id="users">Users</h2>
+<p>There are 2 primary users of the system.</p>
+<ul>
+<li>Human Users: Users who accesses the site through a web app which works on desktops, tablets, and smartphones.</li>
+<li>3rd Party Systems: who are able to access the raw data from an open, RESTful API.</li>
+</ul>
+
+		</div>
+	</body>
+</html>

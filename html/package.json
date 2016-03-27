@@ -1,0 +1,33 @@
+{
+  "name": "final-year-project",
+  "version": "1.0.0",
+  "description": "**V 1.2**",
+  "main": "make-html.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshbalfour/final-year-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joshbalfour/final-year-project/issues"
+  },
+  "homepage": "https://github.com/joshbalfour/final-year-project#readme",
+  "dependencies": {
+    "fs-extra": "^0.26.7",
+    "handlebars": "^4.0.5",
+    "metalsmith": "^2.1.0",
+    "metalsmith-google-analytics": "0.0.1",
+    "metalsmith-ignore": "^0.1.2",
+    "metalsmith-layouts": "^1.6.4",
+    "metalsmith-linkcheck": "^0.2.5",
+    "metalsmith-markdown": "^0.2.1",
+    "metalsmith-markdownit": "^0.3.0",
+    "metalsmith-prefixoid": "git+https://github.com/evoja/metalsmith-prefixoid",
+    "metalsmith-replace": "^1.0.0",
+    "metalsmith-text-replace": "^1.0.1"
+  }
+}

@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	</head>
+	<body>
+
+		<div class="container">
+			<p><strong>V 1.0.1</strong></p>
+<h1 id="technical-overview">Technical Overview</h1>
+<h2 id="implementation">Implementation</h2>
+<p>Each importer is written as a PHP script, this gets the data from the target and imports it into the database. Each importer needs a set of libraries to access the relative data type.</p>
+<h3 id="task-timing">Task timing</h3>
+<p>Each task runs as a cron job. Some tasks need to be ran every minute others, every month depending on how frequent the data changes.</p>
+<h2 id="flow-chart">Flow Chart</h2>
+<p>Below is a generalised, overall flow chart for the connection to Network Rail data. This will generally be the same for each one, only changing the data source and the import phase.</p>
+<h5 id="start">Start</h5>
+<p>The script starts and loads up it’s dependencies.</p>
+<h5 id="read-data">Read Data</h5>
+<p>The script will then connect to the relevant data source and download the data. This may involve several steps.</p>
+<h5 id="is-data-valid">Is Data Valid</h5>
+<p>The data is then ran through a series of tests to ensure it’s both valid and sane.</p>
+<h5 id="notify-admin">Notify Admin</h5>
+<p>If the data is not valid the system administrator is then notified so someone can investigate.</p>
+<h6 id="convert-data">Convert Data</h6>
+<p>This step will vary depending on the data source. The data will be remapped from the external datasource into a format that can be inserted into the database.</p>
+<h6 id="append-data-to-database">Append Data to Database</h6>
+<p>Now insert the data processed in the previous step into the database.</p>
+<h6 id="system-stop">System Stop</h6>
+<p>Finally the PHP script stops and PHP will clean up any data handled internally during the process.</p>
+<p><img src="../images/System designs/Flow Diagram - Section 6.jpg" width="450px"" alt="image"></p>
+
+		</div>
+	</body>
+</html>

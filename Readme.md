@@ -6,8 +6,6 @@
 
 ![image](Assets/logo-bg.png)
 
-## [LevelCrossingPredicator.co.uk](https://levelcrossingpredictor.co.uk)
-
 ## Project Details
 |				|			 |
 |---------------|-----------|

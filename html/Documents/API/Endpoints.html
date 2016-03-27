@@ -1,0 +1,136 @@
+<html>
+	<head>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	</head>
+	<body>
+
+		<div class="container">
+			<p><strong>V 1.0.0</strong></p>
+<h1 id="endpoints">Endpoints</h1>
+<h3 id="get-crossings">GET: /crossings</h3>
+<p>Returns a list of all crossings and thier current status.</p>
+<h5 id="returns">Returns</h5>
+<pre><code>{
+    result: &quot;OK&quot;,
+    data: [
+        {
+            id: 12345,
+            location: {
+                lat: 12.513456,
+                lon: 12.513456
+            },
+            status: &quot;down&quot;
+        },
+        {...}
+    ]
+}
+</code></pre><h3 id="get-crossings-crossing_id-">GET: /crossings/{crossing_id}</h3>
+<p>Returns all the metadata related to a crossing.</p>
+<h5 id="params">Params</h5>
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Required</th>
+<th>Name</th>
+<th>Type</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✅</td>
+<td>crossing_id</td>
+<td>Integer</td>
+<td>URL</td>
+</tr>
+</tbody>
+</table>
+<h5 id="returns">Returns</h5>
+<pre><code>{
+        result: &quot;OK&quot;,
+    data: {
+        id: 12345,
+        type: &quot;road&quot;,
+        status: &quot;down&quot;,
+        name: &quot;Caterbury Crossing Five&quot;,
+        location: {
+            city: &quot;Canterbury&quot;,
+            country: &quot;UK&quot;,
+            postcode: &quot;CT1 4DD&quot;,
+
+            lat: 12.513456,
+            lon: 12.513456
+        },
+        image: &quot;http://picserve.com?id=123&quot;,
+        line: {
+            trainsPerDay: 10,
+            northSpeed: 60,
+            southSpeed: 70,
+        }
+    }
+}
+</code></pre><h3 id="get-crossings-crossing_id-times">GET: /crossings/{crossing_id}/times</h3>
+<p>Returns the times that a crossing will be down for the specified crossing id, between the supplied date range.</p>
+<h5 id="params">Params</h5>
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Required</th>
+<th>Name</th>
+<th>Type</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✅</td>
+<td>crossing_id</td>
+<td>Integer</td>
+<td>URL</td>
+</tr>
+<tr>
+<td>✅</td>
+<td>start_date</td>
+<td>ISO String</td>
+<td>GET</td>
+</tr>
+<tr>
+<td>✅</td>
+<td>end_date</td>
+<td>ISO String</td>
+<td>GET</td>
+</tr>
+</tbody>
+</table>
+<h5 id="returns">Returns</h5>
+<pre><code>{
+    result: &quot;OK&quot;,
+    data: [
+        {
+            downTime: &quot;2015-06-02 12:05Z+0100&quot;,
+            upTime: &quot;2015-06-02 12:08Z+0100&quot;,
+            fromTime: &quot;2015-06-02 12:00Z+0100&quot;,
+            toTime: &quot;2015-06-02 12:12Z+0100&quot;,
+            duration: 480
+        },
+        {...}
+    ]
+}
+</code></pre><h2 id="errors">Errors</h2>
+<p>Requests may return an error. If its a catchable error then it should return the error code and then a nice message. If its an unknown error then error should contain <code>unknown</code> and still provide the error message.</p>
+<h4 id="crossing-id-not-valid">Crossing ID not valid</h4>
+<pre><code>{
+    result: &quot;ERROR&quot;,
+    error: &quot;crossing.not_found&quot;
+    error_message: &quot;Crossing id 34566 does not exist&quot;
+}
+</code></pre><h4 id="unknown">Unknown</h4>
+<pre><code>{
+    result: &quot;ERROR&quot;,
+    error: &quot;unkown&quot;
+    error_message: &quot;Fatal PHP error. Error on in trains.php line 45.&quot;
+}
+</code></pre>
+		</div>
+	</body>
+</html>

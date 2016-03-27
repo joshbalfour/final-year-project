@@ -15,7 +15,11 @@ require('metalsmith')(__dirname)
     gfm: true,
     tables: true
   }))
-  .ignore('Application')
+  .ignore([
+    'Application',
+    '.*',
+    'node_modules'
+  ])
   .source('.')
   .destination('./html')
   .use(replace({

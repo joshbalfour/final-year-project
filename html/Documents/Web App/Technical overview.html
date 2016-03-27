@@ -1,0 +1,48 @@
+<html>
+	<head>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	</head>
+	<body>
+
+		<div class="container">
+			<p><strong>V 1.0.2</strong></p>
+<h1 id="technical-overview">Technical Overview</h1>
+<h2 id="implementation">Implementation</h2>
+<h3 id="general">General</h3>
+<p>The site uses AngularJS to run the webpage, CSS to build the stylesheets, And Grunt which will automatically build the stylesheets and do any optimisation and dependancy resolution on the resources.</p>
+<h3 id="map">Map</h3>
+<p>After loading the page and the resources it connects to the API and periodically fetches the latest data for the crossings and passes this data into the angular scope. Angular uses the HTML markup to update the icons on the screen automatically. This provides a simple, maintainable, and powerful method of working.</p>
+<h4 id="crossing-details">Crossing Details</h4>
+<p>When a user clicks on a crossing icon this brings up a popup that will pull more detailed future data including the crossing’s closing times as well as metadata about the crossing itself.</p>
+<h4 id="testing">Testing</h4>
+<p>This project uses a suite of testing frameworks in order to accomplish different tasks:</p>
+<h5 id="mocha">Mocha</h5>
+<p>Mocha is a testing framework which provides the standard components required in testing such as:</p>
+<ul>
+<li>(De)constructors</li>
+<li>Asserts</li>
+<li>Visual Reporter</li>
+<li>A programmatic way to define a hierarchy of tests</li>
+</ul>
+<h5 id="karma">Karma</h5>
+<p>Karma allows you to run tests inside of a web browser using the Web Driver Protocol. We have it set up to use PhamtomJS, however it could be setup to use Selenium which would allow us to run tests on Chrome and IE. </p>
+<h5 id="ngmock">ngMock</h5>
+<p>ngMock is built into angular and provides a programmatic way to hijack system services and replace them with fixtures which allows us to test our code in an isolated environment, removing the need to rely on external services.</p>
+<h5 id="travis">Travis</h5>
+<p>Travis watches the repository and runs all of the above tests in our testing environment (described in <a href="Deployment/Docker.html">/Deployment/Docker.md</a>) after each commit and marks the commit as either Passed or Failed.</p>
+<h3 id="technologies">Technologies</h3>
+<ul>
+<li>AngularJS (Javascript framework)<ul>
+<li>AngularUI</li>
+<li>ngRoute</li>
+</ul>
+</li>
+<li>Google Maps (Mapping engine)</li>
+<li>Mocha (Testing framework)</li>
+<li>Karma (Testing framework)</li>
+<li>Travis (Continuous Integration tool)</li>
+</ul>
+
+		</div>
+	</body>
+</html>
