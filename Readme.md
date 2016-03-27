@@ -6,9 +6,7 @@ CO600 Project Corpus Index
 ---
 
 
-![image](Assets/logo-bg.png =700x)
-
-[![Build Status](http://f.cl.ly/items/1C0b2q3L2q0X1m3a0Z3W/Image%202016-01-21%20at%2011.03.50%20pm.png)](https://travis-ci.com/joshbalfour/final-year-project)
+![image](Assets/logo-bg.png)
 
 ## Project Details
 |				|			 |
