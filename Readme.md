@@ -18,6 +18,8 @@ CO600 Project Corpus Index
 | Supervisor	| Peter Rodgers (P.J.Rodgers@kent.ac.uk)
 | Date			| 27th March 2016 |
 
+A live demonstration of the project is available at <https://levelcrossingpredictor.co.uk>
+
 ## Documentation Index
 
 All documents are in the /Documents folder.
