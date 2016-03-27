@@ -46,15 +46,18 @@ All documents are in the /Documents folder.
 
 ## Main Code File Index
 
-All code files are in the /Application folder.
+All code files are in the /Application folder. 
+The table below describes the main code files, there are many more supporting files, but these are the most important ones.
 
-| Category 		| Purpose | File  | Contributors  | QA Approval Date  | 
-|--------------	|-------- | -----------|-----------|--------------------|-------------------|
-| Data Importer	| Imports the Level Crossing Location Data from Network Rail | [/app/Console/Commands/ImportCrossings.php](Application/app/Console/Commands/ImportCrossings.php)  |   
-| Data Importer	| Imports the daily train schedule from National Rail | [/app/Console/Commands/ImportDailyTrainData.php](Application/app/Console/Commands/ImportDailyTrainData.php) | 
-| Data Importer | Imports the extended Level Crossing data from Network Rail | [/app/Console/Commands/ImportExtendedCrossingData.php](Application/app/Console/Commands/ImportExtendedCrossingData.php) |
-| Data Importer | Imports the train stations and railway lines from INSPIRE | [/app/Console/Commands/ImportRailMapData.php](Application/app/Console/Commands/ImportRailMapData.php) |
-| Data Importer | Imports real time schedule updates from National Rail | [/app/Console/Commands/ImportRTTrains.php](Application/app/Console/Commands/ImportRTTrains.php) | 
-| Data Importer | Imports the TIPLOC to CRS mapping table | [/app/Console/Commands/ImportTIPLOCcrsMappings.php](Application/app/Console/Commands/ImportTIPLOCcrsMappings.php) | 
-| Data Importer | Passes through to Node.JS to calculate train routes from the railway lines | [/app/Console/Commands/ImportTrainRoutes.php](Application/app/Console/Commands/ImportTrainRoutes.php) |
-| Data Importer | Passes through to Node.JS to calculate which level crossings are on what train routes | [/app/Console/Commands/ImportTrainRoutesToCrossingMap.php](Application/app/Console/Commands/ImportTrainRoutesToCrossingMap.php) |
+| Name | | Category 		| Purpose | Path  | Contributors  | QA Approval Date  | 
+|------|--------------	|-------- | -----------|-----------|--------------------|-------------------|
+| ImportCrossings.php | Data Importer	| Imports the Level Crossing Location Data from Network Rail | [/app/Console/Commands/ImportCrossings.php](Application/app/Console/Commands/ImportCrossings.php)  |   
+|ImportDailyTrainData.php| Data Importer	| Imports the daily train schedule from National Rail | [/app/Console/Commands/ImportDailyTrainData.php](Application/app/Console/Commands/ImportDailyTrainData.php) | 
+|ImportExtendedCrossingData.php| Data Importer | Imports the extended Level Crossing data from Network Rail | [/app/Console/Commands/ImportExtendedCrossingData.php](Application/app/Console/Commands/ImportExtendedCrossingData.php) |
+|ImportRailMapData.php| Data Importer | Imports the train stations and railway lines from INSPIRE | [/app/Console/Commands/ImportRailMapData.php](Application/app/Console/Commands/ImportRailMapData.php) |
+|ImportRTTrains.php| Data Importer | Imports real time schedule updates from National Rail | [/app/Console/Commands/ImportRTTrains.php](Application/app/Console/Commands/ImportRTTrains.php) | 
+|ImportTIPLOCcrsMappings.php| Data Importer | Imports the TIPLOC to CRS mapping table | [/app/Console/Commands/ImportTIPLOCcrsMappings.php](Application/app/Console/Commands/ImportTIPLOCcrsMappings.php) | 
+|ImportTrainRoutes.php| Data Importer | Passes through to Node.JS to calculate train routes from the railway lines | [/app/Console/Commands/ImportTrainRoutes.php](Application/app/Console/Commands/ImportTrainRoutes.php) |
+|ImportTrainRoutesToCrossingMap.php| Data Importer | Passes through to Node.JS to calculate which level crossings are on what train routes | [/app/Console/Commands/ImportTrainRoutesToCrossingMap.php](Application/app/Console/Commands/ImportTrainRoutesToCrossingMap.php) |
+|train-routes.js| Data Importer | Calculates train routes from the railway lines | [/database/train-route-process/train-routes.js](Application/database/train-route-process/train-routes.js)
+|bind-to-crossings.js| Data Importer | Calculates which level crossings are on what train routes | [/database/train-route-process/bind-to-crossings.js](Application/database/train-route-process/bind-to-crossings.js)
