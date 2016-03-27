@@ -49,26 +49,26 @@ All documents are in the /Documents folder.
 All code files are in the /Application folder. 
 The table below describes the main code files, there are many more supporting files, but these are the most important ones.
 
-| Name | Category 		| Purpose | Path  		| Main Contributor(s)  | QA Approval Date  | 
+| Name | Category 		| Purpose | Path  		| Main Contributor(s) (in order of amount)  | QA Approval Date  | 
 |------|--------------	|-------- | -----------|---------------|-------------------|
-| ImportCrossings.php | Data Importer	| Imports the Level Crossing Location Data from Network Rail | [/app/Console/Commands/ImportCrossings.php](Application/app/Console/Commands/ImportCrossings.php)  |   
-|ImportDailyTrainData.php| Data Importer	| Imports the daily train schedule from National Rail | [/app/Console/Commands/ImportDailyTrainData.php](Application/app/Console/Commands/ImportDailyTrainData.php) | 
-|ImportExtendedCrossingData.php| Data Importer | Imports the extended Level Crossing data from Network Rail | [/app/Console/Commands/ImportExtendedCrossingData.php](Application/app/Console/Commands/ImportExtendedCrossingData.php) |
-|ImportRailMapData.php| Data Importer | Imports the train stations and railway lines from INSPIRE | [/app/Console/Commands/ImportRailMapData.php](Application/app/Console/Commands/ImportRailMapData.php) |
-|ImportRTTrains.php| Data Importer | Imports real time schedule updates from National Rail | [/app/Console/Commands/ImportRTTrains.php](Application/app/Console/Commands/ImportRTTrains.php) | 
-|ImportTIPLOCcrsMappings.php| Data Importer | Imports the TIPLOC to CRS mapping table | [/app/Console/Commands/ImportTIPLOCcrsMappings.php](Application/app/Console/Commands/ImportTIPLOCcrsMappings.php) | 
-|ImportTrainRoutes.php| Data Importer | Passes through to Node.JS to calculate train routes from the railway lines | [/app/Console/Commands/ImportTrainRoutes.php](Application/app/Console/Commands/ImportTrainRoutes.php) |
-|ImportTrainRoutesToCrossingMap.php| Data Importer | Passes through to Node.JS to calculate which level crossings are on what train routes | [/app/Console/Commands/ImportTrainRoutesToCrossingMap.php](Application/app/Console/Commands/ImportTrainRoutesToCrossingMap.php) |
-|train-routes.js| Data Importer | Calculates train routes from the railway lines | [/database/train-route-process/train-routes.js](Application/database/train-route-process/train-routes.js)
-|bind-to-crossings.js| Data Importer | Calculates which level crossings are on what train routes | [/database/train-route-process/bind-to-crossings.js](Application/database/train-route-process/bind-to-crossings.js)
-|CrossingsController.php| API Controller | Responds to HTTP requests with a JSON response containing level crossing data, with calculated timing estimates | [/app/Http/Controllers/CrossingsController.php](Application/app/Http/Controllers/CrossingsController.php)
-|DebugController.php| API Controller | Responds to HTTP requests with a JSON response containing calculated real time train positions | [/app/Http/Controllers/DebugController.php](Application/app/Http/Controllers/DebugController.php)
-|TrainDataMysqlStorage.php| Storage Controller | Handles train data related interaction with the Database | [/app/Storage/TrainDataMysqlStorage.php](Application/app/Storage/TrainDataMysqlStorage.php)
-|DailyTrainDataFtpGateway.php| Gateway Controller | Handles interaction with the daily train schedule FTP data source | [/app/Gateways/DailyTrainDataFtpGateway.php](Application/app/Gateways/DailyTrainDataFtpGateway.php)
-|RTTrainDataFtpGateway.php| Gateway Controller | Handles interaction with the real time train schedule corrections FTP data source | [/app/Gateways/RTTrainDataFtpGateway.php](Application/app/Gateways/RTTrainDataFtpGateway.php)
-| Database Schema Migration PHP files | Database Schema Definitions | RDBMS engine agnostic satabase Schema definitions  | [/app/database/migrations](/app/database/migrations)
-| index.html | Web App Entrypoint |  Web app index HTML file | [/public/index.html](/app/public/index.html)
-| controller.js | Web App Controller |  Controller logic for the web app | [/public/app/modules/map/controller.js](/app/public/app/modules/map/controller.js)
-| debug.controller.js | Web App Controller |  Controller logic behind the debug button in the web app | [/public/app/modules/debug.controller.js](/app/public/app/modules/debug.controller.js)
-| Dockerfile | Runtime Environment Definition | Defines a Docker image containing Apache, PHP, HHVM, MySQL for the product to be ran in | [/app/deployment/Dockerfile](/deployment/Dockerfile)
-| boot.sh | Container Boot Bash Script | A Bash script ran when the Docker container starts | [/app/deployment/boot.sh](/deployment/boot.sh)
+| ImportCrossings.php | Data Importer	| Imports the Level Crossing Location Data from Network Rail | [/app/Console/Commands/ImportCrossings.php](Application/app/Console/Commands/ImportCrossings.php)  | Josh, Kieran  
+|ImportDailyTrainData.php| Data Importer	| Imports the daily train schedule from National Rail | [/app/Console/Commands/ImportDailyTrainData.php](Application/app/Console/Commands/ImportDailyTrainData.php) | Josh, Kieran
+|ImportExtendedCrossingData.php| Data Importer | Imports the extended Level Crossing data from Network Rail | [/app/Console/Commands/ImportExtendedCrossingData.php](Application/app/Console/Commands/ImportExtendedCrossingData.php) | Kieran, Josh
+|ImportRailMapData.php| Data Importer | Imports the train stations and railway lines from INSPIRE | [/app/Console/Commands/ImportRailMapData.php](Application/app/Console/Commands/ImportRailMapData.php) | Josh
+|ImportRTTrains.php| Data Importer | Imports real time schedule updates from National Rail | [/app/Console/Commands/ImportRTTrains.php](Application/app/Console/Commands/ImportRTTrains.php) | Josh
+|ImportTIPLOCcrsMappings.php| Data Importer | Imports the TIPLOC to CRS mapping table | [/app/Console/Commands/ImportTIPLOCcrsMappings.php](Application/app/Console/Commands/ImportTIPLOCcrsMappings.php) | Kieran, Josh
+|ImportTrainRoutes.php| Data Importer | Passes through to Node.JS to calculate train routes from the railway lines | [/app/Console/Commands/ImportTrainRoutes.php](Application/app/Console/Commands/ImportTrainRoutes.php) | Kieran
+|ImportTrainRoutesToCrossingMap.php| Data Importer | Passes through to Node.JS to calculate which level crossings are on what train routes | [/app/Console/Commands/ImportTrainRoutesToCrossingMap.php](Application/app/Console/Commands/ImportTrainRoutesToCrossingMap.php) | Kieran
+|train-routes.js| Data Importer | Calculates train routes from the railway lines | [/database/train-route-process/train-routes.js](Application/database/train-route-process/train-routes.js) | Kieran
+|bind-to-crossings.js| Data Importer | Calculates which level crossings are on what train routes | [/database/train-route-process/bind-to-crossings.js](Application/database/train-route-process/bind-to-crossings.js) | Kieran 
+|CrossingsController.php| API Controller | Responds to HTTP requests with a JSON response containing level crossing data, with calculated timing estimates | [/app/Http/Controllers/CrossingsController.php](Application/app/Http/Controllers/CrossingsController.php) | Kieran, Josh
+|DebugController.php| API Controller | Responds to HTTP requests with a JSON response containing calculated real time train positions | [/app/Http/Controllers/DebugController.php](Application/app/Http/Controllers/DebugController.php) | Kieran, Josh
+|TrainDataMysqlStorage.php| Storage Controller | Handles train data related interaction with the Database | [/app/Storage/TrainDataMysqlStorage.php](Application/app/Storage/TrainDataMysqlStorage.php) | Josh
+|DailyTrainDataFtpGateway.php| Gateway Controller | Handles interaction with the daily train schedule FTP data source | [/app/Gateways/DailyTrainDataFtpGateway.php](Application/app/Gateways/DailyTrainDataFtpGateway.php) | Kieran
+|RTTrainDataFtpGateway.php| Gateway Controller | Handles interaction with the real time train schedule corrections FTP data source | [/app/Gateways/RTTrainDataFtpGateway.php](Application/app/Gateways/RTTrainDataFtpGateway.php) | Josh
+| Database Schema Migration PHP files | Database Schema Definitions | RDBMS engine agnostic satabase Schema definitions  | [/app/database/migrations](/app/database/migrations) | Josh, Kieran
+| index.html | Web App Entrypoint |  Web app index HTML file | [/public/index.html](/app/public/index.html) | Kieran
+| controller.js | Web App Controller |  Controller logic for the web app | [/public/app/modules/map/controller.js](/app/public/app/modules/map/controller.js) | Kieran
+| debug.controller.js | Web App Controller |  Controller logic behind the debug button in the web app | [/public/app/modules/debug.controller.js](/app/public/app/modules/debug.controller.js) | Kieran
+| Dockerfile | Runtime Environment Definition | Defines a Docker image containing Apache, PHP, HHVM, MySQL for the product to be ran in | [/app/deployment/Dockerfile](/deployment/Dockerfile) | Josh
+| boot.sh | Container Boot Bash Script | A Bash script ran when the Docker container starts | [/app/deployment/boot.sh](/deployment/boot.sh) | Josh
