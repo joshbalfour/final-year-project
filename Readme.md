@@ -18,18 +18,20 @@ CO600 Project Corpus Index
 | Supervisor	| Peter Rodgers (P.J.Rodgers@kent.ac.uk)
 | Date			| 27th March 2016 |
 
-## Index
+## Documentation Index
 
-| Category  		| Document  | Main Contributors  | QA Approval Date  | 
-|------------------|-----------|--------------------|-------------------|
-|   				| [Abstract](Documents/Abstract.md)  |   |   |
-|   				| [Project Plan](Documents/Project Plan.md)  |   |   |
-| System  			|  [Top level overview](Documents/Top level overview.md) |   |   |
-| System  			|  [Technical overview](Documents/Technical overview.md) |   |   |
+All documents are in the /Documents folder.
+
+| Category 			| Document  | Contributors  | QA Approval Date  | 
+|------------------|-----------|-----------|--------------------|-------------------|
+| Misc 				| [Abstract](Documents/Abstract.md)  |   |   |
+| Misc				| [Project Plan](Documents/Project Plan.md)  |   |   |
+| System  			| [Top level overview](Documents/Top level overview.md) |   |   |
+| System  			| [Technical overview](Documents/Technical overview.md) |   |   |
 | Development 		| [Environment](Documents/environment.md)
 | Development 		| [Workflow](Documents/Development workflow.md)
 | Data Collection 	| [Data Sources](Documents/Data Collection/Data Sources.md)
-| Data Collection 	|  [Technical overview](Documents/Data Collection/Technical overview.md)
+| Data Collection 	| [Technical overview](Documents/Data Collection/Technical overview.md)
 | Data Collection 	| [Data Quality Verification](Documents/Verification/Sample-Data.md)
 | Database 			| [Software](Documents/Database/Database software.md)
 | Database 			| [Management](Documents/Database/Database management.md)
@@ -41,3 +43,18 @@ CO600 Project Corpus Index
 | Web App 			| [UI Designs](Documents/Web App/UI Designs.md)
 | Web App 			| [Technical overview](Documents/Web App/Technical overview.md)
 | Testing 			| [Test Plan](Documents/Test Plan.md)
+
+## Main Code File Index
+
+All code files are in the /Application folder.
+
+| Category 		| Purpose | File  | Contributors  | QA Approval Date  | 
+|--------------	|-------- | -----------|-----------|--------------------|-------------------|
+| Data Importer	| Imports the Level Crossing Location Data from Network Rail | [/app/Console/Commands/ImportCrossings.php](Application/app/Console/Commands/ImportCrossings.php)  |   
+| Data Importer	| Imports the daily train schedule from National Rail | [/app/Console/Commands/ImportDailyTrainData.php](Application/app/Console/Commands/ImportDailyTrainData.php) | 
+| Data Importer | Imports the extended Level Crossing data from Network Rail | [/app/Console/Commands/ImportExtendedCrossingData.php](Application/app/Console/Commands/ImportExtendedCrossingData.php) |
+| Data Importer | Imports the train stations and railway lines from INSPIRE | [/app/Console/Commands/ImportRailMapData.php](Application/app/Console/Commands/ImportRailMapData.php) |
+| Data Importer | Imports real time schedule updates from National Rail | [/app/Console/Commands/ImportRTTrains.php](Application/app/Console/Commands/ImportRTTrains.php) | 
+| Data Importer | Imports the TIPLOC to CRS mapping table | [/app/Console/Commands/ImportTIPLOCcrsMappings.php](Application/app/Console/Commands/ImportTIPLOCcrsMappings.php) | 
+| Data Importer | Passes through to Node.JS to calculate train routes from the railway lines | [/app/Console/Commands/ImportTrainRoutes.php](Application/app/Console/Commands/ImportTrainRoutes.php) |
+| Data Importer | Passes through to Node.JS to calculate which level crossings are on what train routes | [/app/Console/Commands/ImportTrainRoutesToCrossingMap.php](Application/app/Console/Commands/ImportTrainRoutesToCrossingMap.php) |
