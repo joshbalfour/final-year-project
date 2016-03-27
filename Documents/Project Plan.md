@@ -32,16 +32,16 @@ A **Could** requirement is essentially a nice to have, and is possible to extend
 
 Requirements are numbered to be referenced throughout the rest of the project process.
 
-###Must
+### Must
 
 * R1 - Be able to show current level crossing times
 
-###Should
+### Should
 * R2 - Be able to display level crossing times in a nice way
 
 * R3 - Predict level crossing times to a 90% degree of accuracy within 2 minutes
 
-###Could
+### Could
 * R4 - Have an open API to allow other developers to add value
 
 * R5 - Be able to predict level crossing times to 95% degree of accuracy within 30 seconds
@@ -53,7 +53,7 @@ Requirements are numbered to be referenced throughout the rest of the project pr
 
 Each function is based off of the numbered requirement and is also numbered in the format Requirement# (dot) Function#
 
-###R1 - Be able to show current level crossing times
+### R1 - Be able to show current level crossing times
 * R1.F1 - Download and Store Level Crossing Locations
 
 * R1.F2 - Download and Store Train Times
@@ -64,24 +64,24 @@ Each function is based off of the numbered requirement and is also numbered in t
 
 * R1.F5 - Write algorithm to show if level crossing is up or down based on the above data
 
-###R2 - Be able to display level crossing times in a nice way
+### R2 - Be able to display level crossing times in a nice way
 
 * R2.F1 - Easy to use interfac
 
 * R2.F2 - Way to access level crossing time data
 
-###R3 - Predict level crossing times to a 90% degree of accuracy within 2 minutes
+### R3 - Predict level crossing times to a 90% degree of accuracy within 2 minutes
 * R3.F1 - Write Algorithm to predict crossing times within 2 minutes
 
-###R4 - Have an open API to allow other developers to add value
+### R4 - Have an open API to allow other developers to add value
 * R4.F1 - Create API
 
 * R4.F2 - Document API
 
-###R5 - Be able to predict level crossing times to to 95% degree of accuracy within 30 seconds
+### R5 - Be able to predict level crossing times to to 95% degree of accuracy within 30 seconds
 * R5.F1 - Refine algorithm from R3.F1
 
-###R6 - Show more data about the level crossing
+### R6 - Show more data about the level crossing
 * R6.F1 - Download and Store Extended Level Crossing Information
 
 	* Picture
@@ -110,7 +110,7 @@ Requirement # (dot) Function # (dot) Task #
 
 Each has a man hour time estimate against it in the format # MH, this is then summed into the function.
 
-###R1.F1 - Download and Store Level Crossing Locations - 9 MH
+### R1.F1 - Download and Store Level Crossing Locations - 9 MH
 * R1.F1.T1 Set up a Database - 4 MH
 
 	* DockerFile from mysql  
@@ -137,7 +137,7 @@ Each has a man hour time estimate against it in the format # MH, this is then su
 
 	* location
 
-###R1.F2 - Download and Store Train Times - 20 MH
+### R1.F2 - Download and Store Train Times - 20 MH
 * R1.F2.T1 Find and download the data - 14 MH
 
 	* National Rail - Darwin Data Feed
@@ -191,7 +191,7 @@ Each has a man hour time estimate against it in the format # MH, this is then su
 	* Estimated Arrival Time at Next Station
 
 
-###R1.F3 - Download and Store Rail Station Locations (links R1.F1 and R1.F2) - 5 MH
+### R1.F3 - Download and Store Rail Station Locations (links R1.F1 and R1.F2) - 5 MH
 * R1.F3.T1 Find and download the data - 4 MH
 
 	* Docs: [https://data.gov.uk/dataset/naptan](https://data.gov.uk/dataset/naptan)
@@ -216,7 +216,7 @@ Each has a man hour time estimate against it in the format # MH, this is then su
 
 
 
-###R1.F4 - Download and Store Railway Route Locations (R1.F1, R1.F2, and R1.F3) - 10 MH or 32 MH
+### R1.F4 - Download and Store Railway Route Locations (R1.F1, R1.F2, and R1.F3) - 10 MH or 32 MH
 * R1.F4.T1 Find and download the data
 	* Current option: 3
 	
@@ -247,14 +247,14 @@ Each has a man hour time estimate against it in the format # MH, this is then su
 
 	* Rail track routes with Latitude + Longitudes
 
-###R1.F5 - Write algorithm to show if level crossing is up or down based on the above data - 50 MH
+### R1.F5 - Write algorithm to show if level crossing is up or down based on the above data - 50 MH
 * R1.F5.T1 Link the location of the level crossing to the railway - 1 MH
 
 * R1.F5.T2 Get train journeys currently in progress on that line - 1 MH
 
 * R1.F5.T3 Judge whether the train(s) are close enough to warrant the rail crossing barrier being closed - 48 MH
 
-###R2.F1 - Easy to use interface - 9 MH
+### R2.F1 - Easy to use interface - 9 MH
 * R2.F1.T1 Design preliminary UI - 3 MH
 
 	* Map + controls
@@ -277,7 +277,7 @@ Each has a man hour time estimate against it in the format # MH, this is then su
 	
 	* Write usage instructions
 
-###R2.F2 - Way to access level crossing time data - 8.5 MH
+### R2.F2 - Way to access level crossing time data - 8.5 MH
 * R2.F2.T1 Fetch data from API server - 1 MH
 
 	* Fetch data periodically to keep view up to date
@@ -298,7 +298,7 @@ Each has a man hour time estimate against it in the format # MH, this is then su
 
 	* Display them on the page using two way data binding
 
-###R3.F1 - Write Algorithm to predict crossing times to a 90% degree of accuracy within 2 minutes - 60 MH
+### R3.F1 - Write Algorithm to predict crossing times to a 90% degree of accuracy within 2 minutes - 60 MH
 * R3.F1.T1 Download historic time train data - 8 MH
 
 	* Use Darwin Data Feed from R1.F2.T1
@@ -306,7 +306,7 @@ Each has a man hour time estimate against it in the format # MH, this is then su
 * R3.F1.T2 Write view to sanitise/convert/extract the data we need - 4 MH
 * R3.F1.T3 Write algorithm to analyze future times and work out when the rail crossing barrier will be closed to within 2 minutes - 48 MH
 
-###R4.F1 - Create API - 4 MH
+### R4.F1 - Create API - 4 MH
 * R4.F1.T1 Set up connection to database - 1 MH
 * R4.F1.T2 Query the database and extract the required information - 2 MH
 
@@ -318,18 +318,18 @@ Each has a man hour time estimate against it in the format # MH, this is then su
 
 	* JSON Objects
 
-###R4.F2 - Document API - 6 MH
+### R4.F2 - Document API - 6 MH
 * R4.F2.T1 Agree documentation format - 2 MH
 * R4.F2.T2 Copy existing internal-use API documentation to agreed format - 4 MH
 
-###R5.F1 - Refine algorithm from F7 - 48 MH
+### R5.F1 - Refine algorithm from F7 - 48 MH
 * R5.F1.T1 Scope out steps needed for improvement
 
 	* Project risk as currently unknown
 
 * R5.F1.T2 Execute steps
 
-###R6.F1 - Download and Store Extended Level Crossing Information (picture, name, accessibility, train frequency, possibly more) - 5 MH
+### R6.F1 - Download and Store Extended Level Crossing Information (picture, name, accessibility, train frequency, possibly more) - 5 MH
 * R6.F1.T1 Find data sources and Download data
 
 	* Repeat R1.F1.T2
@@ -352,7 +352,7 @@ Each has a man hour time estimate against it in the format # MH, this is then su
 
 	* Download contents of URL
 
-###R6.F2 - Make Extended Level Crossing Information accessible via the API - 4 MH
+### R6.F2 - Make Extended Level Crossing Information accessible via the API - 4 MH
 * R6.F2.T1 Make extra metadata accessible via API - 1 MH
 
 	* Add extra fields to requests
@@ -365,7 +365,7 @@ Each has a man hour time estimate against it in the format # MH, this is then su
 
 	* Or send image as base64 encoded along with the above alteration
 
-###R6.F3 - Make Extended Level Crossing information accessible from the user interface - 3 MH
+### R6.F3 - Make Extended Level Crossing information accessible from the user interface - 3 MH
 * R6.F3.T1 Add popup panel for when user clicks a crossing - 2 MH
 
 	* Image
