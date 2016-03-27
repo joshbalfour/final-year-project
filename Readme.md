@@ -69,5 +69,6 @@ The table below describes the main code files, there are many more supporting fi
 | Database Schema Migration PHP files | Database Schema Definitions | RDBMS engine agnostic satabase Schema definitions  | [/app/database/migrations](/app/database/migrations)
 | index.html | Web App Entrypoint |  Web app index HTML file | [/public/index.html](/app/public/index.html)
 | controller.js | Web App Controller |  Controller logic for the web app | [/public/app/modules/map/controller.js](/app/public/app/modules/map/controller.js)
+| debug.controller.js | Web App Controller |  Controller logic behind the debug button in the web app | [/public/app/modules/debug.controller.js](/app/public/app/modules/debug.controller.js)
 | Dockerfile | Runtime Environment Definition | Defines a Docker image containing Apache, PHP, HHVM, MySQL for the product to be ran in | [/app/deployment/Dockerfile](/deployment/Dockerfile)
 | boot.sh | Container Boot Bash Script | A Bash script ran when the Docker container starts | [/app/deployment/boot.sh](/deployment/boot.sh)
