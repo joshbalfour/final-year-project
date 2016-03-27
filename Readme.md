@@ -1,10 +1,8 @@
 **V 1.2**
 
-CO600 Project Corpus Index
-==
+# CO600 Project Corpus Index
 
 ---
-
 
 ![image](Assets/logo-bg.png)
 
