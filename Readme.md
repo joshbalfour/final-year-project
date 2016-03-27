@@ -14,7 +14,7 @@
 | Supervisor	| Peter Rodgers (P.J.Rodgers@kent.ac.uk)
 | Date			| 27th March 2016 |
 
-A live demonstration of the project is available at <https://levelcrossingpredictor.co.uk>
+A live demonstration of the project is available at <https://levelcrossingpredictor.co.uk> , and works best in Google Chrome.
 
 ## Documentation Index
 
