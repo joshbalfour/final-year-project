@@ -1,14 +1,10 @@
 **V 1.2**
 
-CO600 Project Corpus Index
-==
+# CO600 Project Corpus Index
 
 ---
 
-
-![image](Assets/logo-bg.png =700x)
-
-[![Build Status](http://f.cl.ly/items/1C0b2q3L2q0X1m3a0Z3W/Image%202016-01-21%20at%2011.03.50%20pm.png)](https://travis-ci.com/joshbalfour/final-year-project)
+![image](Assets/logo-bg.png)
 
 ## [LevelCrossingPredicator.co.uk](https://levelcrossingpredictor.co.uk)
 
@@ -20,31 +16,34 @@ CO600 Project Corpus Index
 | Supervisor	| Peter Rodgers (P.J.Rodgers@kent.ac.uk)
 | Date			| 27th March 2016 |
 
+A live demonstration of the project is available at <https://levelcrossingpredictor.co.uk> , and works best in Google Chrome.
+
 ## Documentation Index
 
 All documents are in the /Documents folder.
 
-| Category 			| Document  | Contributors  | QA Approval Date  | 
-|------------------|-----------|-----------|--------------------|-------------------|
-| Misc 				| [Abstract](Documents/Abstract.md)  |   |   |
-| Misc				| [Project Plan](Documents/Project Plan.md)  |   |   |
-| System  			| [Top level overview](Documents/Top level overview.md) |   |   |
-| System  			| [Technical overview](Documents/Technical overview.md) |   |   |
-| Development 		| [Environment](Documents/environment.md)
-| Development 		| [Workflow](Documents/Development workflow.md)
-| Data Collection 	| [Data Sources](Documents/Data Collection/Data Sources.md)
-| Data Collection 	| [Technical overview](Documents/Data Collection/Technical overview.md)
-| Data Collection 	| [Data Quality Verification](Documents/Verification/Sample-Data.md)
-| Database 			| [Software](Documents/Database/Database software.md)
-| Database 			| [Management](Documents/Database/Database management.md)
-| Database 			| [Algorithm](Documents/Database/Algorithm.md)
-| Deployment 		| [Docker](Documents/Deployment/Docker.md)
-| API 				| [Technical overview](Documents/API/Technical overview.md)
-| API 				| [Endpoints](Documents/API/Endpoints.md)
-| Web App 			| [Discovery](Documents/Web App/Discovery.md)
-| Web App 			| [UI Designs](Documents/Web App/UI Designs.md)
-| Web App 			| [Technical overview](Documents/Web App/Technical overview.md)
-| Testing 			| [Test Plan](Documents/Test Plan.md)
+| Category 			| Document  | Contributors  |
+|------------------|-----------|-----------|--------------------|
+| Misc 				| [Abstract](Documents/Abstract.md)  |  Josh |   
+| Misc				| [Project Plan](Documents/Project Plan.md)  | Josh  |   
+| Misc				| [Meeting Minutes](Documents/meeting_minutes.md)  | Kieran  |   
+| System  			| [Top level overview](Documents/Top level overview.md) | Kieran, Josh  |   
+| System  			| [Technical overview](Documents/Technical overview.md) | Kieran, Josh  |   
+| Development 		| [Environment](Documents/environment.md) | Kieran, Josh
+| Development 		| [Workflow](Documents/Development workflow.md) | Josh, Kieran
+| Data Collection 	| [Data Sources](Documents/Data Collection/Data Sources.md) | Josh, Kieran
+| Data Collection 	| [Technical overview](Documents/Data Collection/Technical overview.md) | Kieran, Josh
+| Data Collection 	| [Data Quality Verification](Documents/Verification/Sample-Data.md) | Josh, Kieran
+| Database 			| [Software](Documents/Database/Database software.md) | Kieran, Josh
+| Database 			| [Management](Documents/Database/Database management.md) | Kieran
+| Database 			| [Algorithm](Documents/Database/Algorithm.md) | Kieran, Josh
+| Deployment 		| [Docker](Documents/Deployment/Docker.md) | Josh, Kieran
+| API 				| [Technical overview](Documents/API/Technical overview.md) | Kieran
+| API 				| [Endpoints](Documents/API/Endpoints.md) | Kieran, Josh
+| Web App 			| [Discovery](Documents/Web App/Discovery.md) | Kieran, Josh
+| Web App 			| [UI Designs](Documents/Web App/UI Designs.md) | Kieran, Josh
+| Web App 			| [Technical overview](Documents/Web App/Technical overview.md) | Kieran, Josh
+| Testing 			| [Test Plan](Documents/Test Plan.md) | Ryan
 
 ## Main Code File Index
 
